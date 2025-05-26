@@ -1,21 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   UserSwitchOutlined,
   FileProtectOutlined,
   SafetyCertificateOutlined,
   ReadOutlined
 } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom'; // ✅ nuevo
+import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
-  const navigate = useNavigate(); // ✅ nuevo
+  const [isMobile, setIsMobile] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const iconStyle = {
     fontSize: '3.5rem',
     color: '#e6d769'
   };
+
+  const backgroundPosition = isMobile ? '38%, right' : 'center';
 
   const servicios = [
     {
@@ -37,7 +47,7 @@ const Servicios = ({ id }) => {
       titulo: 'Seguridad y Salud en el Trabajo',
       icono: <SafetyCertificateOutlined style={iconStyle} />,
       resumen: 'Apoyo legal a tu área de Seguridad y Salud en el Trabajo para asegurar el cumplimiento normativo y prevenir riesgos jurídicos y laborales.',
-      link: '/sst' // aunque no se usa aquí, lo dejamos por orden
+      link: '/sst'
     },
     {
       id: 4,
@@ -55,8 +65,8 @@ const Servicios = ({ id }) => {
       style={{
         backgroundImage: `url(${bustos})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundPosition: backgroundPosition,
+        backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
@@ -67,7 +77,6 @@ const Servicios = ({ id }) => {
           />
         </svg>
       </div>
-
 
       <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
 
@@ -80,12 +89,11 @@ const Servicios = ({ id }) => {
           Asesoría legal integral, clara y eficiente para proteger a tu empresa.
         </p>
 
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {servicios.map((servicio) => {
             const isFlipped = activeId === servicio.id;
             return (
-              <div key={servicio.id} className="relative w-full h-[460px] perspective">
+              <div key={servicio.id} className="relative w-[90%] sm:w-[80%] md:w-[280px] h-[360px] sm:h-[400px] md:h-[420px] mx-auto perspective">
                 <div
                   className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
                 >
@@ -93,7 +101,6 @@ const Servicios = ({ id }) => {
                   <div
                     onClick={() => setActiveId(servicio.id)}
                     className="absolute w-full h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-4 py-12 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
-
                   >
                     <div className="mb-6">{servicio.icono}</div>
                     <h3 className="text-2xl font-semibold text-[#e6d769] uppercase tracking-wide mb-6 w-full max-w-[360px] mx-auto leading-snug">
@@ -158,10 +165,6 @@ const Servicios = ({ id }) => {
                       </a>
                     )}
 
-
-
-
-
                     <button
                       onClick={() => setActiveId(null)}
                       className="mt-4 text-xs text-[#e6d769] underline hover:text-white"
@@ -174,7 +177,6 @@ const Servicios = ({ id }) => {
             );
           })}
         </div>
-
       </div>
 
       <style jsx>{`
@@ -191,9 +193,6 @@ const Servicios = ({ id }) => {
           transform: rotateY(180deg);
         }
       `}</style>
-
-
-
     </section>
   );
 };

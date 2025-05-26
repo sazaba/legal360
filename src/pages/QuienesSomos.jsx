@@ -4,7 +4,7 @@ import Mari from '../assets/images/maribg.webp';
 const QuienesSomos = () => {
   return (
     <section
-      className="relative bg-cover bg-no-repeat min-h-screen flex items-center justify-start px-6 py-20 bg-[60%_center] md:bg-center"
+      className="relative bg-cover bg-no-repeat min-h-screen flex items-center justify-start px-6 py-50 bg-[60%_center] md:bg-center"
       style={{ backgroundImage: `url(${Mari})` }}
     >
 
