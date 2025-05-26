@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
+import serviciores from '../assets/images/serviciores.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
@@ -25,7 +26,7 @@ const Servicios = ({ id }) => {
     color: '#e6d769'
   };
 
-  const backgroundPosition = isMobile ? '38%, right' : 'center';
+  const backgroundPosition = isMobile ? '20% center' : 'center';
 
   const servicios = [
     {
@@ -61,9 +62,9 @@ const Servicios = ({ id }) => {
   return (
     <section
       id="servicios"
-      className="relative pt-20 text-white min-h-screen"
+      className="relative pt-20 text-white min-h-screen pb-6"
       style={{
-        backgroundImage: `url(${bustos})`,
+        backgroundImage: `url(${isMobile ? serviciores : bustos})`,
         backgroundSize: 'cover',
         backgroundPosition: backgroundPosition,
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
@@ -81,7 +82,7 @@ const Servicios = ({ id }) => {
       <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
+        <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
           Asesoría y Consultoría Empresarial
         </h2>
 
