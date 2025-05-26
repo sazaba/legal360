@@ -1,24 +1,42 @@
 import React, { useEffect } from 'react';
-import { Typewriter } from 'react-simple-typewriter';
 import { HashLink as Link } from 'react-router-hash-link';
-import { FileTextOutlined, TeamOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
-import v1 from '../assets/videos/sgsst.mp4';
+import {
+    FileTextOutlined,
+    TeamOutlined,
+    SafetyCertificateOutlined,
+    ArrowLeftOutlined,
+    CheckCircleOutlined
+} from '@ant-design/icons';
+import v1 from '../assets/videos/v5.mp4';
 
 const services = [
     {
         title: 'Protocolos y Políticas Legales',
         icon: <FileTextOutlined className="text-5xl text-[#e6d769]" />,
-        description: 'Protocolos sobre acoso, teletrabajo y desconexión laboral.'
+        bullets: [
+            'Elaboración del protocolo y política para la prevención, atención y protección del acoso laboral, sexual, violencia basada en género y discriminación contra mujeres y personas LGBTIQ+ en el ámbito laboral',
+            'Documentación del protocolo y política de desconexión laboral',
+            'Elaboración del protocolo para teletrabajo y trabajo en casa'
+        ]
     },
     {
         title: 'Formación Legal Aplicada',
         icon: <TeamOutlined className="text-5xl text-[#e6d769]" />,
-        description: 'Capacitaciones legales sobre acoso, sustancias y normativa.'
+        bullets: [
+            'Capacitación al Comité de Convivencia Laboral sobre sus deberes legales en materia de acoso, género y diversidad.',
+            'Formación sobre el procedimiento legal en caso de trabajadores bajo efectos de sustancias psicoactivas o alcohol',
+            'Capacitación a empleadores y responsables de SST en normatividad vigente, jurisprudencia y prevención de sanciones por incumplimientos legales.'
+        ]
     },
     {
         title: 'Acompañamiento Legal Estratégico',
         icon: <SafetyCertificateOutlined className="text-5xl text-[#e6d769]" />,
-        description: 'Asesoría en visitas del Ministerio, accidentes y contratos SST.'
+        bullets: [
+            'Asesoría en visitas y actos administrativos del Ministerio del Trabajo.',
+            'Defensa legal en accidentes y enfermedades laborales.',
+            'Conceptos jurídicos sobre incapacidades y restricciones.',
+            'Revisión legal de contratos de servicios SST.'
+        ]
     }
 ];
 
@@ -29,7 +47,6 @@ const SSTLegal360 = () => {
 
     return (
         <section className="relative w-full min-h-screen overflow-hidden pt-10">
-            {/* Video de fondo */}
             <video
                 autoPlay
                 muted
@@ -41,54 +58,53 @@ const SSTLegal360 = () => {
                 Tu navegador no soporta el video.
             </video>
 
-            {/* Capa oscura */}
-            <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
+            <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
 
-            {/* Contenido */}
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
-                {/* Título animado */}
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#e6d769] mb-4 tracking-widest">
-                        <Typewriter
-                            words={['Seguridad y Salud en el Trabajo']}
-                            loop={Infinity}
-                            cursor
-                            cursorStyle="|"
-                            typeSpeed={70}
-                            deleteSpeed={50}
-                            delaySpeed={1000}
-                        />
+                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
+                        Seguridad y Salud en el Trabajo
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                        Apoyo legal integral para el área de SST en tu empresa.
+                        Apoyo legal integral para fortalecer el área de SST en tu empresa.
                     </p>
                 </div>
 
-                {/* Tarjetas de servicio */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch">
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm"
+                            className={`bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm 
+      ${index === 0 ? 'min-h-[440px] md:min-h-[480px]' : ''}`}
                         >
                             <div className="flex justify-center mb-4">{service.icon}</div>
-                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-2">
+                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-4">
                                 {service.title}
                             </h2>
-                            <p className="text-base md:text-lg text-gray-200">{service.description}</p>
+
+                            {service.bullets ? (
+                                <ul className="text-left space-y-2 text-gray-200 text-base md:text-lg">
+                                    {service.bullets.map((bullet, i) => (
+                                        <li key={i} className="flex items-start gap-2">
+                                            <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                            <span>{bullet}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-base md:text-lg text-gray-200">{service.description}</p>
+                            )}
                         </div>
                     ))}
                 </div>
 
-                {/* Botón de regreso */}
                 <div className="mt-20 text-center">
-                    {/* Botón de regreso flotante */}
                     <Link
                         to="/#servicios"
-                        className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-3 px-6 sm:px-8 rounded-full text-sm sm:text-base md:text-lg font-roboto shadow-lg transition-all duration-300 transform hover:scale-105 z-50 
-             fixed sm:top-25 sm:left-6 sm:inline-block hidden"
+                        className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                     >
-                        Regresar
+                        <ArrowLeftOutlined />
+                        <span>Volver</span>
                     </Link>
 
                     <div className="block sm:hidden mt-20 text-center">
@@ -96,7 +112,7 @@ const SSTLegal360 = () => {
                             to="/#servicios"
                             className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
                         >
-                            Regresar
+                            <ArrowLeftOutlined style={{ fontSize: '16px' }} />
                         </Link>
                     </div>
                 </div>

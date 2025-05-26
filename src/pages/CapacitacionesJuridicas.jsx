@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Typewriter } from 'react-simple-typewriter';
 import { HashLink as Link } from 'react-router-hash-link';
-import { BulbOutlined } from '@ant-design/icons';
-import v1 from '../assets/videos/asesoria.mp4';
+import { BulbOutlined, ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import v1 from '../assets/videos/V6.mp4';
 
 const CapacitacionesJuridicas = () => {
     useEffect(() => {
@@ -24,22 +23,14 @@ const CapacitacionesJuridicas = () => {
             </video>
 
             {/* Capa oscura */}
-            <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
+            <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
 
             {/* Contenido */}
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white text-center">
-                {/* Título animado */}
+                {/* Título estático */}
                 <div className="max-w-6xl mx-auto mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#e6d769] mb-4 tracking-widest">
-                        <Typewriter
-                            words={['Capacitaciones Jurídicas Empresariales']}
-                            loop={Infinity}
-                            cursor
-                            cursorStyle="|"
-                            typeSpeed={70}
-                            deleteSpeed={50}
-                            delaySpeed={1000}
-                        />
+                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4 ">
+                        Capacitaciones Jurídicas Empresariales
                     </h1>
                     <p className="text-xl md:text-xl text-gray-200 max-w-4xl mx-auto">
                         Diseñamos y facilitamos formación legal para fortalecer competencias, prevenir riesgos y responder a los principales desafíos jurídicos que enfrentan las empresas hoy.
@@ -50,23 +41,45 @@ const CapacitacionesJuridicas = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-white/10 rounded-2xl shadow-md p-10 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
                         <div className="flex items-center gap-4 mb-4">
-                            <BulbOutlined className="text-5xl text-[#e6d769]" />
-                            <h2 className="text-4xl font-semibold text-[#e6d769]">
-                                Formación Jurídica Empresarial
-                            </h2>
+                            {/* <BulbOutlined className="text-5xl text-[#e6d769]" />
+                                <h2 className="text-4xl font-semibold text-[#e6d769]">
+                                    Formación Jurídica Empresarial
+                                </h2> */}
                         </div>
-                        <p className="text-base md:text-lg text-gray-100 leading-relaxed">
-                            Ofrecemos capacitación jurídica especializada en temas clave como el manejo legal de colaboradores vulnerables, nuevas licencias laborales, estabilidad reforzada, prevención del acoso laboral y gestión de incapacidades. Nuestras capacitaciones, presenciales o virtuales, combinan claridad, enfoque preventivo y aplicabilidad práctica. Además, entregamos materiales de apoyo y promovemos la actualización normativa para reducir riesgos jurídicos y fortalecer la gestión del talento humano.
+                        <p className="text-base md:text-lg text-gray-100 leading-relaxed mb-4">
+                            En Legal 360 S.A.S diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales.
                         </p>
+                        <ul className="text-base md:text-lg text-gray-100 leading-relaxed space-y-3 pl-30">
+                            <li className="flex items-start gap-2">
+                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                Nuevas licencias laborales obligatorias
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                Gestión legal de incapacidades prolongadas
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                Manejo legal de prepensionados y estabilidad laboral reforzada
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                Procedimiento legal en casos de acoso laboral o sexual
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                Reincorporación laboral por enfermedad, accidente o maternidad
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <Link
                     to="/#servicios"
-                    className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-3 px-6 sm:px-8 rounded-full text-sm sm:text-base md:text-lg font-roboto shadow-lg transition-all duration-300 transform hover:scale-105 z-50 
-             fixed sm:top-25 sm:left-6 sm:inline-block hidden"
+                    className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                 >
-                    Regresar
+                    <ArrowLeftOutlined />
+                    <span>Volver</span>
                 </Link>
 
                 <div className="block sm:hidden mt-20 text-center">
@@ -74,7 +87,7 @@ const CapacitacionesJuridicas = () => {
                         to="/#servicios"
                         className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
                     >
-                        Regresar
+                        <ArrowLeftOutlined style={{ fontSize: '16px' }} />
                     </Link>
                 </div>
             </div>
@@ -83,3 +96,4 @@ const CapacitacionesJuridicas = () => {
 };
 
 export default CapacitacionesJuridicas;
+

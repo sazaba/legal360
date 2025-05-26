@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Typewriter } from 'react-simple-typewriter';
 import { HashLink as Link } from 'react-router-hash-link';
 import {
     FaGavel,
@@ -8,6 +7,7 @@ import {
     FaClipboardList,
     FaLock
 } from 'react-icons/fa';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import v1 from '../assets/videos/estatuajusticia.mp4';
 
 const services = [
@@ -45,7 +45,6 @@ const DerechoLaboral = () => {
 
     return (
         <section className="relative w-full min-h-screen overflow-hidden pt-6">
-            {/* Video de fondo */}
             <video
                 autoPlay
                 muted
@@ -57,30 +56,18 @@ const DerechoLaboral = () => {
                 Tu navegador no soporta el video.
             </video>
 
-            {/* Capa oscura */}
             <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
 
-            {/* Contenido */}
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
-                {/* Título animado */}
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#e6d769] mb-4 tracking-widest">
-                        <Typewriter
-                            words={['Derecho Laboral y Seguridad Social']}
-                            loop={Infinity}
-                            cursor
-                            cursorStyle="|"
-                            typeSpeed={70}
-                            deleteSpeed={50}
-                            delaySpeed={1000}
-                        />
+                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4 ">
+                        Derecho Laboral y Seguridad Social
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
                         Soluciones legales clave para empresas y trabajadores.
                     </p>
                 </div>
 
-                {/* Grid de tarjetas con espaciado uniforme */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch">
                     {services.map((service, index) => (
                         <div
@@ -96,14 +83,13 @@ const DerechoLaboral = () => {
                     ))}
                 </div>
 
-                {/* Botón de regreso */}
                 <div className="mt-20 text-center">
                     <Link
                         to="/#servicios"
-                        className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-3 px-6 sm:px-8 rounded-full text-sm sm:text-base md:text-lg font-roboto shadow-lg transition-all duration-300 transform hover:scale-105 z-50 
-             fixed sm:top-25 sm:left-6 sm:inline-block hidden"
+                        className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                     >
-                        Regresar
+                        <ArrowLeftOutlined />
+                        <span>Volver</span>
                     </Link>
 
                     <div className="block sm:hidden mt-20 text-center">
@@ -111,7 +97,7 @@ const DerechoLaboral = () => {
                             to="/#servicios"
                             className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
                         >
-                            Regresar
+                            <ArrowLeftOutlined style={{ fontSize: '16px' }} />
                         </Link>
                     </div>
                 </div>

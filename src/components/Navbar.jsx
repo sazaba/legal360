@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logolegal.webp";
-import Relevo from "../assets/images/relevo.webp"; // Asegúrate de que este archivo exista
+import Relevo from "../assets/images/relevo.webp";
 
 export default function Navbar() {
     const [menuAbierto, setMenuAbierto] = useState(false);
@@ -22,32 +22,28 @@ export default function Navbar() {
     };
 
     return (
-        <nav
-            className={`${scrolled ? "bg-[#001e33] shadow-md" : "bg-transparent"} font-roboto fixed w-full top-0 z-50 transition duration-300`}
-        >
-            <div className="max-w-screen-xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16" >
-                    {/* Logo a la izquierda */}
-                    <div className="flex items-center">
-                        <img src={logo} alt="Legal360" className="object-contain w-30" />
+        <nav className={`${scrolled ? "bg-[#001e33] shadow-md" : "bg-transparent"} fixed w-full top-0 z-50 transition duration-300 font-roboto`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-20">
+                    {/* Logo */}
+                    <div className="flex items-center space-x-4">
+                        <img src={logo} alt="Legal360" className="w-28 sm:w-32 md:w-40 h-auto object-contain" />
                     </div>
 
-                    {/* Enlaces + icono a la derecha */}
-                    <div className="hidden md:flex items-center space-x-4">
-                        <button onClick={() => scrollTo("top")} className="px-3 py-2 rounded-md text-lg font-medium text-white hover:text-gray-300 font-montserrat">Inicio</button>
-                        <button onClick={() => scrollTo("por-que-nosotros")} className="px-3 py-2 rounded-md text-md font-medium text-white hover:text-gray-300 font-montserrat">Nosotros</button>
-                        <button onClick={() => scrollTo("servicios")} className="px-3 py-2 rounded-md text-lg font-medium text-white hover:text-gray-300 font-montserrat">Servicios</button>
-                        <a href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-md text-lg font-medium text-white hover:text-gray-300 font-montserrat">Contacto</a>
+                    {/* Links desktop */}
+                    <div className="hidden md:flex items-center space-x-6">
+                        <button onClick={() => scrollTo("top")} className="text-white hover:text-[#e6d769] text-lg font-montserrat">Inicio</button>
+                        <button onClick={() => scrollTo("por-que-nosotros")} className="text-white hover:text-[#e6d769] text-lg font-montserrat">Nosotros</button>
+                        <button onClick={() => scrollTo("servicios")} className="text-white hover:text-[#e6d769] text-lg font-montserrat">Servicios</button>
+                        <a href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-lg font-montserrat">Contacto</a>
                         <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" title="Centro de Relevo">
-                            <div className="flex items-center justify-center">
-                                <img src={Relevo} alt="Centro de Relevo" className="w-20" />
-                            </div>
+                            <img src={Relevo} alt="Centro de Relevo" className="w-16 h-auto object-contain" />
                         </a>
                     </div>
 
-                    {/* Botón menú móvil */}
-                    <div className="flex md:hidden">
-                        <button onClick={() => setMenuAbierto(!menuAbierto)} className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none">
+                    {/* Mobile menu button */}
+                    <div className="md:hidden flex items-center">
+                        <button onClick={() => setMenuAbierto(!menuAbierto)} className="text-white focus:outline-none">
                             <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {menuAbierto ? (
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -60,25 +56,26 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Menú móvil */}
-            {menuAbierto && (
-                <div className="md:hidden bg-[#001e33] bg-opacity-95 p-4 absolute w-full top-16 left-0">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <button onClick={() => scrollTo("top")} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 font-montserrat">Inicio</button>
-                        <button onClick={() => scrollTo("por-que-nosotros")} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 font-montserrat">Nosotros</button>
-                        <button onClick={() => scrollTo("servicios")} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 font-montserrat">Servicios</button>
-                        <a href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 font-montserrat">Contacto</a>
-                        <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 font-montserrat">
-                            <div className="flex items-center space-x-2">
-                                <div className="bg-white rounded-full p-1 w-6 h-6 flex items-center justify-center">
-                                    <img src={Relevo} alt="Centro de Relevo" className="w-4 h-4 object-contain" />
-                                </div>
-                                <span>Centro de Relevo</span>
-                            </div>
-                        </a>
-                    </div>
+            {/* Fullscreen mobile menu */}
+            <div
+                className={`md:hidden fixed inset-0 bg-[#001e33]/95 z-40 flex flex-col transition-all duration-500 ease-in-out ${menuAbierto ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+                    }`}
+            >
+                <button
+                    onClick={() => setMenuAbierto(false)}
+                    className="absolute top-6 right-6 text-white text-3xl font-bold"
+                >
+                    ×
+                </button>
+
+                <div className="flex flex-col items-center justify-center space-y-8 text-center h-full w-full px-6">
+                    <button onClick={() => scrollTo("top")} className="text-white hover:text-[#e6d769] text-2xl font-semibold font-montserrat">Inicio</button>
+                    <button onClick={() => scrollTo("por-que-nosotros")} className="text-white hover:text-[#e6d769] text-2xl font-semibold font-montserrat">Nosotros</button>
+                    <button onClick={() => scrollTo("servicios")} className="text-white hover:text-[#e6d769] text-2xl font-semibold font-montserrat">Servicios</button>
+                    <a href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-2xl font-semibold font-montserrat">Contacto</a>
+                    <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-2xl font-semibold font-montserrat">Centro de Relevo</a>
                 </div>
-            )}
+            </div>
         </nav>
     );
 }

@@ -1,40 +1,49 @@
 import React, { useEffect } from 'react';
-import { Typewriter } from 'react-simple-typewriter';
 import { HashLink as Link } from 'react-router-hash-link';
 import {
     AiOutlineSchedule,
-    AiOutlineFileText,
     AiOutlineGlobal,
     AiOutlineCustomerService,
     AiOutlineLock
 } from 'react-icons/ai';
+import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
+
 import v1 from '../assets/videos/lawyer.mp4';
 
 const sections = [
     {
-        title: 'Asesoría Comercial',
+        title: 'Asesoría Comercial Preventiva',
         icon: <AiOutlineSchedule className="text-5xl text-[#e6d769]" />,
-        description: 'Estrategia legal y validación contractual.'
+        bullets: [
+            'Elaboración y/o revisión de procedimientos comerciales internos.',
+            'Revisión y validación legal de contratos y ofertas comerciales.',
+            'Asesoría en el manejo de pólizas operativas.',
+            'Contratación legal con terceros conforme a la normativa vigente.'
+        ]
     },
     {
-        title: 'Contratación Legal',
-        icon: <AiOutlineFileText className="text-5xl text-[#e6d769]" />,
-        description: 'Contratos, pólizas y auditoría legal.'
-    },
-    {
-        title: 'Entorno Digital',
+        title: 'Entorno Digital y Publicidad',
         icon: <AiOutlineGlobal className="text-5xl text-[#e6d769]" />,
-        description: 'Publicidad y legalidad digital.'
+        bullets: [
+            'Documentación legal de sitios web y redes sociales.',
+            'Capacitación en publicidad según protección al consumidor.'
+        ]
     },
     {
-        title: 'Atención al Cliente',
+        title: 'Atención al Cliente y Cumplimiento',
         icon: <AiOutlineCustomerService className="text-5xl text-[#e6d769]" />,
-        description: 'PQRSF y acompañamiento postventa.'
+        bullets: [
+            'Diseño legal del procedimiento PQRSF.',
+            'Conceptos jurídicos comerciales y de cumplimiento.'
+        ]
     },
     {
         title: 'Protección de Datos',
         icon: <AiOutlineLock className="text-5xl text-[#e6d769]" />,
-        description: 'Habeas data y gestión legal documental.'
+        bullets: [
+            'Actualización documental según Ley 1581 y normas vigentes.',
+            'Revisión de acuerdos de confidencialidad con terceros.'
+        ]
     }
 ];
 
@@ -45,7 +54,6 @@ const DerechoComercial = () => {
 
     return (
         <section className="relative w-full min-h-screen overflow-hidden pt-10">
-            {/* Video de fondo */}
             <video
                 autoPlay
                 muted
@@ -57,53 +65,47 @@ const DerechoComercial = () => {
                 Tu navegador no soporta el video.
             </video>
 
-            {/* Capa oscura */}
             <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
 
-            {/* Contenido */}
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
-                {/* Título con efecto de máquina de escribir */}
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#e6d769] mb-4 tracking-widest">
-                        <Typewriter
-                            words={['Derecho Comercial']}
-                            loop={Infinity}
-                            cursor
-                            cursorStyle="|"
-                            typeSpeed={70}
-                            deleteSpeed={50}
-                            delaySpeed={1000}
-                        />
+                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4 ">
+                        Derecho Comercial
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
                         Servicios clave para fortalecer y proteger tu actividad empresarial.
                     </p>
                 </div>
 
-                {/* Grid con espaciado uniforme y responsive */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center items-stretch">
                     {sections.map((section, index) => (
                         <div
                             key={index}
                             className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm"
                         >
                             <div className="flex justify-center mb-4">{section.icon}</div>
-                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-2">
+                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-4">
                                 {section.title}
                             </h2>
-                            <p className="text-lg text-gray-200">{section.description}</p>
+                            <ul className="text-left space-y-2 text-gray-200 text-base">
+                                {section.bullets.map((item, i) => (
+                                    <li key={i} className="flex gap-2">
+                                        <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     ))}
                 </div>
 
-                {/* Botón de regreso */}
                 <div className="mt-20 text-center">
                     <Link
                         to="/#servicios"
-                        className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-3 px-6 sm:px-8 rounded-full text-sm sm:text-base md:text-lg font-roboto shadow-lg transition-all duration-300 transform hover:scale-105 z-50 
-             fixed sm:top-25 sm:left-6 sm:inline-block hidden"
+                        className=" gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                     >
-                        Regresar
+                        <ArrowLeftOutlined />
+                        <span>Volver</span>
                     </Link>
 
                     <div className="block sm:hidden mt-20 text-center">
@@ -111,7 +113,7 @@ const DerechoComercial = () => {
                             to="/#servicios"
                             className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
                         >
-                            Regresar
+                            <ArrowLeftOutlined style={{ fontSize: '16px' }} />
                         </Link>
                     </div>
                 </div>

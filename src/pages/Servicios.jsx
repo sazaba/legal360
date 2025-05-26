@@ -72,12 +72,14 @@ const Servicios = ({ id }) => {
       <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
           Asesoría y Consultoría Empresarial
         </h2>
-        <p className="text-xl text-gray-300 mb-16 font-roboto">
+
+        <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-16 font-roboto">
           Asesoría legal integral, clara y eficiente para proteger a tu empresa.
         </p>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {servicios.map((servicio) => {
