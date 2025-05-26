@@ -7,34 +7,101 @@ import {
     FaClipboardList,
     FaLock
 } from 'react-icons/fa';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import v1 from '../assets/videos/estatuajusticia.mp4';
 
 const services = [
     {
         title: 'Asesoría Laboral',
         icon: <FaUserShield className="text-5xl text-[#e6d769]" />,
-        description: 'Vinculación laboral, contratos y cumplimiento legal.'
+        description: (
+            <ul className="text-left space-y-2">
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Asesoría en las formas de vinculación laboral
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Verificación del cumplimiento de la normatividad laboral
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Asesoría en la elaboración o actualización de contratos laborales
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Revisión de contratación con terceros (proveedores y contratistas)
+                </li>
+            </ul>
+        )
     },
     {
-        title: 'Documentación Interna',
-        icon: <FaFileAlt className="text-5xl text-[#e6d769]" />,
-        description: 'Reglamentos, manuales y capacitación legal.'
-    },
-    {
-        title: 'Procesos Disciplinarios',
+        title: 'Procesos Disciplinarios y Documentación Interna',
         icon: <FaGavel className="text-5xl text-[#e6d769]" />,
-        description: 'Citas, decisiones y terminación legal.'
+        description: (
+            <ul className="text-left space-y-2">
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Elaboración y/o actualización del Reglamento de Trabajo.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Elaboración y actualización de Manuales de funciones.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Actualización del procedimiento disciplinario: minutas de citación a descargos, diligencias, decisiones y recursos.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Manejo legal en la finalización de contratos
+                </li>
+            </ul>
+        )
     },
     {
         title: 'Seguridad Social',
         icon: <FaClipboardList className="text-5xl text-[#e6d769]" />,
-        description: 'Afiliaciones, pagos y licencias.'
+        description: (
+            <ul className="text-left space-y-2">
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Auditoría legal de la nómina y pagos a seguridad social.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Asesoría en trámites de registro, radicación y pago de incapacidades.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Actualización de procedimientos de permisos, licencias e incapacidades.
+                </li>
+            </ul>
+        )
     },
     {
-        title: 'Normativa Legal',
+        title: 'Normativa y Cumplimiento Legal',
         icon: <FaLock className="text-5xl text-[#e6d769]" />,
-        description: 'Confidencialidad, habeas data y bienestar.'
+        description: (
+            <ul className="text-left space-y-2">
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Asesoría en el manejo legal de datos personales y habeas data (Circular Externa 003 de 2024).
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Redacción y actualización de acuerdos de confidencialidad.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Documentación de políticas legales: disminución laboral, día de la familia, vinculación de personal extranjero.
+                </li>
+                <li className="flex items-start gap-2">
+                    <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                    Estructuración documental de programas de bienestar laboral.
+                </li>
+            </ul>
+        )
     }
 ];
 
@@ -64,11 +131,11 @@ const DerechoLaboral = () => {
                         Derecho Laboral y Seguridad Social
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                        Soluciones legales clave para empresas y trabajadores.
+                        Eficiencia Laboral Entre Tu Empresa y Tus Colaboradores
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center items-stretch">
                     {services.map((service, index) => (
                         <div
                             key={index}
@@ -78,7 +145,7 @@ const DerechoLaboral = () => {
                             <h2 className="text-2xl font-semibold text-[#e6d769] mb-2">
                                 {service.title}
                             </h2>
-                            <p className="text-lg text-gray-200">{service.description}</p>
+                            <div className="text-lg text-gray-200">{service.description}</div>
                         </div>
                     ))}
                 </div>
