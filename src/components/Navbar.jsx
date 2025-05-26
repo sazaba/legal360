@@ -27,7 +27,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <div className="flex items-center space-x-4">
-                        <img src={logo} alt="Legal360" className="w-28 sm:w-32 md:w-40 h-auto object-contain" />
+                        <img src={logo} alt="Legal360" className="w-24 sm:w-24 md:w-24 h-auto object-contain" />
                     </div>
 
                     {/* Links desktop */}
