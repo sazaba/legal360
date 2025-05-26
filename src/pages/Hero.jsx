@@ -26,7 +26,7 @@ const Hero = () => {
     >
       {/* Capa de opacidad más oscura en móviles */}
       {isMobile && (
-        <div className="absolute inset-0 bg-black opacity-60 z-0"></div>
+        <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
       )}
 
       {/* Contenido */}

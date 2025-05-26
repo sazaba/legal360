@@ -21,6 +21,8 @@ const Servicios = ({ id }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const animationDelays = ['0s', '0.2s', '0.4s', '0.6s'];
+
   const iconStyle = {
     fontSize: '3.5rem',
     color: '#e6d769'
@@ -62,7 +64,7 @@ const Servicios = ({ id }) => {
   return (
     <section
       id="servicios"
-      className="relative pt-20 text-white min-h-screen pb-6"
+      className="relative pt-20 text-white min-h-screen pb-8"
       style={{
         backgroundImage: `url(${isMobile ? serviciores : bustos})`,
         backgroundSize: 'cover',
@@ -82,7 +84,7 @@ const Servicios = ({ id }) => {
       <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
           Asesoría y Consultoría Empresarial
         </h2>
 
@@ -91,10 +93,11 @@ const Servicios = ({ id }) => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {servicios.map((servicio) => {
+          {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
             return (
-              <div key={servicio.id} className="relative w-[90%] sm:w-[80%] md:w-[280px] h-[360px] sm:h-[400px] md:h-[420px] mx-auto perspective">
+              <div key={servicio.id} className={`relative w-[90%] sm:w-[80%] md:w-[280px] h-[360px] sm:h-[400px] md:h-[420px] mx-auto perspective ${isMobile ? 'mobile-fade-in' : ''}`}
+                style={isMobile ? { '--delay': animationDelays[index % animationDelays.length] } : {}}>
                 <div
                   className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
                 >
@@ -104,7 +107,7 @@ const Servicios = ({ id }) => {
                     className="absolute w-full h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-4 py-12 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
                   >
                     <div className="mb-6">{servicio.icono}</div>
-                    <h3 className="text-2xl font-semibold text-[#e6d769] uppercase tracking-wide mb-6 w-full max-w-[360px] mx-auto leading-snug">
+                    <h3 className="text-lg font-semibold text-[#e6d769] uppercase tracking-wide mb-6 w-full max-w-[360px] mx-auto leading-snug">
                       {servicio.titulo}
                     </h3>
                     <div className="mt-6">
@@ -123,7 +126,7 @@ const Servicios = ({ id }) => {
                   {/* Back */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-[#001e33] border border-[#e6d769] rounded-2xl px-8 py-12 flex flex-col justify-center items-center text-center">
                     <h3 className="text-2xl font-bold text-[#e6d769] mb-4">{servicio.titulo}</h3>
-                    <p className="text-gray-300 text-md md:text-lg mb-6 leading-normal max-w-2xl w-full">
+                    <p className="text-gray-300 text-sm md:text-lg mb-6 leading-normal max-w-2xl w-full">
                       {servicio.resumen}
                     </p>
 
@@ -181,6 +184,20 @@ const Servicios = ({ id }) => {
       </div>
 
       <style jsx>{`
+        @keyframes fadeInMobile {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .mobile-fade-in {
+          opacity: 0;
+          animation: fadeInMobile 0.8s ease-in-out forwards var(--delay, 0s);
+        }
         .perspective {
           perspective: 1500px;
         }

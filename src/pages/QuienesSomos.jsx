@@ -26,8 +26,8 @@ const QuienesSomos = () => {
         <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Texto descriptivo */}
           <div className="text-left">
-            <p className="text-[#e6d769] uppercase tracking-widest text-base mb-4">Nuestra razón de ser</p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6">
+            <p className="text-[#e6d769] uppercase tracking-widest text-sm mb-4">Nuestra razón de ser</p>
+            <h1 className=" text-center text-3xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6">
               Somos{' '}
               <span className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] bg-clip-text text-transparent">
                 Legal 360 S.A.S
