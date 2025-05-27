@@ -29,9 +29,18 @@ const QuienesSomos = () => {
             <p className="text-[#e6d769] uppercase tracking-widest text-sm mb-4">Nuestra razón de ser</p>
             <h1 className=" text-center text-3xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6">
               Somos{' '}
-              <span className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] bg-clip-text text-transparent">
+              <span
+                style={{
+                  background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  display: 'inline-block'
+                }}
+                className="text-amber-300 font-bold"
+              >
                 Legal 360 S.A.S
               </span>
+
             </h1>
 
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-5">
@@ -49,9 +58,18 @@ const QuienesSomos = () => {
             {/* <p className="text-[#e6d769] font-semibold text-lg sm:text-xl md:text-2xl mb-10">
               Legal 360 S.A.S
             </p> */}
-            <p className="text-[#e6d769] text-left font-semibold text-lg sm:text-xl md:text-2xl mb-10">
+            <p
+              style={{
+                background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}
+              className="text-[#e6d769] text-left font-semibold text-lg sm:text-xl md:text-2xl mb-10"
+            >
               "Legal, claro y eficiente".
             </p>
+
 
             <div className="flex justify-start space-x-6 text-[#e6d769] text-3xl">
               <a href="#">

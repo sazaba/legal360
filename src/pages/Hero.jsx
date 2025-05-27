@@ -29,9 +29,19 @@ const Hero = () => {
         <div className="text-center md:text-left max-w-2xl">
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight md:leading-tight text-center md:text-left font-montserrat px-4">
             Cumple con la Ley{' '}
-            <span className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] bg-clip-text text-transparent">
+            <span
+              style={{
+                background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}
+              className="text-amber-300 font-bold"
+            >
               Protege tu Empresa
             </span>
+
+
             <span className="block">Crece con Legal 360</span>
           </h1>
 
