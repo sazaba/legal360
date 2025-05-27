@@ -25,24 +25,24 @@ const sections = [
         title: 'Entorno Digital y Publicidad',
         icon: <AiOutlineGlobal className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Documentación legal de sitios web y redes sociales.',
-            'Capacitación en publicidad según protección al consumidor.'
+            'Documentación legal de sitios web y redes sociales empresariales (Términos y Condiciones, Avisos de Privacidad, Cookies, etc.).',
+            'Capacitación sobre el uso adecuado de la publicidad en redes sociales, según las normas de protección al consumidor.'
         ]
     },
     {
         title: 'Atención al Cliente y Cumplimiento',
         icon: <AiOutlineCustomerService className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Diseño legal del procedimiento PQRSF.',
-            'Conceptos jurídicos comerciales y de cumplimiento.'
+            'Asesoría y diseño del procedimiento de peticiones, quejas, reclamos, sugerencias y felicitaciones (PQRSF).',
+            'Emisión de conceptos jurídicos en materia comercial, contractual y de cumplimiento.'
         ]
     },
     {
         title: 'Protección de Datos',
         icon: <AiOutlineLock className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Actualización documental según Ley 1581 y normas vigentes.',
-            'Revisión de acuerdos de confidencialidad con terceros.'
+            'Actualización documental sobre protección de datos personales de clientes, proveedores y contratistas, según la Ley 1581, Decreto 1367 de 2013 y Circular Externa 003 de 2024.',
+            'Elaboración y revisión de acuerdos de confidencialidad con terceros.'
         ]
     }
 ];
@@ -69,7 +69,7 @@ const DerechoComercial = () => {
 
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4 ">
+                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
                         Derecho Comercial
                     </h1>
                     <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
@@ -102,7 +102,7 @@ const DerechoComercial = () => {
                 <div className="mt-20 text-center">
                     <Link
                         to="/#servicios"
-                        className=" gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
+                        className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                     >
                         <ArrowLeftOutlined />
                         <span>Volver</span>

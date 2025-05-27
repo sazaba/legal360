@@ -32,10 +32,10 @@ const services = [
         title: 'Acompañamiento Legal Estratégico',
         icon: <SafetyCertificateOutlined className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Asesoría en visitas y actos administrativos del Ministerio del Trabajo.',
-            'Defensa legal en accidentes y enfermedades laborales.',
-            'Conceptos jurídicos sobre incapacidades y restricciones.',
-            'Revisión legal de contratos de servicios SST.'
+            'Asesoría frente a requerimientos del Ministerio del Trabajo, actos administrativos y planes de mejora.',
+            'Defensa legal en accidentes laborales graves y enfermedades laborales y situaciones críticas del área SST.',
+            'Emisión de conceptos jurídicos sobre incapacidades y restricciones médicas.',
+            'Revisión legal de contratos de servicios con terceros.'
         ]
     }
 ];
@@ -60,12 +60,12 @@ const SSTLegal360 = () => {
 
             <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
 
-            <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
+            <div className="relative z-20 px-6 py-10 lg:px-24 text-white">
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
                         Seguridad y Salud en el Trabajo
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
                         Apoyo legal integral para fortalecer el área de SST en tu empresa.
                     </p>
                 </div>
@@ -78,12 +78,12 @@ const SSTLegal360 = () => {
       ${index === 0 ? 'min-h-[440px] md:min-h-[480px]' : ''}`}
                         >
                             <div className="flex justify-center mb-4">{service.icon}</div>
-                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-4">
+                            <h2 className="text-xl sm:text-2xl font-semibold text-[#e6d769] mb-4">
                                 {service.title}
                             </h2>
 
                             {service.bullets ? (
-                                <ul className="text-left space-y-2 text-gray-200 text-base md:text-lg">
+                                <ul className="text-left space-y-2 text-gray-200 text-base sm:text-lg">
                                     {service.bullets.map((bullet, i) => (
                                         <li key={i} className="flex items-start gap-2">
                                             <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
@@ -92,13 +92,13 @@ const SSTLegal360 = () => {
                                     ))}
                                 </ul>
                             ) : (
-                                <p className="text-base md:text-lg text-gray-200">{service.description}</p>
+                                <p className="text-base sm:text-lg text-gray-200">{service.description}</p>
                             )}
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-20 text-center">
+                <div className="mt-16 sm:mt-20 text-center">
                     <Link
                         to="/#servicios"
                         className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"

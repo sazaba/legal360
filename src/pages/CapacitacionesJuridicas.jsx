@@ -26,30 +26,24 @@ const CapacitacionesJuridicas = () => {
             <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
 
             {/* Contenido */}
-            <div className="relative z-20 px-6 py-20 lg:px-24 text-white text-center">
+            <div className="relative z-20 px-6 py-10 sm:px-12 lg:px-24 text-white text-center">
                 {/* Título estático */}
-                <div className="max-w-6xl mx-auto mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4 ">
+                <div className="max-w-6xl mx-auto mb-12">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
                         Capacitaciones Jurídicas Empresariales
                     </h1>
-                    <p className="text-xl md:text-xl text-gray-200 max-w-4xl mx-auto">
+                    <p className="text-lg sm:text-xl md:text-xl text-gray-200 max-w-4xl mx-auto">
                         Diseñamos y facilitamos formación legal para fortalecer competencias, prevenir riesgos y responder a los principales desafíos jurídicos que enfrentan las empresas hoy.
                     </p>
                 </div>
 
                 {/* Tarjeta única descriptiva */}
                 <div className="max-w-4xl mx-auto">
-                    <div className="bg-white/10 rounded-2xl shadow-md p-10 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
-                        <div className="flex items-center gap-4 mb-4">
-                            {/* <BulbOutlined className="text-5xl text-[#e6d769]" />
-                                <h2 className="text-4xl font-semibold text-[#e6d769]">
-                                    Formación Jurídica Empresarial
-                                </h2> */}
-                        </div>
-                        <p className="text-base md:text-lg text-gray-100 leading-relaxed mb-4">
-                            En Legal 360 S.A.S diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales.
+                    <div className="bg-white/10 rounded-2xl shadow-md p-6 sm:p-8 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
+                        <p className="text-base sm:text-lg md:text-lg text-gray-100 leading-relaxed mb-4">
+                            En Legal 360 S.A.S diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales:
                         </p>
-                        <ul className="text-base md:text-lg text-gray-100 leading-relaxed space-y-3 pl-30">
+                        <ul className="text-base sm:text-lg text-gray-100 leading-relaxed space-y-3 pl-6 sm:pl-10 md:pl-20">
                             <li className="flex items-start gap-2">
                                 <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
                                 Nuevas licencias laborales obligatorias
@@ -74,21 +68,24 @@ const CapacitacionesJuridicas = () => {
                     </div>
                 </div>
 
-                <Link
-                    to="/#servicios"
-                    className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
-                >
-                    <ArrowLeftOutlined />
-                    <span>Volver</span>
-                </Link>
-
-                <div className="block sm:hidden mt-20 text-center">
+                {/* Botón para volver */}
+                <div className="mt-8 sm:mt-12">
                     <Link
                         to="/#servicios"
-                        className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
+                        className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
                     >
-                        <ArrowLeftOutlined style={{ fontSize: '16px' }} />
+                        <ArrowLeftOutlined />
+                        <span>Volver</span>
                     </Link>
+
+                    <div className="block sm:hidden mt-12 text-center">
+                        <Link
+                            to="/#servicios"
+                            className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
+                        >
+                            <ArrowLeftOutlined style={{ fontSize: '16px' }} />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>
@@ -96,4 +93,3 @@ const CapacitacionesJuridicas = () => {
 };
 
 export default CapacitacionesJuridicas;
-

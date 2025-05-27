@@ -126,7 +126,7 @@ const Servicios = ({ id }) => {
                   {/* Back */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-[#001e33] border border-[#e6d769] rounded-2xl px-8 py-12 flex flex-col justify-center items-center text-center">
                     <h3 className="text-2xl font-bold text-[#e6d769] mb-4">{servicio.titulo}</h3>
-                    <p className="text-gray-300 text-sm md:text-lg mb-6 leading-normal max-w-2xl w-full">
+                    <p className="text-gray-300 text-sm md:text- mb-6 leading-normal max-w-2xl w-full">
                       {servicio.resumen}
                     </p>
 
