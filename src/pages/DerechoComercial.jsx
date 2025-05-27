@@ -84,10 +84,10 @@ const DerechoComercial = () => {
                             className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm"
                         >
                             <div className="flex justify-center mb-4">{section.icon}</div>
-                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-4">
+                            <h2 className="text-lg font-semibold text-[#e6d769] mb-2">
                                 {section.title}
                             </h2>
-                            <ul className="text-left space-y-2 text-gray-200 text-base">
+                            <ul className="text-left space-y-2 text-gray-200 text-sm">
                                 {section.bullets.map((item, i) => (
                                     <li key={i} className="flex gap-2">
                                         <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />

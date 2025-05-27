@@ -22,7 +22,7 @@ const QuienesSomos = () => {
       </div>
 
       {/* Contenido sobre el fondo */}
-      <div className="relative z-10 max-w-7xl w-full text-white pl-10 md:pl-16 lg:pl-15 xl:pl-12">
+      <div className="relative z-10 max-w-6xl w-full text-white pl-10 md:pl-12 lg:pl-12 xl:pl-12">
         <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Texto descriptivo */}
           <div className="text-left">

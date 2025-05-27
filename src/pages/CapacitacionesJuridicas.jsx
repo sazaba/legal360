@@ -40,7 +40,7 @@ const CapacitacionesJuridicas = () => {
                 {/* Tarjeta única descriptiva */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-white/10 rounded-2xl shadow-md p-6 sm:p-8 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
-                        <p className="text-base sm:text-lg md:text-lg text-gray-100 leading-relaxed mb-4">
+                        <p className="text-md sm:text-md md:text-md text-gray-100 leading-relaxed mb-4">
                             En Legal 360 S.A.S diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales:
                         </p>
                         <ul className="text-base sm:text-lg text-gray-100 leading-relaxed space-y-3 pl-6 sm:pl-10 md:pl-20">
