@@ -6,6 +6,8 @@ import Hero from "./Hero";
 import QuienesSomos from "./QuienesSomos";
 import Servicios from "./Servicios";
 import Footer from "./Footer";
+import FormularioPlanes from "./FormularioPlanes";
+import ContactoAccesos from "../components/ContactoAccesos";
 
 export default function Home() {
     return (
@@ -21,7 +23,10 @@ export default function Home() {
             <section id="servicios">
                 <Servicios />
             </section>
-
+            <section id="planes">
+                <FormularioPlanes />
+            </section>
+            <ContactoAccesos />
             <Footer />
         </main>
     );
