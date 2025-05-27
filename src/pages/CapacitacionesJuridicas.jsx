@@ -79,12 +79,13 @@ const CapacitacionesJuridicas = () => {
                         <span>Volver</span>
                     </Link>
 
-                    <div className="block sm:hidden mt-12 text-center">
+                    <div className="block sm:hidden mt-20 text-center z-20">
                         <Link
                             to="/#servicios"
-                            className="inline-block bg-gradient-to-r from-[#e6d769] to-[#95642a] text-[#001e33] font-bold py-3 px-6 rounded-full text-sm shadow-md hover:scale-105 transition duration-300"
+                            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#95642a] text-[#001e33] font-semibold py-2 px-5 rounded-full text-sm shadow-md hover:scale-105 transition-all duration-300"
                         >
-                            <ArrowLeftOutlined style={{ fontSize: '16px' }} />
+                            <ArrowLeftOutlined className="text-base" />
+                            Regresar
                         </Link>
                     </div>
                 </div>

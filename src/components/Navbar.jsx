@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link"; // para enlaces externos
 import logo from "../assets/images/logolegal.webp";
 import Relevo from "../assets/images/relevo.webp";
 
 export default function Navbar() {
     const [menuAbierto, setMenuAbierto] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 0);
@@ -13,17 +16,29 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const scrollTo = (id) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-            setMenuAbierto(false);
+    // Función inteligente que navega o hace scroll según la ruta
+    const handleSmartScroll = (id) => {
+        if (location.pathname === "/") {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+                setMenuAbierto(false);
+            }
+        } else {
+            navigate("/#" + id); // fuerza reload con hash para que <HashLink> funcione
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 500);
         }
     };
 
     return (
         <nav
-            className={`${scrolled ? "bg-[#001e33] shadow-md" : "bg-transparent"} fixed w-full top-0 z-50 transition duration-300 font-roboto`}
+            className={`${scrolled ? "bg-[#001e33] shadow-md" : "bg-transparent"
+                } fixed w-full top-0 z-50 transition duration-300 font-roboto`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
@@ -39,19 +54,19 @@ export default function Navbar() {
                     {/* Links desktop */}
                     <div className="hidden md:flex items-center space-x-6">
                         <button
-                            onClick={() => scrollTo("top")}
+                            onClick={() => handleSmartScroll("top")}
                             className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat"
                         >
                             Inicio
                         </button>
                         <button
-                            onClick={() => scrollTo("por-que-nosotros")}
+                            onClick={() => handleSmartScroll("por-que-nosotros")}
                             className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat"
                         >
                             Nosotros
                         </button>
                         <button
-                            onClick={() => scrollTo("servicios")}
+                            onClick={() => handleSmartScroll("servicios")}
                             className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat"
                         >
                             Servicios
@@ -79,7 +94,7 @@ export default function Navbar() {
                         </a>
                     </div>
 
-                    {/* Mobile menu button */}
+                    {/* Botón menú móvil */}
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={() => setMenuAbierto(!menuAbierto)}
@@ -113,9 +128,12 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Fullscreen mobile menu */}
+            {/* Menú móvil */}
             <div
-                className={`md:hidden fixed inset-0 bg-[#001e33]/95 z-40 flex flex-col transition-all duration-500 ease-in-out ${menuAbierto ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+                className={`md:hidden fixed inset-0 bg-[#001e33]/95 z-40 flex flex-col transition-all duration-500 ease-in-out ${menuAbierto
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-95 pointer-events-none"
+                    }`}
             >
                 <button
                     onClick={() => setMenuAbierto(false)}
@@ -126,19 +144,19 @@ export default function Navbar() {
 
                 <div className="flex flex-col items-center justify-center space-y-8 text-center h-full w-full px-6">
                     <button
-                        onClick={() => scrollTo("top")}
+                        onClick={() => handleSmartScroll("top")}
                         className="text-white hover:text-[#e6d769] text-xl sm:text-2xl font-semibold font-montserrat"
                     >
                         Inicio
                     </button>
                     <button
-                        onClick={() => scrollTo("por-que-nosotros")}
+                        onClick={() => handleSmartScroll("por-que-nosotros")}
                         className="text-white hover:text-[#e6d769] text-xl sm:text-2xl font-semibold font-montserrat"
                     >
                         Nosotros
                     </button>
                     <button
-                        onClick={() => scrollTo("servicios")}
+                        onClick={() => handleSmartScroll("servicios")}
                         className="text-white hover:text-[#e6d769] text-xl sm:text-2xl font-semibold font-montserrat"
                     >
                         Servicios

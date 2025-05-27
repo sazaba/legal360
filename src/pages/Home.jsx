@@ -1,21 +1,28 @@
 
 import Slider from "../components/Slider";
-import Footer from "./Footer";
 import Hero from "./Hero";
 
-
+// En Home.jsx
 import QuienesSomos from "./QuienesSomos";
 import Servicios from "./Servicios";
+import Footer from "./Footer";
 
 export default function Home() {
     return (
         <main>
+            <section id="top">
+                <Hero />
+            </section>
 
-            <Hero />
-            <QuienesSomos />
-            <Servicios id="servicios" />
+            <section id="por-que-nosotros">
+                <QuienesSomos />
+            </section>
+
+            <section id="servicios">
+                <Servicios />
+            </section>
+
             <Footer />
-            {/* <Slider /> */}
         </main>
     );
 }
