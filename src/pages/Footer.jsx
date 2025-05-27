@@ -2,7 +2,7 @@ import { FaInstagram, } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#0d1a2b] text-white font-roboto pt-12 pb-8">
+        <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-2">
             <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 {/* Marca */}
                 <div>
@@ -54,7 +54,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="mt-12 pt-6 border-t border-gray-800 text-center text-sm text-gray-500">
+            <div className="pt-3 border-t border-gray-800 text-center text-sm text-gray-500">
                 © {new Date().getFullYear()} Legal 360. Todos los derechos reservados.
             </div>
         </footer>
