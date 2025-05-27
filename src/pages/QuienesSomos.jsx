@@ -49,7 +49,7 @@ const QuienesSomos = () => {
             {/* <p className="text-[#e6d769] font-semibold text-lg sm:text-xl md:text-2xl mb-10">
               Legal 360 S.A.S
             </p> */}
-            <p className="text-[#e6d769] text-right font-semibold text-lg sm:text-xl md:text-2xl mb-10">
+            <p className="text-[#e6d769] text-left font-semibold text-lg sm:text-xl md:text-2xl mb-10">
               "Legal, claro y eficiente".
             </p>
 
