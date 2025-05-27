@@ -145,7 +145,7 @@ const DerechoLaboral = () => {
                             <h2 className="text-xl font-semibold text-[#e6d769] mb-2">
                                 {service.title}
                             </h2>
-                            <div className="text-lg text-gray-200">{service.description}</div>
+                            <div className="text-md text-gray-200">{service.description}</div>
                         </div>
                     ))}
                 </div>
