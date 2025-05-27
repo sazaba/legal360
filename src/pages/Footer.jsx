@@ -2,7 +2,7 @@ import { FaInstagram, } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-2">
+        <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-3">
             <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 {/* Marca */}
                 <div>
@@ -40,7 +40,7 @@ const Footer = () => {
                 {/* Redes Sociales */}
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Síguenos</h3>
-                    <div className="flex gap-5">
+                    <div className="flex gap-5 pb-4">
                         {[FaInstagram].map((Icon, i) => (
                             <a
                                 key={i}

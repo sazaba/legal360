@@ -89,7 +89,7 @@ const Servicios = ({ id }) => {
           Asesoría legal integral, clara y eficiente para proteger a tu empresa.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 justify-items-center">
           {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
             return (
