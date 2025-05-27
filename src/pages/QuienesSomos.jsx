@@ -4,12 +4,11 @@ import Mari from '../assets/images/maribg.webp';
 const QuienesSomos = () => {
   return (
     <section
-      className="relative bg-cover bg-no-repeat min-h-screen flex items-center justify-start px-6 py-50 bg-[60%_center] md:bg-center"
+      className="relative bg-cover bg-no-repeat min-h-screen flex items-center justify-center md:justify-start px-6 py-24 sm:py-32 bg-[60%_center] md:bg-center"
       style={{ backgroundImage: `url(${Mari})` }}
     >
-
       {/* Capa oscura para mejorar contraste */}
-      <div className="absolute inset-0 z-0 bg-black/80 md:bg-transparent" />
+      <div className="absolute inset-0 z-0 bg-black/70 md:bg-transparent" />
 
       {/* Ola superior conectada al Hero */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-0">
@@ -22,32 +21,31 @@ const QuienesSomos = () => {
       </div>
 
       {/* Contenido sobre el fondo */}
-      <div className="relative z-10 max-w-6xl w-full text-white pl-10 md:pl-12 lg:pl-12 xl:pl-12">
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div className="relative z-10 max-w-6xl w-full text-white">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Texto descriptivo */}
-          <div className="text-left">
+          <div className="text-left px-2 sm:px-6 md:px-10">
             <p className="text-[#e6d769] uppercase tracking-widest text-sm mb-4">Nuestra razón de ser</p>
-            <h1 className=" text-center text-3xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6">
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-center lg:text-left">
               Somos{' '}
               <span
                 style={{
                   background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  display: 'inline-block'
                 }}
-                className="text-amber-300 font-bold"
+                className="inline-block"
               >
                 Legal 360 S.A.S
               </span>
-
             </h1>
 
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-5">
               Nuestra firma está conformada por un equipo multidisciplinario en derecho laboral, seguridad social y derecho comercial, con experiencia en conciliación, auditoría legal y gestión empresarial. Esto nos permite ofrecer soluciones jurídicas integrales que previenen conflictos y fortalecen la toma de decisiones.
             </p>
 
-            <p className="text-gray-300 text-xl mb-5">
+            <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-5">
               Ofrecemos un servicio accesible, claro y adaptado a tu realidad empresarial, con tarifas justas y un enfoque preventivo que te brinda tranquilidad jurídica.
             </p>
 
@@ -55,25 +53,20 @@ const QuienesSomos = () => {
               Confía en un equipo que entiende el lenguaje legal y sabe traducirlo en acciones concretas para tu empresa.
             </p>
 
-            {/* <p className="text-[#e6d769] font-semibold text-lg sm:text-xl md:text-2xl mb-10">
-              Legal 360 S.A.S
-            </p> */}
             <p
+              className="font-semibold text-lg sm:text-xl md:text-2xl mb-10"
               style={{
                 background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                display: 'inline-block'
               }}
-              className="text-[#e6d769] text-left font-semibold text-lg sm:text-xl md:text-2xl mb-10"
             >
               "Legal, claro y eficiente".
             </p>
 
-
             <div className="flex justify-start space-x-6 text-[#e6d769] text-3xl">
               <a href="#">
-                <FaWhatsapp className="hover:scale-110 transition text-[#e6d769]" />
+                <FaWhatsapp className="hover:scale-110 transition" />
               </a>
               <a href="#">
                 <FaInstagram className="hover:scale-110 transition" />
@@ -97,4 +90,3 @@ const QuienesSomos = () => {
 };
 
 export default QuienesSomos;
-

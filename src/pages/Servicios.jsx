@@ -64,7 +64,7 @@ const Servicios = ({ id }) => {
   return (
     <section
       id="servicios"
-      className="relative pt-20 text-white min-h-screen pb-8"
+      className="relative pt-20 text-white min-h-screen pb-10"
       style={{
         backgroundImage: `url(${isMobile ? serviciores : bustos})`,
         backgroundSize: 'cover',
@@ -72,14 +72,17 @@ const Servicios = ({ id }) => {
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
+      {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
         </svg>
       </div>
 
+      {/* Fondo oscuro */}
       <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
 
+      {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
           Asesoría y Consultoría Empresarial
@@ -89,23 +92,24 @@ const Servicios = ({ id }) => {
           Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 justify-items-center">
+        {/* Grid de tarjetas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-2 sm:px-4 md:px-10 justify-items-center">
           {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
             return (
               <div
                 key={servicio.id}
-                className={`relative w-full max-w-[220px] aspect-[3/4] perspective ${isMobile ? 'mobile-fade-in' : ''}`}
+                className={`relative w-full max-w-[280px] aspect-[3/4] perspective ${isMobile ? 'mobile-fade-in' : ''}`}
                 style={isMobile ? { '--delay': animationDelays[index % animationDelays.length] } : {}}
               >
                 <div className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
-                  {/* Front */}
+                  {/* Cara frontal */}
                   <div
                     onClick={() => setActiveId(servicio.id)}
                     className="absolute w-full h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-4 py-6 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
                   >
                     <div className="mb-4">{servicio.icono}</div>
-                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wide mb-4 w-full max-w-[240px] mx-auto leading-snug">
+                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wide mb-4 leading-snug">
                       {servicio.titulo}
                     </h3>
                     <div className="mt-4">
@@ -121,10 +125,12 @@ const Servicios = ({ id }) => {
                     </div>
                   </div>
 
-                  {/* Back */}
+                  {/* Cara trasera */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-[#001e33] border border-[#e6d769] rounded-2xl px-4 py-6 flex flex-col justify-center items-center text-center">
-                    <h3 className="text-lg font-bold text-[#e6d769] mb-3">{servicio.titulo}</h3>
-                    <p className="text-gray-300 text-xs mb-4 leading-normal max-w-sm w-full">
+                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3">
+                      {servicio.titulo}
+                    </h3>
+                    <p className="text-gray-300 text-xs sm:text-sm mb-4 leading-normal max-w-sm w-full">
                       {servicio.resumen}
                     </p>
                     <button
@@ -147,6 +153,7 @@ const Servicios = ({ id }) => {
         </div>
       </div>
 
+      {/* Estilos personalizados */}
       <style jsx>{`
         @keyframes fadeInMobile {
           from {
