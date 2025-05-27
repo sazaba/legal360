@@ -104,10 +104,10 @@ const Servicios = ({ id }) => {
                   {/* Front */}
                   <div
                     onClick={() => setActiveId(servicio.id)}
-                    className="absolute w-full h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-4 py-12 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
+                    className="absolute w-[90%] h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-2 py-12 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
                   >
                     <div className="mb-6">{servicio.icono}</div>
-                    <h3 className="text-lg font-semibold text-[#e6d769] uppercase tracking-wide mb-6 w-full max-w-[360px] mx-auto leading-snug">
+                    <h3 className="text-md font-semibold text-[#e6d769] uppercase tracking-wide mb-6 w-full max-w-[360px] mx-auto leading-snug">
                       {servicio.titulo}
                     </h3>
                     <div className="mt-6">
