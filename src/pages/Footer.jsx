@@ -1,4 +1,4 @@
-import { FaInstagram, } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
     return (
@@ -41,7 +41,7 @@ const Footer = () => {
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Síguenos</h3>
                     <div className="flex gap-5 pb-4">
-                        {[FaInstagram].map((Icon, i) => (
+                        {[FaInstagram, FaWhatsapp].map((Icon, i) => (
                             <a
                                 key={i}
                                 href="#"
