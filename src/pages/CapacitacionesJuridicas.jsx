@@ -29,10 +29,10 @@ const CapacitacionesJuridicas = () => {
             <div className="relative z-20 px-6 py-10 sm:px-12 lg:px-24 text-white text-center">
                 {/* Título estático */}
                 <div className="max-w-6xl mx-auto mb-12">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
                         Capacitaciones Jurídicas Empresariales
                     </h1>
-                    <p className="text-lg sm:text-xl md:text-xl text-gray-200 max-w-4xl mx-auto">
+                    <p className="text-md sm:text-lg md:text-lg text-gray-200 max-w-4xl mx-auto">
                         Diseñamos y facilitamos formación legal para fortalecer competencias, prevenir riesgos y responder a los principales desafíos jurídicos que enfrentan las empresas hoy.
                     </p>
                 </div>
@@ -41,9 +41,9 @@ const CapacitacionesJuridicas = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-white/10 rounded-2xl shadow-md p-6 sm:p-8 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
                         <p className="text-md sm:text-md md:text-md text-gray-100 leading-relaxed mb-4">
-                            En Legal 360 S.A.S diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales:
+                            Diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales:
                         </p>
-                        <ul className="text-base sm:text-lg text-gray-100 leading-relaxed space-y-3 pl-6 sm:pl-10 md:pl-20">
+                        <ul className="text-sm sm:text-md text-gray-100 leading-relaxed space-y-3 pl-6 sm:pl-10 md:pl-20">
                             <li className="flex items-start gap-2">
                                 <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
                                 Nuevas licencias laborales obligatorias

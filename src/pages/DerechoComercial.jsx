@@ -69,10 +69,10 @@ const DerechoComercial = () => {
 
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
                         Derecho Comercial
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+                    <p className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto">
                         Servicios clave para fortalecer y proteger tu actividad empresarial.
                     </p>
                 </div>

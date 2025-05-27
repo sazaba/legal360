@@ -29,7 +29,7 @@ const services = [
         ]
     },
     {
-        title: 'Acompañamiento Legal Estratégico',
+        title: 'Acompañamiento Legal',
         icon: <SafetyCertificateOutlined className="text-5xl text-[#e6d769]" />,
         bullets: [
             'Asesoría frente a requerimientos del Ministerio del Trabajo, actos administrativos y planes de mejora.',
@@ -62,10 +62,10 @@ const SSTLegal360 = () => {
 
             <div className="relative z-20 px-6 py-10 lg:px-24 text-white">
                 <div className="max-w-6xl mx-auto text-center mb-16">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d769] mb-4">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
                         Seguridad y Salud en el Trabajo
                     </h1>
-                    <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+                    <p className="text-sm sm:text-md md:text-lg text-gray-200 max-w-3xl mx-auto">
                         Apoyo legal integral para fortalecer el área de SST en tu empresa.
                     </p>
                 </div>
