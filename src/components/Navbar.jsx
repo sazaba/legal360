@@ -72,7 +72,7 @@ export default function Navbar() {
                             Servicios
                         </button>
                         <a
-                            href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!"
+                            href="#"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat"
@@ -131,8 +131,8 @@ export default function Navbar() {
             {/* Menú móvil */}
             <div
                 className={`md:hidden fixed inset-0 bg-[#001e33]/95 z-40 flex flex-col transition-all duration-500 ease-in-out ${menuAbierto
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-95 pointer-events-none"
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95 pointer-events-none"
                     }`}
             >
                 <button
@@ -162,7 +162,7 @@ export default function Navbar() {
                         Servicios
                     </button>
                     <a
-                        href="https://api.whatsapp.com/send?phone=573015207556&text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios!"
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white hover:text-[#e6d769] text-xl sm:text-2xl font-semibold font-montserrat"

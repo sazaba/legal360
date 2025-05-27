@@ -121,7 +121,7 @@ const DerechoComercial = () => {
                 </div>
             </div>
             <a
-                href="https://wa.link/biqv3m"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 hover:shadow-2xl animate-bounce z-50"
