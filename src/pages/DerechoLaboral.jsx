@@ -8,7 +8,7 @@ import {
     FaLock
 } from 'react-icons/fa';
 import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
-import v1 from '../assets/videos/estatuajusticia.mp4';
+import v1 from '../assets/videos/v1.mp4';
 
 const services = [
     {
