@@ -135,14 +135,14 @@ const DerechoLaboral = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center items-stretch">
                     {services.map((service, index) => (
                         <div
                             key={index}
                             className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-md"
                         >
                             <div className="flex justify-center mb-4">{service.icon}</div>
-                            <h2 className="text-2xl font-semibold text-[#e6d769] mb-2">
+                            <h2 className="text-xl font-semibold text-[#e6d769] mb-2">
                                 {service.title}
                             </h2>
                             <div className="text-lg text-gray-200">{service.description}</div>
