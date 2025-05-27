@@ -86,7 +86,7 @@ const Servicios = ({ id }) => {
         </h2>
 
         <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-12 font-roboto">
-          Asesoría legal integral, clara y eficiente para proteger a tu empresa.
+          Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 justify-items-center">
