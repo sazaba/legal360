@@ -27,7 +27,7 @@ const Hero = () => {
       {/* Contenido */}
       <div className="relative z-10 w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-6 md:px-12">
         <div className="text-center md:text-left max-w-2xl">
-          <h1 className="text-white text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-bold mb-6 leading-15 font-montserrat">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-bold mb-6 leading-tight md:leading-15 font-montserrat">
             Cumple con la Ley{' '}
             <span className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] bg-clip-text text-transparent">
               Protege tu Empresa

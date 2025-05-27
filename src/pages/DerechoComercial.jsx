@@ -12,7 +12,7 @@ import v1 from '../assets/videos/lawyer.mp4';
 
 const sections = [
     {
-        title: 'Asesoría Comercial Preventiva',
+        title: 'Asesoría Comercial',
         icon: <AiOutlineSchedule className="text-5xl text-[#e6d769]" />,
         bullets: [
             'Elaboración y/o revisión de procedimientos comerciales internos.',
