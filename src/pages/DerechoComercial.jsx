@@ -9,6 +9,7 @@ import {
 import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 import v1 from '../assets/videos/lawyer.mp4';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const sections = [
     {
@@ -118,6 +119,18 @@ const DerechoComercial = () => {
                     </div>
                 </div>
             </div>
+            <a
+                href="https://wa.link/biqv3m"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 hover:shadow-2xl animate-bounce z-50"
+                style={{
+                    background: 'linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)',
+                    color: '#001e33',
+                }}
+            >
+                <FaWhatsapp className="text-2xl sm:text-3xl" />
+            </a>
         </section>
     );
 };
