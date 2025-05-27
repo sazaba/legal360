@@ -75,7 +75,7 @@ const SSTLegal360 = () => {
                         <div
                             key={index}
                             className={`bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm 
-      ${index === 0 ? 'min-h-[440px] md:min-h-[400px]' : ''}`}
+      ${index === 0 ? 'min-h-[380px] md:min-h-[360px]' : ''}`}
                         >
                             <div className="flex justify-center mb-4">{service.icon}</div>
                             <h2 className="text-lg sm:text-2xl font-semibold text-[#e6d769] mb-4">
