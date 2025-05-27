@@ -8,7 +8,7 @@ const Footer = () => {
                 <div>
                     <h2 className="text-2xl font-bold text-[#e6d769] mb-4 tracking-tight">Legal 360 S.A.S</h2>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                        Asesoría legal, clara y eficiente.<br /> Protege tu empresa con expertos legales.
+                        Legal, claro y eficiente.<br /> Protege tu empresa con expertos legales.
                     </p>
                 </div>
 
