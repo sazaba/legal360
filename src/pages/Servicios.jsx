@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
-import serviciores from '../assets/images/serviciores.webp';
+import serviciores from '../assets/images/bserv.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
