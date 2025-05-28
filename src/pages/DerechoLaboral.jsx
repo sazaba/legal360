@@ -20,7 +20,7 @@ const services = [
             <ul className="text-left space-y-2">
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Asesoría en las formas de vinculación laboral
+                    Asesoría en las diferentes formas de contratación laboral que más convengan a sus intereses.
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />

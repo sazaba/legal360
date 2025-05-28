@@ -37,20 +37,20 @@ const QuienesSomos = () => {
                 }}
                 className="inline-block"
               >
-                Legal 360 S.A.S
+                Legal 360 S.A.S.
               </span>
             </h1>
 
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-5">
-              Nuestra firma está conformada por un equipo multidisciplinario en derecho laboral, seguridad social y derecho comercial, con experiencia en conciliación, auditoría legal y gestión empresarial. Esto nos permite ofrecer soluciones jurídicas integrales que previenen conflictos y fortalecen la toma de decisiones.
+              Legal 360 S.A.S., es un equipo multidisciplinario de profesionales altamente capacitados en derecho laboral, seguridad social, derecho comercial y seguridad y salud en el trabajo.
             </p>
 
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-5">
-              Ofrecemos un servicio accesible, claro y adaptado a tu realidad empresarial, con tarifas justas y un enfoque preventivo que te brinda tranquilidad jurídica.
+              Brindamos soluciones jurídicas integrales, oportunas y comprensibles, diseñadas para fortalecer la toma de decisiones tanto a nivel empresarial como individual. Nuestro enfoque preventivo busca anticipar conflictos, reducir riesgos legales y ofrecer una experiencia de acompañamiento que garantice tranquilidad jurídica.
             </p>
 
             <p className="text-gray-400 text-sm sm:text-base md:text-lg italic mb-6">
-              Confía en un equipo que entiende el lenguaje legal y sabe traducirlo en acciones concretas para tu empresa.
+              Ofrecemos planes y tarifas flexibles que se adaptan a las necesidades reales de tu empresa.
             </p>
 
             <p

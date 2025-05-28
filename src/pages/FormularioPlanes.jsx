@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { CalendarOutlined } from '@ant-design/icons';
 
 const FormularioPlanes = () => {
     const form = useRef();
@@ -27,17 +28,15 @@ const FormularioPlanes = () => {
 
     return (
         <section className="min-h-[80vh] bg-gradient-to-br from-white to-gray-100 flex justify-center px-4 sm:px-6 py-8 font-sans">
-            {/* Contenedor con bordes redondeados y sombra */}
             <div className="flex flex-col md:flex-row w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden">
                 {/* Formulario compacto */}
                 <div className="bg-white w-full md:w-1/2 p-6 sm:p-8 border border-gray-200">
                     <h2 className="text-xl sm:text-2xl font-bold text-[#001e33] mb-4 text-center sm:text-left">
-                        Agenda tu Diagnostico Gratuito
+                        Agenda tu Diagnóstico Gratuito
                     </h2>
                     <p className="text-sm sm:text-base text-gray-700 leading-relaxed mt-2 mb-4">
                         Si usted es una persona jurídica o empresa y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
                     </p>
-
 
                     <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 gap-3 text-[#001e33] text-sm">
                         <div className="grid grid-cols-2 gap-3">
@@ -91,7 +90,7 @@ const FormularioPlanes = () => {
                             />
                             <label className="text-xs text-gray-700 leading-snug">
                                 En cumplimiento de la Ley 1581 de 2012 y sus decretos reglamentarios,
-                                autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S</strong>,
+                                autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S.</strong>,
                                 con el propósito de cumplir el desarrollo de actividades afines a su objeto social
                                 de conformidad con la Ley, de acuerdo con su Política de Protección de Datos Personales.*
                             </label>
@@ -108,7 +107,6 @@ const FormularioPlanes = () => {
                             <p className="text-green-600 text-sm text-center pt-1">
                                 ✅ ¡Muchas gracias! Lo estaremos contactando.
                             </p>
-
                         )}
                     </form>
                 </div>
@@ -121,44 +119,44 @@ const FormularioPlanes = () => {
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
-                            {/* Plan 1 */}
+                            {/* Plan 1: Asesoría Mensual */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2">Plan Básico</h4>
-                                <p className="text-sm mb-4">Ideal para pequeñas empresas que están comenzando su proceso de formalización.</p>
-                                <p className="text-lg font-bold text-[#001e33]">Desde $800.000 / mes</p>
+                                <h4 className="text-xl font-bold mb-2">Plan Mensual</h4>
+                                <p className="text-sm mb-4">Ideal para empresas que requieren un respaldo jurídico permanente y preventivo.</p>
                                 <ul className="mt-3 list-disc list-inside text-sm space-y-1">
-                                    <li>Consultas jurídicas ilimitadas</li>
-                                    <li>Revisión de contratos básicos</li>
-                                    <li>Acompañamiento en requerimientos</li>
+                                    <li>Acompañamiento legal continuo en derecho laboral y comercial</li>
+                                    <li>Consultas jurídicas ilimitadas por correo, teléfono o videollamada</li>
+                                    <li>Revisión y elaboración de documentos clave</li>
+                                    <li>Alerta de vencimientos legales y gestión de riesgos jurídicos</li>
+                                    <li>Capacitaciones jurídicas breves para tu equipo</li>
                                 </ul>
                             </div>
 
-                            {/* Plan 2 */}
+                            {/* Plan 2: Servicio por Evento */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2">Plan Premium</h4>
-                                <p className="text-sm mb-4">Para empresas que requieren un soporte jurídico integral y constante.</p>
-                                <p className="text-lg font-bold text-[#001e33]">Desde $1.500.000 / mes</p>
+                                <h4 className="text-xl font-bold mb-2">Servicio por Evento</h4>
+                                <p className="text-sm mb-4">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
                                 <ul className="mt-3 list-disc list-inside text-sm space-y-1">
-                                    <li>Consultas y acompañamiento legal ilimitado</li>
-                                    <li>Elaboración y revisión de documentos</li>
-                                    <li>Soporte en inspecciones y procesos</li>
-                                    <li>Capacitaciones jurídicas personalizadas</li>
+                                    <li>Asesoría especializada para un caso o situación puntual</li>
+                                    <li>Aplicación de estrategias jurídicas enfocadas en resultados inmediatos</li>
+                                    <li>Ideal para trámites, reclamaciones, inspecciones o conflictos</li>
+                                    <li>No requiere compromiso mensual</li>
+                                    <li>Tiempo de respuesta prioritario según disponibilidad</li>
                                 </ul>
                             </div>
                         </div>
 
-                        {/* Botón de acción */}
                         <p
                             className="mt-8 text-sm sm:text-base font-semibold text-[#1d1d1b] px-4 py-3 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 inline-block"
                             style={{
                                 background: "linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)",
                             }}
                         >
-                            📅 AGENDA TU PRIMERA CONSULTA <br /> para realizar el diagnóstico de tus activos legales.
+                            <CalendarOutlined className="mr-2 text-lg align-middle" />
+                            AGENDA TU PRIMERA CONSULTA <br /> para realizar el diagnóstico de tus activos legales.
                         </p>
                     </div>
                 </div>
-
             </div>
         </section>
     );

@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 {/* Marca */}
                 <div>
-                    <h2 className="text-2xl font-bold text-[#e6d769] mb-4 tracking-tight">Legal 360 S.A.S</h2>
+                    <h2 className="text-2xl font-bold text-[#e6d769] mb-4 tracking-tight">Legal 360 S.A.S.</h2>
                     <p className="text-gray-400 text-sm leading-relaxed">
                         Legal, claro y eficiente.<br /> Protege tu empresa con expertos legales.
                     </p>
