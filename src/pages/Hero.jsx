@@ -45,17 +45,16 @@ const Hero = () => {
               <span className="block text-[#e6d769] mt-2">Crece con Legal 360</span>
             </h1>
 
-            <div className="mt-4 space-y-2">
-              <p className="text-white text-lg sm:text-xl font-roboto">
-                Acompañamiento mensual o por requerimiento
-              </p>
-              <p className="text-[#1d1d1b] bg-[#e6d769] px-5 py-2 inline-block rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300">
-                ¡Tenemos los mejores precios del mercado!
+            <div className="mt-10
+             space-y-2">
+              <p className="text-[#1d1d1b] bg-[#e6d769] px-5 py-2 inline-block rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300 animate-bounce">
+                Acompañamiento mensual o por evento
               </p>
             </div>
           </div>
 
         </div>
+
       </div>
 
       {/* Separador decorativo SVG */}

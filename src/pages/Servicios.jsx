@@ -38,26 +38,27 @@ const Servicios = ({ id }) => {
       resumen: 'Acompañamiento legal en materia laboral y de seguridad social, protegiendo a tu empresa y optimizando la relación con tus colaboradores.',
       link: '/derecho-laboral'
     },
+
     {
       id: 2,
+      titulo: 'Capacitaciones Jurídicas',
+      icono: <ReadOutlined style={iconStyle} />,
+      resumen: 'Capacitaciones jurídicas prácticas y actualizadas para fortalecer el cumplimiento legal en tu empresa.',
+      link: '/capacitaciones'
+    },
+    {
+      id: 3,
       titulo: 'Derecho Comercial',
       icono: <FileProtectOutlined style={iconStyle} />,
       resumen: 'Asesoría legal en derecho comercial para la tomas de decisiones empresariales seguras, protegiendo tu negocio y respaldando cada acuerdo con confianza.',
       link: '/comercial'
     },
     {
-      id: 3,
+      id: 4,
       titulo: 'Seguridad y Salud en el Trabajo',
       icono: <SafetyCertificateOutlined style={iconStyle} />,
       resumen: 'Apoyo legal a tu área de Seguridad y Salud en el Trabajo para asegurar el cumplimiento normativo y prevenir riesgos jurídicos y laborales.',
       link: '/sst'
-    },
-    {
-      id: 4,
-      titulo: 'Capacitaciones Jurídicas',
-      icono: <ReadOutlined style={iconStyle} />,
-      resumen: 'Capacitaciones jurídicas prácticas y actualizadas para fortalecer el cumplimiento legal en tu empresa.',
-      link: '/capacitaciones'
     },
   ];
 

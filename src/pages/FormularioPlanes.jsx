@@ -34,6 +34,10 @@ const FormularioPlanes = () => {
                     <h2 className="text-xl sm:text-2xl font-bold text-[#001e33] mb-4 text-center sm:text-left">
                         Agenda tu Diagnostico Gratuito
                     </h2>
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed mt-2 mb-4">
+                        Si usted es una persona jurídica o empresa y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
+                    </p>
+
 
                     <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 gap-3 text-[#001e33] text-sm">
                         <div className="grid grid-cols-2 gap-3">
@@ -102,28 +106,50 @@ const FormularioPlanes = () => {
 
                         {enviado && (
                             <p className="text-green-600 text-sm text-center pt-1">
-                                ✅ ¡Formulario enviado correctamente!
+                                ✅ ¡Muchas gracias! Lo estaremos contactando.
                             </p>
+
                         )}
                     </form>
                 </div>
 
                 {/* Columna derecha: Planes de asesoría */}
                 <div className="bg-[#001e33] w-full md:w-1/2 text-white p-8 flex flex-col justify-center items-center text-center">
-                    <div className="max-w-sm">
-                        <h3 className="text-2xl font-bold mb-4 text-[#fcd34d]">
+                    <div className="max-w-3xl w-full">
+                        <h3 className="text-3xl font-bold mb-8 text-[#fcd34d] text-center">
                             Planes de Asesoría Legal
                         </h3>
-                        <p className="text-base font-semibold bg-white text-[#1d1d1b] px-5 py-2 rounded-lg inline-block shadow-md">
-                            Desde $800.000 mensuales
-                        </p>
-                        <p className="mt-4 text-sm text-gray-200 leading-relaxed">
-                            Acompañamiento jurídico, cumplimiento legal y tranquilidad para tu empresa o negocio.
-                        </p>
 
-                        {/* Texto persuasivo con gradiente dorado */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+                            {/* Plan 1 */}
+                            <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
+                                <h4 className="text-xl font-bold mb-2">Plan Básico</h4>
+                                <p className="text-sm mb-4">Ideal para pequeñas empresas que están comenzando su proceso de formalización.</p>
+                                <p className="text-lg font-bold text-[#001e33]">Desde $800.000 / mes</p>
+                                <ul className="mt-3 list-disc list-inside text-sm space-y-1">
+                                    <li>Consultas jurídicas ilimitadas</li>
+                                    <li>Revisión de contratos básicos</li>
+                                    <li>Acompañamiento en requerimientos</li>
+                                </ul>
+                            </div>
+
+                            {/* Plan 2 */}
+                            <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
+                                <h4 className="text-xl font-bold mb-2">Plan Premium</h4>
+                                <p className="text-sm mb-4">Para empresas que requieren un soporte jurídico integral y constante.</p>
+                                <p className="text-lg font-bold text-[#001e33]">Desde $1.500.000 / mes</p>
+                                <ul className="mt-3 list-disc list-inside text-sm space-y-1">
+                                    <li>Consultas y acompañamiento legal ilimitado</li>
+                                    <li>Elaboración y revisión de documentos</li>
+                                    <li>Soporte en inspecciones y procesos</li>
+                                    <li>Capacitaciones jurídicas personalizadas</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Botón de acción */}
                         <p
-                            className="mt-6 text-sm sm:text-base font-semibold text-[#1d1d1b] px-4 py-3 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
+                            className="mt-8 text-sm sm:text-base font-semibold text-[#1d1d1b] px-4 py-3 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 inline-block"
                             style={{
                                 background: "linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)",
                             }}
@@ -132,6 +158,7 @@ const FormularioPlanes = () => {
                         </p>
                     </div>
                 </div>
+
             </div>
         </section>
     );
