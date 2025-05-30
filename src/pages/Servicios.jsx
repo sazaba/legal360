@@ -28,7 +28,7 @@ const Servicios = ({ id }) => {
     color: '#e6d769'
   };
 
-  const backgroundPosition = isMobile ? '20% center' : 'center';
+  const backgroundPosition = isMobile ? ' center top' : 'center';
 
   const servicios = [
     {
