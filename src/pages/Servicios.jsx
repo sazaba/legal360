@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
-import serviciores from '../assets/images/CrisFront.webp';
+import MariCris from '../assets/videos/MariCris.MOV'
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
@@ -65,14 +65,31 @@ const Servicios = ({ id }) => {
   return (
     <section
       id="servicios"
-      className="relative pt-20 text-white min-h-screen pb-10"
+      className="relative pt-20 text-white min-h-screen pb-10 overflow-hidden"
       style={{
-        backgroundImage: `url(${isMobile ? serviciores : bustos})`,
+        backgroundImage: isMobile ? undefined : `url(${bustos})`,
         backgroundSize: 'cover',
         backgroundPosition: backgroundPosition,
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
+      {/* 🎥 Video solo en móvil */}
+      {isMobile && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 w-full h-full object-cover z-0"
+        >
+          <source src={MariCris} type="video/mp4" />
+          Tu navegador no soporta videos HTML5.
+        </video>
+      )}
+
+      {/* Capa oscura para contraste */}
+      <div className="absolute inset-0 bg-black opacity-70 z-10"></div>
+
       {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
