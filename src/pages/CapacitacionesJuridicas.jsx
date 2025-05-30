@@ -31,7 +31,7 @@ const CapacitacionesJuridicas = () => {
                 {/* Título estático */}
                 <div className="max-w-6xl mx-auto mb-12">
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
-                        Capacitaciones Jurídicas Empresariales
+                        Pensiones
                     </h1>
                     <p className="text-md sm:text-lg md:text-lg text-gray-200 max-w-4xl mx-auto">
                         Diseñamos y facilitamos formación legal para fortalecer competencias, prevenir riesgos y responder a los principales desafíos jurídicos que enfrentan las empresas hoy.

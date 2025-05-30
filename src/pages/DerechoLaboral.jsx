@@ -24,15 +24,15 @@ const services = [
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Verificación del cumplimiento de la normatividad laboral
+                    Verificación del cumplimiento de la normatividad laboral.
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Asesoría en la elaboración o actualización de contratos laborales
+                    Asesoría en la elaboración o actualización de contratos laborales.
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Revisión de contratación con terceros (proveedores y contratistas)
+                    Revisión de contratación con terceros (proveedores y contratistas).
                 </li>
             </ul>
         )
@@ -56,7 +56,7 @@ const services = [
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Manejo legal en la finalización de contratos
+                    Manejo legal en la finalización de contratos.
                 </li>
             </ul>
         )
@@ -88,7 +88,7 @@ const services = [
             <ul className="text-left space-y-2">
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Asesoría en el manejo legal de datos personales y habeas data (Circular Externa 003 de 2024).
+                    Implementación de datos personales y habeas data.
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
@@ -96,7 +96,7 @@ const services = [
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                    Documentación de políticas legales: disminución laboral, día de la familia, vinculación de personal extranjero.
+                    Documentación de políticas legales al interior de la empresa.
                 </li>
                 <li className="flex items-start gap-2">
                     <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />

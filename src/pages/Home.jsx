@@ -8,6 +8,7 @@ import Servicios from "./Servicios";
 import Footer from "./Footer";
 import FormularioPlanes from "./FormularioPlanes";
 import ContactoAccesos from "../components/ContactoAccesos";
+import PoliticaDatos from "./PoliticaDatos";
 
 export default function Home() {
     return (
@@ -27,7 +28,6 @@ export default function Home() {
                 <FormularioPlanes />
             </section>
             <ContactoAccesos />
-            <Footer />
         </main>
     );
 }

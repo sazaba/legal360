@@ -41,9 +41,9 @@ const Servicios = ({ id }) => {
 
     {
       id: 2,
-      titulo: 'Capacitaciones Jurídicas',
+      titulo: 'Pensiones',
       icono: <ReadOutlined style={iconStyle} />,
-      resumen: 'Capacitaciones jurídicas prácticas y actualizadas para fortalecer el cumplimiento legal en tu empresa.',
+      resumen: 'Asesoria legal en pensiones de vejez, invalidez y sobrevivientes, cálculo actuarial y reclamaciones ante la Junta de Calificación.',
       link: '/capacitaciones'
     },
     {

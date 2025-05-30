@@ -29,7 +29,7 @@ const Hero = () => {
         <div className="text-center md:text-left max-w-2xl space-y-6">
 
           <div className="w-full max-w-6xl mx-auto px-6 py-12 flex flex-col items-center md:items-start text-center md:text-left gap-4">
-            <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight font-montserrat tracking-tight">
+            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-montserrat tracking-tight">
               Cumple con la Ley{' '}
               <span
                 className="inline-block"
