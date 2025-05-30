@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
-import serviciores from '../assets/images/bserv.webp';
+import serviciores from '../assets/images/CrisFront.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
@@ -81,7 +81,7 @@ const Servicios = ({ id }) => {
       </div>
 
       {/* Fondo oscuro */}
-      <div className="absolute inset-0 bg-[#001e33] opacity-70 z-0"></div>
+      <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
 
       {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
