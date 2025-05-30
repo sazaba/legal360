@@ -47,7 +47,7 @@ const Hero = () => {
 
             <div className="mt-10
              space-y-2">
-              <p className="text-[#1d1d1b] bg-[#e6d769] px-5 py-2 inline-block rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300 animate-bounce">
+              <p className="text-[#1d1d1b] bg-[#e6d769] px-3 py-2 inline-block rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300 animate-bounce">
                 Acompañamiento mensual o por evento
               </p>
             </div>
