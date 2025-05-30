@@ -1,6 +1,13 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { CalendarOutlined } from '@ant-design/icons';
+
+import {
+    SolutionOutlined,
+    FileTextOutlined,
+    PhoneOutlined,
+    CheckCircleOutlined,
+    CalendarOutlined,
+} from "@ant-design/icons";
 
 const FormularioPlanes = () => {
     const form = useRef();
@@ -111,37 +118,77 @@ const FormularioPlanes = () => {
                     </form>
                 </div>
 
-                {/* Columna derecha: Planes de asesoría */}
                 <div className="bg-[#001e33] w-full md:w-1/2 text-white p-8 flex flex-col justify-center items-center text-center">
                     <div className="max-w-3xl w-full">
-                        <h3 className="text-3xl font-bold mb-8 text-[#fcd34d] text-center">
+                        <h3 className="text-3xl font-bold mb-8 text-[#fcd34d] text-center flex items-center justify-center gap-3">
+                            <SolutionOutlined className="text-4xl" />
                             Planes de Asesoría Legal
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
-                            {/* Plan 1: Asesoría Mensual */}
+                            {/* Plan Mensual */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2">Plan Mensual</h4>
-                                <p className="text-sm mb-4">Ideal para empresas que requieren un respaldo jurídico permanente y preventivo.</p>
-                                <ul className="mt-3 list-disc list-inside text-sm space-y-1">
-                                    <li>Acompañamiento legal continuo en derecho laboral y comercial</li>
-                                    <li>Consultas jurídicas ilimitadas por correo, teléfono o videollamada</li>
-                                    <li>Revisión y elaboración de documentos clave</li>
-                                    <li>Alerta de vencimientos legales y gestión de riesgos jurídicos</li>
-                                    <li>Capacitaciones jurídicas breves para tu equipo</li>
+                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                    <FileTextOutlined className="text-lg text-[#001e33]" />
+                                    Plan Mensual
+                                </h4>
+                                <p className="text-sm mb-4">
+                                    Ideal para empresas que requieren un respaldo jurídico permanente y preventivo.
+                                </p>
+                                <ul className="mt-3 list-none space-y-2 text-sm">
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircleOutlined className="mt-1 text-[#001e33]" />
+                                        Acompañamiento legal continuo en derecho laboral y comercial
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <PhoneOutlined className="mt-1 text-[#001e33]" />
+                                        Consultas jurídicas ilimitadas por correo, teléfono o videollamada
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <FileTextOutlined className="mt-1 text-[#001e33]" />
+                                        Revisión y elaboración de documentos clave
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircleOutlined className="mt-1 text-[#001e33]" />
+                                        Alerta de vencimientos legales y gestión de riesgos jurídicos
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <SolutionOutlined className="mt-1 text-[#001e33]" />
+                                        Capacitaciones jurídicas breves para tu equipo
+                                    </li>
                                 </ul>
                             </div>
 
-                            {/* Plan 2: Servicio por Evento */}
+                            {/* Servicio por Evento */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2">Servicio por Evento</h4>
-                                <p className="text-sm mb-4">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
-                                <ul className="mt-3 list-disc list-inside text-sm space-y-1">
-                                    <li>Asesoría especializada para un caso o situación puntual</li>
-                                    <li>Aplicación de estrategias jurídicas enfocadas en resultados inmediatos</li>
-                                    <li>Ideal para trámites, reclamaciones, inspecciones o conflictos</li>
-                                    <li>No requiere compromiso mensual</li>
-                                    <li>Tiempo de respuesta prioritario según disponibilidad</li>
+                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                    <CalendarOutlined className="text-lg text-[#001e33]" />
+                                    Servicio por Evento
+                                </h4>
+                                <p className="text-sm mb-4">
+                                    Para empresas que requieren apoyo jurídico puntual en casos específicos.
+                                </p>
+                                <ul className="mt-3 list-none space-y-2 text-sm">
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircleOutlined className="mt-1 text-[#001e33]" />
+                                        Asesoría especializada para un caso o situación puntual
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <SolutionOutlined className="mt-1 text-[#001e33]" />
+                                        Estrategias jurídicas enfocadas en resultados inmediatos
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <FileTextOutlined className="mt-1 text-[#001e33]" />
+                                        Trámites, reclamaciones, inspecciones o conflictos
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircleOutlined className="mt-1 text-[#001e33]" />
+                                        No requiere compromiso mensual
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <CalendarOutlined className="mt-1 text-[#001e33]" />
+                                        Tiempo de respuesta prioritario según disponibilidad
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -156,8 +203,7 @@ const FormularioPlanes = () => {
                             AGENDA TU PRIMERA CONSULTA <br /> para realizar el diagnóstico de tus activos legales.
                         </p>
                     </div>
-                </div>
-            </div>
+                </div>            </div>
         </section>
     );
 };

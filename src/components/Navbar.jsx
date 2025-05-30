@@ -39,8 +39,15 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     <div className="flex items-center space-x-4">
-                        <img src={logo} alt="Legal360" className="w-20 sm:w-24 md:w-28 h-auto object-contain" />
+                        <Link to="/">
+                            <img
+                                src={logo}
+                                alt="Legal360"
+                                className="w-20 sm:w-24 md:w-28 h-auto object-contain cursor-pointer"
+                            />
+                        </Link>
                     </div>
+
 
                     <div className="hidden md:flex items-center space-x-6">
                         <button onClick={() => handleSmartScroll("top")} className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat">
