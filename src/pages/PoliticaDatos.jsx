@@ -36,7 +36,7 @@ const PoliticaDatos = () => {
                         A continuación puede visualizar el documento oficial con la política de tratamiento de datos personales de <strong>Legal 360 S.A.S.</strong>
                     </p>
 
-                    <div className="m-auto w-[85%] h-[700px] rounded-xl border-[2px] border-[#e6d769] shadow-xl bg-white overflow-hidden">
+                    <div className="m-auto w-[100%] h-[700px] rounded-xl border-[2px] border-[#e6d769] shadow-xl bg-white overflow-hidden">
                         <iframe
                             src="/documentos/Politica_Datos_Personales.pdf#toolbar=0&navpanes=0&scrollbar=1"
                             title="Política de Tratamiento de Datos"
