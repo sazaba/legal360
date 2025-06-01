@@ -16,10 +16,10 @@ const sections = [
         title: 'Asesoría Comercial',
         icon: <AiOutlineSchedule className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Elaboración y/o revisión de procedimientos comerciales internos.',
+            'Elaboración y/o revisión de procedimientos comerciales.',
             'Revisión y validación legal de contratos y ofertas comerciales.',
-            'Asesoría en el manejo de pólizas operativas.',
-            'Contratación legal con terceros conforme a la normativa vigente.'
+            'Asesoría en el manejo de pólizas de seguros.',
+            'Contratación legal con terceros.'
         ]
     },
     {
@@ -42,7 +42,7 @@ const sections = [
         title: 'Protección de Datos',
         icon: <AiOutlineLock className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Actualización documental sobre protección de datos personales de clientes, proveedores y contratistas, según la Ley 1581, Decreto 1367 de 2013 y Circular Externa 003 de 2024.',
+            'Actualización documental sobre protección de datos personales de clientes, proveedores y contratistas.',
             'Elaboración y revisión de acuerdos de confidencialidad con terceros.'
         ]
     }
