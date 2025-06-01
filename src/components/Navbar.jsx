@@ -100,7 +100,7 @@ export default function Navbar() {
                     <button onClick={() => handleSmartScroll("por-que-nosotros")} className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Nosotros</button>
                     <button onClick={() => handleSmartScroll("servicios")} className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Servicios</button>
                     <a href="#" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Contacto</a>
-                    <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Centro de Relevo</a>
+
                     <button
                         onClick={() => {
                             setMenuAbierto(false);
@@ -119,6 +119,7 @@ export default function Navbar() {
                     >
                         Términos y Condiciones
                     </button>
+                    <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Centro de Relevo</a>
                 </div>
             </div>
         </nav>

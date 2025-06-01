@@ -141,7 +141,7 @@ const TerminosWeb = () => {
                         <img
                             src={cristab}
                             alt="Legal 360 Atención al Cliente"
-                            className="w-full max-w-md h-auto object-cover filter grayscale rounded-lg shadow-gray-600 shadow-lg"
+                            className="w-full max-w-md h-auto object-cover filter grayscale rounded-sm"
                         />
                     </div>
 

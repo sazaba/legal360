@@ -22,7 +22,7 @@ const Hero = () => {
       }}
     >
       {/* Capa oscura para móvil */}
-      {isMobile && <div className="absolute inset-0 bg-black opacity-30 z-0" />}
+      {isMobile && <div className="absolute inset-0 bg-black opacity-10 z-0" />}
 
       {/* Contenido principal */}
       <div className="relative z-10 w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-8 md:px-20">
