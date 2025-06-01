@@ -38,7 +38,7 @@ const FormularioPlanes = () => {
             <div className="flex flex-col md:flex-row w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden">
                 {/* Formulario compacto */}
                 <div className="bg-white w-full md:w-1/2 p-6 sm:p-8 border border-gray-200">
-                    <h2 className="text-xl sm:text-2xl font-bold text-[#001e33] mb-4 text-center sm:text-left">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#001e33] mb-4 text-center sm:text-center">
                         Agenda tu Diagnóstico Gratuito
                     </h2>
                     <p className="text-sm sm:text-base text-gray-700 leading-relaxed mt-2 mb-4">
@@ -128,42 +128,42 @@ const FormularioPlanes = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
                             {/* Plan Mensual */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2 text-center">
                                     <FileTextOutlined className="text-lg text-[#001e33]" />
                                     Plan Mensual
                                 </h4>
                                 <p className="text-sm mb-4">
-                                    Ideal para empresas que requieren un respaldo jurídico permanente y preventivo.
+                                    Ideal para empresas que requieren un respaldo jurídico preventivo.
                                 </p>
                                 <ul className="mt-3 list-none space-y-2 text-sm">
                                     <li className="flex items-start gap-2">
                                         <CheckCircleOutlined className="mt-1 text-[#001e33]" />
-                                        Acompañamiento legal continuo en derecho laboral y comercial
+                                        Acompañamiento legal continuo en derecho laboral y comercial.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <PhoneOutlined className="mt-1 text-[#001e33]" />
-                                        Consultas jurídicas ilimitadas por correo, teléfono o videollamada
+                                        Consultas jurídicas ilimitadas por correo, teléfono o videollamada.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <FileTextOutlined className="mt-1 text-[#001e33]" />
-                                        Revisión y elaboración de documentos clave
+                                        Revisión y elaboración de documentos legales.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <CheckCircleOutlined className="mt-1 text-[#001e33]" />
-                                        Alerta de vencimientos legales y gestión de riesgos jurídicos
+                                        Alerta de vencimientos legales y gestión de riesgos jurídicos.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <SolutionOutlined className="mt-1 text-[#001e33]" />
-                                        Capacitaciones jurídicas breves para tu equipo
+                                        Capacitaciones jurídicas a tu equipo.
                                     </li>
                                 </ul>
                             </div>
 
                             {/* Servicio por Evento */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2 text-center">
                                     <CalendarOutlined className="text-lg text-[#001e33]" />
-                                    Servicio por Evento
+                                    Servicios por Evento
                                 </h4>
                                 <p className="text-sm mb-4">
                                     Para empresas que requieren apoyo jurídico puntual en casos específicos.
@@ -171,23 +171,23 @@ const FormularioPlanes = () => {
                                 <ul className="mt-3 list-none space-y-2 text-sm">
                                     <li className="flex items-start gap-2">
                                         <CheckCircleOutlined className="mt-1 text-[#001e33]" />
-                                        Asesoría especializada para un caso o situación puntual
+                                        Asesoría especializada para un caso o situación puntual.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <SolutionOutlined className="mt-1 text-[#001e33]" />
-                                        Estrategias jurídicas enfocadas en resultados inmediatos
+                                        Estrategias jurídicas enfocadas en resultados inmediatos.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <FileTextOutlined className="mt-1 text-[#001e33]" />
-                                        Trámites, reclamaciones, inspecciones o conflictos
+                                        Gestión en trámites, reclamaciones, inspecciones o conflictos.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <CheckCircleOutlined className="mt-1 text-[#001e33]" />
-                                        No requiere compromiso mensual
+                                        No requiere compromiso mensual.
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <CalendarOutlined className="mt-1 text-[#001e33]" />
-                                        Tiempo de respuesta prioritario según disponibilidad
+                                        Tiempo de respuesta prioritario según disponibilidad.
                                     </li>
                                 </ul>
                             </div>
@@ -200,10 +200,11 @@ const FormularioPlanes = () => {
                             }}
                         >
                             <CalendarOutlined className="mr-2 text-lg align-middle" />
-                            AGENDA TU PRIMERA CONSULTA <br /> para realizar el diagnóstico de tus activos legales.
+                            AGENDA <br />TU PRIMERA CONSULTA
                         </p>
                     </div>
-                </div>            </div>
+                </div>
+            </div>
         </section>
     );
 };
