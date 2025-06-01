@@ -12,7 +12,7 @@ import PoliticaDatos from "./PoliticaDatos";
 
 export default function Home() {
     return (
-        <main>
+        <main className="bg-white">
             <section id="top">
                 <Hero />
             </section>

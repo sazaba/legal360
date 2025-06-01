@@ -34,7 +34,7 @@ const FormularioPlanes = () => {
     };
 
     return (
-        <section className="min-h-[80vh] bg-gradient-to-br from-white to-gray-100 flex justify-center px-4 sm:px-6 py-8 font-sans">
+        <section className="min-h-[80vh] w-[85%] rounded-md m-auto bg-gradient-to-br from-white to-gray-100 flex justify-center px-4 sm:px-6 py-8 font-sans">
             <div className="flex flex-col md:flex-row w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden">
                 {/* Formulario compacto */}
                 <div className="bg-white w-full md:w-1/2 p-6 sm:p-8 border border-gray-200">
@@ -129,7 +129,7 @@ const FormularioPlanes = () => {
                             {/* Plan Mensual */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
                                 <h4 className="text-xl font-bold mb-4 flex flex-col items-center justify-center gap-2 text-center">
-                                    <FileTextOutlined className="text-lg text-[#001e33]" />
+                                    {/* <FileTextOutlined className="text-lg text-[#001e33]" /> */}
                                     Plan Mensual
                                 </h4>
                                 <p className="text-sm mb-4">
@@ -162,7 +162,7 @@ const FormularioPlanes = () => {
                             {/* Servicio por Evento */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
                                 <h4 className="text-xl font-bold mb-4 flex flex-col items-center justify-center gap-2 text-center">
-                                    <CalendarOutlined className="text-lg text-[#001e33]" />
+                                    {/* <CalendarOutlined className="text-lg text-[#001e33]" /> */}
                                     Servicios por Evento
                                 </h4>
                                 <p className="text-sm mb-4">
