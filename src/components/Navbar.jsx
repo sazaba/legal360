@@ -62,9 +62,7 @@ export default function Navbar() {
                         <a href="#" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat">
                             Contacto
                         </a>
-                        <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" title="Centro de Relevo" className="inline-flex">
-                            <img src={Relevo} alt="Centro de Relevo" className="w-16 h-auto object-contain" />
-                        </a>
+
                         <button
                             onClick={() => navigate("/politica-datos")}
                             className="text-white hover:text-[#e6d769] text-base lg:text-lg font-montserrat"
@@ -77,6 +75,9 @@ export default function Navbar() {
                         >
                             Términos y Condiciones
                         </button>
+                        <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" title="Centro de Relevo" className="inline-flex">
+                            <img src={Relevo} alt="Centro de Relevo" className="w-16 h-auto object-contain" />
+                        </a>
                     </div>
 
                     <div className="md:hidden flex items-center">
