@@ -128,7 +128,7 @@ const FormularioPlanes = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
                             {/* Plan Mensual */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2 text-center">
+                                <h4 className="text-xl font-bold mb-4 flex flex-col items-center justify-center gap-2 text-center">
                                     <FileTextOutlined className="text-lg text-[#001e33]" />
                                     Plan Mensual
                                 </h4>
@@ -161,7 +161,7 @@ const FormularioPlanes = () => {
 
                             {/* Servicio por Evento */}
                             <div className="bg-white text-[#1d1d1b] p-6 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-300">
-                                <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2 text-center">
+                                <h4 className="text-xl font-bold mb-4 flex flex-col items-center justify-center gap-2 text-center">
                                     <CalendarOutlined className="text-lg text-[#001e33]" />
                                     Servicios por Evento
                                 </h4>
