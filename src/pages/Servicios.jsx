@@ -98,7 +98,7 @@ const Servicios = ({ id }) => {
       </div>
 
       {/* Fondo oscuro */}
-      <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+      <div className="absolute inset-0 bg-black opacity-20 z-0"></div>
 
       {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
