@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { FaUserCheck, FaCalculator, FaBalanceScale, FaWhatsapp } from 'react-icons/fa';
 import v1 from '../assets/videos/V6.mp4';
-import { FaWhatsapp } from 'react-icons/fa';
 
 const CapacitacionesJuridicas = () => {
     useEffect(() => {
@@ -12,6 +12,7 @@ const CapacitacionesJuridicas = () => {
     const cards = [
         {
             title: 'Asesoría para trámites Pensión',
+            icon: <FaUserCheck className="text-5xl text-[#e6d769]" />,
             items: [
                 'Pensión de vejez ante Colpensiones o fondos privados.',
                 'Pensión por invalidez, con o sin dictamen de pérdida de capacidad laboral.',
@@ -21,14 +22,16 @@ const CapacitacionesJuridicas = () => {
         },
         {
             title: 'Cálculo y revisión financiera',
+            icon: <FaCalculator className="text-5xl text-[#e6d769]" />,
             items: [
                 'Revisión de historia laboral para validar semanas cotizadas.',
-                'Cálculo actuarial para traslado de régimen pensional',
+                'Cálculo actuarial para traslado de régimen pensional (RAIS a RPM o viceversa).',
                 'Estimación de retroactivo pensional y simulaciones del valor a recibir.'
             ]
         },
         {
             title: 'Defensa y recursos legales',
+            icon: <FaBalanceScale className="text-5xl text-[#e6d769]" />,
             items: [
                 'Interposición de recursos ante la Junta Regional o Nacional de Calificación de Invalidez.',
                 'Representación en controversias relacionadas con pérdida de capacidad laboral.',
@@ -39,7 +42,7 @@ const CapacitacionesJuridicas = () => {
 
     return (
         <section className="relative w-full min-h-screen overflow-hidden pt-10">
-            {/* Video de fondo */}
+            {/* Fondo de video */}
             <video
                 autoPlay
                 muted
@@ -51,31 +54,31 @@ const CapacitacionesJuridicas = () => {
                 Tu navegador no soporta el video.
             </video>
 
-            {/* Capa oscura */}
-            <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
+            {/* Capa oscura sobre el video */}
+            <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
 
             {/* Contenido */}
-            <div className="relative z-20 px-6 py-10 sm:px-12 lg:px-24 text-white text-center">
-                <div className="max-w-6xl mx-auto mb-12">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
+            <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
+                <div className="max-w-6xl mx-auto text-center mb-16">
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
                         Pensiones
                     </h1>
-                    <p className="text-md sm:text-lg md:text-lg text-gray-200 max-w-4xl mx-auto">
+                    <p className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto">
                         Asesoría jurídica integral en pensiones, revisión financiera y defensa legal.
                     </p>
                 </div>
 
-                {/* Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch">
                     {cards.map((card, index) => (
                         <div
                             key={index}
-                            className="bg-white/10 rounded-2xl shadow-md p-6 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300"
+                            className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full max-w-sm"
                         >
-                            <h2 className="text-lg font-semibold text-[#e6d769] mb-4">{card.title}</h2>
-                            <ul className="space-y-3 text-sm text-gray-100">
+                            <div className="flex justify-center mb-4">{card.icon}</div>
+                            <h2 className="text-lg font-semibold text-[#e6d769] mb-2">{card.title}</h2>
+                            <ul className="text-left space-y-2 text-gray-200 text-sm">
                                 {card.items.map((item, i) => (
-                                    <li key={i} className="flex items-start gap-2">
+                                    <li key={i} className="flex gap-2">
                                         <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
                                         <span>{item}</span>
                                     </li>
@@ -85,8 +88,8 @@ const CapacitacionesJuridicas = () => {
                     ))}
                 </div>
 
-                {/* Botón volver */}
-                <div className="mt-10 sm:mt-12">
+                {/* Botón de regreso fijo (desktop y mobile) */}
+                <div className="mt-20 text-center">
                     <Link
                         to="/#servicios"
                         className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
@@ -107,7 +110,7 @@ const CapacitacionesJuridicas = () => {
                 </div>
             </div>
 
-            {/* Botón WhatsApp */}
+            {/* Botón WhatsApp flotante */}
             <a
                 href="#"
                 target="_blank"
