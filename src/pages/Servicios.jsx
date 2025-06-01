@@ -80,7 +80,7 @@ const Servicios = ({ id }) => {
           loop
           muted
           playsInline
-          className="absolute top-0 w-full h-full object-cover z-0"
+          className="absolute top-0 w-full h-full object-cover object-right z-0"
         >
           <source src={MariCris} type="video/mp4" />
           Tu navegador no soporta videos HTML5.
@@ -88,7 +88,7 @@ const Servicios = ({ id }) => {
       )}
 
       {/* Capa oscura para contraste */}
-      <div className="absolute inset-0 bg-black opacity-70 z-10"></div>
+      <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
 
       {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">

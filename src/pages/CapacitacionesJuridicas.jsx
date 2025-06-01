@@ -25,7 +25,7 @@ const CapacitacionesJuridicas = () => {
             icon: <FaCalculator className="text-5xl text-[#e6d769]" />,
             items: [
                 'Revisión de historia laboral para validar semanas cotizadas.',
-                'Cálculo actuarial para traslado de régimen pensional (RAIS a RPM o viceversa).',
+                'Cálculo actuarial para traslado de régimen pensional.',
                 'Estimación de retroactivo pensional y simulaciones del valor a recibir.'
             ]
         },
