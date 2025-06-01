@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import { BulbOutlined, ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import v1 from '../assets/videos/V6.mp4';
 import { FaWhatsapp } from 'react-icons/fa';
 
@@ -8,6 +8,34 @@ const CapacitacionesJuridicas = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
+
+    const cards = [
+        {
+            title: 'Asesoría para trámites Pensión',
+            items: [
+                'Pensión de vejez ante Colpensiones o fondos privados.',
+                'Pensión por invalidez, con o sin dictamen de pérdida de capacidad laboral.',
+                'Pensión de sobrevivientes (viudos(as), hijos, padres dependientes).',
+                'Análisis del cumplimiento de requisitos y acompañamiento durante el proceso.'
+            ]
+        },
+        {
+            title: 'Cálculo y revisión financiera',
+            items: [
+                'Revisión de historia laboral para validar semanas cotizadas.',
+                'Cálculo actuarial para traslado de régimen pensional',
+                'Estimación de retroactivo pensional y simulaciones del valor a recibir.'
+            ]
+        },
+        {
+            title: 'Defensa y recursos legales',
+            items: [
+                'Interposición de recursos ante la Junta Regional o Nacional de Calificación de Invalidez.',
+                'Representación en controversias relacionadas con pérdida de capacidad laboral.',
+                'Revisión de inconsistencias y soporte documental en procesos de reclamación.'
+            ]
+        }
+    ];
 
     return (
         <section className="relative w-full min-h-screen overflow-hidden pt-10">
@@ -28,49 +56,37 @@ const CapacitacionesJuridicas = () => {
 
             {/* Contenido */}
             <div className="relative z-20 px-6 py-10 sm:px-12 lg:px-24 text-white text-center">
-                {/* Título estático */}
                 <div className="max-w-6xl mx-auto mb-12">
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#e6d769] mb-4">
                         Pensiones
                     </h1>
                     <p className="text-md sm:text-lg md:text-lg text-gray-200 max-w-4xl mx-auto">
-                        Diseñamos y facilitamos formación legal para fortalecer competencias, prevenir riesgos y responder a los principales desafíos jurídicos que enfrentan las empresas hoy.
+                        Asesoría jurídica integral en pensiones, revisión financiera y defensa legal.
                     </p>
                 </div>
 
-                {/* Tarjeta única descriptiva */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-white/10 rounded-2xl shadow-md p-6 sm:p-8 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full">
-                        <p className="text-md sm:text-md md:text-md text-gray-100 leading-relaxed mb-4">
-                            Diseñamos y facilitamos seminarios, talleres y capacitaciones jurídicas especializadas dirigidas a empleadores, áreas de talento humano, Seguridad y Salud en el Trabajo (SST) y líderes de procesos. Nuestro objetivo es fortalecer competencias legales, mantener a tu equipo actualizado frente a los cambios normativos y prevenir riesgos jurídicos en la gestión del personal y las operaciones empresariales:
-                        </p>
-                        <ul className="text-sm sm:text-md text-gray-100 leading-relaxed space-y-3 pl-6 sm:pl-10 md:pl-20">
-                            <li className="flex items-start gap-2">
-                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                                Nuevas licencias laborales obligatorias
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                                Gestión legal de incapacidades prolongadas
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                                Manejo legal de prepensionados y estabilidad laboral reforzada
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                                Procedimiento legal en casos de acoso laboral o sexual
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
-                                Reincorporación laboral por enfermedad, accidente o maternidad
-                            </li>
-                        </ul>
-                    </div>
+                {/* Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    {cards.map((card, index) => (
+                        <div
+                            key={index}
+                            className="bg-white/10 rounded-2xl shadow-md p-6 text-left backdrop-blur-md hover:scale-105 transition-transform duration-300"
+                        >
+                            <h2 className="text-lg font-semibold text-[#e6d769] mb-4">{card.title}</h2>
+                            <ul className="space-y-3 text-sm text-gray-100">
+                                {card.items.map((item, i) => (
+                                    <li key={i} className="flex items-start gap-2">
+                                        <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
 
-                {/* Botón para volver */}
-                <div className="mt-8 sm:mt-12">
+                {/* Botón volver */}
+                <div className="mt-10 sm:mt-12">
                     <Link
                         to="/#servicios"
                         className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex"
@@ -90,6 +106,8 @@ const CapacitacionesJuridicas = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Botón WhatsApp */}
             <a
                 href="#"
                 target="_blank"
