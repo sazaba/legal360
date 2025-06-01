@@ -41,7 +41,7 @@ const FormularioPlanes = () => {
                     <h2 className="text-2xl font-bold text-[#001e33] mb-4 text-center">
                         Agenda tu Diagnóstico Gratuito
                     </h2>
-                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
+                    <p className="text-sm sm:text-sm text-justify text-gray-700 leading-relaxed mb-4">
                         Si usted es una persona jurídica o empresa y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
                     </p>
 
@@ -74,11 +74,7 @@ const FormularioPlanes = () => {
                             <option value="101 en adelante">101 en adelante</option>
                         </select>
 
-                        <select name="legalmente_constituida" required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
-                            <option value="">¿Constituida legalmente?*</option>
-                            <option value="Sí">Sí</option>
-                            <option value="No">No</option>
-                        </select>
+
 
                         <textarea
                             name="mensaje"
@@ -90,7 +86,7 @@ const FormularioPlanes = () => {
 
                         <div className="flex items-start gap-2">
                             <input type="checkbox" name="autorizacion" required className="mt-1 accent-[#e6d769]" />
-                            <label className="text-xs text-gray-700 leading-snug">
+                            <label className="text-xs text-gray-700 leading-snug text-justify">
                                 En cumplimiento de la Ley 1581 de 2012 y sus decretos reglamentarios, autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S.</strong>, con el propósito de cumplir el desarrollo de actividades afines a su objeto social de conformidad con la Ley, de acuerdo con su Política de Protección de Datos Personales.*
                             </label>
                         </div>
