@@ -1,20 +1,28 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useRef } from 'react';
+import { FaCheck } from 'react-icons/fa';
+import { AiOutlinePaperClip } from "react-icons/ai";
 import cristab from '../assets/images/Cris_tab.webp'
 
 const TerminosWeb = () => {
+    const fileInputRef = useRef(null);
+
+    const handleFileClick = () => {
+        fileInputRef.current?.click();
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+
     return (
         <section className="pt-32 pb-16 px-6 sm:px-10 font-sans min-h-screen bg-[#001e33] text-white">
             <div className="max-w-5xl mx-auto">
-                <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-[#e6d769] border-b-4 border-[#e6d769] pb-2">
+                <h1 className="text-center text-3xl sm:text-4xl font-bold mb-6 text-[#e6d769] border-b-4 border-[#e6d769] pb-2">
                     Términos Legales Web
                 </h1>
 
-                <div className="text-gray-100 space-y-4 text-base leading-relaxed">
+                <div className="text-gray-100 space-y-4 text-base leading-relaxed text-justify">
                     <p>Apreciado Usuario,</p>
                     <p>
                         Los términos y condiciones expresados a continuación, regulan el uso de este sitio web y los cuales se han puesto a su servicio. Cuando ingresa y usa nuestra página web, adquiere de forma automática la calidad de ‘usuario’. En virtud de lo anterior, el Usuario entiende que el uso de la presente herramienta significa una aceptación de este Aviso Legal, así como de las condiciones generales de uso. En cualquier momento y sin obligación de notificarlo con anterioridad, LEGAL 360 S.A.S., puede editar, cambiar, renovar, agregar o retirar cualquier parte o la totalidad de los términos y condiciones del sitio web. Por eso es tu responsabilidad como usuario, verificar la información contenida en los términos y condiciones del sitio, siempre que vayas a hacer uso de alguno de sus contenidos o servicios.
@@ -108,19 +116,30 @@ const TerminosWeb = () => {
 
                         Igualmente, para su comodidad, en este mismo sitio, puedes presentar tus peticiones, quejas. reclamos, sugerencias o felicitaciones, para lo cual es necesario diligenciar el formulario que se encuentra a su disposición para tal fin<br /> <br />
                     </p>
+
+
                     <p>
-                        b. Definiciones
-                        <br /> <br />
+                        <strong>b. Definiciones</strong>
+                        <br /><br />
 
-                        ✔ Petición: <br /> <br /> Es el derecho fundamental que tiene toda persona a presentar solicitudes respetuosas a las autoridades respectivas por motivos de interés general o particular y a obtener su pronta resolución. <br /> <br />
-                        ✔ Queja: <br /> <br /> Es la manifestación de protesta, insatisfacción, descontento o inconformidad que formula una persona en relación con una conducta o actitud que considera irregular, por parte de quien le atiende dentro de la Institución<br /> <br />
-                        ✔ Reclamo:<br /> <br /> Declaración formal por el incumplimiento de un derecho que ha sido perjudicado o amenazado, ocasionado por la deficiente prestación o suspensión injustificada del servicio por parte de un área o funcionario de esta dentro de la Institución<br /> <br />
-                        ✔ Sugerencia: <br /> <br />Se entiende por sugerencia, aquella propuesta que formula el usuario del servicio y que tiene como propósito mejorar la prestación del servicio en cualquiera de las áreas académicas o administrativas de la Institución<br /> <br />
-                        ✔ Felicitación:<br /> <br /> Es aquella expresión de satisfacción de un usuario del servicio, con relación a la prestación de un servicio.<br /> <br />
+                        <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
+                        <strong>Petición:</strong> Es el derecho fundamental que tiene toda persona a presentar solicitudes respetuosas a las autoridades respectivas por motivos de interés general o particular y a obtener su pronta resolución. <br /><br />
 
-                        LEGAL 360 S.A.S., en atención a lo contemplado dentro de la Ley 1755 de 2015, las peticiones deberán ser resueltas dentro de los quince (15) días siguientes a su recepción, en cuanto a las peticiones de documentos e información, estos deberán resolverse dentro de los diez (10) días siguientes a su recepción. Las respuestas a las quejas, reclamos, sugerencias y felicitaciones tendrán como tiempo de respuesta los quince (15) días siguientes a la recepción de las mismas a través del mismo medio de atención por el cual fue presentada por el usuario, a menos que este decida que quiere recibirla por otro medio distinto.<br /> <br />
+                        <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
+                        <strong>Queja:</strong> Es la manifestación de protesta, insatisfacción, descontento o inconformidad que formula una persona en relación con una conducta o actitud que considera irregular, por parte de quien le atiende dentro de la Institución. <br /><br />
 
+                        <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
+                        <strong>Reclamo:</strong> Declaración formal por el incumplimiento de un derecho que ha sido perjudicado o amenazado, ocasionado por la deficiente prestación o suspensión injustificada del servicio por parte de un área o funcionario de esta dentro de la Institución. <br /><br />
+
+                        <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
+                        <strong>Sugerencia:</strong> Se entiende por sugerencia, aquella propuesta que formula el usuario del servicio y que tiene como propósito mejorar la prestación del servicio en cualquiera de las áreas académicas o administrativas de la Institución. <br /><br />
+
+                        <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
+                        <strong>Felicitación:</strong> Es aquella expresión de satisfacción de un usuario del servicio, con relación a la prestación de un servicio. <br /><br />
+
+                        LEGAL 360 S.A.S., en atención a lo contemplado dentro de la Ley 1755 de 2015, las peticiones deberán ser resueltas dentro de los quince (15) días siguientes a su recepción, en cuanto a las peticiones de documentos e información, estos deberán resolverse dentro de los diez (10) días siguientes a su recepción. Las respuestas a las quejas, reclamos, sugerencias y felicitaciones tendrán como tiempo de respuesta los quince (15) días siguientes a la recepción de las mismas a través del mismo medio de atención por el cual fue presentada por el usuario, a menos que este decida que quiere recibirla por otro medio distinto. <br /><br />
                     </p>
+
                     <p>
                         c. Habeas Data: Señor usuario según las disposiciones legales vigentes usted tiene derecho a radicar ante LEGAL 360 S.A.S., solicitudes de corrección, actualización o retiro de la información personal que haya suministrado.
                     </p>
@@ -133,90 +152,115 @@ const TerminosWeb = () => {
                     </p>
                 </div>
 
+
                 <h2 className="text-2xl font-bold mt-12 mb-4 text-[#e6d769]">Formulario PQRSF</h2>
 
                 <div className="bg-white text-gray-800 rounded-xl shadow-md overflow-hidden flex flex-col lg:flex-row">
-                    {/* Imagen lateral izquierda */}
-                    <div className="lg:w-1/2 w-full flex items-center justify-center bg-black/5">
+                    {/* Imagen lateral izquierda con overlay */}
+                    <div className="lg:w-1/2 w-full relative flex items-center justify-center">
                         <img
                             src={cristab}
                             alt="Legal 360 Atención al Cliente"
-                            className="w-full max-w-md h-auto object-cover filter grayscale rounded-sm"
+                            className="w-full h-full object-cover "
                         />
+
                     </div>
 
+                    {/* 
+Formulario  */}
 
-                    {/* Formulario lado derecho */}
-                    <form className="w-full lg:w-[45%] p-6 bg-white rounded-xl shadow space-y-5">
-                        <div className="text-sm text-gray-700 leading-relaxed">
-                            <p className="text-justify">
-                                He leído y autorizo de manera voluntaria e informada a <strong>LEGAL 360 S.A.S.</strong>, para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra <a href="#" className="text-blue-600 underline font-semibold">AQUÍ</a>.
-                            </p>
+                    <form className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
+                        <p className="text-justify text-gray-700 leading-relaxed">
+                            He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra <a href="#" className="text-blue-600 underline">AQUÍ</a>.
+                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <select className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
+                                <option value="">Seleccione una opción</option>
+                                <option value="CC">C.C</option>
+                                <option value="CE">C.E.</option>
+                                <option value="PEP">P.E.P.</option>
+                                <option value="TI">T.I</option>
+                                <option value="NIT">NIT</option>
+                            </select>
+                            <input type="text" placeholder="Número de Documento de Identificación *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label htmlFor="nombres" className="block font-semibold text-sm">Nombres *</label>
-                                <input id="nombres" name="nombres" type="text" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
-                            <div>
-                                <label htmlFor="apellidos" className="block font-semibold text-sm">Apellidos *</label>
-                                <input id="apellidos" name="apellidos" type="text" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
-                            <div>
-                                <label htmlFor="correo" className="block font-semibold text-sm">Correo electrónico *</label>
-                                <input id="correo" name="correo" type="email" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
-                            <div>
-                                <label htmlFor="telefono" className="block font-semibold text-sm">Número de contacto *</label>
-                                <input id="telefono" name="telefono" type="tel" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
-                            <div>
-                                <label htmlFor="tipo-doc" className="block font-semibold text-sm">Tipo de documento *</label>
-                                <input id="tipo-doc" name="tipo-doc" type="text" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
-                            <div>
-                                <label htmlFor="numero-doc" className="block font-semibold text-sm">Número de documento *</label>
-                                <input id="numero-doc" name="numero-doc" type="text" required className="w-full p-2 border border-gray-300 rounded" />
-                            </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" placeholder="Nombre(s) del peticionario o recurrente *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="text" placeholder="Apellido(s) del peticionario o recurrente *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                        </div>
+
+                        <input type="email" placeholder="Correo electrónico *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                        <input type="email" placeholder="Confirmación correo electrónico *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="tel" placeholder="Teléfono de contacto *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="tel" placeholder="Teléfono adicional" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
                         </div>
 
                         <fieldset className="space-y-2">
-                            <legend className="block font-semibold text-sm mb-2">Objeto de la solicitud *</legend>
-                            <div className="flex flex-col gap-1 text-sm text-gray-700">
-                                <label htmlFor="peticion"><input id="peticion" name="objeto" type="checkbox" className="mr-2 accent-[#e6d769]" />Petición</label>
-                                <label htmlFor="queja"><input id="queja" name="objeto" type="checkbox" className="mr-2 accent-[#e6d769]" />Queja</label>
-                                <label htmlFor="reclamo"><input id="reclamo" name="objeto" type="checkbox" className="mr-2 accent-[#e6d769]" />Reclamo</label>
-                                <label htmlFor="sugerencia"><input id="sugerencia" name="objeto" type="checkbox" className="mr-2 accent-[#e6d769]" />Sugerencia</label>
-                                <label htmlFor="felicitacion"><input id="felicitacion" name="objeto" type="checkbox" className="mr-2 accent-[#e6d769]" />Felicitación</label>
+                            <legend className="block mb-2">Objeto de la solicitud *</legend>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                {["Petición", "Queja", "Reclamo", "Sugerencia", "Felicitación"].map((item) => (
+                                    <label key={item} className="flex items-center gap-2">
+                                        <input type="checkbox" name="objeto" value={item} className="accent-[#e6d769]" /> {item}
+                                    </label>
+                                ))}
                             </div>
                         </fieldset>
 
                         <div>
-                            <label htmlFor="descripcion" className="block font-semibold text-sm">Hechos en los que se fundamenta la petición, solicitud, queja / reclamo o recurso *</label>
-                            <textarea id="descripcion" name="descripcion" rows="6" maxLength="2000" required className="w-full p-2 border border-gray-300 rounded mt-1" />
-                            <p className="text-xs text-gray-500 mt-1">Máximo 2.000 caracteres. Si requiere enviar más información, adjunte un archivo.</p>
+                            <textarea
+                                rows="6"
+                                maxLength="2000"
+                                placeholder="Hechos en los que se fundamenta la petición, solicitud, queja / reclamo o recurso *"
+                                className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full"
+                                required
+                            ></textarea>
+                            <p className="text-xs text-gray-500 mt-1 text-justify">
+                                Máximo 2.000 caracteres. Si requiere enviar más información, adjunte un archivo.
+                            </p>
                         </div>
 
                         <div>
-                            <label htmlFor="anexos" className="block font-semibold text-sm">Documentos anexos (pruebas que se deseen aportar)</label>
-                            <input id="anexos" name="anexos" type="file" multiple accept=".jpg,.gif,.png,.doc,.xls,.txt,.pdf,.zip" className="w-full p-2" />
-                            <p className="text-xs text-gray-500 mt-1">
-                                Solo puede anexar archivos con extensiones .jpg, .gif, .png, .doc, .xls, .txt, .pdf o .ZIP y cada archivo debe separar los ítems. Evite el uso de caracteres especiales como: ¡, “, #, $, %, &, /, (, ), =, ?, ¿, *, +, ~, [, ], ¨, ^, _, `, , \, |, ;, :, &lt;, &gt;.
+                            <label className="block mb-1 text-justify">
+                                Documentos anexos: (pruebas que se deseen aportar) (Selecciona los archivos y adjúntalos con el botón "Adjuntar")
+                            </label>
+                            <button
+                                type="button"
+                                onClick={handleFileClick}
+                                className="flex items-center justify-center gap-2 bg-gray-300 text-gray-600 py-2 rounded-md px-4"
+                            >
+                                <AiOutlinePaperClip className="text-base" />
+                                <span>Adjuntar</span>
+                            </button>
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                multiple
+                                accept=".jpg,.gif,.png,.doc,.xls,.txt,.pdf,.zip"
+                                className="hidden"
+                            />
+                            <p className="text-xs text-gray-500 mt-1 text-justify">
+                                Solo puede anexar archivos con extensión válida y cada archivo no debe superar los 2MB. Evite caracteres especiales en los nombres de archivo.
                             </p>
                         </div>
 
                         <div className="flex items-start gap-2">
-                            <input id="autorizacion" name="autorizacion" type="checkbox" required className="mt-1 accent-[#e6d769]" />
-                            <label htmlFor="autorizacion" className="text-sm text-gray-700">
+                            <input type="checkbox" required className="mt-1 accent-[#e6d769]" />
+                            <label className="text-gray-700 leading-snug text-justify">
                                 He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales.
                             </label>
                         </div>
 
-                        <button type="submit" className="bg-[#e6d769] text-[#001e33] font-semibold px-6 py-2 rounded hover:opacity-90 transition">
+                        <button type="submit" className="w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white py-2 rounded-md font-semibold">
                             Enviar solicitud
                         </button>
                     </form>
+
+
+
 
                 </div>
 

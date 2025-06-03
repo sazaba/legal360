@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import estatua from '../assets/images/Hero4.webp';
 import { FaWhatsapp } from 'react-icons/fa';
+import Typewriter from 'typewriter-effect';
+import '../index.css'; // Asegúrate de que esta línea esté apuntando a donde cargas las fuentes globales
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -21,13 +23,10 @@ const Hero = () => {
         backgroundAttachment: isMobile ? 'scroll' : 'fixed',
       }}
     >
-      {/* Capa oscura para móvil */}
       {isMobile && <div className="absolute inset-0 bg-black opacity-20 z-0" />}
 
-      {/* Contenido principal */}
       <div className="relative z-10 w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-8 md:px-20">
         <div className="text-center md:text-left max-w-2xl space-y-6">
-
           <div className="w-full max-w-6xl mx-auto px-6 py-12 flex flex-col items-center md:items-start text-center md:text-left gap-4">
             <h1 className="text-white text-4xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-montserrat tracking-tight">
               Cumple con la Ley{' '}
@@ -45,18 +44,34 @@ const Hero = () => {
               <span className="block text-[#e6d769] mt-2">Crece con Legal 360</span>
             </h1>
 
-            <div className="mt-10
-             space-y-2">
-              <p className="text-center text-[#001e33] bg-white px-3 py-2 inline-block rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300 animate-bounce">
-                Acompañamiento Mensual <br /> Ó Por Evento!              </p>
+            <div className="mt-10">
+              <p
+                className="font-bold text-base sm:text-lg shadow-lg px-4 py-3 rounded-xl bg-white text-center font-poppins"
+                style={{
+                  background: 'white',
+                  color: 'transparent',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundImage: 'linear-gradient(90deg, #d4af37, #f5e27a, #d4af37)',
+                  fontFamily: 'Montserrat, sans-serif',
+                }}
+              >
+                <Typewriter
+                  options={{
+                    strings: ['Acompañamiento Mensual o Por Evento!'],
+                    autoStart: true,
+                    loop: true,
+                    delay: 60,
+                    deleteSpeed: 40,
+                  }}
+                />
+              </p>
             </div>
           </div>
-
         </div>
-
       </div>
 
-      {/* Separador decorativo SVG */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none">
         <svg
           viewBox="0 0 500 150"
@@ -70,7 +85,6 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Botón WhatsApp flotante */}
       <a
         href="#"
         target="_blank"

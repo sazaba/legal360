@@ -6,6 +6,11 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['Poppins', 'sans-serif'],
+                montserrat: ['Montserrat', 'sans-serif'],
+                opensans: ['Open Sans', 'sans-serif'],
+            },
             keyframes: {
                 typing: {
                     from: { width: "0" },
