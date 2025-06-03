@@ -6,8 +6,6 @@ import {
   ReadOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import bustos from '../assets/images/bustos.webp';
-import MariCris from '../assets/videos/MariCris.MOV'
 import Teamlegal from '../assets/images/Teamlegal.webp'
 
 const Servicios = ({ id }) => {
@@ -74,7 +72,7 @@ const Servicios = ({ id }) => {
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
-      <div className="absolute inset-0 bg-black/75 z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-black/70 z-10 pointer-events-none"></div>
 
 
       {/* Capa oscura para contraste */}
@@ -82,7 +80,7 @@ const Servicios = ({ id }) => {
 
       {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[20px] rotate-180">
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
         </svg>
       </div>

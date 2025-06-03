@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import bustos from '../assets/images/bustos.webp'
 
 import {
     SolutionOutlined,
@@ -107,8 +108,20 @@ const FormularioPlanes = () => {
                 </div>
 
                 {/* Panel derecho - 70% */}
-                <div className="bg-[#001e33] w-full lg:w-[55%] text-white p-8 flex flex-col justify-center items-center text-center">
-                    <div className="max-w-3xl w-full">
+                <div
+                    className="relative w-full lg:w-[55%] text-white flex flex-col justify-center items-center text-center overflow-hidden"
+                    style={{
+                        backgroundImage: `url(${bustos})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    }}
+                >
+                    {/* Capa de color con opacidad */}
+                    <div className="absolute inset-0 bg-[#001e33]/70 z-10 pointer-events-none"></div>
+
+                    {/* Contenido */}
+                    <div className="relative z-20 p-8 w-full max-w-3xl">
                         <h3 className="text-3xl font-bold mb-8 text-[#fcd34d] text-center flex items-center justify-center gap-3">
                             <SolutionOutlined className="text-4xl" />
                             Planes de Asesoría Legal
@@ -153,9 +166,9 @@ const FormularioPlanes = () => {
                                 AGENDA <br />TU PRIMERA CONSULTA
                             </p>
                         </a>
-
                     </div>
                 </div>
+
             </div>
         </section>
     );
