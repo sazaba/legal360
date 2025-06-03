@@ -34,7 +34,7 @@ const FormularioPlanes = () => {
     };
 
     return (
-        <section className="min-h-[80vh] w-[90%] mx-auto  flex justify-center px-4 py-10 font-sans rounded-2xl">
+        <section className="min-h-[80vh] w-[90%] mx-auto flex justify-center px-4 py-10 font-sans rounded-2xl">
             <div className="flex flex-col lg:flex-row w-full max-w-7xl rounded-xl shadow-gray-400 shadow-lg overflow-hidden">
                 {/* Formulario - 30% */}
                 <div className="bg-white w-full lg:w-[45%] p-6 sm:p-8 border border-gray-200">
@@ -142,10 +142,18 @@ const FormularioPlanes = () => {
                             </div>
                         </div>
 
-                        <p className="mt-8 text-sm sm:text-base font-semibold text-[#1d1d1b] px-4 py-3 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 inline-block" style={{ background: "linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)" }}>
-                            <CalendarOutlined className="mr-2 text-lg align-middle" />
-                            AGENDA <br />TU PRIMERA CONSULTA
-                        </p>
+                        <a
+                            href="https://wa.link/twbzum"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block cursor-pointer"
+                        >
+                            <p className="cursor-pointer mt-8 text-sm sm:text-base font-semibold text-[#1d1d1b] px-4 py-3 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300" style={{ background: "linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)" }}>
+                                <CalendarOutlined className="mr-2 text-lg align-middle cursor-pointer" />
+                                AGENDA <br />TU PRIMERA CONSULTA
+                            </p>
+                        </a>
+
                     </div>
                 </div>
             </div>

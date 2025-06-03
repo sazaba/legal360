@@ -1,34 +1,30 @@
 import React, { useEffect } from 'react';
+import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
+import { zoomPlugin } from '@react-pdf-viewer/zoom';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/zoom/lib/styles/index.css';
 
-import JesusTyping from '../assets/videos/JesusTyping.MOV'
-import BoardTeam from '../assets/videos/BoardTeam.MOV'
+import JesusTyping from '../assets/videos/JesusTyping.MOV';
+import BoardTeam from '../assets/videos/BoardTeam.MOV';
 
 const PoliticaDatos = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    const zoomPluginInstance = zoomPlugin();
+
     return (
         <section className="relative w-full min-h-screen font-sans overflow-hidden">
-            {/* Video de fondo */}
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-0 left-0 w-full h-full object-cover z-0"
-            >
-                <source src={BoardTeam} type="video/mp4" />
-                Tu navegador no soporta videos HTML5.
-            </video>
+
 
             {/* Capa oscura para legibilidad */}
             <div className="absolute inset-0 bg-[#001e33]/60 z-10"></div>
 
             {/* Contenido */}
-            <div className="relative z-20 pt-32 pb-16 px-6 sm:px-10 text-white">
+            <div className="relative z-20 pt-32 pb-16 px-6 sm:px-10 text-white min-h-[200vh]">
                 <div className="max-w-5xl mx-auto">
-                    <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-[#e6d769] border-b-4 border-[#e6d769] pb-2">
+                    <h1 className=" text-center text-3xl sm:text-4xl font-bold mb-6 text-[#e6d769] border-b-4 border-[#e6d769] pb-2">
                         Política de Tratamiento de Datos Personales
                     </h1>
 
@@ -36,19 +32,17 @@ const PoliticaDatos = () => {
                         A continuación puede visualizar el documento oficial con la política de tratamiento de datos personales de <strong>Legal 360 S.A.S.</strong>
                     </p>
 
-                    <div className="w-full rounded-md border-[2px] border-[#e6d769] shadow-xl bg-white overflow-hidden">
-                        <div className="w-full h-[70vh] sm:h-[80vh]">
-                            <iframe
-                                src="/documentos/Politica_Datos_Personales.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                                title="Política de Tratamiento de Datos"
-                                width="100%"
-                                height="100%"
-                                className="w-full h-full rounded"
-                                frameBorder="0"
-                            ></iframe>
+                    <article className="p-4 w-full rounded-md  shadow-xl bg-white overflow-hidden">
+                        <div className="w-full h-full bg-white p-[10px] box-border">
+                            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
+                                <Viewer
+                                    fileUrl="/documentos/Politica_Datos_Personales.pdf"
+                                    plugins={[zoomPluginInstance]}
+                                    defaultScale={SpecialZoomLevel.PageWidth}
+                                />
+                            </Worker>
                         </div>
-                    </div>
-
+                    </article>
                 </div>
             </div>
         </section>
