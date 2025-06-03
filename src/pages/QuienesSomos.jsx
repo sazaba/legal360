@@ -4,7 +4,7 @@ import Mari from '../assets/images/maribg2.webp';
 const QuienesSomos = () => {
   return (
     <section
-      className="relative bg-cover bg-no-repeat min-h-screen flex items-center justify-center md:justify-start px-6 py-24 sm:py-32 bg-[60%_center] md:bg-center"
+      className="relative bg-contain bg-no-repeat bg-center w-full aspect-[16/9] flex items-center justify-center md:justify-start px-6"
       style={{ backgroundImage: `url(${Mari})` }}
     >
       {/* Capa oscura para mejorar contraste */}
@@ -23,11 +23,10 @@ const QuienesSomos = () => {
       {/* Contenido sobre el fondo */}
       <div className="relative z-10 max-w-9xl w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Caja con estilo de card como en Seguridad Social */}
-          <div className="bg-white/10 rounded-2xl shadow-md p-8 sm:p-10 text-white backdrop-blur-md">
-            <p className="uppercase tracking-widest text-sm mb-4 text-[#fcd34d]">Nuestra razón de ser</p>
+          <div className="bg-white/10 rounded-2xl shadow-md p-6 sm:p-8 text-white backdrop-blur-md text-sm sm:text-base md:text-lg">
+            <p className="uppercase tracking-widest text-xs sm:text-sm mb-4 text-[#fcd34d]">Nuestra razón de ser</p>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-center lg:text-left">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6 text-center lg:text-left">
               Somos{' '}
               <span
                 style={{
@@ -41,20 +40,20 @@ const QuienesSomos = () => {
               </span>
             </h1>
 
-            <p className="text-[#f4f4f4] text-base sm:text-lg md:text-xl mb-5">
+            <p className="text-[#f4f4f4] mb-4">
               Legal 360 S.A.S., es un equipo multidisciplinario de profesionales altamente capacitados en derecho laboral, seguridad social, derecho comercial y seguridad y salud en el trabajo.
             </p>
 
-            <p className="text-[#f4f4f4] text-base sm:text-lg md:text-xl mb-5">
+            <p className="text-[#f4f4f4] mb-4">
               Brindamos soluciones jurídicas integrales, oportunas y comprensibles, diseñadas para fortalecer la toma de decisiones tanto a nivel empresarial como individual. Nuestro enfoque preventivo busca anticipar conflictos, reducir riesgos legales y ofrecer una experiencia de acompañamiento que garantice tranquilidad jurídica.
             </p>
 
-            <p className="text-[#dcdcdc] text-sm sm:text-base md:text-lg italic mb-6">
+            <p className="text-[#dcdcdc] italic mb-4">
               Ofrecemos planes y tarifas flexibles que se adaptan a las necesidades reales de tu empresa.
             </p>
 
             <p
-              className="font-semibold text-lg sm:text-xl md:text-2xl mb-10"
+              className="font-semibold text-base sm:text-lg md:text-xl mb-8"
               style={{
                 background: 'linear-gradient(to right, #d4af37, #f5e27a, #d4af37)',
                 WebkitBackgroundClip: 'text',
@@ -64,7 +63,7 @@ const QuienesSomos = () => {
               "Legal, claro y eficiente".
             </p>
 
-            <div className="flex justify-start space-x-6 text-[#fcd34d] text-3xl">
+            <div className="flex justify-start space-x-6 text-[#fcd34d] text-2xl">
               <a href="#">
                 <FaWhatsapp className="hover:scale-110 transition" />
               </a>
