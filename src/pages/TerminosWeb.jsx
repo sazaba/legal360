@@ -176,7 +176,7 @@ Formulario  */}
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <select className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
-                                <option value="">Seleccione una opción</option>
+                                <option value="">Tipo de Documento</option>
                                 <option value="CC">C.C</option>
                                 <option value="CE">C.E.</option>
                                 <option value="PEP">P.E.P.</option>
@@ -204,11 +204,20 @@ Formulario  */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                                 {["Petición", "Queja", "Reclamo", "Sugerencia", "Felicitación"].map((item) => (
                                     <label key={item} className="flex items-center gap-2">
-                                        <input type="checkbox" name="objeto" value={item} className="accent-[#e6d769]" /> {item}
+                                        <input
+                                            type="radio"
+                                            name="objeto"
+                                            value={item}
+                                            className="accent-[#001e33] w-4 h-4"
+                                            required
+                                        />
+                                        {item}
                                     </label>
                                 ))}
                             </div>
                         </fieldset>
+
+
 
                         <div>
                             <textarea
