@@ -8,7 +8,7 @@ const QuienesSomos = () => {
       style={{ backgroundImage: `url(${Mari})` }}
     >
       {/* Capa oscura para mejorar contraste */}
-      <div className="absolute inset-0 z-0 bg-black/40" />
+      <div className="absolute inset-0 z-0 bg-black/20" />
 
       {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-0">
