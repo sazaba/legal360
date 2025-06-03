@@ -7,9 +7,10 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Poppins', 'sans-serif'],
+                sans: ['Poppins', 'sans-serif'], // Fuente por defecto
                 montserrat: ['Montserrat', 'sans-serif'],
                 opensans: ['Open Sans', 'sans-serif'],
+                quicksand: ['Quicksand', 'sans-serif'],
             },
             keyframes: {
                 typing: {

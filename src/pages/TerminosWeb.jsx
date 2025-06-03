@@ -17,13 +17,13 @@ const TerminosWeb = () => {
 
 
     return (
-        <section className="pt-32 pb-16 px-6 sm:px-10 font-sans min-h-screen bg-[#001e33] text-white">
+        <section className="pt-32 pb-16 px-6 sm:px-10 font-sans min-h-screen bg-[#001e33] text-white select-none">
             <div className="max-w-5xl mx-auto">
                 <h1 className="text-center text-3xl sm:text-4xl font-bold mb-6 text-[#e6d769] border-b-4 border-[#e6d769] pb-2">
                     Términos Legales Web
                 </h1>
 
-                <div className="text-gray-100 space-y-4 text-base leading-relaxed text-justify">
+                <div className="text-gray-100 space-y-4 text-base leading-relaxed text-justify pointer-events-none">
                     <p>Apreciado Usuario,</p>
                     <p>
                         Los términos y condiciones expresados a continuación, regulan el uso de este sitio web y los cuales se han puesto a su servicio. Cuando ingresa y usa nuestra página web, adquiere de forma automática la calidad de ‘usuario’. En virtud de lo anterior, el Usuario entiende que el uso de la presente herramienta significa una aceptación de este Aviso Legal, así como de las condiciones generales de uso. En cualquier momento y sin obligación de notificarlo con anterioridad, LEGAL 360 S.A.S., puede editar, cambiar, renovar, agregar o retirar cualquier parte o la totalidad de los términos y condiciones del sitio web. Por eso es tu responsabilidad como usuario, verificar la información contenida en los términos y condiciones del sitio, siempre que vayas a hacer uso de alguno de sus contenidos o servicios.

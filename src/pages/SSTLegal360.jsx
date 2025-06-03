@@ -35,7 +35,7 @@ const services = [
         bullets: [
             'Asesoría frente a requerimientos del Ministerio del Trabajo, actos administrativos y planes de mejora.',
             'Defensa legal en accidentes laborales graves y enfermedades laborales y situaciones críticas del área SST.',
-            'Emisión de conceptos jurídicos sobre incapacidades y restricciones médicas.',
+            'Emisión de conceptos jurídicos sobre incapacidades, recomendaciones y restricciones médicas.',
             'Revisión legal de contratos de servicios con terceros.'
         ]
     }

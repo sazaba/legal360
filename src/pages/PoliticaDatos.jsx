@@ -10,14 +10,30 @@ import BoardTeam from '../assets/videos/BoardTeam.MOV';
 const PoliticaDatos = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        const handleContextMenu = (e) => e.preventDefault();
+        const blockKeys = (e) => {
+            if (
+                (e.ctrlKey && ['p', 's', 'u', 'c'].includes(e.key.toLowerCase())) ||
+                e.key === 'PrintScreen'
+            ) {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener('contextmenu', handleContextMenu);
+        window.addEventListener('keydown', blockKeys);
+
+        return () => {
+            document.removeEventListener('contextmenu', handleContextMenu);
+            window.removeEventListener('keydown', blockKeys);
+        };
     }, []);
 
     const zoomPluginInstance = zoomPlugin();
 
     return (
-        <section className="relative w-full min-h-screen font-sans overflow-hidden">
-
-
+        <section className="relative w-full min-h-screen font-sans overflow-hidden select-none">
             {/* Capa oscura para legibilidad */}
             <div className="absolute inset-0 bg-[#001e33]/60 z-10"></div>
 
@@ -32,7 +48,7 @@ const PoliticaDatos = () => {
                         A continuación puede visualizar el documento oficial con la política de tratamiento de datos personales de <strong>Legal 360 S.A.S.</strong>
                     </p>
 
-                    <article className="p-4 w-full rounded-md  shadow-xl bg-white overflow-hidden">
+                    <article className="p-4 w-full rounded-md shadow-xl bg-white overflow-hidden select-none">
                         <div className="w-full h-full bg-white p-[10px] box-border">
                             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                                 <Viewer

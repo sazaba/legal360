@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import estatua from '../assets/images/Hero4.webp';
+import logo from '../assets/images/logolegal.webp';
 import { FaWhatsapp } from 'react-icons/fa';
 import Typewriter from 'typewriter-effect';
-import '../index.css'; // Asegúrate de que esta línea esté apuntando a donde cargas las fuentes globales
+import '../index.css';
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -16,19 +17,19 @@ const Hero = () => {
 
   return (
     <section
-      className="relative min-h-screen bg-no-repeat bg-cover overflow-hidden"
+      className="relative min-h-screen bg-no-repeat bg-cover overflow-hidden "
       style={{
         backgroundImage: `url(${estatua})`,
         backgroundPosition: isMobile ? '70% center' : 'center',
         backgroundAttachment: isMobile ? 'scroll' : 'fixed',
       }}
     >
-      {isMobile && <div className="absolute inset-0 bg-black opacity-20 z-0" />}
+      <div className="absolute inset-0 bg-black opacity-60 z-0" />
 
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-8 md:px-20">
-        <div className="text-center md:text-left max-w-2xl space-y-6">
-          <div className="w-full max-w-6xl mx-auto px-6 py-12 flex flex-col items-center md:items-start text-center md:text-left gap-4">
-            <h1 className="text-white text-4xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-montserrat tracking-tight">
+      <div className="relative z-10 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
+        <div className="text-center md:text-left max-w-2xl space-y-6 pt-32 md:pt-20">
+          <div className="w-full px-6 py-8 flex flex-col items-center md:items-start gap-4">
+            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
               Cumple con la Ley{' '}
               <span
                 className="inline-block"
@@ -41,12 +42,14 @@ const Hero = () => {
                 Protege tu Empresa
               </span>
               <br />
-              <span className="block text-[#e6d769] mt-2">Crece con Legal 360</span>
+              <span className="block text-[#e6d769] mt-2 text-2xl sm:text-3xl">
+                Crece con Legal 360
+              </span>
             </h1>
 
-            <div className="mt-10">
+            <div className="mt-6">
               <p
-                className="font-bold text-base sm:text-lg shadow-lg px-4 py-3 rounded-xl bg-white text-center font-poppins"
+                className="font-bold text-sm sm:text-base shadow-lg px-4 py-3 rounded-xl bg-white text-center"
                 style={{
                   background: 'white',
                   color: 'transparent',
@@ -54,7 +57,6 @@ const Hero = () => {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundImage: 'linear-gradient(90deg, #d4af37, #f5e27a, #d4af37)',
-                  fontFamily: 'Montserrat, sans-serif',
                 }}
               >
                 <Typewriter
@@ -70,14 +72,16 @@ const Hero = () => {
             </div>
           </div>
         </div>
+
+        {!isMobile && (
+          <div className="hidden md:block">
+            <img src={logo} alt="Logo Legal 360" className="w-72 max-w-full h-auto" />
+          </div>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none">
-        <svg
-          viewBox="0 0 500 150"
-          preserveAspectRatio="none"
-          className="w-full h-[30px]"
-        >
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px]">
           <path
             d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
             className="fill-[#001e33]"
@@ -95,7 +99,7 @@ const Hero = () => {
           color: '#001e33',
         }}
       >
-        <FaWhatsapp className="text-2xl sm:text-3xl" />
+        <FaWhatsapp className="text-xl sm:text-2xl" />
       </a>
     </section>
   );

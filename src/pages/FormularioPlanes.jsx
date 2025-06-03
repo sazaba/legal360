@@ -43,7 +43,7 @@ const FormularioPlanes = () => {
                         Agenda tu Diagnóstico Gratuito
                     </h2>
                     <p className="text-sm sm:text-sm text-justify text-gray-700 leading-relaxed mb-4">
-                        Si usted es una persona jurídica o empresa y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
+                        Si usted es una persona jurídica o natural y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
                     </p>
 
                     <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 gap-4 text-[#001e33] text-sm">
@@ -133,8 +133,8 @@ const FormularioPlanes = () => {
                                 <h4 className="text-xl font-bold mb-4 text-center">Plan Mensual</h4>
                                 <p className="text-sm mb-4">Ideal para empresas que requieren un respaldo jurídico preventivo.</p>
                                 <ul className="mt-3 list-none space-y-2 text-sm">
-                                    <li className="flex items-start gap-2"><CheckCircleOutlined className="mt-1 text-[#001e33]" />Acompañamiento legal continuo en derecho laboral y comercial.</li>
-                                    <li className="flex items-start gap-2"><PhoneOutlined className="mt-1 text-[#001e33]" />Consultas jurídicas ilimitadas por correo, teléfono o videollamada.</li>
+                                    <li className="flex items-start gap-2"><CheckCircleOutlined className="mt-1 text-[#001e33]" />Acompañamiento legal continuo en derecho laboral, comercial y Seguridad y Salud en el Trabajo.</li>
+                                    <li className="flex items-start gap-2"><PhoneOutlined className="mt-1 text-[#001e33]" />Consultas jurídicas ilimitadas por correo electrónico, teléfono, videollamada o Whatsapp.</li>
                                     <li className="flex items-start gap-2"><FileTextOutlined className="mt-1 text-[#001e33]" />Revisión y elaboración de documentos legales.</li>
                                     <li className="flex items-start gap-2"><CheckCircleOutlined className="mt-1 text-[#001e33]" />Alerta de vencimientos legales y gestión de riesgos jurídicos.</li>
                                     <li className="flex items-start gap-2"><SolutionOutlined className="mt-1 text-[#001e33]" />Capacitaciones jurídicas a tu equipo.</li>
@@ -148,7 +148,7 @@ const FormularioPlanes = () => {
                                 <ul className="mt-3 list-none space-y-2 text-sm">
                                     <li className="flex items-start gap-2"><CheckCircleOutlined className="mt-1 text-[#001e33]" />Asesoría especializada para un caso o situación puntual.</li>
                                     <li className="flex items-start gap-2"><SolutionOutlined className="mt-1 text-[#001e33]" />Estrategias jurídicas enfocadas en resultados inmediatos.</li>
-                                    <li className="flex items-start gap-2"><FileTextOutlined className="mt-1 text-[#001e33]" />Gestión en trámites, reclamaciones, inspecciones o conflictos.</li>
+                                    <li className="flex items-start gap-2"><FileTextOutlined className="mt-1 text-[#001e33]" />Gestión en trámites, reclamaciones, auditorias o requerimientos.</li>
                                     <li className="flex items-start gap-2"><CheckCircleOutlined className="mt-1 text-[#001e33]" />No requiere compromiso mensual.</li>
                                     <li className="flex items-start gap-2"><CalendarOutlined className="mt-1 text-[#001e33]" />Tiempo de respuesta prioritario según disponibilidad.</li>
                                 </ul>

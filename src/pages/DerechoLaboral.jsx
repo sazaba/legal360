@@ -38,7 +38,7 @@ const services = [
         )
     },
     {
-        title: 'Procesos Disciplinarios y Documentación Interna',
+        title: 'Procesos Disciplinarios y Documentación de Omisiones',
         icon: <FaGavel className="text-5xl text-[#e6d769]" />,
         description: (
             <ul className="text-left space-y-2">

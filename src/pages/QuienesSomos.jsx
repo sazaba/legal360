@@ -48,7 +48,7 @@ const QuienesSomos = () => {
                 Brindamos soluciones jurídicas integrales, oportunas y comprensibles, diseñadas para fortalecer la toma de decisiones tanto a nivel empresarial como individual. Nuestro enfoque preventivo busca anticipar conflictos, reducir riesgos legales y ofrecer una experiencia de acompañamiento que garantice tranquilidad jurídica.
               </p>
               <p className="italic text-[#dcdcdc]">
-                Ofrecemos planes y tarifas flexibles que se adaptan a las necesidades reales de tu empresa.
+                Contamos con planes y tarifas adaptables a las necesidades específicas de tu empresa.
               </p>
             </div>
 

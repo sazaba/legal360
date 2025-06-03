@@ -17,8 +17,8 @@ const sections = [
         icon: <AiOutlineSchedule className="text-5xl text-[#e6d769]" />,
         bullets: [
             'Elaboración y/o revisión de procedimientos comerciales.',
-            'Revisión y validación legal de contratos y ofertas comerciales.',
-            'Asesoría en el manejo de pólizas de seguros.',
+            'Revisión y validación legal de contratos y ofertas mercantiles.',
+            'Asesoría en manejo societario.',
             'Contratación legal con terceros.'
         ]
     },
