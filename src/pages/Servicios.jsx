@@ -8,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import bustos from '../assets/images/bustos.webp';
 import MariCris from '../assets/videos/MariCris.MOV'
+import Teamlegal from '../assets/images/Teamlegal.webp'
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
@@ -67,25 +68,14 @@ const Servicios = ({ id }) => {
       id="servicios"
       className="relative pt-20 text-white min-h-screen pb-10 overflow-hidden"
       style={{
-        backgroundImage: isMobile ? undefined : `url(${bustos})`,
+        backgroundImage: `url(${Teamlegal})`,
         backgroundSize: 'cover',
-        backgroundPosition: backgroundPosition,
+        backgroundPosition: isMobile ? '40%' : 'center 20%', // aquí se baja la imagen
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
-      {/* 🎥 Video solo en móvil */}
-      {isMobile && (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 w-full h-full object-cover object-right z-0"
-        >
-          <source src={MariCris} type="video/mp4" />
-          Tu navegador no soporta videos HTML5.
-        </video>
-      )}
+      <div className="absolute inset-0 bg-black/75 z-10 pointer-events-none"></div>
+
 
       {/* Capa oscura para contraste */}
       <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
