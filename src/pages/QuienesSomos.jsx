@@ -4,7 +4,7 @@ import Mari from '../assets/images/maribg3.webp';
 const QuienesSomos = () => {
   return (
     <section
-      className="relative bg-cover md:bg-contain bg-no-repeat bg-center md:bg-center w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-6 py-20 sm:py-28"
+      className="relative bg-cover md:bg-contain bg-no-repeat bg-center md:bg-center w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-6 py-20 sm:py-28 my-[-30px]"
       style={{ backgroundImage: `url(${Mari})`, backgroundPosition: '90% center' }}
     >
       {/* Capa oscura para mejorar contraste */}
@@ -12,7 +12,7 @@ const QuienesSomos = () => {
 
       {/* Ola superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-0">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px] rotate-180">
           <path
             d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
             className="fill-[#001e33]"
