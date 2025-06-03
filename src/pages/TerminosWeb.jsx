@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { AiOutlinePaperClip } from "react-icons/ai";
 import cristab from '../assets/images/Cris_tab.webp'
+import { Link } from 'react-router-dom';
 
 const TerminosWeb = () => {
     const fileInputRef = useRef(null);
@@ -109,17 +110,25 @@ const TerminosWeb = () => {
                     <p>
                         a. Los usuarios de tienen derecho a presentar peticiones, quejas, reclamos, sugerencias, felicitaciones ante LEGAL 360 S.A.S., en forma verbal o escrita.
                         <br /> <br />
-                        El titular de los datos o quien ejerza su representación podrá enviar sus peticiones, quejas, reclamos, sugerencias o felicitaciones en la siguiente dirección física: Carrera 23 N°. 79-09 manzana 25 Barrio Corales. Pereira (Risaralda)
-                        <br /> <br />
+                        <ul className="list-disc list-outside pl-5 text-justify text-white leading-relaxed space-y-4 ml-10">
+                            <li>
+                                El titular de los datos o quien ejerza su representación podrá enviar sus peticiones, quejas, reclamos, sugerencias o felicitaciones en la siguiente dirección física: Carrera 23 N°. 79-09 manzana 25 Barrio Corales. Pereira (Risaralda).
+                            </li>
 
-                        Así mismo, podrá radicar virtualmente, peticiones, quejas, reclamos, sugerencias o felicitaciones a través del correo electrónico servicioalcliente@legal360.co y podrá contactarnos en la Línea celular 3123240463.<br /> <br />
+                            <li>
+                                Así mismo, podrá radicar virtualmente, peticiones, quejas, reclamos, sugerencias o felicitaciones a través del correo electrónico <strong>servicioalcliente@legal360.co</strong> y podrá contactarnos en la Línea celular <strong>3123240463</strong>.
+                            </li>
 
-                        Igualmente, para su comodidad, en este mismo sitio, puedes presentar tus peticiones, quejas. reclamos, sugerencias o felicitaciones, para lo cual es necesario diligenciar el formulario que se encuentra a su disposición para tal fin<br /> <br />
+                            <li>
+                                Igualmente, para su comodidad, en este mismo sitio, puedes presentar tus peticiones, quejas, reclamos, sugerencias o felicitaciones, para lo cual es necesario diligenciar el formulario que se encuentra a su disposición para tal fin.
+                            </li>
+                        </ul>
+
                     </p>
 
 
                     <p>
-                        <strong>b. Definiciones</strong>
+                        b. Definiciones
                         <br /><br />
 
                         <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
@@ -137,14 +146,14 @@ const TerminosWeb = () => {
                         <span className="text-[#d4af37] inline-block mr-1"><FaCheck /></span>
                         <strong>Felicitación:</strong> Es aquella expresión de satisfacción de un usuario del servicio, con relación a la prestación de un servicio. <br /><br />
 
-                        LEGAL 360 S.A.S., en atención a lo contemplado dentro de la Ley 1755 de 2015, las peticiones deberán ser resueltas dentro de los quince (15) días siguientes a su recepción, en cuanto a las peticiones de documentos e información, estos deberán resolverse dentro de los diez (10) días siguientes a su recepción. Las respuestas a las quejas, reclamos, sugerencias y felicitaciones tendrán como tiempo de respuesta los quince (15) días siguientes a la recepción de las mismas a través del mismo medio de atención por el cual fue presentada por el usuario, a menos que este decida que quiere recibirla por otro medio distinto. <br /><br />
+                        c. LEGAL 360 S.A.S., en atención a lo contemplado dentro de la Ley 1755 de 2015, las peticiones deberán ser resueltas dentro de los quince (15) días siguientes a su recepción, en cuanto a las peticiones de documentos e información, estos deberán resolverse dentro de los diez (10) días siguientes a su recepción. Las respuestas a las quejas, reclamos, sugerencias y felicitaciones tendrán como tiempo de respuesta los quince (15) días siguientes a la recepción de las mismas a través del mismo medio de atención por el cual fue presentada por el usuario, a menos que este decida que quiere recibirla por otro medio distinto. <br /><br />
                     </p>
 
                     <p>
-                        c. Habeas Data: Señor usuario según las disposiciones legales vigentes usted tiene derecho a radicar ante LEGAL 360 S.A.S., solicitudes de corrección, actualización o retiro de la información personal que haya suministrado.
+                        d. Habeas Data: Señor usuario según las disposiciones legales vigentes usted tiene derecho a radicar ante LEGAL 360 S.A.S., solicitudes de corrección, actualización o retiro de la información personal que haya suministrado.
                     </p>
                     <p>
-                        d.  Rechazo de P.Q.R.S.F
+                        e. Rechazo de PQRSF
 
 
                         Habrá lugar a rechazar la PQRSF que sean presentadas en forma irrespetuosa o desobligante, utilizando amenazas, improperios, insultos, ofensas, afrentas, provocaciones o cualquier otra conducta semejante, de acuerdo a lo establecido en el artículo 19 de la Ley 1955 de 2015
@@ -171,9 +180,11 @@ Formulario  */}
 
                     <form className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
                         <p className="text-justify text-gray-700 leading-relaxed">
-                            He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra <a href="#" className="text-blue-600 underline">AQUÍ</a>.
+                            He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra{" "}
+                            <Link to="/politica-datos" className="text-blue-600 underline font-medium">
+                                AQUÍ
+                            </Link>.
                         </p>
-
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <select className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
                                 <option value="">Tipo de Documento</option>
