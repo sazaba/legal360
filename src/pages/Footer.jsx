@@ -1,4 +1,5 @@
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const Footer = () => {
     return (
@@ -16,13 +17,31 @@ const Footer = () => {
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Enlaces</h3>
                     <ul className="space-y-2 text-gray-400 text-sm">
-                        {['Inicio', 'Servicios', 'Nosotros', 'Contacto'].map((item) => (
-                            <li key={item}>
-                                <a href={`/#${item.toLowerCase()}`} className="hover:text-white transition-colors duration-150">
-                                    {item}
-                                </a>
-                            </li>
-                        ))}
+                        <li>
+                            <Link smooth to="/#top" className="hover:text-white transition-colors duration-150">
+                                Inicio
+                            </Link>
+                        </li>
+                        <li>
+                            <Link smooth to="/#servicios" className="hover:text-white transition-colors duration-150">
+                                Servicios
+                            </Link>
+                        </li>
+                        <li>
+                            <Link smooth to="/#por-que-nosotros" className="hover:text-white transition-colors duration-150">
+                                Nosotros
+                            </Link>
+                        </li>
+                        <li>
+                            <a
+                                href="https://wa.link/twbzum"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white transition-colors duration-150"
+                            >
+                                Contacto
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -41,15 +60,22 @@ const Footer = () => {
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Síguenos</h3>
                     <div className="flex gap-5 pb-4">
-                        {[FaInstagram, FaWhatsapp].map((Icon, i) => (
-                            <a
-                                key={i}
-                                href="#"
-                                className="text-gray-400 hover:text-white transition-colors duration-200 text-xl"
-                            >
-                                <Icon />
-                            </a>
-                        ))}
+                        <a
+                            href="https://www.instagram.com/legal360abogados/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors duration-200 text-xl"
+                        >
+                            <FaInstagram />
+                        </a>
+                        <a
+                            href="https://wa.link/twbzum"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors duration-200 text-xl"
+                        >
+                            <FaWhatsapp />
+                        </a>
                     </div>
                 </div>
             </div>

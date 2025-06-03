@@ -11,7 +11,7 @@ const CapacitacionesJuridicas = () => {
 
     const cards = [
         {
-            title: 'Asesoría para trámites Pensión',
+            title: 'Asesoría para Trámites Pensión',
             icon: <FaUserCheck className="text-5xl text-[#e6d769]" />,
             items: [
                 'Pensión de vejez ante Colpensiones o fondos privados.',
@@ -21,7 +21,7 @@ const CapacitacionesJuridicas = () => {
             ]
         },
         {
-            title: 'Cálculo y revisión financiera',
+            title: 'Cálculo y Revisión Financiera',
             icon: <FaCalculator className="text-5xl text-[#e6d769]" />,
             items: [
                 'Revisión de historia laboral para validar semanas cotizadas.',
@@ -30,7 +30,7 @@ const CapacitacionesJuridicas = () => {
             ]
         },
         {
-            title: 'Defensa y recursos legales',
+            title: 'Defensa y Recursos Legales',
             icon: <FaBalanceScale className="text-5xl text-[#e6d769]" />,
             items: [
                 'Interposición de recursos ante la Junta Regional o Nacional de Calificación de Invalidez.',
@@ -55,7 +55,7 @@ const CapacitacionesJuridicas = () => {
             </video>
 
             {/* Capa oscura sobre el video */}
-            <div className="absolute inset-0 bg-[#001e33]/60 z-10" />
+            <div className="absolute inset-0 bg-[#001e33]/80 z-10" />
 
             {/* Contenido */}
             <div className="relative z-20 px-6 py-20 lg:px-24 text-white">
@@ -78,7 +78,7 @@ const CapacitacionesJuridicas = () => {
                             <h2 className="text-lg font-semibold text-[#e6d769] mb-2">{card.title}</h2>
                             <ul className="text-left space-y-2 text-gray-200 text-sm">
                                 {card.items.map((item, i) => (
-                                    <li key={i} className="flex gap-2">
+                                    <li key={i} className="flex items-start gap-2">
                                         <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
                                         <span>{item}</span>
                                     </li>

@@ -15,9 +15,9 @@ const services = [
         title: 'Protocolos y Políticas Legales',
         icon: <FileTextOutlined className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Elaboración del protocolo y política para la prevención, atención y protección del acoso laboral, sexual, violencia basada en género y discriminación contra mujeres y personas LGBTIQ+ en el ámbito laboral',
-            'Documentación del protocolo y política de desconexión laboral',
-            'Elaboración del protocolo para teletrabajo y trabajo en casa'
+            'Elaboración del protocolo y política para la prevención, atención y protección del acoso laboral, sexual, violencia basada en género y discriminación contra mujeres y personas LGBTIQ+ en el ámbito laboral.',
+            'Documentación del protocolo y política de desconexión laboral.',
+            'Elaboración del protocolo para teletrabajo y trabajo en casa.'
         ]
     },
     {
@@ -25,7 +25,7 @@ const services = [
         icon: <TeamOutlined className="text-5xl text-[#e6d769]" />,
         bullets: [
             'Capacitación al Comité de Convivencia Laboral sobre sus deberes legales en materia de acoso, género y diversidad.',
-            'Formación sobre el procedimiento legal en caso de trabajadores bajo efectos de sustancias psicoactivas o alcohol',
+            'Formación sobre el procedimiento legal en caso de trabajadores bajo efectos de sustancias psicoactivas o alcohol.',
             'Capacitación a empleadores y responsables de SST en normatividad vigente, jurisprudencia y prevención de sanciones por incumplimientos legales.'
         ]
     },
@@ -59,7 +59,7 @@ const SSTLegal360 = () => {
                 Tu navegador no soporta el video.
             </video>
 
-            <div className="absolute inset-0 bg-[#001e33]/70 z-10" />
+            <div className="absolute inset-0 bg-[#001e33]/85 z-10" />
 
             <div className="relative z-20 px-6 py-10 lg:px-24 text-white">
                 <div className="max-w-6xl mx-auto text-center mb-16">

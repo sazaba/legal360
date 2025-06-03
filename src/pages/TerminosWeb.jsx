@@ -88,7 +88,7 @@ const TerminosWeb = () => {
                         Usaremos la información entregada por nuestros clientes para realizar el procesamiento y entrega de los pedidos y para enviar información que pueda ser útil a nuestros clientes o que hayan solicitado específicamente, incluida información sobre nuestros productos y servicios, a menos que nos hayan comunicado que se oponen a ser contactados para estos fines.<br /> <br />
 
 
-                        Sujeto a la obtención de su consentimiento podemos comunicarnos con Usted, por correo electrónico, por medio telefónico o por cualquier red social. Si prefiere no recibir comunicaciones a través de alguno o todos estos canales, puede comunicarlo en cualquier momento a servicioalcliente@legal360.com y dejará de recibir dichas comunicaciones. Usted puede acceder a los detalles de la orden de servicio y a los servicios prestados, a través del cual le informemos que tenemos convenio y el estado de cada orden de servicio<br /> <br />
+                        Sujeto a la obtención de su consentimiento podemos comunicarnos con Usted, por correo electrónico, por medio telefónico o por cualquier red social. Si prefiere no recibir comunicaciones a través de alguno o todos estos canales, puede comunicarlo en cualquier momento a servicioalcliente@legal360.com y dejará de recibir dichas comunicaciones. Usted puede acceder a los detalles de la orden de servicio y a los servicios prestados, a través del cual le informemos que tenemos convenio y el estado de cada orden de servicio.<br /> <br />
 
                     </p>
 
@@ -153,18 +153,22 @@ const TerminosWeb = () => {
                         d. Habeas Data: Señor usuario según las disposiciones legales vigentes usted tiene derecho a radicar ante LEGAL 360 S.A.S., solicitudes de corrección, actualización o retiro de la información personal que haya suministrado.
                     </p>
                     <p>
-                        e. Rechazo de PQRSF
+                        e. Rechazo de PQRSF <br /> <br />
 
 
-                        Habrá lugar a rechazar la PQRSF que sean presentadas en forma irrespetuosa o desobligante, utilizando amenazas, improperios, insultos, ofensas, afrentas, provocaciones o cualquier otra conducta semejante, de acuerdo a lo establecido en el artículo 19 de la Ley 1955 de 2015
+                        Habrá lugar a rechazar la PQRSF que sean presentadas en forma irrespetuosa o desobligante, utilizando amenazas, improperios, insultos, ofensas, afrentas, provocaciones o cualquier otra conducta semejante, de acuerdo a lo establecido en el artículo 19 de la Ley 1955 de 2015.
 
+                    </p>
+                    <p>
+                        f. Llena los campos obligatorios marcados con un (*) para recibir posteriormente dentro de los términos
+                        legales, la respuesta a la petición efectuada.
                     </p>
                 </div>
 
 
-                <h2 className="text-2xl font-bold mt-12 mb-4 text-[#e6d769]">Formulario PQRSF</h2>
 
-                <div className="bg-white text-gray-800 rounded-xl shadow-md overflow-hidden flex flex-col lg:flex-row">
+
+                <div className="bg-white text-gray-800 rounded-xl shadow-md overflow-hidden flex flex-col lg:flex-row mt-8">
                     {/* Imagen lateral izquierda con overlay */}
                     <div className="lg:w-1/2 w-full relative flex items-center justify-center">
                         <img
@@ -179,12 +183,9 @@ const TerminosWeb = () => {
 Formulario  */}
 
                     <form className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
-                        <p className="text-justify text-gray-700 leading-relaxed">
-                            He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra{" "}
-                            <Link to="/politica-datos" className="text-blue-600 underline font-medium">
-                                AQUÍ
-                            </Link>.
-                        </p>
+
+                        <h2 className="text-2xl font-bold text-center py-4 text-[#001e33]">Formulario PQRSF</h2>
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <select className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
                                 <option value="">Tipo de Documento</option>
@@ -194,15 +195,15 @@ Formulario  */}
                                 <option value="TI">T.I</option>
                                 <option value="NIT">NIT</option>
                             </select>
-                            <input type="text" placeholder="Número de Documento de Identificación *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="text" placeholder="Número de Documento*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input type="text" placeholder="Nombre(s) del peticionario o recurrente *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
-                            <input type="text" placeholder="Apellido(s) del peticionario o recurrente *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="text" placeholder="Nombre(s) del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="text" placeholder="Apellido(s) del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
                         </div>
 
-                        <input type="email" placeholder="Correo electrónico *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                        <input type="email" placeholder="Correo electrónico de notificación del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
                         <input type="email" placeholder="Confirmación correo electrónico *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required />
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -270,7 +271,12 @@ Formulario  */}
                         <div className="flex items-start gap-2">
                             <input type="checkbox" required className="mt-1 accent-[#e6d769]" />
                             <label className="text-gray-700 leading-snug text-justify">
-                                He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales.
+
+                                He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales, de acuerdo con los fines relacionados con su misiva y funciones, cuyo contenido se encuentra{" "}
+                                <Link to="/politica-datos" className="text-blue-600 underline font-medium">
+                                    AQUÍ
+                                </Link>.
+
                             </label>
                         </div>
 

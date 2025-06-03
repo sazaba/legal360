@@ -19,28 +19,36 @@ const ContactoAccesos = () => {
                 {/* Columna derecha: íconos de contacto */}
                 <div className="w-full flex justify-center sm:justify-end gap-4 sm:gap-6">
                     {/* Tarjeta 1: Llámanos */}
-                    <div className="flex flex-col items-center">
+                    <a href="tel:+573123240463" className="flex flex-col items-center hover:scale-105 transition-transform">
                         <div className="bg-[#001e33] p-2 sm:p-3 rounded-full shadow-md">
                             <BsFillTelephoneFill className="text-[#e6d769] text-xl sm:text-2xl" />
                         </div>
                         <p className="mt-2 text-[#1d1d1b] font-medium text-xs sm:text-sm">LLÁMANOS</p>
-                    </div>
+                    </a>
 
                     {/* Tarjeta 2: Chatea */}
-                    <div className="flex flex-col items-center">
+                    <a
+                        href="https://wa.link/twbzum"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center hover:scale-105 transition-transform"
+                    >
                         <div className="bg-[#001e33] p-2 sm:p-3 rounded-full shadow-md">
                             <AiOutlineMessage className="text-[#e6d769] text-xl sm:text-2xl" />
                         </div>
                         <p className="mt-2 text-[#1d1d1b] font-medium text-xs sm:text-sm">CHATEA</p>
-                    </div>
+                    </a>
 
                     {/* Tarjeta 3: Email */}
-                    <div className="flex flex-col items-center">
+                    <a
+                        href="mailto:servicioalcliente@legal360.co"
+                        className="flex flex-col items-center hover:scale-105 transition-transform"
+                    >
                         <div className="bg-[#001e33] p-2 sm:p-3 rounded-full shadow-md">
                             <AiOutlineMail className="text-[#e6d769] text-xl sm:text-2xl" />
                         </div>
                         <p className="mt-2 text-[#1d1d1b] font-medium text-xs sm:text-sm">EMAIL</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>

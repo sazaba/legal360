@@ -90,7 +90,7 @@ const DerechoComercial = () => {
                             </h2>
                             <ul className="text-left space-y-2 text-gray-200 text-sm">
                                 {section.bullets.map((item, i) => (
-                                    <li key={i} className="flex gap-2">
+                                    <li key={i} className="flex items-start gap-2">
                                         <CheckCircleOutlined style={{ color: '#e6d769', marginTop: '4px' }} />
                                         <span>{item}</span>
                                     </li>
