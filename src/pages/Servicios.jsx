@@ -64,7 +64,7 @@ const Servicios = ({ id }) => {
   ];
 
   const getBackgroundStyle = () => {
-    if (windowWidth <= 1024) {
+    if (windowWidth <= 1240) {
       return {
         backgroundColor: '#001e33',
         backgroundImage: `url(${serviciosmobile})`,
