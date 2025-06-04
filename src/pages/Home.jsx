@@ -1,5 +1,5 @@
 
-import Slider from "../components/Slider";
+
 import Hero from "./Hero";
 
 // En Home.jsx

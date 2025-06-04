@@ -3,8 +3,8 @@ import { HashLink as Link } from 'react-router-hash-link';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-3">
-            <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-6">
+            <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-12">
                 {/* Marca */}
                 <div>
                     <h2 className="text-2xl font-bold text-[#e6d769] mb-4 tracking-tight">Legal 360 S.A.S.</h2>
@@ -80,6 +80,23 @@ const Footer = () => {
                             <FaWhatsapp />
                         </a>
                     </div>
+                </div>
+
+                {/* Políticas y Condiciones */}
+                <div>
+                    <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Políticas y Condiciones</h3>
+                    <ul className="space-y-2 text-gray-400 text-sm">
+                        <li>
+                            <Link to="/politica-datos" className="hover:text-white transition-colors duration-150">
+                                Política de Datos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/terminos-condiciones" className="hover:text-white transition-colors duration-150">
+                                Términos y Condiciones
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
 

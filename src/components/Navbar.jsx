@@ -61,19 +61,6 @@ export default function Navbar() {
                         <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-sm lg:text-base font-montserrat">
                             Contacto
                         </a>
-
-                        <button
-                            onClick={() => navigate("/politica-datos")}
-                            className="text-white hover:text-[#e6d769] text-sm lg:text-base font-montserrat"
-                        >
-                            Política de Datos
-                        </button>
-                        <button
-                            onClick={() => navigate("/terminos-condiciones")}
-                            className="text-white hover:text-[#e6d769] text-sm lg:text-base font-montserrat"
-                        >
-                            Términos y Condiciones
-                        </button>
                         <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" title="Centro de Relevo" className="inline-flex">
                             <img src={Relevo} alt="Centro de Relevo" className="w-10 sm:w-12 object-contain" />
                         </a>
@@ -100,25 +87,6 @@ export default function Navbar() {
                     <button onClick={() => handleSmartScroll("por-que-nosotros")} className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Nosotros</button>
                     <button onClick={() => handleSmartScroll("servicios")} className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Servicios</button>
                     <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Contacto</a>
-
-                    <button
-                        onClick={() => {
-                            setMenuAbierto(false);
-                            navigate("/politica-datos");
-                        }}
-                        className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat"
-                    >
-                        Política de Datos
-                    </button>
-                    <button
-                        onClick={() => {
-                            setMenuAbierto(false);
-                            navigate("/terminos-condiciones");
-                        }}
-                        className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat"
-                    >
-                        Términos y Condiciones
-                    </button>
                     <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#e6d769] text-base sm:text-lg font-semibold font-montserrat">Centro de Relevo</a>
                 </div>
             </div>
