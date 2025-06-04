@@ -7,6 +7,7 @@ import '../index.css';
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -23,12 +24,13 @@ const Hero = () => {
         backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
-      {/* Imagen con lazy loading */}
+      {/* Imagen con lazy loading y blur temporal */}
       <img
         src={estatua}
         alt="Fondo Hero"
         loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        onLoad={() => setIsImageLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'}`}
       />
 
       {/* Capa oscura sobre la imagen */}
