@@ -11,11 +11,11 @@ import serviciosmobile from '../assets/images/serviciosmobile.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
@@ -59,24 +59,29 @@ const Servicios = ({ id }) => {
     },
   ];
 
+  const getBackgroundStyle = () => {
+    if (windowWidth <= 1024) {
+      return {
+        backgroundColor: '#001e33',
+        backgroundImage: `url(${serviciosmobile})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      };
+    } else {
+      return {
+        backgroundImage: `url(${Teamlegal})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 20%',
+        backgroundAttachment: 'fixed'
+      };
+    }
+  };
+
   return (
     <section
       id="servicios"
       className="relative pt-20 text-white min-h-screen pb-10 overflow-hidden"
-      style={isMobile
-        ? {
-          backgroundColor: '#001e33',
-          backgroundImage: `url(${serviciosmobile})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }
-        : {
-          backgroundImage: `url(${Teamlegal})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 20%',
-          backgroundAttachment: 'fixed'
-        }
-      }
+      style={getBackgroundStyle()}
     >
       <div className="absolute inset-0 bg-[#001e33] opacity-20 z-10 pointer-events-none"></div>
       <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
@@ -102,8 +107,8 @@ const Servicios = ({ id }) => {
             return (
               <div
                 key={servicio.id}
-                className={`relative w-full max-w-[280px] aspect-[3/4] perspective ${isMobile ? 'mobile-fade-in' : ''}`}
-                style={isMobile ? { '--delay': animationDelays[index % animationDelays.length] } : {}}
+                className={`relative w-full max-w-[280px] aspect-[3/4] perspective ${windowWidth < 768 ? 'mobile-fade-in' : ''}`}
+                style={windowWidth < 768 ? { '--delay': animationDelays[index % animationDelays.length] } : {}}
               >
                 <div className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
                   <div
