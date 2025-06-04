@@ -35,7 +35,8 @@ const FormularioPlanes = () => {
     };
 
     return (
-        <section className="min-h-[80vh] w-[90%] mx-auto flex justify-center px-4 py-10 font-sans rounded-2xl">
+        <section className="min-h-[80vh] w-full max-w-full px-2 sm:px-4 py-10 font-sans rounded-none sm:rounded-2xl">
+
             <div className="flex flex-col lg:flex-row w-full max-w-7xl rounded-xl shadow-gray-400 shadow-lg overflow-hidden">
                 {/* Formulario - 30% */}
                 <div className="bg-white w-full lg:w-[45%] p-6 sm:p-8 border border-gray-200">
