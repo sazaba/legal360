@@ -59,6 +59,24 @@ const Footer = () => {
                     </ul>
                 </div>
 
+
+
+                {/* Políticas y Condiciones */}
+                <div>
+                    <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Políticas y Condiciones</h3>
+                    <ul className="space-y-2 text-gray-400 text-sm">
+                        <li>
+                            <Link to="/politica-datos" className="hover:text-white transition-colors duration-150">
+                                Política de Datos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/terminos-condiciones" className="hover:text-white transition-colors duration-150">
+                                Términos y Condiciones
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
                 {/* Redes Sociales */}
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Síguenos</h3>
@@ -80,23 +98,6 @@ const Footer = () => {
                             <FaWhatsapp />
                         </a>
                     </div>
-                </div>
-
-                {/* Políticas y Condiciones */}
-                <div>
-                    <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Políticas y Condiciones</h3>
-                    <ul className="space-y-2 text-gray-400 text-sm">
-                        <li>
-                            <Link to="/politica-datos" className="hover:text-white transition-colors duration-150">
-                                Política de Datos
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/terminos-condiciones" className="hover:text-white transition-colors duration-150">
-                                Términos y Condiciones
-                            </Link>
-                        </li>
-                    </ul>
                 </div>
             </div>
 
