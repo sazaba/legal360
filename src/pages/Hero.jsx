@@ -17,16 +17,25 @@ const Hero = () => {
 
   return (
     <section
-      className="relative min-h-screen bg-no-repeat bg-cover overflow-hidden "
+      className="relative min-h-screen overflow-hidden"
       style={{
-        backgroundImage: `url(${estatua})`,
         backgroundPosition: isMobile ? '70% center' : 'center',
-        backgroundAttachment: isMobile ? 'scroll' : 'fixed',
+        backgroundAttachment: isMobile ? 'scroll' : 'fixed'
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-60 z-0" />
+      {/* Imagen con lazy loading */}
+      <img
+        src={estatua}
+        alt="Fondo Hero"
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
 
-      <div className="relative z-10 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
+      {/* Capa oscura sobre la imagen */}
+      <div className="absolute inset-0 bg-black opacity-60 z-10" />
+
+      {/* Contenido principal */}
+      <div className="relative z-20 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
         <div className="text-center md:text-left max-w-2xl space-y-6 pt-32 md:pt-20">
           <div className="w-full px-6 py-8 flex flex-col items-center md:items-start gap-4">
             <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
@@ -80,6 +89,7 @@ const Hero = () => {
         )}
       </div>
 
+      {/* Onda inferior decorativa */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px]">
           <path
@@ -89,6 +99,7 @@ const Hero = () => {
         </svg>
       </div>
 
+      {/* Botón flotante de WhatsApp */}
       <a
         href="https://wa.link/twbzum"
         target="_blank"
