@@ -43,7 +43,7 @@ const Hero = () => {
         className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'}`}
       />
 
-      <div className="absolute inset-0 bg-black opacity-40 z-10" />
+      <div className="absolute inset-0 bg-black opacity-10 z-10" />
 
       <div className="relative z-20 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
         <div className="text-center md:text-left max-w-2xl space-y-6 pt-32 md:pt-20">
