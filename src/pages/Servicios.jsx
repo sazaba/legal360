@@ -72,7 +72,7 @@ const Servicios = ({ id }) => {
         }
       }
     >
-      <div className="absolute inset-0 bg-black/60 z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[#001e33] opacity-20 z-10 pointer-events-none"></div>
       <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
