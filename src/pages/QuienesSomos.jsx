@@ -12,7 +12,7 @@ const QuienesSomos = () => {
   }, []);
 
   const getBackgroundStyle = () => {
-    if (windowWidth >= 768 && windowWidth <= 1024) {
+    if (windowWidth >= 768 && windowWidth <= 1024 && window.innerHeight < window.innerWidth) {
       return {
         backgroundImage: `url(${Mari})`,
         backgroundRepeat: 'no-repeat',
