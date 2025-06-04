@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Teamlegal from '../assets/images/Teamlegal.webp';
+import serviciosmobile from '../assets/images/serviciosmobile.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
@@ -63,7 +64,12 @@ const Servicios = ({ id }) => {
       id="servicios"
       className="relative pt-20 text-white min-h-screen pb-10 overflow-hidden"
       style={isMobile
-        ? { backgroundColor: '#001e33' }
+        ? {
+          backgroundColor: '#001e33',
+          backgroundImage: `url(${serviciosmobile})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }
         : {
           backgroundImage: `url(${Teamlegal})`,
           backgroundSize: 'cover',
@@ -91,7 +97,6 @@ const Servicios = ({ id }) => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-2 sm:px-4 md:px-10 justify-items-center">
-
           {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
             return (

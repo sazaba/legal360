@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import estatua from '../assets/images/Hero4.webp';
+import estatuaresponsive from '../assets/images/estatuaresponsive.webp';
 import logo from '../assets/images/logolegal.webp';
 import { FaWhatsapp } from 'react-icons/fa';
 import Typewriter from 'typewriter-effect';
@@ -16,6 +17,8 @@ const Hero = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const backgroundImage = isMobile ? estatuaresponsive : estatua;
+
   return (
     <section
       className="relative min-h-screen overflow-hidden"
@@ -26,7 +29,7 @@ const Hero = () => {
     >
       {/* Imagen con lazy loading y blur temporal */}
       <img
-        src={estatua}
+        src={backgroundImage}
         alt="Fondo Hero"
         loading="lazy"
         onLoad={() => setIsImageLoaded(true)}
@@ -34,7 +37,7 @@ const Hero = () => {
       />
 
       {/* Capa oscura sobre la imagen */}
-      <div className="absolute inset-0 bg-black opacity-60 z-10" />
+      <div className="absolute inset-0 bg-black opacity-40 z-10" />
 
       {/* Contenido principal */}
       <div className="relative z-20 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
