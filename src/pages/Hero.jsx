@@ -1,33 +1,40 @@
 import { useEffect, useState } from 'react';
 import estatua from '../assets/images/Hero4.webp';
 import estatuaresponsive from '../assets/images/estatuaresponsive.webp';
+import estatuatablet from '../assets/images/estatuatablet.webp';
 import logo from '../assets/images/logolegal.webp';
 import { FaWhatsapp } from 'react-icons/fa';
 import Typewriter from 'typewriter-effect';
 import '../index.css';
 
 const Hero = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const backgroundImage = isMobile ? estatuaresponsive : estatua;
+  let backgroundImage;
+  if (windowWidth < 768) {
+    backgroundImage = estatuaresponsive;
+  } else if (windowWidth >= 768 && windowWidth <= 1024) {
+    backgroundImage = estatuatablet;
+  } else {
+    backgroundImage = estatua;
+  }
 
   return (
     <section
       className="relative min-h-screen overflow-hidden"
       style={{
-        backgroundPosition: isMobile ? '70% center' : 'center',
-        backgroundAttachment: isMobile ? 'scroll' : 'fixed'
+        backgroundPosition: windowWidth < 768 ? '70% center' : 'center',
+        backgroundAttachment: windowWidth < 768 ? 'scroll' : 'fixed'
       }}
     >
-      {/* Imagen con lazy loading y blur temporal */}
       <img
         src={backgroundImage}
         alt="Fondo Hero"
@@ -36,10 +43,8 @@ const Hero = () => {
         className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'}`}
       />
 
-      {/* Capa oscura sobre la imagen */}
       <div className="absolute inset-0 bg-black opacity-40 z-10" />
 
-      {/* Contenido principal */}
       <div className="relative z-20 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
         <div className="text-center md:text-left max-w-2xl space-y-6 pt-32 md:pt-20">
           <div className="w-full px-6 py-8 flex flex-col items-center md:items-start gap-4">
@@ -75,7 +80,7 @@ const Hero = () => {
               >
                 <Typewriter
                   options={{
-                    strings: ['Acompañamiento Mensual o Por Evento!'],
+                    strings: ['Acompa\u00f1amiento Mensual o Por Evento!'],
                     autoStart: true,
                     loop: true,
                     delay: 60,
@@ -87,14 +92,13 @@ const Hero = () => {
           </div>
         </div>
 
-        {!isMobile && (
+        {windowWidth >= 768 && (
           <div className="hidden md:block">
             <img src={logo} alt="Logo Legal 360" className="w-72 max-w-full h-auto" />
           </div>
         )}
       </div>
 
-      {/* Onda inferior decorativa */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px]">
           <path
@@ -104,7 +108,6 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Botón flotante de WhatsApp */}
       <a
         href="https://wa.link/twbzum"
         target="_blank"
