@@ -12,10 +12,14 @@ import serviciosmobile from '../assets/images/serviciosmobile.webp';
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+    };
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
