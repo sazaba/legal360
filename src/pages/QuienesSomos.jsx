@@ -1,11 +1,36 @@
+import { useEffect, useState } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import Mari from '../assets/images/maribg3.webp';
 
 const QuienesSomos = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getBackgroundStyle = () => {
+    if (windowWidth >= 768 && windowWidth <= 1024) {
+      return {
+        backgroundImage: `url(${Mari})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+      };
+    }
+    return {
+      backgroundImage: `url(${Mari})`,
+      backgroundPosition: '90% center',
+      backgroundSize: 'cover',
+    };
+  };
+
   return (
     <section
-      className="relative bg-cover md:bg-contain bg-no-repeat bg-center md:bg-center w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-6 py-20 sm:py-28 my-[-30px]"
-      style={{ backgroundImage: `url(${Mari})`, backgroundPosition: '90% center' }}
+      className="relative bg-no-repeat bg-center w-full min-h-screen flex items-center justify-center md:justify-start px-4 sm:px-6 py-20 sm:py-28 my-[-30px]"
+      style={getBackgroundStyle()}
     >
       {/* Capa oscura para mejorar contraste */}
       <div className="absolute inset-0 z-0 bg-black/30" />
