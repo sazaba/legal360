@@ -14,4 +14,9 @@
         @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen;
     }
 
+    a {
+        color: white !important;
+        text-decoration: none;
+    }
+
 }

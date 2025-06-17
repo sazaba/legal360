@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-import bustos from '../assets/images/bustos.webp'
+import { useState } from "react";
+import axios from '../api/axios';
+import Swal from "sweetalert2";
+import bustos from '../assets/images/bustos.webp';
 
 import {
     SolutionOutlined,
@@ -11,57 +12,113 @@ import {
 } from "@ant-design/icons";
 
 const FormularioPlanes = () => {
-    const form = useRef();
-    const [enviado, setEnviado] = useState(false);
+    const [formData, setFormData] = useState({
+        nombre: '',
+        apellido: '',
+        email: '',
+        pais: 'Col',
+        telefono: '',
+        cargo: '',
+        tamano_empresa: '',
+        mensaje: '',
+        autorizacion: false
+    });
 
-    const sendEmail = (e) => {
-        e.preventDefault();
+    const [isLoading, setIsLoading] = useState(false);
 
-        emailjs
-            .sendForm(
-                "service_z8guij6",
-                "template_c8msv7q",
-                form.current,
-                "xg_0dv3Hbof0dI54N"
-            )
-            .then(() => {
-                setEnviado(true);
-                form.current.reset();
-            })
-            .catch((error) => {
-                console.error("Error al enviar:", error);
-                alert("❌ Hubo un error al enviar el formulario.");
-            });
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
     };
 
-    return (
-        <section className="min-h-[80vh] w-full max-w-full px-2 sm:px-4 py-10 font-sans rounded-none sm:rounded-2xl">
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
 
+        const data = {
+            nombre: formData.nombre,
+            apellido: formData.apellido,
+            correo_electronico: formData.email,
+            pais_codigo: formData.pais,
+            telefono: formData.telefono,
+            cargo: formData.cargo,
+            tamano_empresa: formData.tamano_empresa,
+            mensaje: formData.mensaje,
+            autorizacion_datos: formData.autorizacion ? 1 : 0
+        };
+
+        try {
+            console.log("Enviando datos:", data); // <== Nuevo
+            const response = await axios.post("/api/diagnostico", data);
+            ;
+            console.log("Respuesta:", response); // <== Nuevo
+            Swal.fire({
+                icon: 'success',
+                title: '¡Formulario enviado!',
+                text: 'Gracias por contactarnos. Te responderemos pronto.',
+                confirmButtonColor: '#001e33'
+            });
+            setFormData({
+                nombre: '',
+                apellido: '',
+                email: '',
+                pais: 'Col',
+                telefono: '',
+                cargo: '',
+                tamano_empresa: '',
+                mensaje: '',
+                autorizacion: false
+            });
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al enviar',
+                text: 'Hubo un problema al enviar el formulario.',
+                confirmButtonColor: '#e63946'
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
+    return (
+        <section className="min-h-[80vh] w-full px-2 sm:px-4 py-10 font-sans rounded-none sm:rounded-2xl flex items-center justify-center">
             <div className="flex flex-col lg:flex-row w-full max-w-7xl rounded-xl shadow-gray-400 shadow-lg overflow-hidden">
-                {/* Formulario - 30% */}
                 <div className="bg-white w-full lg:w-[45%] p-6 sm:p-8 border border-gray-200">
                     <h2 className="text-2xl font-bold text-[#001e33] mb-4 text-center">
                         Agenda tu Diagnóstico Gratuito
                     </h2>
-                    <p className="text-sm sm:text-sm text-justify text-gray-700 leading-relaxed mb-4">
+                    <p className="text-sm text-justify text-gray-700 leading-relaxed mb-4">
                         Si usted es una persona jurídica o natural y requiere conocer cuál es su estado jurídico en materia de derecho laboral y comercial, diligencie la siguiente información.
                     </p>
 
-                    <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 gap-4 text-[#001e33] text-sm">
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 text-[#001e33] text-sm">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input name="nombre" required placeholder="Nombre*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
-                            <input name="apellido" required placeholder="Apellido*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
+                            <label className="sr-only" htmlFor="nombre">Nombre</label>
+                            <input id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Nombre*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
+                            <label className="sr-only" htmlFor="apellido">Apellido</label>
+                            <input id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required placeholder="Apellido*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
                         </div>
-                        <input name="email" type="email" required placeholder="Correo electrónico*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
+
+                        <label className="sr-only" htmlFor="email">Correo electrónico</label>
+                        <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="Correo electrónico*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
 
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <select name="pais" required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 sm:w-1/3">
-                                <option value="Colombia">Col</option>
+                            <label className="sr-only" htmlFor="pais">País</label>
+                            <select id="pais" name="pais" value={formData.pais} onChange={handleChange} required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 sm:w-1/3">
+                                <option value="Col">Col</option>
                             </select>
-                            <input name="telefono" required placeholder="+57" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 sm:w-2/3" />
+                            <label className="sr-only" htmlFor="telefono">Teléfono</label>
+                            <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="+57" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 sm:w-2/3" />
                         </div>
 
-                        <select name="cargo" required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <label className="sr-only" htmlFor="cargo">Cargo</label>
+                        <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
                             <option value="">Cargo*</option>
                             <option value="Gerente">Gerente/Fundador/Socio</option>
                             <option value="Administrador">Administrador/Contador</option>
@@ -69,45 +126,27 @@ const FormularioPlanes = () => {
                             <option value="Otro">Otro</option>
                         </select>
 
-                        <select name="tamaño_empresa" required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <label className="sr-only" htmlFor="tamano_empresa">Tamaño de empresa</label>
+                        <select id="tamano_empresa" name="tamano_empresa" value={formData.tamano_empresa} onChange={handleChange} required className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full">
                             <option value="">Tamaño de empresa*</option>
                             <option value="1 a 10">1 a 10</option>
                             <option value="11 a 100">11 a 100 empleados</option>
                             <option value="101 en adelante">101 en adelante</option>
                         </select>
 
+                        <label className="sr-only" htmlFor="mensaje">Mensaje o consulta</label>
+                        <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" required placeholder="Mensaje o consulta" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
 
+                        <label className="flex items-start gap-2 text-xs text-gray-700 leading-snug text-justify">
+                            <input type="checkbox" name="autorizacion" checked={formData.autorizacion} onChange={handleChange} required className="mt-1 accent-[#e6d769]" />
+                            En cumplimiento de la Ley 158 de 2012 y sus decretos reglamentarios, autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S.</strong>, con el propósito de cumplir el desarrollo de actividades afines a su objeto social de conformidad con la Ley, de acuerdo con su Política de Protección de Datos Personales.*
+                        </label>
 
-                        <textarea
-                            name="mensaje"
-                            rows="3"
-                            required
-                            placeholder="Mensaje o consulta"
-                            className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full"
-                        />
-
-                        <div className="flex items-start gap-2">
-                            <input type="checkbox" name="autorizacion" required className="mt-1 accent-[#e6d769]" />
-                            <label className="text-xs text-gray-700 leading-snug text-justify">
-                                En cumplimiento de la Ley 1581 de 2012 y sus decretos reglamentarios, autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S.</strong>, con el propósito de cumplir el desarrollo de actividades afines a su objeto social de conformidad con la Ley, de acuerdo con su Política de Protección de Datos Personales.*
-                            </label>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white font-semibold py-2 rounded-md text-sm"
-                        >
-                            Enviar
+                        <button type="submit" disabled={isLoading} className={`w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white font-semibold py-2 rounded-md text-sm ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                            {isLoading ? 'Enviando...' : 'Enviar'}
                         </button>
-
-                        {enviado && (
-                            <p className="text-green-600 text-sm text-center pt-1">
-                                ✅ ¡Muchas gracias! Lo estaremos contactando.
-                            </p>
-                        )}
                     </form>
                 </div>
-
                 {/* Panel derecho - 70% */}
                 <div
                     className="relative w-full lg:w-[55%] text-white flex flex-col justify-center items-center text-center overflow-hidden"

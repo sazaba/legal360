@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import FormularioPlanes from "./FormularioPlanes";
 import ContactoAccesos from "../components/ContactoAccesos";
 import PoliticaDatos from "./PoliticaDatos";
+import BlogPublicList from "./BlogPublicList";
 
 export default function Home() {
     return (
@@ -26,6 +27,9 @@ export default function Home() {
             </section>
             <section id="planes">
                 <FormularioPlanes />
+            </section>
+            <section id="planes">
+                <BlogPublicList />
             </section>
             <ContactoAccesos />
         </main>

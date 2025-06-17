@@ -4,9 +4,6 @@ import { zoomPlugin } from '@react-pdf-viewer/zoom';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/zoom/lib/styles/index.css';
 
-import JesusTyping from '../assets/videos/JesusTyping.MOV';
-import BoardTeam from '../assets/videos/BoardTeam.MOV';
-
 const PoliticaDatos = () => {
     useEffect(() => {
         window.scrollTo(0, 0);

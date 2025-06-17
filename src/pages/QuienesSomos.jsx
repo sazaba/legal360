@@ -90,10 +90,10 @@ const QuienesSomos = () => {
 
             <div className="flex justify-center lg:justify-start space-x-6 text-[#fcd34d] text-2xl">
               <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer">
-                <FaWhatsapp className="hover:scale-110 transition" />
+                <FaWhatsapp className="hover:scale-110 transition text-[#fcd34d]  " />
               </a>
               <a href="https://www.instagram.com/legal360abogados/" target="_blank" rel="noopener noreferrer">
-                <FaInstagram className="hover:scale-110 transition" />
+                <FaInstagram className="hover:scale-110 transition text-[#fcd34d] " />
               </a>
             </div>
           </div>
