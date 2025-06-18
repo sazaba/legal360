@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden bg-black"
       style={{
         backgroundPosition: windowWidth < 768 ? '70% center' : 'center',
         backgroundAttachment: windowWidth < 768 ? 'scroll' : 'fixed'
@@ -40,7 +40,7 @@ const Hero = () => {
         alt="Fondo Hero"
         loading="lazy"
         onLoad={() => setIsImageLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'}`}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
 
       <div className="absolute inset-0 bg-black opacity-10 z-10" />
