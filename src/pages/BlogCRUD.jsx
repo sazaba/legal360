@@ -105,12 +105,25 @@ export default function BlogCRUD() {
         fileInputRef.current.value = null;
     };
 
+    const generateSlug = (text) =>
+        text.toLowerCase().trim().replace(/[^ña-z0-9\s-]/g, '').replace(/\s+/g, '-');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const data = new FormData();
+        const slug = formData.slug.trim() || generateSlug(formData.title);
+
         Object.entries(formData).forEach(([key, value]) => {
-            if (value !== null) data.append(key, value);
+            if (key === 'image') {
+                if (value instanceof File) {
+                    data.append('image', value); // ✅ solo si es un archivo real
+                }
+            } else if (value !== null) {
+                data.append(key, value);
+            }
         });
+
 
         try {
             if (editMode) {
@@ -133,7 +146,15 @@ export default function BlogCRUD() {
     };
 
     const handleEdit = (blog) => {
-        setFormData({ ...blog, image: null });
+        setFormData({
+            id: blog.id,
+            title: blog.title,
+            slug: blog.slug,
+            content: blog.content,
+            author: blog.author || '',
+            status: blog.status || 'draft',
+            image: null,
+        });
         setPreviewImage(blog.image_url || null);
         setEditMode(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });

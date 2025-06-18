@@ -16,17 +16,16 @@ export default function BlogView() {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const res = await axios.get('/api/blog/list');
-                const allBlogs = Array.isArray(res.data) ? res.data : [];
-                const post = allBlogs.find(b => b.slug === slug);
-                setBlog(post);
+                // ✅ Obtener publicación individual
+                const resBlog = await axios.get(`/api/blog/${slug}`);
+                setBlog(resBlog.data);
 
-                if (post) {
-                    const related = allBlogs
-                        .filter(b => b.id !== post.id && b.status === 'published')
-                        .slice(0, 4);
-                    setRelatedBlogs(related);
-                }
+                // ✅ Obtener publicaciones relacionadas
+                const resRelated = await axios.get('/api/blog/published');
+                const related = resRelated.data
+                    .filter(b => b.slug !== slug)
+                    .slice(0, 4);
+                setRelatedBlogs(related);
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (err) {
@@ -63,17 +62,6 @@ export default function BlogView() {
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
                     </svg>
                     <p className="text-gray-900 text-lg">Cargando publicación...</p>
-                    <div className="grid gap-4 mt-10 sm:grid-cols-2 lg:grid-cols-4 px-10">
-                        {[1, 2, 3, 4].map((n) => (
-                            <div key={n} className="bg-gray-800 rounded shadow animate-pulse">
-                                <div className="h-40 bg-gray-700" />
-                                <div className="p-4">
-                                    <div className="h-4 bg-gray-700 mb-2 rounded w-3/4"></div>
-                                    <div className="h-3 bg-gray-600 rounded w-1/2"></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
         );
@@ -100,10 +88,12 @@ export default function BlogView() {
                     >
                         {blog.title}
                     </motion.h1>
-                    <p className="text-sm text-gray-500 mb-6">Por {blog.author || 'Anónimo'} - {new Date(blog.created_at).toLocaleDateString()}</p>
-                    {blog.image_filename && (
+                    <p className="text-sm text-gray-500 mb-6">
+                        Por {blog.author || 'Anónimo'} - {new Date(blog.created_at).toLocaleDateString()}
+                    </p>
+                    {blog.image_url && (
                         <motion.img
-                            src={`/uploads/blog/${blog.image_filename}`}
+                            src={blog.image_url}
                             alt={blog.title}
                             className="w-full h-96 object-cover rounded mb-8"
                             initial={{ opacity: 0 }}
@@ -131,9 +121,9 @@ export default function BlogView() {
                                                 setLoading(true);
                                             }}
                                         >
-                                            {related.image_filename && (
+                                            {related.image_url && (
                                                 <img
-                                                    src={`/uploads/blog/${related.image_filename}`}
+                                                    src={related.image_url}
                                                     alt={related.title}
                                                     className="h-40 w-full object-cover"
                                                 />

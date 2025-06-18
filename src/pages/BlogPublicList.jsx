@@ -14,9 +14,8 @@ export default function BlogPublicList() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await axios.get('/api/blog/list');
-                const published = res.data.filter(post => post.status === 'published');
-                setBlogs(published);
+                const res = await axios.get('api/blog/published'); // Ya tiene /api como prefijo en la instancia
+                setBlogs(res.data);
             } catch (error) {
                 console.error('Error cargando blogs públicos:', error);
             } finally {
@@ -26,6 +25,7 @@ export default function BlogPublicList() {
 
         fetchBlogs();
     }, []);
+
 
     if (loading) return <p className="text-center py-10">Cargando publicaciones...</p>;
 
