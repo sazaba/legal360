@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import Swal from 'sweetalert2';
 import {
     Table,
     Drawer,
@@ -11,7 +12,6 @@ import {
     Col,
     Space,
     message,
-    Modal,
     App as AntApp,
     ConfigProvider,
     theme,
@@ -27,7 +27,6 @@ export default function UserCrudForm() {
     const [formVisible, setFormVisible] = useState(false);
     const [form] = Form.useForm();
     const [editId, setEditId] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
     const [usuarioAEliminar, setUsuarioAEliminar] = useState(null);
 
     const fetchUsuarios = async () => {
@@ -55,22 +54,45 @@ export default function UserCrudForm() {
         setFormVisible(true);
     };
 
-    const handleDelete = (usuario) => {
-        setUsuarioAEliminar(usuario);
-        setModalVisible(true);
-    };
+    const handleDelete = async (usuario) => {
+        const result = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            background: '#0f172a',
+            color: '#ffffff',
+            showCancelButton: true,
+            confirmButtonColor: '#e11d48',
+            cancelButtonColor: '#3b82f6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: 'rounded-xl shadow-lg border border-gray-700'
+            }
+        });
 
-    const confirmarEliminacion = async () => {
-        try {
-            await axios.delete(`/api/usuarios/${usuarioAEliminar.id}`);
-            message.success('Usuario eliminado correctamente');
-            fetchUsuarios();
-        } catch (error) {
-            console.error('Error al eliminar:', error);
-            message.error('Error al eliminar el usuario');
-        } finally {
-            setModalVisible(false);
-            setUsuarioAEliminar(null);
+        if (result.isConfirmed) {
+            try {
+                await axios.delete(`/api/usuarios/${usuario.id}`);
+                await Swal.fire({
+                    title: 'Eliminado',
+                    text: 'El usuario ha sido eliminado.',
+                    icon: 'success',
+                    timer: 1800,
+                    showConfirmButton: false,
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+                fetchUsuarios();
+            } catch (error) {
+                await Swal.fire({
+                    title: 'Error',
+                    text: 'No se pudo eliminar el usuario.',
+                    icon: 'error',
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+            }
         }
     };
 
@@ -133,7 +155,7 @@ export default function UserCrudForm() {
                     },
                 }}
             >
-                <div className="p-6 mt-20 max-w-6xl mx-auto text-white">
+                <div className="mt-20 px-2 sm:px-6 xl:px-12 max-w-full text-white">
                     <Row justify="space-between" align="middle" className="mb-6">
                         <Col>
                             <h2 className="text-3xl font-bold">Gestión de Usuarios</h2>
@@ -212,18 +234,6 @@ export default function UserCrudForm() {
                             </Form.Item>
                         </Form>
                     </Drawer>
-
-                    <Modal
-                        title="¿Estás seguro de eliminar este usuario?"
-                        open={modalVisible}
-                        onOk={confirmarEliminacion}
-                        onCancel={() => setModalVisible(false)}
-                        okText="Sí, eliminar"
-                        okType="danger"
-                        cancelText="Cancelar"
-                    >
-                        <p>Esta acción no se puede deshacer.</p>
-                    </Modal>
                 </div>
             </ConfigProvider>
         </AntApp>

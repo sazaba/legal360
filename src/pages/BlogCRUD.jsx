@@ -80,8 +80,7 @@ export default function BlogCRUD() {
                 const res = await axios.get('/api/blog/list');
                 setBlogs(Array.isArray(res.data) ? res.data : []);
             } catch (err) {
-                console.error(err);
-                Swal.fire('Error', 'No se pudieron cargar los blogs', 'error');
+                Swal.fire({ title: 'Error', text: 'No se pudieron cargar los blogs', icon: 'error', background: '#0f172a', color: '#ffffff' });
             } finally {
                 setLoading(false);
             }
@@ -105,33 +104,34 @@ export default function BlogCRUD() {
         fileInputRef.current.value = null;
     };
 
-    const generateSlug = (text) =>
-        text.toLowerCase().trim().replace(/[^ña-z0-9\s-]/g, '').replace(/\s+/g, '-');
+    const cancelEdit = () => {
+        setFormData({ id: null, title: '', slug: '', content: '', author: '', status: 'draft', image: null });
+        setPreviewImage(null);
+        setEditMode(false);
+        if (editor) editor.commands.clearContent();
+        Swal.fire({ title: 'Cancelado', text: 'Edición cancelada.', icon: 'info', background: '#0f172a', color: '#ffffff' });
+    };
+
+    const generateSlug = (text) => text.toLowerCase().trim().replace(/[^ña-z0-9\s-]/g, '').replace(/\s+/g, '-');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const data = new FormData();
         const slug = formData.slug.trim() || generateSlug(formData.title);
-
         Object.entries(formData).forEach(([key, value]) => {
-            if (key === 'image') {
-                if (value instanceof File) {
-                    data.append('image', value); // ✅ solo si es un archivo real
-                }
+            if (key === 'image' && value instanceof File) {
+                data.append('image', value);
             } else if (value !== null) {
                 data.append(key, value);
             }
         });
-
-
         try {
             if (editMode) {
                 await axios.put(`/api/blog/update/${formData.id}`, data);
-                Swal.fire('Actualizado', 'El blog fue actualizado correctamente', 'success');
+                Swal.fire({ title: 'Actualizado', text: 'El blog fue actualizado correctamente', icon: 'success', background: '#0f172a', color: '#ffffff' });
             } else {
                 await axios.post('/api/blog/create', data);
-                Swal.fire('Publicado', 'El blog fue creado correctamente', 'success');
+                Swal.fire({ title: 'Publicado', text: 'El blog fue creado correctamente', icon: 'success', background: '#0f172a', color: '#ffffff' });
             }
             setFormData({ id: null, title: '', slug: '', content: '', author: '', status: 'draft', image: null });
             setPreviewImage(null);
@@ -139,9 +139,8 @@ export default function BlogCRUD() {
             const res = await axios.get('/api/blog/list');
             setBlogs(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
-            console.error(err);
             const errorMsg = err?.response?.data?.message || 'Hubo un problema al guardar el blog';
-            Swal.fire('Error', errorMsg, 'error');
+            Swal.fire({ title: 'Error', text: errorMsg, icon: 'error', background: '#0f172a', color: '#ffffff' });
         }
     };
 
@@ -162,14 +161,26 @@ export default function BlogCRUD() {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('¿Eliminar esta publicación?')) return;
+        const result = await Swal.fire({
+            title: '¿Eliminar publicación?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            background: '#0f172a',
+            color: '#ffffff',
+            showCancelButton: true,
+            confirmButtonColor: '#e11d48',
+            cancelButtonColor: '#3b82f6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: { popup: 'rounded-xl shadow-lg border border-gray-700' }
+        });
+        if (!result.isConfirmed) return;
         try {
             await axios.delete(`/api/blog/delete/${id}`);
             setBlogs(blogs.filter(b => b.id !== id));
-            Swal.fire('Eliminado', 'El blog fue eliminado exitosamente', 'success');
+            Swal.fire({ title: 'Eliminado', text: 'El blog fue eliminado exitosamente', icon: 'success', background: '#0f172a', color: '#ffffff' });
         } catch (err) {
-            console.error(err);
-            Swal.fire('Error', 'No se pudo eliminar el blog', 'error');
+            Swal.fire({ title: 'Error', text: 'No se pudo eliminar el blog', icon: 'error', background: '#0f172a', color: '#ffffff' });
         }
     };
 
@@ -179,47 +190,47 @@ export default function BlogCRUD() {
     );
 
     return (
-        <div className="text-white max-w-5xl mx-auto p-6">
+        <div className="text-white max-w-screen-xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-20 py-6">
             <h2 className="text-3xl font-bold mb-6">Administrador de Blog</h2>
-
+            <div className="mb-10">
+                <h3 className="text-xl font-semibold mb-4">Publicaciones existentes</h3>
+                <input type="text" placeholder="Buscar por título o autor..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full p-2 mb-4 rounded-xl bg-gray-700 text-white focus:outline-none" />
+                {loading ? (
+                    <p className="text-gray-400">Cargando publicaciones...</p>
+                ) : filteredBlogs.length === 0 ? (
+                    <p className="text-gray-400">No hay publicaciones que coincidan.</p>
+                ) : (
+                    <ul className="space-y-4">
+                        {filteredBlogs.map(blog => (
+                            <li key={blog.id} className="bg-gray-800 p-4 rounded-xl shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <div>
+                                    <h4 className="text-lg font-bold">{blog.title}</h4>
+                                    <p className="text-sm text-gray-400">Autor: {blog.author || 'Anónimo'} — Estado: {blog.status}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button onClick={() => handleEdit(blog)} className="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-xl">Editar</button>
+                                    <button onClick={() => handleDelete(blog.id)} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl">Eliminar</button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4 bg-gray-800 p-6 rounded-xl shadow-xl">
                 <input type="text" name="title" placeholder="Título" value={formData.title} onChange={handleChange} className="w-full p-3 bg-gray-700 rounded-xl focus:outline-none" required />
                 <input type="text" name="slug" placeholder="Slug" value={formData.slug} onChange={handleChange} className="w-full p-3 bg-gray-700 rounded-xl focus:outline-none" required />
-
                 {editor && (
                     <div className="space-y-2">
-                        <div className="flex flex-wrap gap-2">
-                            <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={`p-2 rounded ${editor.isActive('bold') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><BoldOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={`p-2 rounded ${editor.isActive('italic') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><ItalicOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleUnderline().run()} className={`p-2 rounded ${editor.isActive('underline') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><UnderlineOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`p-2 rounded ${editor.isActive('bulletList') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><UnorderedListOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`p-2 rounded ${editor.isActive('orderedList') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><OrderedListOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().setTextAlign('left').run()} className={`p-2 rounded ${editor.isActive({ textAlign: 'left' }) ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><AlignLeftOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().setTextAlign('center').run()} className={`p-2 rounded ${editor.isActive({ textAlign: 'center' }) ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><AlignCenterOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().setTextAlign('right').run()} className={`p-2 rounded ${editor.isActive({ textAlign: 'right' }) ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><AlignRightOutlined /></button>
-                            <button type="button" onClick={() => {
-                                const url = prompt('URL del enlace:');
-                                if (url) editor.chain().focus().toggleLink({ href: url }).run();
-                            }} className="p-2 rounded bg-gray-600 text-white"><LinkOutlined /></button>
-                            <button type="button" onClick={() => {
-                                const url = prompt('URL de la imagen:');
-                                if (url) editor.chain().focus().setImage({ src: url }).run();
-                            }} className="p-2 rounded bg-gray-600 text-white"><FileImageOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={`p-2 rounded ${editor.isActive('codeBlock') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><CodeOutlined /></button>
-                            <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`p-2 rounded ${editor.isActive('blockquote') ? 'bg-blue-600' : 'bg-gray-600'} text-white`}><BlockOutlined /></button>
-                        </div>
                         <div className="bg-white text-black rounded-xl overflow-hidden">
                             <EditorContent editor={editor} className="p-4" />
                         </div>
                     </div>
                 )}
-
                 <input type="text" name="author" placeholder="Autor" value={formData.author} onChange={handleChange} className="w-full p-3 bg-gray-700 rounded-xl focus:outline-none" />
                 <select name="status" value={formData.status} onChange={handleChange} className="w-full p-3 bg-gray-700 rounded-xl focus:outline-none">
                     <option value="draft">Borrador</option>
                     <option value="published">Publicado</option>
                 </select>
-
                 <div className="space-y-2">
                     <label htmlFor="upload" className="flex items-center space-x-2 text-sm text-gray-300 cursor-pointer hover:text-blue-300">
                         <UploadOutlined className="text-lg" />
@@ -235,58 +246,17 @@ export default function BlogCRUD() {
                         </div>
                     )}
                 </div>
-
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-xl w-full md:w-auto">
-                    {editMode ? 'Actualizar' : 'Publicar'}
-                </button>
+                <div className="flex flex-col md:flex-row gap-4">
+                    <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-xl w-full md:w-auto">
+                        {editMode ? 'Actualizar' : 'Publicar'}
+                    </button>
+                    {editMode && (
+                        <button type="button" onClick={cancelEdit} className="bg-gray-500 hover:bg-gray-600 px-6 py-2 rounded-xl w-full md:w-auto">
+                            Cancelar edición
+                        </button>
+                    )}
+                </div>
             </form>
-            <div className="mt-10">
-                <h3 className="text-xl font-semibold mb-4">Publicaciones existentes</h3>
-                <input
-                    type="text"
-                    placeholder="Buscar por título o autor..."
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    className="w-full p-2 mb-4 rounded-xl bg-gray-700 text-white focus:outline-none"
-                />
-
-                {loading ? (
-                    <p className="text-gray-400">Cargando publicaciones...</p>
-                ) : filteredBlogs.length === 0 ? (
-                    <p className="text-gray-400">No hay publicaciones que coincidan.</p>
-                ) : (
-                    <ul className="space-y-4">
-                        {filteredBlogs.map(blog => (
-                            <li
-                                key={blog.id}
-                                className="bg-gray-800 p-4 rounded-xl shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
-                            >
-                                <div>
-                                    <h4 className="text-lg font-bold">{blog.title}</h4>
-                                    <p className="text-sm text-gray-400">
-                                        Autor: {blog.author || 'Anónimo'} — Estado: {blog.status}
-                                    </p>
-                                </div>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => handleEdit(blog)}
-                                        className="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-xl"
-                                    >
-                                        Editar
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(blog.id)}
-                                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl"
-                                    >
-                                        Eliminar
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
         </div>
     );
 }

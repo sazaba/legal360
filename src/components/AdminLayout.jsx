@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { Drawer, Button, Affix } from 'antd';
+import { Drawer, Button, Affix, Tooltip } from 'antd';
 import {
     MenuOutlined,
     CloseOutlined,
@@ -76,8 +76,9 @@ export default function NavbarUsuarioAutenticado() {
                 </div>
             </aside>
 
-            {/* Mobile Bottom Button */}
+            {/* Mobile Bottom Button (only on mobile and tablet) */}
             <Affix
+                className="block lg:hidden"
                 style={{
                     position: 'fixed',
                     bottom: 16,
@@ -86,14 +87,20 @@ export default function NavbarUsuarioAutenticado() {
                     zIndex: 20,
                 }}
             >
-                <Button
-                    className="md:hidden"
-                    type="primary"
-                    shape="circle"
-                    size="large"
-                    icon={<AppstoreOutlined style={{ fontSize: 28 }} />}
-                    onClick={() => setDrawerVisible(true)}
-                />
+                <Tooltip title="Abrir menú">
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        size="large"
+                        icon={<AppstoreOutlined style={{ fontSize: 22 }} />}
+                        onClick={() => setDrawerVisible(true)}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    />
+                </Tooltip>
             </Affix>
 
             {/* Mobile Drawer */}

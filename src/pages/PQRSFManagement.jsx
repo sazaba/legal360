@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import Swal from 'sweetalert2';
 import {
     Table,
     Drawer,
@@ -7,8 +8,6 @@ import {
     Row,
     Col,
     Space,
-    message,
-    Modal,
     App as AntApp,
     ConfigProvider,
     theme,
@@ -23,8 +22,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function PQRSFCrud() {
     const [registros, setRegistros] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [registroAEliminar, setRegistroAEliminar] = useState(null);
     const [registroDetalle, setRegistroDetalle] = useState(null);
 
     const fetchRegistros = async () => {
@@ -32,7 +29,13 @@ export default function PQRSFCrud() {
             const res = await axios.get('/api/pqrsf');
             setRegistros(res.data);
         } catch (error) {
-            message.error('Error al cargar los registros');
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudieron cargar los registros',
+                icon: 'error',
+                background: '#0f172a',
+                color: '#ffffff',
+            });
         }
     };
 
@@ -40,32 +43,83 @@ export default function PQRSFCrud() {
         fetchRegistros();
     }, []);
 
-    const handleDelete = (registro) => {
-        setRegistroAEliminar(registro);
-        setModalVisible(true);
-    };
+    const handleDelete = async (registro) => {
+        const result = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            background: '#0f172a',
+            color: '#ffffff',
+            showCancelButton: true,
+            confirmButtonColor: '#e11d48',
+            cancelButtonColor: '#3b82f6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: 'rounded-xl shadow-lg border border-gray-700'
+            }
+        });
 
-    const confirmarEliminacion = async () => {
-        try {
-            await axios.delete(`/api/pqrsf/${registroAEliminar.id}`);
-            message.success('Registro eliminado correctamente');
-            fetchRegistros();
-        } catch (error) {
-            message.error('Error al eliminar el registro');
-        } finally {
-            setModalVisible(false);
-            setRegistroAEliminar(null);
+        if (result.isConfirmed) {
+            try {
+                await axios.delete(`/api/pqrsf/${registro.id}`);
+                await Swal.fire({
+                    title: 'Eliminado',
+                    text: 'El registro ha sido eliminado.',
+                    icon: 'success',
+                    timer: 1800,
+                    showConfirmButton: false,
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+                fetchRegistros();
+            } catch (error) {
+                await Swal.fire({
+                    title: 'Error',
+                    text: 'No se pudo eliminar el registro.',
+                    icon: 'error',
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+            }
         }
     };
 
-    const descargarArchivos = (archivos) => {
-        archivos.forEach((archivo) => {
-            const url = `${API_URL}/uploads/${archivo}`;
-            window.open(url, '_blank');
+    const descargarArchivos = async (archivos) => {
+        const confirm = await Swal.fire({
+            title: '¿Descargar archivos?',
+            text: 'Se abrirán los archivos adjuntos en nuevas pestañas.',
+            icon: 'info',
+            background: '#0f172a',
+            color: '#ffffff',
+            showCancelButton: true,
+            confirmButtonColor: '#3b82f6',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Descargar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: 'rounded-xl shadow-lg border border-gray-700'
+            }
         });
+
+        if (confirm.isConfirmed) {
+            archivos.forEach((archivo) => {
+                const url = `${API_URL}/uploads/${archivo}`;
+                window.open(url, '_blank');
+            });
+        }
     };
 
-    const mostrarDetalles = (registro) => {
+    const mostrarDetalles = async (registro) => {
+        await Swal.fire({
+            title: 'Mostrando detalles',
+            text: 'Puedes visualizar los detalles completos a continuación.',
+            icon: 'info',
+            timer: 1200,
+            showConfirmButton: false,
+            background: '#0f172a',
+            color: '#ffffff'
+        });
         setRegistroDetalle(registro);
     };
 
@@ -113,7 +167,7 @@ export default function PQRSFCrud() {
                     },
                 }}
             >
-                <div className="p-6 mt-20 max-w-6xl mx-auto text-white">
+                <div className="mt-20 px-2 sm:px-6 xl:px-12 max-w-full text-white">
                     <Row justify="space-between" align="middle" className="mb-6">
                         <Col>
                             <h2 className="text-3xl font-bold">Gestión de PQRSF</h2>
@@ -128,24 +182,12 @@ export default function PQRSFCrud() {
                         scroll={{ x: 'max-content' }}
                     />
 
-                    <Modal
-                        title="¿Estás seguro de eliminar este registro?"
-                        open={modalVisible}
-                        onOk={confirmarEliminacion}
-                        onCancel={() => setModalVisible(false)}
-                        okText="Sí, eliminar"
-                        okType="danger"
-                        cancelText="Cancelar"
-                    >
-                        <p>Esta acción no se puede deshacer.</p>
-                    </Modal>
-
                     <Drawer
                         title="Detalles de PQRSF"
                         placement="right"
                         onClose={cerrarDrawer}
                         open={!!registroDetalle}
-                        width={400}
+                        width={window.innerWidth < 768 ? '100%' : 400}
                     >
                         {registroDetalle && (
                             <div className="space-y-2 text-sm">

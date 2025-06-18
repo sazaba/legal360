@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import Swal from 'sweetalert2';
 import {
     Table,
     Button,
     Row,
     Col,
     Space,
-    message,
-    Modal,
     App as AntApp,
     ConfigProvider,
     theme,
@@ -16,15 +15,19 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 export default function DiagnosticoCrud() {
     const [diagnosticos, setDiagnosticos] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [diagnosticoAEliminar, setDiagnosticoAEliminar] = useState(null);
 
     const fetchDiagnosticos = async () => {
         try {
-            const res = await axios.get('/api/diagnosticos');;
+            const res = await axios.get('/api/diagnosticos');
             setDiagnosticos(res.data);
         } catch (error) {
-            message.error('Error al cargar los registros');
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudieron cargar los registros',
+                icon: 'error',
+                background: '#0f172a',
+                color: '#ffffff',
+            });
         }
     };
 
@@ -32,22 +35,45 @@ export default function DiagnosticoCrud() {
         fetchDiagnosticos();
     }, []);
 
-    const handleDelete = (registro) => {
-        setDiagnosticoAEliminar(registro);
-        setModalVisible(true);
-    };
+    const handleDelete = async (registro) => {
+        const result = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            background: '#0f172a',
+            color: '#ffffff',
+            showCancelButton: true,
+            confirmButtonColor: '#e11d48',
+            cancelButtonColor: '#3b82f6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: 'rounded-xl shadow-lg border border-gray-700'
+            }
+        });
 
-    const confirmarEliminacion = async () => {
-        try {
-            await axios.delete(`/api/diagnosticos/${diagnosticoAEliminar.id}`);
-            message.success('Registro eliminado correctamente');
-            fetchDiagnosticos();
-        } catch (error) {
-            console.error('Error al eliminar:', error);
-            message.error('Error al eliminar el registro');
-        } finally {
-            setModalVisible(false);
-            setDiagnosticoAEliminar(null);
+        if (result.isConfirmed) {
+            try {
+                await axios.delete(`/api/diagnosticos/${registro.id}`);
+                await Swal.fire({
+                    title: 'Eliminado',
+                    text: 'El registro ha sido eliminado.',
+                    icon: 'success',
+                    timer: 1800,
+                    showConfirmButton: false,
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+                fetchDiagnosticos();
+            } catch (error) {
+                await Swal.fire({
+                    title: 'Error',
+                    text: 'No se pudo eliminar el registro.',
+                    icon: 'error',
+                    background: '#0f172a',
+                    color: '#ffffff',
+                });
+            }
         }
     };
 
@@ -85,7 +111,7 @@ export default function DiagnosticoCrud() {
                     },
                 }}
             >
-                <div className="p-6 mt-20 max-w-6xl mx-auto text-white">
+                <div className="mt-20 px-2 sm:px-6 xl:px-12 max-w-full text-white">
                     <Row justify="space-between" align="middle" className="mb-6">
                         <Col>
                             <h2 className="text-3xl font-bold">Registros de Diagnóstico</h2>
@@ -99,18 +125,6 @@ export default function DiagnosticoCrud() {
                         pagination={{ pageSize: 10 }}
                         scroll={{ x: 'max-content' }}
                     />
-
-                    <Modal
-                        title="¿Estás seguro de eliminar este registro?"
-                        open={modalVisible}
-                        onOk={confirmarEliminacion}
-                        onCancel={() => setModalVisible(false)}
-                        okText="Sí, eliminar"
-                        okType="danger"
-                        cancelText="Cancelar"
-                    >
-                        <p>Esta acción no se puede deshacer.</p>
-                    </Modal>
                 </div>
             </ConfigProvider>
         </AntApp>
