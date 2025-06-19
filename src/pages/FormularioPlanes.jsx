@@ -139,7 +139,7 @@ const FormularioPlanes = () => {
 
                         <label className="flex items-start gap-2 text-xs text-gray-700 leading-snug text-justify">
                             <input type="checkbox" name="autorizacion" checked={formData.autorizacion} onChange={handleChange} required className="mt-1 accent-[#e6d769]" />
-                            En cumplimiento de la Ley 158 de 2012 y sus decretos reglamentarios, autorizo el tratamiento de mis datos personales a <strong>Legal 360 S.A.S.</strong>, con el propósito de cumplir el desarrollo de actividades afines a su objeto social de conformidad con la Ley, de acuerdo con su Política de Protección de Datos Personales.*
+                            En virtud de lo anterior, autorizo a, LEGAL 360 S.A.S. , para que realice tratamiento de mis datos personales y emita respuesta a inquietudes, envíe publicidad, comunicaciones, promociones, invitaciones a eventos, noticias, encuestas y cualquier información comercial a través de este medio.
                         </label>
 
                         <button type="submit" disabled={isLoading} className={`w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white font-semibold py-2 rounded-md text-sm ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
