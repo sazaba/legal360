@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className="bg-[#0d1a2b] text-white font-roboto pt-6 pb-6">
             <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-12">
-                {/* Marca */}
+
                 <div>
                     <h2 className="text-2xl font-bold text-[#e6d769] mb-4 tracking-tight">Legal 360 S.A.S.</h2>
                     <p className="text-gray-400 text-sm leading-relaxed">
@@ -16,7 +16,7 @@ const Footer = () => {
                     </p>
                 </div>
 
-                {/* Enlaces */}
+                {/* Enlacesssssssss */}
                 <div>
                     <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-wide">Enlaces</h3>
                     <ul className="space-y-2 text-gray-400 text-sm">
