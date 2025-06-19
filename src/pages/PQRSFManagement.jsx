@@ -10,15 +10,14 @@ import {
     Space,
     App as AntApp,
     ConfigProvider,
-    theme,
+    theme
 } from 'antd';
 import {
     EyeOutlined,
     DeleteOutlined,
     DownloadOutlined,
+    FilePdfOutlined
 } from '@ant-design/icons';
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 export default function PQRSFCrud() {
     const [registros, setRegistros] = useState([]);
@@ -27,7 +26,19 @@ export default function PQRSFCrud() {
     const fetchRegistros = async () => {
         try {
             const res = await axios.get('/api/pqrsf');
-            setRegistros(res.data);
+            const data = res.data.map(registro => {
+                try {
+                    registro.archivos = typeof registro.archivos === 'string'
+                        ? JSON.parse(registro.archivos)
+                        : Array.isArray(registro.archivos)
+                            ? registro.archivos
+                            : [];
+                } catch (err) {
+                    registro.archivos = [];
+                }
+                return registro;
+            });
+            setRegistros(data);
         } catch (error) {
             Swal.fire({
                 title: 'Error',
@@ -65,7 +76,7 @@ export default function PQRSFCrud() {
                 await axios.delete(`/api/pqrsf/${registro.id}`);
                 await Swal.fire({
                     title: 'Eliminado',
-                    text: 'El registro ha sido eliminado.',
+                    text: 'El registro y sus archivos han sido eliminados.',
                     icon: 'success',
                     timer: 1800,
                     showConfirmButton: false,
@@ -82,31 +93,6 @@ export default function PQRSFCrud() {
                     color: '#ffffff',
                 });
             }
-        }
-    };
-
-    const descargarArchivos = async (archivos) => {
-        const confirm = await Swal.fire({
-            title: '¿Descargar archivos?',
-            text: 'Se abrirán los archivos adjuntos en nuevas pestañas.',
-            icon: 'info',
-            background: '#0f172a',
-            color: '#ffffff',
-            showCancelButton: true,
-            confirmButtonColor: '#3b82f6',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Descargar',
-            cancelButtonText: 'Cancelar',
-            customClass: {
-                popup: 'rounded-xl shadow-lg border border-gray-700'
-            }
-        });
-
-        if (confirm.isConfirmed) {
-            archivos.forEach((archivo) => {
-                const url = `${API_URL}/uploads/${archivo}`;
-                window.open(url, '_blank');
-            });
         }
     };
 
@@ -142,7 +128,11 @@ export default function PQRSFCrud() {
                     {record.archivos?.length > 0 && (
                         <Button
                             icon={<DownloadOutlined />}
-                            onClick={() => descargarArchivos(record.archivos)}
+                            onClick={() =>
+                                record.archivos.forEach((archivoUrl) => {
+                                    window.open(`${archivoUrl}?fl_attachment`, '_blank');
+                                })
+                            }
                             type="link"
                         />
                     )}
@@ -200,10 +190,15 @@ export default function PQRSFCrud() {
                                     <div>
                                         <p className="mt-4 font-semibold">Archivos Adjuntos:</p>
                                         <ul className="list-disc list-inside text-blue-400">
-                                            {registroDetalle.archivos.map((archivo, idx) => (
+                                            {registroDetalle.archivos.map((archivoUrl, idx) => (
                                                 <li key={idx}>
-                                                    <a href={`${API_URL}/uploads/${archivo}`} target="_blank" rel="noopener noreferrer">
-                                                        {archivo}
+                                                    <a
+                                                        href={`${archivoUrl}?fl_attachment`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="hover:underline text-blue-400"
+                                                    >
+                                                        <FilePdfOutlined className="mr-1" /> Descargar PDF {idx + 1}
                                                     </a>
                                                 </li>
                                             ))}
