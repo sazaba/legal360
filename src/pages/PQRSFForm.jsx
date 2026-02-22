@@ -108,9 +108,13 @@ const PQRSFForm = () => {
             <div className="border-t border-gray-200 pt-4 mt-2">
                 <p className="text-gray-700 leading-snug text-justify text-[13px] sm:text-sm">
                     He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales de la entidad para los fines relacionados con su misión y funciones, cuyo contenido se encuentra {" "}
-                    <Link to="/politica-datos" className="font-bold text-blue-600 hover:underline">
-                        AQUÍ.
-                    </Link>
+                  <Link 
+            to="/politica-datos" 
+            style={{ color: '#2563eb', textDecoration: 'underline' }} // Forzamos el azul y subrayado
+            className="font-bold"
+        >
+            AQUÍ.
+        </Link>
                 </p>
                 
                 <div className="flex items-center gap-6 mt-4">
