@@ -91,11 +91,9 @@ const Servicios = ({ id }) => {
       className="relative pt-24 text-white min-h-screen pb-16 overflow-hidden"
       style={getBackgroundStyle()}
     >
-      {/* Overlays para oscurecer el fondo y resaltar el glassmorphism */}
       <div className="absolute inset-0 bg-[#001e33]/40 z-10 pointer-events-none mix-blend-multiply"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-transparent to-[#001e33] opacity-80 z-10 pointer-events-none"></div>
       
-      {/* Separador SVG Superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180 drop-shadow-md">
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
@@ -111,7 +109,6 @@ const Servicios = ({ id }) => {
           Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
-        {/* Uso de Flex en lugar de Grid para forzar 3 arriba y 2 centrados abajo */}
         <div className="flex flex-wrap justify-center gap-6 sm:gap-8 px-2">
           {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
@@ -123,18 +120,18 @@ const Servicios = ({ id }) => {
               >
                 <div className={`relative w-full h-full card-transition transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
                   
-                  {/* FRONT CARD - Glassmorphism */}
+                  {/* FRONT CARD */}
                   <div
                     onClick={() => setActiveId(servicio.id)}
                     className="absolute w-full h-full backface-hidden rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] border border-white/10 glass-panel hover:border-[#e6d769]/50 flex flex-col justify-center items-center text-center cursor-pointer group transition-colors duration-300"
                   >
-                    <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
+                    <div className="mb-5 transform group-hover:scale-110 transition-transform duration-500 ease-out">
                       {servicio.icono}
                     </div>
                     <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed">
                       {servicio.titulo}
                     </h3>
-                    <div className="mt-auto">
+                    <div>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -147,15 +144,15 @@ const Servicios = ({ id }) => {
                     </div>
                   </div>
 
-                  {/* BACK CARD - Glassmorphism Oscuro */}
+                  {/* BACK CARD */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] border border-[#e6d769]/40 glass-panel-dark flex flex-col justify-center items-center text-center">
-                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-4">
+                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3">
                       {servicio.titulo}
                     </h3>
-                    <p className="text-gray-200 text-xs sm:text-sm mb-6 leading-relaxed font-light">
+                    <p className="text-gray-200 text-xs sm:text-sm mb-5 leading-relaxed font-light">
                       {servicio.resumen}
                     </p>
-                    <div className="mt-auto flex flex-col items-center gap-3">
+                    <div className="flex flex-col items-center gap-3">
                       <button
                         onClick={() => navigate(servicio.link)}
                         className="text-xs bg-transparent border border-[#e6d769] text-[#e6d769] font-bold px-5 py-2 rounded-full hover:bg-[#e6d769] hover:text-[#001e33] transition-all duration-300 uppercase tracking-wider"
@@ -188,19 +185,17 @@ const Servicios = ({ id }) => {
           animation: fadeInMobile 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards var(--delay, 0s);
         }
         
-        /* Utilidades Glassmorphism */
         .glass-panel {
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
           backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px); /* Safari Support */
+          -webkit-backdrop-filter: blur(12px);
         }
         .glass-panel-dark {
           background: linear-gradient(135deg, rgba(0, 30, 51, 0.85) 0%, rgba(3, 43, 76, 0.95) 100%);
           backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px); /* Safari Support */
+          -webkit-backdrop-filter: blur(16px);
         }
 
-        /* Utilidades 3D Optimizadas para Safari */
         .perspective {
           perspective: 2000px;
           -webkit-perspective: 2000px;
@@ -216,7 +211,6 @@ const Servicios = ({ id }) => {
         .backface-hidden {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-          /* Hack vital para evitar parpadeos en Safari durante el 3D */
           transform: translateZ(0);
           -webkit-transform: translateZ(0);
         }
