@@ -2,29 +2,24 @@
 
 @import "tailwindcss";
 
-
 @layer base {
-
     html,
     body {
         @apply m-0 p-0 overflow-x-hidden;
     }
 
     body {
-        @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen;
+        @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen text-white;
     }
 
-/* Busca esta parte y déjala así: */
-@layer base {
     /* 1. Regla general para todos los enlaces (limpia) */
     a {
        color: inherit !important; 
-        text-decoration: none !important;
-        transition: color 0.3s ease;
+       text-decoration: none !important;
+       transition: color 0.3s ease;
     }
 
     /* 2. Forzamos el blanco SOLO en el Navbar y el Footer */
-    /* Usamos selectores de etiqueta y clases comunes por si acaso */
     nav a, 
     footer a, 
     .navbar a, 
@@ -32,10 +27,9 @@
         color: white !important;
     }
 
-    /* 3. Si quieres que al pasar el mouse brillen un poco (opcional) */
+    /* 3. Hover */
     nav a:hover, 
     footer a:hover {
-        color: #e6d769 !important; /* El color doradito que usas en otros lados */
+        color: #e6d769 !important;
     }
-}
 }
