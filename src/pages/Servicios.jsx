@@ -51,7 +51,7 @@ const Servicios = ({ id }) => {
       id: 3,
       titulo: 'Derecho Comercial',
       icono: <FileProtectOutlined style={iconStyle} />,
-      resumen: 'Asesoría legal en derecho comercial para la tomas de decisiones empresariales seguras, protegiendo tu negocio y respaldando cada acuerdo con confianza.',
+      resumen: 'Asesoría legal en derecho comercial para la toma de decisiones empresariales seguras, protegiendo tu negocio y respaldando cada acuerdo con confianza.',
       link: '/comercial'
     },
     {
