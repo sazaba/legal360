@@ -106,40 +106,42 @@ export default function Navbar() {
     };
 
     const isDarkBgRoute = location.pathname === "/politica-datos" || location.pathname === "/terminos-condiciones";
+    const needsBackground = scrolled || isDarkBgRoute;
 
     return (
         <>
-            {/* 1. CONTENEDOR NAVBAR (Z-100) */}
-            <nav className={`fixed w-full top-0 z-[100] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu font-roboto text-white 
-                ${scrolled || isDarkBgRoute ? "bg-[#001e33]/95 backdrop-blur-md shadow-lg" : "bg-transparent"}
-                ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-            `}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* CONTENEDOR PRINCIPAL */}
+            <nav className={`fixed w-full top-0 z-[100] transition-transform duration-500 ease-in-out font-roboto text-white ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
+                
+                {/* 1. EL TRUCO ANTI-SAFARI: Capa Aislada para el Blur y el Fondo */}
+                <div 
+                    className={`absolute inset-0 w-full h-full transition-colors duration-300 ${needsBackground ? "bg-[#001e33]/95 shadow-lg" : "bg-transparent"}`}
+                    style={needsBackground ? { backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' } : {}}
+                ></div>
+
+                {/* 2. CAPA FRONTAL: Contenido (Logo y Botones) */}
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-auto">
                     <div className="flex justify-between items-center h-20">
                         
-                        {/* Logo */}
-{/* Logo - Convertido a DIV para evitar el bug del cuadro blanco en botones Safari */}
-{/* Logo - CERO TRANSFORMACIONES para evitar el bug del cuadro en Safari */}
-<div className="flex items-center space-x-4">
-    <div
-        onClick={() => {
-            navigate("/");
-            setMenuAbierto(false);
-            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
-        }}
-        // Eliminamos 'transform', 'hover:scale-105' y 'transition-transform'
-        className="cursor-pointer flex items-center select-none"
-        style={{ WebkitTapHighlightColor: 'transparent' }}
-    >
-        <img
-            src={logo}
-            alt="Legal360"
-            fetchpriority="high"
-            // Aseguramos que no tenga fondos heredados
-            className="w-16 sm:w-20 md:w-24 h-auto object-contain block bg-transparent" 
-        />
-    </div>
-</div>
+                        {/* Logo totalmente limpio, sin transformaciones que mareen a Safari */}
+                        <div className="flex items-center space-x-4">
+                            <div
+                                onClick={() => {
+                                    navigate("/");
+                                    setMenuAbierto(false);
+                                    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+                                }}
+                                className="cursor-pointer flex items-center select-none"
+                                style={{ WebkitTapHighlightColor: 'transparent' }}
+                            >
+                                <img
+                                    src={logo}
+                                    alt="Legal360"
+                                    loading="eager"
+                                    className="w-16 sm:w-20 md:w-24 h-auto object-contain block bg-transparent"
+                                />
+                            </div>
+                        </div>
 
                         {/* Menú Desktop */}
                         <div className="hidden md:flex items-center space-x-6 text-white">
@@ -206,30 +208,20 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* 2. CONTENEDOR MENÚ MÓVIL (Z-110) - Extraído para evitar el bug de transformaciones CSS */}
+            {/* Menú Móvil - Intacto y seguro */}
             <div className={`md:hidden fixed inset-0 z-[110] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${menuAbierto ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-                
-                {/* Fondo con Glassmorphism nativo */}
-                <div className="absolute inset-0 bg-[#001e33]/95 backdrop-blur-xl -webkit-backdrop-filter" />
-                
-                {/* Contenedor principal */}
+                <div className="absolute inset-0 bg-[#001e33]/95 backdrop-blur-xl" style={{ WebkitBackdropFilter: 'blur(20px)' }}></div>
                 <div className={`absolute inset-0 flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu ${menuAbierto ? "translate-y-0" : "-translate-y-8"}`}>
-                    
-                    {/* Botón de cerrar fijo */}
                     <div className="absolute top-4 right-4 z-[120]">
-                        <button onClick={() => setMenuAbierto(false)} className="text-[#e6d769] text-3xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 focus:outline-none backdrop-blur-md">×</button>
+                        <button onClick={() => setMenuAbierto(false)} className="text-[#e6d769] text-3xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 focus:outline-none">×</button>
                     </div>
-                    
-                    {/* Contenedor scrolleable */}
-                    <div className="flex flex-col flex-grow items-center justify-start w-full px-6 pt-24 pb-16 text-white overflow-y-auto overscroll-contain space-y-5">
-                        
+                    <div className="flex flex-col flex-grow items-center justify-start w-full px-6 pt-24 pb-16 text-white overflow-y-auto overscroll-contain space-y-5 relative z-10">
                         {usuario && usuario.nombre && (
                             <div className="w-full max-w-xs bg-white/5 border border-white/10 rounded-2xl p-5 mb-2 flex flex-col items-center gap-3 shrink-0">
                                 <div className="bg-[#e6d769] text-[#001e33] rounded-full w-14 h-14 flex items-center justify-center font-bold text-2xl shadow-lg">
                                     {usuario.nombre.charAt(0).toUpperCase()}
                                 </div>
                                 <span className="text-lg font-semibold font-montserrat">Hola, {usuario.nombre}</span>
-                                
                                 <button onClick={() => { setMenuAbierto(false); navigate('/admin'); }} className="mt-2 w-full flex items-center justify-center gap-2 bg-[#e6d769] text-[#001e33] font-bold py-2.5 rounded-lg transition-colors">
                                     <DashboardOutlined /> Panel de Control
                                 </button>
@@ -238,12 +230,10 @@ export default function Navbar() {
                                 </button>
                             </div>
                         )}
-
                         <button onClick={() => handleSmartScroll("top")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Inicio</button>
                         <button onClick={() => handleSmartScroll("por-que-nosotros")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Nosotros</button>
                         <button onClick={() => handleSmartScroll("servicios")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Servicios</button>
                         <a href="https://wa.link/twbzum" className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0 flex justify-center" target="_blank" rel="noopener noreferrer">Contacto</a>
-
                         {!usuario && (
                             <div className="pt-2 w-full max-w-xs shrink-0 flex justify-center">
                                 <button onClick={goToLogin} className="bg-transparent border-2 border-[#e6d769] text-[#e6d769] px-8 py-3 rounded-full text-lg font-montserrat font-semibold w-full">
@@ -251,7 +241,6 @@ export default function Navbar() {
                                 </button>
                             </div>
                         )}
-
                         <div className="mt-6 pt-6 border-t border-white/10 w-full max-w-xs flex flex-col items-center shrink-0">
                             <span className="text-sm text-gray-400 mb-4 font-montserrat">Accesibilidad</span>
                             <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="inline-flex">
