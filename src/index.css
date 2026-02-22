@@ -14,9 +14,14 @@
         @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen;
     }
 
-  a {
-        color: inherit; /* O simplemente borra la línea de color si no la necesitas global */
-        text-decoration: none;
-    }
+/* Busca esta parte y déjala así: */
+a {
+    /* Quitamos el color: white !important; */
+    text-decoration: none;
+}
 
+/* Para que los enlaces de tu Navbar y Footer no se dañen y sigan siendo blancos: */
+nav a, footer a, .text-white a {
+    color: white;
+}
 }
