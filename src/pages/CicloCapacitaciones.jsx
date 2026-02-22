@@ -52,7 +52,7 @@ const CicloCapacitaciones = () => {
             Ciclo de Capacitaciones
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Ofrecemos Ciclos de Capacitaciones para fortalecer el desarrollo integral del talento humano, enfocados en preparar a tu equipo para los retos del día a día.
+            Ofrecemos Ciclos de Capacitaciones para fortalecer el desarrollo integral del talento humano, enfocados en:
           </p>
         </div>
 

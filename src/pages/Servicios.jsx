@@ -66,7 +66,7 @@ const Servicios = ({ id }) => {
       id: 5,
       titulo: 'Ciclo de Capacitaciones',
       icono: <BulbOutlined style={iconStyle} />,
-      resumen: 'Capacitación integral para el talento humano, fortaleciendo sus habilidades y optimizando la gestión y bienestar laboral de tu empresa.',
+      resumen: 'Capacitación integral para el talento humano, fortaleciendo tus habilidades y optimizando la gestión y bienestar laboral de tu empresa.',
       link: '/ciclo-capacitaciones'
     }
   ];
