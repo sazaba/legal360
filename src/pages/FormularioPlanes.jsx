@@ -21,7 +21,7 @@ const FormularioPlanes = () => {
         cargo: '',
         tamano_empresa: '',
         mensaje: '',
-        autorizacion: false
+        autorizacion: '' // Inicializado en vacío para forzar la selección
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +36,18 @@ const FormularioPlanes = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validación extra de seguridad
+        if (formData.autorizacion !== 'si') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Autorización requerida',
+                text: 'Debes autorizar el tratamiento de datos para poder enviar tus datos.',
+                confirmButtonColor: '#001e33'
+            });
+            return;
+        }
+
         setIsLoading(true);
 
         const data = {
@@ -47,14 +59,14 @@ const FormularioPlanes = () => {
             cargo: formData.cargo,
             tamano_empresa: formData.tamano_empresa,
             mensaje: formData.mensaje,
-            autorizacion_datos: formData.autorizacion ? 1 : 0
+            autorizacion_datos: formData.autorizacion === 'si' ? 1 : 0
         };
 
         try {
-            console.log("Enviando datos:", data); // <== Nuevo
+            console.log("Enviando datos:", data);
             const response = await axios.post("/api/diagnostico", data);
-            ;
-            console.log("Respuesta:", response); // <== Nuevo
+            
+            console.log("Respuesta:", response);
             Swal.fire({
                 icon: 'success',
                 title: '¡Formulario enviado!',
@@ -70,7 +82,7 @@ const FormularioPlanes = () => {
                 cargo: '',
                 tamano_empresa: '',
                 mensaje: '',
-                autorizacion: false
+                autorizacion: ''
             });
         } catch (error) {
             console.error("Error al enviar el formulario:", error);
@@ -84,7 +96,6 @@ const FormularioPlanes = () => {
             setIsLoading(false);
         }
     };
-
 
     return (
         <section className="min-h-[80vh] w-full px-2 sm:px-4 py-10 font-sans rounded-none sm:rounded-2xl flex items-center justify-center">
@@ -137,12 +148,49 @@ const FormularioPlanes = () => {
                         <label className="sr-only" htmlFor="mensaje">Mensaje o consulta</label>
                         <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" required placeholder="Mensaje o consulta" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" />
 
-                        <label className="flex items-start gap-2 text-xs text-gray-700 leading-snug text-justify">
-                            <input type="checkbox" name="autorizacion" checked={formData.autorizacion} onChange={handleChange} required className="mt-1 accent-[#e6d769]" />
-                            En virtud de lo anterior, autorizo a, LEGAL 360 S.A.S. , para que realice tratamiento de mis datos personales y emita respuesta a inquietudes, envíe publicidad, comunicaciones, promociones, invitaciones a eventos, noticias, encuestas y cualquier información comercial a través de este medio.
-                        </label>
+                        {/* SECCIÓN DE AUTORIZACIÓN ADAPTADA */}
+                        <div className="flex flex-col gap-2 text-xs text-gray-700 leading-snug text-justify mt-2 p-3 bg-gray-50 border border-gray-200 rounded-md">
+                            <p>
+                                En virtud de lo anterior, autorizo o no autorizo a LEGAL 360 S.A.S., para que realice tratamiento de mis datos personales y emita respuesta a inquietudes, envíe publicidad, comunicaciones, promociones, invitaciones a eventos, noticias, encuestas y cualquier información comercial a través de este medio.
+                            </p>
+                            <div className="flex items-center gap-6 mt-1 font-semibold">
+                                <label className="flex items-center gap-1 cursor-pointer">
+                                    <input 
+                                        type="radio" 
+                                        name="autorizacion" 
+                                        value="si" 
+                                        checked={formData.autorizacion === 'si'} 
+                                        onChange={handleChange} 
+                                        required 
+                                        className="accent-[#e6d769] w-4 h-4 cursor-pointer" 
+                                    />
+                                    Autorizo
+                                </label>
+                                <label className="flex items-center gap-1 cursor-pointer">
+                                    <input 
+                                        type="radio" 
+                                        name="autorizacion" 
+                                        value="no" 
+                                        checked={formData.autorizacion === 'no'} 
+                                        onChange={handleChange} 
+                                        required 
+                                        className="accent-[#e6d769] w-4 h-4 cursor-pointer" 
+                                    />
+                                    No autorizo
+                                </label>
+                            </div>
+                            {formData.autorizacion === 'no' && (
+                                <p className="text-red-500 text-xs mt-1 font-semibold">
+                                    Debes autorizar el tratamiento de datos para enviar el formulario.
+                                </p>
+                            )}
+                        </div>
 
-                        <button type="submit" disabled={isLoading} className={`w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white font-semibold py-2 rounded-md text-sm ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                        <button 
+                            type="submit" 
+                            disabled={isLoading || formData.autorizacion === 'no'} 
+                            className={`w-full mt-2 bg-[#001e33] hover:bg-[#0b2a4d] text-white font-semibold py-2 rounded-md text-sm ${(isLoading || formData.autorizacion === 'no') ? 'opacity-50 cursor-not-allowed' : 'transition-colors duration-300'}`}
+                        >
                             {isLoading ? 'Enviando...' : 'Enviar'}
                         </button>
                     </form>
