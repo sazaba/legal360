@@ -9,23 +9,38 @@ import Relevo from "../assets/images/relevo.webp";
 export default function Navbar() {
     const [menuAbierto, setMenuAbierto] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const [userDropdown, setUserDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const { usuario, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Efecto de Scroll Inteligente
     useEffect(() => {
         const onScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
+            const currentScrollY = window.scrollY;
+            
+            // Fondo oscuro al bajar un poco
+            if (currentScrollY > 20 !== scrolled) {
+                setScrolled(currentScrollY > 20);
             }
+
+            // Lógica Premium: Ocultar al bajar, mostrar al subir
+            // (Se bloquea el ocultamiento si el menú móvil o el dropdown están abiertos)
+            if (currentScrollY > lastScrollY && currentScrollY > 80 && !menuAbierto && !userDropdown) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+
+            setLastScrollY(currentScrollY);
         };
         
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
-    }, [scrolled]);
+    }, [lastScrollY, scrolled, menuAbierto, userDropdown]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -96,7 +111,10 @@ export default function Navbar() {
     const isDarkBgRoute = location.pathname === "/politica-datos" || location.pathname === "/terminos-condiciones";
 
     return (
-        <nav className={`fixed w-full top-0 z-[100] transition-all duration-300 font-roboto text-white ${scrolled || isDarkBgRoute ? "bg-[#001e33]/95 backdrop-blur-md shadow-lg" : "bg-transparent"}`}>
+        <nav className={`fixed w-full top-0 z-[100] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu font-roboto text-white 
+            ${scrolled || isDarkBgRoute ? "bg-[#001e33]/95 backdrop-blur-md shadow-lg" : "bg-transparent"}
+            ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+        `}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     
@@ -219,10 +237,10 @@ export default function Navbar() {
                         <button onClick={() => handleSmartScroll("top")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Inicio</button>
                         <button onClick={() => handleSmartScroll("por-que-nosotros")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Nosotros</button>
                         <button onClick={() => handleSmartScroll("servicios")} className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0">Servicios</button>
-                        <a href="https://wa.link/twbzum" className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0" target="_blank" rel="noopener noreferrer">Contacto</a>
+                        <a href="https://wa.link/twbzum" className="text-xl font-medium font-montserrat text-gray-200 hover:text-[#e6d769] transition-colors w-full py-2 shrink-0 flex justify-center" target="_blank" rel="noopener noreferrer">Contacto</a>
 
                         {!usuario && (
-                            <div className="pt-2 w-full max-w-xs shrink-0">
+                            <div className="pt-2 w-full max-w-xs shrink-0 flex justify-center">
                                 <button onClick={goToLogin} className="bg-transparent border-2 border-[#e6d769] text-[#e6d769] px-8 py-3 rounded-full text-lg font-montserrat font-semibold w-full">
                                     Iniciar Sesión
                                 </button>
