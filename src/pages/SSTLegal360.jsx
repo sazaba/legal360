@@ -11,15 +11,17 @@ import v1 from '../assets/videos/v5.mp4';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const services = [
-    {
-        title: 'Protocolos y Políticas Legales',
-        icon: <FileTextOutlined className="text-5xl text-[#e6d769]" />,
-        bullets: [
-            'Elaboración del protocolo y política para la prevención, atención y protección del acoso laboral, sexual, violencia basada en género y discriminación contra mujeres y personas LGBTIQ+ en el ámbito laboral.',
-            'Documentación del protocolo y política de desconexión laboral.',
-            'Elaboración del protocolo para teletrabajo y trabajo en casa.'
-        ]
-    },
+   {
+    title: 'Protocolos y Manuales',
+    icon: <FileTextOutlined className="text-5xl text-[#e6d769]" />,
+    bullets: [
+        'Protocolo para la prevención y protección del acoso laboral, sexual, violencia de género en el ámbito laboral.',
+        'Protocolo de desconexión laboral.',
+        'Protocolo para legalizar modalidad de teletrabajo y trabajo en casa.',
+        'Protocolo de salud mental y la prevención de problemas y trastornos mentales y del consumo de sustancias psicoactivas en el entorno laboral.',
+        'Manual de contratista'
+    ]
+},
     {
         title: 'Formación Legal Aplicada',
         icon: <TeamOutlined className="text-5xl text-[#e6d769]" />,

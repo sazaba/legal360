@@ -26,7 +26,7 @@ const sections = [
         title: 'Entorno Digital y Publicidad',
         icon: <AiOutlineGlobal className="text-5xl text-[#e6d769]" />,
         bullets: [
-            'Documentación legal de sitios web y redes sociales empresariales (Términos y Condiciones, Avisos de Privacidad, Cookies, etc.).',
+            'Documentación legal de sitios web y redes sociales empresariales (Términos y Condiciones, Avisos de Privacidad, Cookie, etc.).',
             'Capacitación sobre el uso adecuado de la publicidad en redes sociales, según las normas de protección al consumidor.'
         ]
     },
