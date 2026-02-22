@@ -90,6 +90,12 @@ export default function Navbar() {
         }
     };
 
+    const goToLogin = () => {
+        navigate("/login");
+        setUserDropdown(false);
+        setMenuAbierto(false);
+    };
+
     const isDarkBgRoute = location.pathname === "/politica-datos" || location.pathname === "/terminos-condiciones";
 
     return (
