@@ -6,6 +6,7 @@ import SSTLegal360 from './pages/SSTLegal360';
 import DerechoLaboral from './pages/DerechoLaboral';
 import DerechoComercial from './pages/DerechoComercial';
 import CapacitacionesJuridicas from './pages/CapacitacionesJuridicas';
+import CicloCapacitaciones from './pages/CicloCapacitaciones'; // <-- Nueva importación
 import PoliticaDatos from './pages/PoliticaDatos';
 import Footer from './pages/Footer';
 import TerminosWeb from './pages/TerminosWeb';
@@ -34,6 +35,8 @@ function App() {
         <Route path="/derecho-laboral" element={<DerechoLaboral />} />
         <Route path="/comercial" element={<DerechoComercial />} />
         <Route path="/capacitaciones" element={<CapacitacionesJuridicas />} />
+        {/* 👇 Nueva ruta agregada */}
+        <Route path="/ciclo-capacitaciones" element={<CicloCapacitaciones />} /> 
         <Route path="/politica-datos" element={<PoliticaDatos />} />
         <Route path="/terminos-condiciones" element={<TerminosWeb />} />
         <Route path="/login" element={<Login />} />
@@ -62,4 +65,3 @@ function App() {
 }
 
 export default App;
-// export default function Navbar() {

@@ -3,7 +3,8 @@ import {
   UserSwitchOutlined,
   FileProtectOutlined,
   SafetyCertificateOutlined,
-  ReadOutlined
+  ReadOutlined,
+  BulbOutlined // <-- Nuevo ícono importado
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Teamlegal from '../assets/images/Teamlegal.webp';
@@ -61,6 +62,13 @@ const Servicios = ({ id }) => {
       resumen: 'Apoyo legal a tu área de Seguridad y Salud en el Trabajo para asegurar el cumplimiento normativo y prevenir riesgos jurídicos y laborales.',
       link: '/sst'
     },
+    {
+      id: 5,
+      titulo: 'Ciclo de Capacitaciones',
+      icono: <BulbOutlined style={iconStyle} />,
+      resumen: 'Fortalecemos el desarrollo integral del talento humano en actualización normativa, habilidades blandas, gestión y salud laboral.',
+      link: '/ciclo-capacitaciones'
+    }
   ];
 
   const getBackgroundStyle = () => {
