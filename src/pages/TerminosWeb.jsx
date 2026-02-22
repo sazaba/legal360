@@ -182,7 +182,7 @@ const TerminosWeb = () => {
                         Usaremos la información entregada por nuestros clientes para realizar el procesamiento y entrega de los pedidos y para enviar información que pueda ser útil a nuestros clientes o que hayan solicitado específicamente, incluida información sobre nuestros productos y servicios, a menos que nos hayan comunicado que se oponen a ser contactados para estos fines.<br /> <br />
 
 
-                        Sujeto a la obtención de su consentimiento podemos comunicarnos con Usted, por correo electrónico, por medio telefónico o por cualquier red social. Si prefiere no recibir comunicaciones a través de alguno o todos estos canales, puede comunicarlo en cualquier momento a servicioalcliente@legal360.com y dejará de recibir dichas comunicaciones. Usted puede acceder a los detalles de la orden de servicio y a los servicios prestados, a través del cual le informemos que tenemos convenio y el estado de cada orden de servicio.<br /> <br />
+                        Sujeto a la obtención de su consentimiento podemos comunicarnos con Usted, por correo electrónico, por medio telefónico o por cualquier red social. Si prefiere no recibir comunicaciones a través de alguno o todos estos canales, puede comunicarlo en cualquier momento a juridico@legal360.com y dejará de recibir dichas comunicaciones. Usted puede acceder a los detalles de la orden de servicio y a los servicios prestados, a través del cual le informemos que tenemos convenio y el estado de cada orden de servicio.<br /> <br />
 
                     </p>
 
@@ -210,7 +210,7 @@ const TerminosWeb = () => {
                             </li>
 
                             <li>
-                                Así mismo, podrá radicar virtualmente, peticiones, quejas, reclamos, sugerencias o felicitaciones a través del correo electrónico <strong>servicioalcliente@legal360.co</strong> y podrá contactarnos en la Línea celular <strong>3123240463</strong>.
+                                Así mismo, podrá radicar virtualmente, peticiones, quejas, reclamos, sugerencias o felicitaciones a través del correo electrónico <strong>juridico@legal360.co</strong> y podrá contactarnos en la Línea celular <strong>3123240463</strong>.
                             </li>
 
                             <li>

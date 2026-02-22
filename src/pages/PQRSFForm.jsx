@@ -32,6 +32,9 @@ const PQRSFForm = () => {
         try {
             // Se envía directamente el objeto formData
             const payload = { ...formData };
+            
+            // Aseguramos que el backend reciba un 1 o un 0 lógico para la BD
+            payload.autorizacion_datos = payload.autorizacion_datos === "1" ? 1 : 0;
 
             await axios.post("/api/pqrsf", payload);
 
@@ -45,6 +48,9 @@ const PQRSFForm = () => {
             Swal.fire("❌ Error", "No se pudo enviar la solicitud", "error");
         }
     };
+
+    // Evaluamos si el botón debe estar bloqueado (se bloquea si el valor no es "1" que equivale a "Autorizo")
+    const isBotonBloqueado = formData.autorizacion_datos !== "1";
 
     return (
         <form onSubmit={handleSubmit} className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
@@ -100,17 +106,37 @@ const PQRSFForm = () => {
                 <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres.</p>
             </div>
 
-            <div className="flex items-start gap-2">
-                <input name="autorizacion_datos" type="checkbox" required className="mt-1 accent-[#e6d769]" onChange={handleChange} />
-                <label className="text-gray-700 leading-snug text-justify">
-                    He leído y autorizo a LEGAL 360 S.A.S., para tratar mis datos según la {" "}
-                    <Link to="/politica-datos" className="text-blue-600 underline font-medium">
-                        Política de Tratamiento de Datos Personales
-                    </Link>.
-                </label>
+            {/* SECCIÓN DE AUTORIZACIÓN MODIFICADA */}
+            <div className="border-t border-gray-200 pt-4 mt-2">
+                <p className="text-gray-700 leading-snug text-justify text-[13px] sm:text-sm">
+                    He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales de la entidad para los fines relacionados con su misión y funciones, cuyo contenido se encuentra {" "}
+                    <Link to="/politica-datos" className="font-bold text-black hover:underline">
+                        AQUÍ.
+                    </Link>
+                </p>
+                
+                <div className="flex items-center gap-6 mt-4">
+                    <label className="flex items-center gap-2 cursor-pointer font-semibold">
+                        <input type="radio" name="autorizacion_datos" value="1" className="accent-[#001e33] w-4 h-4" required onChange={handleChange} />
+                        Autorizo
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer font-semibold">
+                        <input type="radio" name="autorizacion_datos" value="0" className="accent-[#001e33] w-4 h-4" required onChange={handleChange} />
+                        No autorizo
+                    </label>
+                </div>
             </div>
 
-            <button type="submit" className="w-full bg-[#001e33] hover:bg-[#0b2a4d] text-white py-2 rounded-md font-semibold">
+            {/* BOTÓN CON LÓGICA DE BLOQUEO */}
+            <button 
+                type="submit" 
+                disabled={isBotonBloqueado}
+                className={`w-full py-2 rounded-md font-semibold transition-colors duration-300 mt-2 ${
+                    isBotonBloqueado 
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                    : "bg-[#001e33] hover:bg-[#0b2a4d] text-white"
+                }`}
+            >
                 Enviar solicitud
             </button>
         </form>
