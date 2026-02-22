@@ -13,7 +13,8 @@ const Hero = () => {
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#001e33] flex flex-col justify-center">
       
-      <picture className="absolute inset-0 w-full h-full z-0">
+     {/* Añadimos 'block' al picture */}
+      <picture className="absolute inset-0 w-full h-full z-0 block">
         <source media="(min-width: 1025px)" srcSet={estatua} />
         <source media="(min-width: 768px)" srcSet={estatuatablet} />
         <img
@@ -23,6 +24,7 @@ const Hero = () => {
           fetchpriority="high"
           onLoad={() => setIsImageLoaded(true)}
           className={`w-full h-full object-cover object-[70%_center] md:object-center transition-opacity duration-1000 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          style={{ color: 'transparent', backgroundColor: 'transparent' }} /* Hack definitivo Anti-Safari */
         />
       </picture>
 
