@@ -1,56 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { AiOutlinePaperClip } from "react-icons/ai";
-import { BsFillFileEarmarkCheckFill } from "react-icons/bs";
+import React, { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
-import { supabase } from '../supabaseClient';
-
-
-const MAX_FILES = 5;
-const MAX_FILE_SIZE_MB = 2;
 
 const PQRSFForm = () => {
     useEffect(() => window.scrollTo(0, 0), []);
 
-    const fileInputRef = useRef();
     const [formData, setFormData] = useState({});
     const [confirmacionCorreo, setConfirmacionCorreo] = useState("");
-    const [archivosSeleccionados, setArchivosSeleccionados] = useState([]);
-
-    const handleFileClick = () => fileInputRef.current.click();
-
-    const handleFileChange = (e) => {
-        const nuevosArchivos = Array.from(e.target.files);
-        const archivosValidos = [];
-        const extensionesPermitidas = ['pdf'];
-
-        for (let archivo of nuevosArchivos) {
-            const extension = archivo.name.split('.').pop().toLowerCase();
-            const esPDF = extensionesPermitidas.includes(extension);
-            const esTamanioValido = archivo.size <= MAX_FILE_SIZE_MB * 1024 * 1024;
-
-            if (!esPDF) {
-                Swal.fire("⚠️ Archivo inválido", `El archivo "${archivo.name}" no es un PDF`, "warning");
-                continue;
-            }
-
-            if (!esTamanioValido) {
-                Swal.fire("⚠️ Tamaño excedido", `El archivo "${archivo.name}" supera los 2MB`, "warning");
-                continue;
-            }
-
-            archivosValidos.push(archivo);
-        }
-
-        const total = archivosSeleccionados.length + archivosValidos.length;
-        if (total > MAX_FILES) {
-            Swal.fire("⚠️ Límite excedido", "Solo puedes adjuntar hasta 5 archivos en total", "warning");
-            return;
-        }
-
-        setArchivosSeleccionados((prev) => [...prev, ...archivosValidos]);
-    };
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -73,22 +30,8 @@ const PQRSFForm = () => {
         }
 
         try {
-            // 1. Subir los archivos a Supabase Storage
-            const urls = [];
-            for (const archivo of archivosSeleccionados) {
-                const nombreUnico = `${Date.now()}-${archivo.name}`;
-                const { error: uploadError } = await supabase.storage.from('legal360pdf').upload(nombreUnico, archivo);
-                if (uploadError) throw uploadError;
-
-                const { data } = supabase.storage.from('legal360pdf').getPublicUrl(nombreUnico);
-                urls.push(data.publicUrl);
-            }
-
-            // 2. Crear el cuerpo con datos y URLs de los archivos
-            const payload = {
-                ...formData,
-                archivos: urls
-            };
+            // Se envía directamente el objeto formData
+            const payload = { ...formData };
 
             await axios.post("/api/pqrsf", payload);
 
@@ -96,17 +39,11 @@ const PQRSFForm = () => {
             e.target.reset();
             setFormData({});
             setConfirmacionCorreo("");
-            setArchivosSeleccionados([]);
-            if (fileInputRef.current) fileInputRef.current.value = "";
 
         } catch (error) {
             console.error(error);
             Swal.fire("❌ Error", "No se pudo enviar la solicitud", "error");
         }
-    };
-
-    const eliminarArchivo = (index) => {
-        setArchivosSeleccionados(prev => prev.filter((_, i) => i !== index));
     };
 
     return (
@@ -160,31 +97,7 @@ const PQRSFForm = () => {
                     required
                     onChange={handleChange}
                 ></textarea>
-                <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres. Si requiere enviar más información, adjunte un archivo.</p>
-            </div>
-
-            <div>
-                <label className="block mb-1 text-justify">Documentos anexos: (Selecciona los archivos y adjúntalos con el botón "Adjuntar")</label>
-                <div className="flex items-center gap-2">
-                    <button type="button" onClick={handleFileClick} className="flex items-center justify-center gap-2 bg-gray-300 text-gray-600 py-2 rounded-md px-4">
-                        <AiOutlinePaperClip className="text-base" /> <span>Adjuntar</span>
-                    </button>
-                    {archivosSeleccionados.length > 0 && <BsFillFileEarmarkCheckFill className="text-green-500 text-xl" title="Archivos listos para enviar" />}
-                </div>
-                <input ref={fileInputRef} type="file" multiple accept=".pdf" className="hidden" onChange={handleFileChange} />
-                {archivosSeleccionados.length > 0 && (
-                    <ul className="mt-2 text-xs text-green-600 list-disc pl-5">
-                        {archivosSeleccionados.map((file, idx) => (
-                            <li key={idx} className="flex justify-between items-center">
-                                {file.name}
-                                <button type="button" className="ml-2 text-red-600 text-xs" onClick={() => eliminarArchivo(idx)}>
-                                    Eliminar
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 5 archivos. Cada uno no debe superar los 2MB. Solo formato PDF.</p>
+                <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres.</p>
             </div>
 
             <div className="flex items-start gap-2">
