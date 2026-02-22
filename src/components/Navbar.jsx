@@ -119,6 +119,7 @@ export default function Navbar() {
                         
                         {/* Logo */}
 {/* Logo - Convertido a DIV para evitar el bug del cuadro blanco en botones Safari */}
+{/* Logo - CERO TRANSFORMACIONES para evitar el bug del cuadro en Safari */}
 <div className="flex items-center space-x-4">
     <div
         onClick={() => {
@@ -126,15 +127,16 @@ export default function Navbar() {
             setMenuAbierto(false);
             setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
         }}
-        className="cursor-pointer flex items-center transform hover:scale-105 transition-transform duration-300 select-none"
+        // Eliminamos 'transform', 'hover:scale-105' y 'transition-transform'
+        className="cursor-pointer flex items-center select-none"
         style={{ WebkitTapHighlightColor: 'transparent' }}
     >
         <img
             src={logo}
             alt="Legal360"
             fetchpriority="high"
-            className="w-16 sm:w-20 md:w-24 h-auto object-contain block"
-            style={{ color: 'transparent' }} /* Oculta el texto del cuadro fantasma de Safari */
+            // Aseguramos que no tenga fondos heredados
+            className="w-16 sm:w-20 md:w-24 h-auto object-contain block bg-transparent" 
         />
     </div>
 </div>
