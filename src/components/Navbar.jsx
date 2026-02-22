@@ -114,7 +114,7 @@ export default function Navbar() {
                             <button onClick={goToLogin} className="hover:text-[#e6d769] text-base font-montserrat">Iniciar Sesión</button>
                         )}
 
-                        <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" title="Centro de Relevo" className="inline-flex">
+                        <a href="https://www.cancilleria.gov.co/centro-relevo" target="_blank" rel="noopener noreferrer" title="Centro de Relevo" className="inline-flex">
                             <img src={Relevo} alt="Centro de Relevo" className="w-10 sm:w-12 object-contain" />
                         </a>
                     </div>
