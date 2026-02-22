@@ -106,7 +106,6 @@ const PQRSFForm = () => {
                 <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres.</p>
             </div>
 
-            {/* SECCIÓN DE AUTORIZACIÓN MODIFICADA */}
             <div className="border-t border-gray-200 pt-4 mt-2">
                 <p className="text-gray-700 leading-snug text-justify text-[13px] sm:text-sm">
                     He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales de la entidad para los fines relacionados con su misión y funciones, cuyo contenido se encuentra {" "}
@@ -125,9 +124,20 @@ const PQRSFForm = () => {
                         No autorizo
                     </label>
                 </div>
+
+                {/* MENSAJE DE ADVERTENCIA QUIRÚRGICO */}
+                {formData.autorizacion_datos === "0" && (
+                    <div className="mt-4 flex items-start gap-3 p-3 bg-red-50 border-l-4 border-red-600 rounded-r-md text-red-800 text-xs sm:text-sm transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 flex-shrink-0 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        <p>
+                            <strong>Aviso importante:</strong> Para poder radicar su solicitud, es estrictamente necesario que autorice el tratamiento de sus datos personales. De lo contrario, no podremos procesar su requerimiento.
+                        </p>
+                    </div>
+                )}
             </div>
 
-            {/* BOTÓN CON LÓGICA DE BLOQUEO */}
             <button 
                 type="submit" 
                 disabled={isBotonBloqueado}
