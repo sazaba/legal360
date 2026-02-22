@@ -30,7 +30,6 @@ const PQRSFForm = () => {
         }
 
         try {
-            // Se envía directamente el objeto formData
             const payload = { ...formData };
             
             // Aseguramos que el backend reciba un 1 o un 0 lógico para la BD
@@ -49,13 +48,14 @@ const PQRSFForm = () => {
         }
     };
 
-    // Evaluamos si el botón debe estar bloqueado (se bloquea si el valor no es "1" que equivale a "Autorizo")
+    // Evaluamos si el botón debe estar bloqueado
     const isBotonBloqueado = formData.autorizacion_datos !== "1";
 
     return (
         <form onSubmit={handleSubmit} className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
             <h2 className="text-2xl font-bold text-center py-4 text-[#001e33]">Formulario PQRSF</h2>
 
+            {/* Datos de Identificación */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <select name="tipo_documento" onChange={handleChange} className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required>
                     <option value="">Tipo de Documento</option>
@@ -68,24 +68,28 @@ const PQRSFForm = () => {
                 <input name="numero_documento" type="text" placeholder="Número de Documento*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
             </div>
 
+            {/* Nombres y Apellidos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input name="nombres" type="text" placeholder="Nombre(s) del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
                 <input name="apellidos" type="text" placeholder="Apellido(s) del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
             </div>
 
+            {/* Correos */}
             <input name="correo_electronico" type="email" placeholder="Correo electrónico de notificación del peticionario*" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
             <input name="confirmacion_correo" type="email" placeholder="Confirmación correo electrónico *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
 
+            {/* Teléfonos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input name="telefono_principal" type="tel" placeholder="Teléfono de contacto *" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required onChange={handleChange} />
                 <input name="telefono_adicional" type="tel" placeholder="Teléfono adicional" className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" onChange={handleChange} />
             </div>
 
+            {/* Objeto de solicitud */}
             <fieldset className="space-y-2">
                 <legend className="block mb-2">Objeto de la solicitud *</legend>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {["Petición", "Queja", "Reclamo", "Sugerencia", "Felicitación"].map((item) => (
-                        <label key={item} className="flex items-center gap-2">
+                        <label key={item} className="flex items-center gap-2 cursor-pointer">
                             <input type="radio" name="objeto" value={item} className="accent-[#001e33] w-4 h-4" required onChange={handleChange} />
                             {item}
                         </label>
@@ -93,6 +97,7 @@ const PQRSFForm = () => {
                 </div>
             </fieldset>
 
+            {/* Descripción */}
             <div>
                 <textarea
                     name="descripcion"
@@ -106,10 +111,11 @@ const PQRSFForm = () => {
                 <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres.</p>
             </div>
 
+            {/* Sección de Autorización */}
             <div className="border-t border-gray-200 pt-4 mt-2">
                 <p className="text-gray-700 leading-snug text-justify text-[13px] sm:text-sm">
                     He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales de la entidad para los fines relacionados con su misión y funciones, cuyo contenido se encuentra {" "}
-                    <Link to="/politica-datos" className="font-bold text-black hover:underline">
+                    <Link to="/politica-datos" className="font-bold text-blue-600 hover:underline">
                         AQUÍ.
                     </Link>
                 </p>
@@ -125,7 +131,7 @@ const PQRSFForm = () => {
                     </label>
                 </div>
 
-                {/* MENSAJE DE ADVERTENCIA QUIRÚRGICO */}
+                {/* Mensaje de advertencia si marca "No autorizo" */}
                 {formData.autorizacion_datos === "0" && (
                     <div className="mt-4 flex items-start gap-3 p-3 bg-red-50 border-l-4 border-red-600 rounded-r-md text-red-800 text-xs sm:text-sm transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 flex-shrink-0 text-red-600" viewBox="0 0 20 20" fill="currentColor">
@@ -138,6 +144,7 @@ const PQRSFForm = () => {
                 )}
             </div>
 
+            {/* Botón de envío */}
             <button 
                 type="submit" 
                 disabled={isBotonBloqueado}
