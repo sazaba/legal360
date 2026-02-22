@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import estatua from '../assets/images/Hero4.webp';
 import estatuaresponsive from '../assets/images/estatuaresponsive.webp';
 import estatuatablet from '../assets/images/estatuatablet.webp';
@@ -8,99 +8,71 @@ import Typewriter from 'typewriter-effect';
 import '../index.css';
 
 const Hero = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  let backgroundImage;
-  if (windowWidth < 768) {
-    backgroundImage = estatuaresponsive;
-  } else if (windowWidth >= 768 && windowWidth <= 1024) {
-    backgroundImage = estatuatablet;
-  } else {
-    backgroundImage = estatua;
-  }
-
   return (
-    <section
-      className="relative min-h-screen overflow-hidden bg-black"
-      style={{
-        backgroundPosition: windowWidth < 768 ? '70% center' : 'center',
-        backgroundAttachment: windowWidth < 768 ? 'scroll' : 'fixed'
-      }}
-    >
-      <img
-        src={backgroundImage}
-        alt="Fondo Hero"
-        loading="lazy"
-        onLoad={() => setIsImageLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-700 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
-      />
+    // 1. Usamos 100svh para evitar el salto de la barra de URL en iOS Safari
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#001e33] flex flex-col justify-center">
+      
+      {/* 2. Etiqueta <picture> para ultra responsive nativo sin JavaScript */}
+      <picture className="absolute inset-0 w-full h-full z-0">
+        <source media="(min-width: 1025px)" srcSet={estatua} />
+        <source media="(min-width: 768px)" srcSet={estatuatablet} />
+        <img
+          src={estatuaresponsive}
+          alt="Fondo Hero Legal 360"
+          loading="eager" // El Hero SIEMPRE debe cargar inmediatamente
+          fetchpriority="high"
+          onLoad={() => setIsImageLoaded(true)}
+          className={`w-full h-full object-cover object-[70%_center] md:object-center transition-opacity duration-1000 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+      </picture>
 
-      <div className="absolute inset-0 bg-black opacity-10 z-10" />
+      {/* Overlays para oscurecer y dar contraste al texto */}
+      <div className="absolute inset-0 bg-black/40 md:bg-black/20 z-10 pointer-events-none" />
 
-      <div className="relative z-20 w-full max-w-screen-xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-6">
-        <div className="text-center md:text-left max-w-2xl space-y-6 pt-32 md:pt-20">
-          <div className="w-full px-6 py-8 flex flex-col items-center md:items-start gap-4">
-            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-              Cumple con la Ley{' '}
-              <span
-                className="inline-block"
-                style={{
-                  background: 'linear-gradient(90deg, #d4af37, #f5e27a, #d4af37)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+      {/* Contenedor Principal */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-8 md:px-20 gap-8 pt-20 pb-16">
+        
+        {/* Bloque de Textos */}
+        <div className="text-center md:text-left max-w-2xl space-y-6 flex flex-col items-center md:items-start pt-10 sm:pt-0">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight drop-shadow-lg">
+            Cumple con la Ley{' '}
+            <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37]">
+              Protege tu Empresa
+            </span>
+            <br />
+            <span className="block text-[#e6d769] mt-3 text-2xl sm:text-3xl font-bold drop-shadow-md">
+              Crece con Legal 360
+            </span>
+          </h1>
+
+          {/* 3. Corrección del Typewriter: Contenedor separado del texto */}
+          <div className="mt-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.15)] px-6 py-4 rounded-xl">
+            <div className="font-bold text-base sm:text-lg text-transparent bg-clip-text bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b]">
+              <Typewriter
+                options={{
+                  strings: ['Acompañamiento Mensual o Por Evento!'],
+                  autoStart: true,
+                  loop: true,
+                  delay: 60,
+                  deleteSpeed: 40,
                 }}
-              >
-                Protege tu Empresa
-              </span>
-              <br />
-              <span className="block text-[#e6d769] mt-2 text-2xl sm:text-3xl">
-                Crece con Legal 360
-              </span>
-            </h1>
-
-            <div className="mt-6">
-              <p
-                className="font-bold text-sm sm:text-base shadow-lg px-4 py-3 rounded-xl bg-white text-center"
-                style={{
-                  background: 'white',
-                  color: 'transparent',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundImage: 'linear-gradient(90deg, #d4af37, #f5e27a, #d4af37)',
-                }}
-              >
-                <Typewriter
-                  options={{
-                    strings: ['Acompa\u00f1amiento Mensual o Por Evento!'],
-                    autoStart: true,
-                    loop: true,
-                    delay: 60,
-                    deleteSpeed: 40,
-                  }}
-                />
-              </p>
+              />
             </div>
           </div>
         </div>
 
-        {windowWidth >= 768 && (
-          <div className="hidden md:block">
-            <img src={logo} alt="Logo Legal 360" className="w-72 max-w-full h-auto" />
-          </div>
-        )}
+        {/* Logo en Desktop */}
+        <div className="hidden md:flex flex-col items-center justify-center w-full max-w-[280px] lg:max-w-[320px] drop-shadow-2xl">
+          <img src={logo} alt="Logo Legal 360" className="w-full h-auto object-contain" />
+        </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px]">
+      {/* Separador SVG Inferior (Alineado para no dejar lineas blancas) */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none translate-y-[1px]">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px] sm:h-[40px] drop-shadow-md">
           <path
             d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
             className="fill-[#001e33]"
@@ -108,17 +80,14 @@ const Hero = () => {
         </svg>
       </div>
 
+      {/* Botón WhatsApp */}
       <a
         href="https://wa.link/twbzum"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 hover:shadow-2xl animate-bounce z-50"
-        style={{
-          background: 'linear-gradient(135deg, #d4af37 0%, #f5e27a 50%, #d4af37 100%)',
-          color: '#001e33',
-        }}
+        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 hover:shadow-2xl animate-bounce z-50 bg-gradient-to-br from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33]"
       >
-        <FaWhatsapp className="text-xl sm:text-2xl" />
+        <FaWhatsapp className="text-3xl" />
       </a>
     </section>
   );
