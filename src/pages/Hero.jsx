@@ -11,20 +11,23 @@ const Hero = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#001e33] flex flex-col justify-center">
+    // 1. Usamos 100dvh (Dynamic Viewport) para que se adapte suavemente a la barra de Safari
+    <section className="relative min-h-screen sm:min-h-[100dvh] w-full overflow-hidden bg-[#0c111b] flex flex-col justify-center">
       
-     {/* Añadimos 'block' al picture */}
-      <picture className="absolute inset-0 w-full h-full z-0 block">
+      {/* 2. pointer-events-none para que no interfiera con los toques en la pantalla */}
+      <picture className="absolute inset-0 w-full h-full z-0 block pointer-events-none">
         <source media="(min-width: 1025px)" srcSet={estatua} />
         <source media="(min-width: 768px)" srcSet={estatuatablet} />
+        {/* 3. El truco maestro: scale-[1.05]. Expande la imagen un 5% fuera de la pantalla. */}
+        {/* Así, durante el salto de Safari, los bordes ocultos cubren el hueco azul oscuro. */}
         <img
           src={estatuaresponsive}
           alt="Fondo Hero Legal 360"
           loading="eager"
           fetchpriority="high"
           onLoad={() => setIsImageLoaded(true)}
-          className={`w-full h-full object-cover object-[70%_center] md:object-center transition-opacity duration-1000 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          style={{ color: 'transparent', backgroundColor: 'transparent' }} /* Hack definitivo Anti-Safari */
+          className={`w-full h-full object-cover object-[70%_center] md:object-center transform scale-[1.05] transition-opacity duration-1000 ease-in-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          style={{ color: 'transparent', backgroundColor: 'transparent' }}
         />
       </picture>
 
@@ -45,7 +48,6 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Typewriter Refactorizado: Fondo invisible, texto dorado flotante con sombra intensa */}
           <div className="mt-4 sm:mt-6 min-h-[2rem] sm:min-h-[2.5rem]">
             <div className="font-bold text-lg sm:text-xl md:text-2xl text-[#f5e27a] drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)] tracking-wide">
               <Typewriter
@@ -55,7 +57,7 @@ const Hero = () => {
                   loop: true,
                   delay: 60,
                   deleteSpeed: 40,
-                  cursorClassName: 'animate-pulse text-[#f5e27a]', // El cursor del mismo color que el texto
+                  cursorClassName: 'animate-pulse text-[#f5e27a]',
                 }}
               />
             </div>
