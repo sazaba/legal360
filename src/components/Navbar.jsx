@@ -118,23 +118,25 @@ export default function Navbar() {
                     <div className="flex justify-between items-center h-20">
                         
                         {/* Logo */}
-                        <div className="flex items-center space-x-4">
-                            <button
-                                onClick={() => {
-                                    navigate("/");
-                                    setMenuAbierto(false);
-                                    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
-                                }}
-                                className="p-0 m-0 border-none bg-transparent focus:outline-none transform hover:scale-105 transition-transform duration-300"
-                            >
-                                <img
-                                    src={logo}
-                                    alt="Legal360"
-                                    fetchpriority="high"
-                                    className="w-16 sm:w-20 md:w-24 h-auto object-contain cursor-pointer"
-                                />
-                            </button>
-                        </div>
+<div className="flex items-center space-x-4">
+    <button
+        onClick={() => {
+            navigate("/");
+            setMenuAbierto(false);
+            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+        }}
+        /* Añadimos appearance-none, !bg-transparent y shadow-none para matar el bug de Safari */
+        className="appearance-none !bg-transparent p-0 m-0 border-none shadow-none focus:outline-none transform hover:scale-105 transition-transform duration-300"
+        style={{ WebkitAppearance: 'none', WebkitTapHighlightColor: 'transparent' }}
+    >
+        <img
+            src={logo}
+            alt="Legal360"
+            fetchpriority="high"
+            className="w-16 sm:w-20 md:w-24 h-auto object-contain cursor-pointer block"
+        />
+    </button>
+</div>
 
                         {/* Menú Desktop */}
                         <div className="hidden md:flex items-center space-x-6 text-white">
