@@ -4,7 +4,7 @@ import {
   FileProtectOutlined,
   SafetyCertificateOutlined,
   ReadOutlined,
-  BulbOutlined 
+  BulbOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Teamlegal from '../assets/images/Teamlegal.webp';
@@ -13,24 +13,20 @@ import serviciosmobile from '../assets/images/serviciosmobile.webp';
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
+    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
-    handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const animationDelays = ['0s', '0.2s', '0.4s', '0.6s'];
+  const animationDelays = ['0s', '0.15s', '0.3s', '0.45s', '0.6s'];
 
   const iconStyle = {
     fontSize: '3.5rem',
-    color: '#e6d769'
+    color: '#e6d769',
+    filter: 'drop-shadow(0px 4px 6px rgba(0,0,0,0.4))'
   };
 
   const servicios = [
@@ -45,7 +41,7 @@ const Servicios = ({ id }) => {
       id: 2,
       titulo: 'Pensiones',
       icono: <ReadOutlined style={iconStyle} />,
-      resumen: 'Asesoria legal en pensiones de vejez, invalidez y sobrevivientes, cálculo actuarial y reclamaciones ante la Junta de Calificación.',
+      resumen: 'Asesoría legal en pensiones de vejez, invalidez y sobrevivientes, cálculo actuarial y reclamaciones ante la Junta de Calificación.',
       link: '/capacitaciones'
     },
     {
@@ -91,29 +87,32 @@ const Servicios = ({ id }) => {
 
   return (
     <section
-      id="servicios"
-      className="relative pt-20 text-white min-h-screen pb-10 overflow-hidden"
+      id={id || "servicios"}
+      className="relative pt-24 text-white min-h-screen pb-16 overflow-hidden"
       style={getBackgroundStyle()}
     >
-      <div className="absolute inset-0 bg-[#001e33] opacity-20 z-10 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-black opacity-10 z-10"></div>
+      {/* Overlays para oscurecer el fondo y resaltar el glassmorphism */}
+      <div className="absolute inset-0 bg-[#001e33]/40 z-10 pointer-events-none mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-transparent to-[#001e33] opacity-80 z-10 pointer-events-none"></div>
+      
+      {/* Separador SVG Superior */}
       <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180 drop-shadow-md">
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
         </svg>
       </div>
-      <div className="absolute inset-0 bg-black opacity-20 z-0"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-montserrat text-[#e6d769]">
+      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-[#e6d769] to-[#f1e28c] drop-shadow-lg">
           Asesoría y Consultoría Empresarial
         </h2>
 
-        <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-12 font-roboto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-14 font-roboto font-light tracking-wide max-w-2xl mx-auto">
           Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-2 sm:px-4 md:px-10 justify-items-center">
+        {/* Uso de Flex en lugar de Grid para forzar 3 arriba y 2 centrados abajo */}
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-8 px-2">
           {servicios.map((servicio, index) => {
             const isFlipped = activeId === servicio.id;
             return (
@@ -122,48 +121,56 @@ const Servicios = ({ id }) => {
                 className={`relative w-full max-w-[280px] aspect-[3/4] perspective ${windowWidth < 768 ? 'mobile-fade-in' : ''}`}
                 style={windowWidth < 768 ? { '--delay': animationDelays[index % animationDelays.length] } : {}}
               >
-                <div className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+                <div className={`relative w-full h-full card-transition transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+                  
+                  {/* FRONT CARD - Glassmorphism */}
                   <div
                     onClick={() => setActiveId(servicio.id)}
-                    className="absolute w-full h-full backface-hidden bg-[#032b4c]/50 rounded-2xl px-4 py-6 shadow-xl border border-[#0f3a57] hover:border-[#e6d769] flex flex-col justify-center items-center text-center cursor-pointer"
+                    className="absolute w-full h-full backface-hidden rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] border border-white/10 glass-panel hover:border-[#e6d769]/50 flex flex-col justify-center items-center text-center cursor-pointer group transition-colors duration-300"
                   >
-                    <div className="mb-4">{servicio.icono}</div>
-                    <h3 className="text-xs font-semibold text-[#e6d769] uppercase tracking-wide mb-4 leading-snug">
+                    <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
+                      {servicio.icono}
+                    </div>
+                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed">
                       {servicio.titulo}
                     </h3>
-                    <div className="mt-4">
+                    <div className="mt-auto">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           setActiveId(servicio.id);
                         }}
-                        className="text-xs text-[#001e33] bg-[#e6d769] hover:bg-[#f1e28c] font-semibold px-4 py-1.5 rounded-full transition"
+                        className="text-xs text-[#001e33] bg-gradient-to-r from-[#e6d769] to-[#f1e28c] hover:shadow-[0_0_15px_rgba(230,215,105,0.4)] font-bold px-6 py-2.5 rounded-full transition-all duration-300 uppercase tracking-widest"
                       >
                         Ver detalles
                       </button>
                     </div>
                   </div>
 
-                  <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-[#001e33] border border-[#e6d769] rounded-2xl px-4 py-6 flex flex-col justify-center items-center text-center">
-                    <h3 className="text-xs sm:text-lg font-bold text-[#e6d769] mb-3">
+                  {/* BACK CARD - Glassmorphism Oscuro */}
+                  <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] border border-[#e6d769]/40 glass-panel-dark flex flex-col justify-center items-center text-center">
+                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-4">
                       {servicio.titulo}
                     </h3>
-                    <p className="text-gray-300 text-xs sm:text-sm mb-4 leading-normal max-w-sm w-full">
+                    <p className="text-gray-200 text-xs sm:text-sm mb-6 leading-relaxed font-light">
                       {servicio.resumen}
                     </p>
-                    <button
-                      onClick={() => navigate(servicio.link)}
-                      className="text-xs bg-[#e6d769] text-[#001e33] font-semibold px-4 py-1.5 rounded-full hover:bg-[#f1e28c] transition animate-bounce"
-                    >
-                      Más información
-                    </button>
-                    <button
-                      onClick={() => setActiveId(null)}
-                      className="mt-3 text-xs text-[#e6d769] underline hover:text-white"
-                    >
-                      Volver
-                    </button>
+                    <div className="mt-auto flex flex-col items-center gap-3">
+                      <button
+                        onClick={() => navigate(servicio.link)}
+                        className="text-xs bg-transparent border border-[#e6d769] text-[#e6d769] font-bold px-5 py-2 rounded-full hover:bg-[#e6d769] hover:text-[#001e33] transition-all duration-300 uppercase tracking-wider"
+                      >
+                        Más información
+                      </button>
+                      <button
+                        onClick={() => setActiveId(null)}
+                        className="text-xs text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-1"
+                      >
+                        <span aria-hidden="true">&larr;</span> Volver
+                      </button>
+                    </div>
                   </div>
+
                 </div>
               </div>
             );
@@ -173,30 +180,49 @@ const Servicios = ({ id }) => {
 
       <style jsx>{`
         @keyframes fadeInMobile {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .mobile-fade-in {
           opacity: 0;
-          animation: fadeInMobile 0.8s ease-in-out forwards var(--delay, 0s);
+          animation: fadeInMobile 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards var(--delay, 0s);
         }
+        
+        /* Utilidades Glassmorphism */
+        .glass-panel {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px); /* Safari Support */
+        }
+        .glass-panel-dark {
+          background: linear-gradient(135deg, rgba(0, 30, 51, 0.85) 0%, rgba(3, 43, 76, 0.95) 100%);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px); /* Safari Support */
+        }
+
+        /* Utilidades 3D Optimizadas para Safari */
         .perspective {
-          perspective: 1500px;
+          perspective: 2000px;
+          -webkit-perspective: 2000px;
         }
         .transform-style-preserve-3d {
           transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d;
+        }
+        .card-transition {
+          transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+          -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
         }
         .backface-hidden {
           backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          /* Hack vital para evitar parpadeos en Safari durante el 3D */
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
         }
         .rotate-y-180 {
           transform: rotateY(180deg);
+          -webkit-transform: rotateY(180deg);
         }
       `}</style>
     </section>
