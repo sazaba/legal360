@@ -15,13 +15,26 @@
     }
 
 /* Busca esta parte y déjala así: */
-a {
-    /* Quitamos el color: white !important; */
-    text-decoration: none;
-}
+@layer base {
+    /* 1. Regla general para todos los enlaces (limpia) */
+    a {
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 
-/* Para que los enlaces de tu Navbar y Footer no se dañen y sigan siendo blancos: */
-nav a, footer a, .text-white a {
-    color: white;
+    /* 2. Forzamos el blanco SOLO en el Navbar y el Footer */
+    /* Usamos selectores de etiqueta y clases comunes por si acaso */
+    nav a, 
+    footer a, 
+    .navbar a, 
+    .footer a {
+        color: white !important;
+    }
+
+    /* 3. Si quieres que al pasar el mouse brillen un poco (opcional) */
+    nav a:hover, 
+    footer a:hover {
+        color: #e6d769 !important; /* El color doradito que usas en otros lados */
+    }
 }
 }
