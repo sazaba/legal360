@@ -23,14 +23,14 @@ const services = [
     ]
 },
     {
-        title: 'Formación Legal Aplicada',
-        icon: <TeamOutlined className="text-5xl text-[#e6d769]" />,
-        bullets: [
-            'Capacitación al Comité de Convivencia Laboral sobre sus deberes legales en materia de acoso, género y diversidad.',
-            'Formación sobre el procedimiento legal en caso de trabajadores bajo efectos de sustancias psicoactivas o alcohol.',
-            'Capacitación a empleadores y responsables de SST en normatividad vigente, jurisprudencia y prevención de sanciones por incumplimientos legales.'
-        ]
-    },
+    title: 'Formación Legal Aplicada',
+    icon: <TeamOutlined className="text-5xl text-[#e6d769]" />,
+    bullets: [
+        'Capacitación al Comité de Convivencia Laboral sobre sus deberes legales en materia de acoso laboral, violencia de género, salud mental.',
+        'Formación sobre el procedimiento legal en caso de trabajadores bajo efectos de sustancias psicoactivas o alcohol sobre el contexto de salud mental.',
+        'Capacitación a empleadores y responsables de SST en normatividad vigente, jurisprudencia y prevención de sanciones por incumplimientos legales.'
+    ]
+},
     {
         title: 'Acompañamiento Legal',
         icon: <SafetyCertificateOutlined className="text-5xl text-[#e6d769]" />,
