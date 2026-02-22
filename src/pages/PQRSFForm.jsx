@@ -31,7 +31,6 @@ const PQRSFForm = () => {
 
         try {
             const payload = { ...formData };
-            // Convertimos la selección de radio a número para la base de datos
             payload.autorizacion_datos = payload.autorizacion_datos === "1" ? 1 : 0;
 
             await axios.post("/api/pqrsf", payload);
@@ -47,13 +46,13 @@ const PQRSFForm = () => {
         }
     };
 
-    // Bloqueo del botón si no autoriza
     const isBotonBloqueado = formData.autorizacion_datos !== "1";
 
     return (
         <form onSubmit={handleSubmit} className="bg-white w-full lg:w-[55%] p-6 sm:p-8 border border-gray-200 grid grid-cols-1 gap-4 text-[#001e33] text-sm font-medium">
             <h2 className="text-2xl font-bold text-center py-4 text-[#001e33]">Formulario PQRSF</h2>
 
+            {/* Campos de datos (Iguales al original) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <select name="tipo_documento" onChange={handleChange} className="bg-gray-100 border border-gray-300 rounded-md px-3 py-2 w-full" required>
                     <option value="">Tipo de Documento</option>
@@ -104,17 +103,16 @@ const PQRSFForm = () => {
                 <p className="text-xs text-gray-500 mt-1 text-justify">Máximo 2.000 caracteres.</p>
             </div>
 
-            {/* AUTORIZACIÓN EXACTA A LA IMAGEN */}
+            {/* SECCIÓN DE AUTORIZACIÓN CORREGIDA CON FORCE-COLOR */}
             <div className="border-t border-gray-200 pt-4 mt-2">
                 <p className="text-gray-700 leading-snug text-justify text-[13px] sm:text-sm">
                     He leído y autorizo de manera voluntaria e informada a LEGAL 360 S.A.S., para tratar mis datos, acorde con la Política de Tratamiento de Datos Personales de la entidad para los fines relacionados con su misión y funciones, cuyo contenido se encuentra {" "}
-                  <Link 
-            to="/politica-datos" 
-            style={{ color: '#2563eb', textDecoration: 'underline' }} // Forzamos el azul y subrayado
-            className="font-bold"
-        >
-            AQUÍ.
-        </Link>
+                    <Link 
+                        to="/politica-datos" 
+                        className="font-bold !text-[#2563eb] !underline inline-block"
+                    >
+                        AQUÍ.
+                    </Link>
                 </p>
                 
                 <div className="flex items-center gap-6 mt-4">
