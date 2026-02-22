@@ -18,8 +18,8 @@
 @layer base {
     /* 1. Regla general para todos los enlaces (limpia) */
     a {
-        color: inherit;
-        text-decoration: none;
+       color: inherit !important; 
+        text-decoration: none !important;
         transition: color 0.3s ease;
     }
 
