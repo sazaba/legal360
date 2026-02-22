@@ -14,8 +14,8 @@
         @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen;
     }
 
-    a {
-        color: white !important;
+  a {
+        color: inherit; /* O simplemente borra la línea de color si no la necesitas global */
         text-decoration: none;
     }
 
