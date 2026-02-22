@@ -4,7 +4,7 @@ import {
   FileProtectOutlined,
   SafetyCertificateOutlined,
   ReadOutlined,
-  BulbOutlined // <-- Nuevo ícono importado
+  BulbOutlined 
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Teamlegal from '../assets/images/Teamlegal.webp';
@@ -66,7 +66,7 @@ const Servicios = ({ id }) => {
       id: 5,
       titulo: 'Ciclo de Capacitaciones',
       icono: <BulbOutlined style={iconStyle} />,
-      resumen: 'Fortalecemos el desarrollo integral del talento humano en actualización normativa, habilidades blandas, gestión y salud laboral.',
+      resumen: 'Capacitación integral para el talento humano, fortaleciendo sus habilidades y optimizando la gestión y bienestar laboral de tu empresa.',
       link: '/ciclo-capacitaciones'
     }
   ];

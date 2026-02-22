@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 import { 
   CheckCircleOutlined, 
   BulbOutlined, 
   TeamOutlined, 
   SafetyCertificateOutlined, 
-  LineChartOutlined 
+  LineChartOutlined,
+  ArrowLeftOutlined
 } from '@ant-design/icons';
 
 const CicloCapacitaciones = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
+
   const modulos = [
     {
       titulo: 'Actualización normativa y legal',
@@ -37,8 +43,8 @@ const CicloCapacitaciones = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#001e33] pt-24 pb-16 px-4 font-roboto">
-      <div className="max-w-5xl mx-auto">
+    <div className="relative min-h-screen bg-[#001e33] pt-24 pb-16 px-4 font-roboto">
+      <div className="relative z-20 max-w-5xl mx-auto">
         
         {/* Encabezado */}
         <div className="text-center mb-16">
@@ -70,6 +76,27 @@ const CicloCapacitaciones = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Botones de Volver */}
+        <div className="mt-20 text-center">
+          <Link
+            to="/#servicios"
+            className="gap-2 bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold py-2 px-5 rounded-full shadow-md hover:scale-105 transition duration-300 fixed sm:top-24 sm:left-6 hidden sm:inline-flex z-50"
+          >
+            <ArrowLeftOutlined />
+            <span>Volver</span>
+          </Link>
+
+          <div className="block sm:hidden mt-20 text-center z-20">
+            <Link
+              to="/#servicios"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#95642a] text-[#001e33] font-semibold py-2 px-5 rounded-full text-sm shadow-md hover:scale-105 transition-all duration-300"
+            >
+              <ArrowLeftOutlined className="text-base" />
+              Regresar
+            </Link>
+          </div>
         </div>
 
       </div>
