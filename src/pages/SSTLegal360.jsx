@@ -19,7 +19,7 @@ const services = [
         'Protocolo de desconexión laboral.',
         'Protocolo para legalizar modalidad de teletrabajo y trabajo en casa.',
         'Protocolo de salud mental y la prevención de problemas y trastornos mentales y del consumo de sustancias psicoactivas en el entorno laboral.',
-        'Manual de contratista'
+        'Manual de contratista.'
     ]
 },
     {
