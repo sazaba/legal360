@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { AiOutlineMail, AiOutlineMessage } from 'react-icons/ai';
-import { BsFillTelephoneFill } from 'react-icons/bs';
+import { AiOutlineMail } from 'react-icons/ai';
+import { BsFillTelephoneFill, BsWhatsapp } from 'react-icons/bs';
 
 const ContactoAccesos = () => {
     
@@ -17,128 +17,120 @@ const ContactoAccesos = () => {
         }
     };
 
-    const cardVariants = {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        hover: { 
-            scale: 1.02,
-            rotateX: 5,
-            rotateY: -5,
-            transition: { duration: 0.3 }
-        },
-        tap: { scale: 0.95 }
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2 }
+        }
     };
 
-    const actions = [
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: { y: 0, opacity: 1 }
+    };
+
+    const contactItems = [
         {
             id: 1,
-            label: "Llámanos",
-            desc: "Línea Directa",
-            value: "+573123240463",
-            type: "tel",
+            name: "Llámanos",
+            info: "+57 312 324 0463",
             icon: <BsFillTelephoneFill />,
-            color: "from-[#d4af37] to-[#f5e27a]"
+            action: () => handleNavigation('tel', '+573123240463')
         },
         {
             id: 2,
-            label: "WhatsApp",
-            desc: "Chat en Vivo",
-            value: "https://wa.link/twbzum",
-            type: "link",
-            icon: <AiOutlineMessage />,
-            color: "from-[#e6d769] to-[#b8860b]"
+            name: "WhatsApp",
+            info: "Chat Inmediato",
+            icon: <BsWhatsapp />,
+            action: () => handleNavigation('link', 'https://wa.link/twbzum')
         },
         {
             id: 3,
-            label: "Email",
-            desc: "Consultas",
-            value: "servicioalcliente@legal360.co",
-            type: "mail",
+            name: "Email",
+            info: "servicioalcliente@legal360.co",
             icon: <AiOutlineMail />,
-            color: "from-[#f5e27a] to-[#d4af37]"
+            action: () => handleNavigation('mail', 'servicioalcliente@legal360.co')
         }
     ];
 
     return (
-        <section className="relative w-full bg-[#030912] py-20 px-6 sm:px-10 lg:px-20 overflow-hidden font-montserrat">
+        <section className="relative w-full bg-[#030912] py-16 px-6 lg:px-20 overflow-hidden isolate">
             
-            {/* Fondo con Rayas de Seguridad Abstractas (Muy Legal Tech) */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                 style={{ backgroundImage: `linear-gradient(45deg, #e6d769 25%, transparent 25%, transparent 50%, #e6d769 50%, #e6d769 75%, transparent 75%, transparent)` , backgroundSize: '100px 100px'}}>
-            </div>
+            {/* Elementos decorativos de fondo (Luces sutiles) */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#d4af37]/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#001e33]/40 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-6xl mx-auto relative z-10">
                 
-                {/* Título Disruptivo */}
-                <div className="mb-16 text-center md:text-left">
-                    <motion.h2 
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none"
+                <div className="flex flex-col items-center mb-12">
+                    <motion.span 
+                        initial={{ opacity: 0, tracking: "0.1em" }}
+                        whileInView={{ opacity: 1, tracking: "0.3em" }}
+                        className="text-[#e6d769] text-xs font-bold uppercase mb-3 font-montserrat"
                     >
-                        Conecta con el <br /> 
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f5e27a]">
-                            Poder Jurídico
-                        </span>
-                    </motion.h2>
+                        Canales Directos
+                    </motion.span>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-white font-montserrat text-center tracking-tight">
+                        ¿Cómo prefieres <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f5e27a]">contactarnos?</span>
+                    </h2>
                 </div>
 
-                {/* Grid de Acción Brutalista */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-                    {actions.map((action, index) => (
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                >
+                    {contactItems.map((item) => (
                         <motion.div
-                            key={action.id}
-                            variants={cardVariants}
-                            initial="initial"
-                            whileInView="animate"
-                            whileHover="hover"
-                            whileTap="tap"
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            onClick={() => handleNavigation(action.type, action.value)}
-                            className="relative group cursor-pointer overflow-hidden aspect-square md:aspect-video lg:aspect-square bg-[#0a1524] border border-white/5 flex flex-col justify-between p-8 sm:p-10"
+                            key={item.id}
+                            variants={itemVariants}
+                            whileHover={{ y: -8 }}
+                            onClick={item.action}
+                            className="group relative cursor-pointer"
                         >
-                            {/* Efecto de Brillo Magnético en el Hover */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#e6d769]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            {/* Borde con Gradiente Animado */}
+                            <div className="absolute -inset-[1px] bg-gradient-to-r from-[#d4af37]/20 via-[#f5e27a]/40 to-[#d4af37]/20 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
                             
-                            {/* Icono Flotante Grande */}
-                            <div className="relative z-10 text-4xl sm:text-5xl text-[#e6d769] group-hover:scale-110 transition-transform duration-500">
-                                {action.icon}
-                            </div>
+                            {/* Cuerpo de la tarjeta */}
+                            <div className="relative bg-[#0a1524]/80 backdrop-blur-xl border border-white/5 p-6 rounded-2xl flex items-center gap-5 transition-all duration-300 group-hover:border-[#e6d769]/30 group-hover:bg-[#0c1c30]">
+                                
+                                {/* Icono Circular con Pulso */}
+                                <div className="relative flex-shrink-0 w-14 h-14 bg-gradient-to-br from-[#030912] to-[#0a1524] rounded-full flex items-center justify-center border border-white/10 text-[#e6d769] text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:border-[#e6d769]/50 shadow-lg">
+                                    {item.icon}
+                                    {/* Anillo de pulso */}
+                                    <div className="absolute inset-0 rounded-full border border-[#e6d769]/30 animate-ping opacity-0 group-hover:opacity-100" />
+                                </div>
 
-                            {/* Textos Inferiores */}
-                            <div className="relative z-10">
-                                <p className="text-[#e6d769] text-xs font-bold uppercase tracking-[0.3em] mb-2 opacity-60">
-                                    {action.desc}
-                                </p>
-                                <h3 className="text-3xl sm:text-4xl font-black text-white uppercase leading-none group-hover:tracking-widest transition-all duration-500">
-                                    {action.label}
-                                </h3>
-                            </div>
+                                <div className="flex flex-col overflow-hidden">
+                                    <span className="text-[#e6d769] text-[10px] font-bold uppercase tracking-widest font-montserrat mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
+                                        {item.name}
+                                    </span>
+                                    <span className="text-white text-sm sm:text-base font-semibold font-roboto truncate tracking-tight">
+                                        {item.info}
+                                    </span>
+                                </div>
 
-                            {/* Barra de progreso decorativa inferior */}
-                            <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-[#e6d769] to-transparent w-0 group-hover:w-full transition-all duration-700" />
+                                {/* Flecha indicadora que aparece al final */}
+                                <div className="ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#e6d769]">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                            </div>
                         </motion.div>
                     ))}
-                </div>
-
-                {/* Footer del Componente */}
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="mt-12 flex justify-center md:justify-end"
-                >
-                    <p className="text-white/20 text-xs font-bold uppercase tracking-[0.5em]">
-                        Disponibilidad Inmediata
-                    </p>
                 </motion.div>
-            </div>
 
-            <style jsx>{`
-                section {
-                    perspective: 1000px;
-                }
-            `}</style>
+                {/* Footer de sección sutil */}
+                <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.4 }}
+                    className="text-center text-white text-[10px] uppercase tracking-[0.4em] font-montserrat mt-12"
+                >
+                    Atención inmediata de Lunes a Viernes
+                </motion.p>
+            </div>
         </section>
     );
 };
