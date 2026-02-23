@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 
 const FormularioPlanes = () => {
+    // ================= LÓGICA INTACTA =================
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -43,7 +44,7 @@ const FormularioPlanes = () => {
                 title: 'Autorización requerida',
                 text: 'Debes autorizar el tratamiento de datos para poder enviar tus datos.',
                 confirmButtonColor: '#001e33',
-                customClass: { popup: 'rounded-2xl shadow-2xl' }
+                customClass: { popup: 'rounded-2xl shadow-2xl font-roboto' }
             });
             return;
         }
@@ -72,7 +73,7 @@ const FormularioPlanes = () => {
                 title: '¡Formulario enviado!',
                 text: 'Gracias por contactarnos. Te responderemos pronto.',
                 confirmButtonColor: '#d4af37',
-                customClass: { popup: 'rounded-2xl shadow-2xl' }
+                customClass: { popup: 'rounded-2xl shadow-2xl font-roboto' }
             });
             setFormData({
                 nombre: '', apellido: '', email: '', pais: 'Col', telefono: '', cargo: '', tamano_empresa: '', mensaje: '', autorizacion: ''
@@ -84,7 +85,7 @@ const FormularioPlanes = () => {
                 title: 'Error al enviar',
                 text: 'Hubo un problema al enviar el formulario.',
                 confirmButtonColor: '#e63946',
-                customClass: { popup: 'rounded-2xl shadow-2xl' }
+                customClass: { popup: 'rounded-2xl shadow-2xl font-roboto' }
             });
         } finally {
             setIsLoading(false);
@@ -92,14 +93,22 @@ const FormularioPlanes = () => {
     };
 
     return (
-        // Usamos isolate y py-generosos para separar bien la sección
-        <section className="relative w-full min-h-[100svh] bg-[#0c111b] py-20 sm:py-28 px-4 sm:px-8 lg:px-12 flex items-center justify-center isolate">
+        // 1. FONDO DE TRANSICIÓN: Empieza en #001e33 (igual que Servicios) y baja a #0c111b
+        <section className="relative w-full min-h-[100svh] bg-gradient-to-b from-[#001e33] to-[#0c111b] py-24 sm:py-32 px-4 sm:px-8 lg:px-12 flex items-center justify-center isolate overflow-hidden">
             
-            {/* Contenedor Principal Grid */}
-            <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            {/* 2. OLA SUPERIOR: Se pinta de #001e33 para curvar visualmente el final del componente Servicios */}
+            <div className="absolute top-0 left-0 w-full overflow-hidden z-[-1] -translate-y-[1px]">
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block rotate-180">
+                    <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
+                </svg>
+            </div>
+
+            {/* Contenedor Principal Grid (Sombra profunda para resaltar sobre el fondo oscuro) */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/10">
                 
                 {/* ================= PANEL IZQUIERDO: FORMULARIO ================= */}
-                <div className="lg:col-span-5 bg-white p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <div className="lg:col-span-5 bg-white p-8 sm:p-10 lg:p-12 flex flex-col justify-center relative">
+                    
                     <div className="mb-8 text-center lg:text-left">
                         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
                             Agenda tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#b8860b]">Diagnóstico</span>
@@ -111,28 +120,29 @@ const FormularioPlanes = () => {
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-[#001e33] text-sm font-roboto">
                         
+                        {/* Inputs Modernos con anillos de enfoque dorados */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <input id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Nombre*" 
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                                className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
                             <input id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required placeholder="Apellido*" 
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                                className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
                         </div>
 
                         <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="Correo electrónico*" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                            className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
 
                         <div className="flex gap-4">
                             <select id="pais" name="pais" value={formData.pais} onChange={handleChange} required 
-                                className="w-1/3 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer">
+                                className="w-1/3 bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
                                 <option value="Col">Col (+57)</option>
                             </select>
                             <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="Número de teléfono*" 
-                                className="w-2/3 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                                className="w-2/3 bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required 
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
+                                className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
                                 <option value="">Cargo*</option>
                                 <option value="Gerente">Gerente / Socio</option>
                                 <option value="Administrador">Administrador</option>
@@ -141,7 +151,7 @@ const FormularioPlanes = () => {
                             </select>
 
                             <select id="tamano_empresa" name="tamano_empresa" value={formData.tamano_empresa} onChange={handleChange} required 
-                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
+                                className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
                                 <option value="">Tamaño de empresa*</option>
                                 <option value="1 a 10">1 a 10 empleados</option>
                                 <option value="11 a 100">11 a 100 empleados</option>
@@ -150,10 +160,10 @@ const FormularioPlanes = () => {
                         </div>
 
                         <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" required placeholder="Cuéntanos brevemente tu caso o consulta*" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 resize-none placeholder-gray-400" />
+                            className="w-full bg-[#f8fafc] border border-gray-200 rounded-xl px-4 py-3 outline-none focus:bg-white focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 resize-none placeholder-gray-400" />
 
                         {/* Caja de Autorización Premium */}
-                        <div className="bg-[#f8fafc] border border-gray-200 rounded-xl p-5 space-y-4 shadow-inner">
+                        <div className="bg-[#f8fafc] border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm mt-2">
                             <p className="text-xs text-gray-500 text-justify leading-relaxed">
                                 Autorizo a LEGAL 360 S.A.S. para el tratamiento de mis datos personales, envío de respuestas, publicidad, invitaciones a eventos y encuestas a través de este medio.
                             </p>
@@ -181,10 +191,10 @@ const FormularioPlanes = () => {
                         <button 
                             type="submit" 
                             disabled={isLoading || formData.autorizacion === 'no'} 
-                            className={`w-full mt-2 font-montserrat font-bold py-4 rounded-xl text-sm tracking-wide shadow-lg transform active:scale-95 transition-all duration-300 uppercase
+                            className={`w-full mt-4 font-montserrat font-bold py-4 rounded-xl text-sm tracking-wide shadow-lg transform active:scale-95 transition-all duration-300 uppercase
                                 ${(isLoading || formData.autorizacion === 'no') 
                                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' 
-                                    : 'bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)]'
+                                    : 'bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:scale-[1.01]'
                                 }`}
                         >
                             {isLoading ? 'Procesando solicitud...' : 'Solicitar Diagnóstico'}
@@ -195,15 +205,15 @@ const FormularioPlanes = () => {
                 {/* ================= PANEL DERECHO: VISUAL & PLANES ================= */}
                 <div className="lg:col-span-7 relative flex flex-col justify-center p-6 sm:p-10 lg:p-14 overflow-hidden min-h-[600px] lg:min-h-full">
                     
-                    {/* Imagen de fondo optimizada para Safari (Cero glitches) */}
+                    {/* 3. IMAGEN OPTIMIZADA: Hardware Acceleration para evitar glitches en Safari */}
                     <div className="absolute inset-0 z-0">
                         <img 
                             src={bustos} 
                             alt="Abogados Legal 360" 
                             loading="lazy"
                             className="w-full h-full object-cover transform-gpu will-change-transform"
+                            style={{ WebkitTransform: 'translateZ(0)' }}
                         />
-                        {/* Overlays para profundidad y contraste */}
                         <div className="absolute inset-0 bg-[#001e33]/85 mix-blend-multiply"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-[#001e33] via-transparent to-[#001e33]/50"></div>
                     </div>
@@ -216,8 +226,8 @@ const FormularioPlanes = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                             
-                            {/* Tarjeta Plan Mensual - Estilo Glassmorphism Oscuro */}
-                            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300 group">
+                            {/* Tarjeta Plan Mensual - Glassmorphism Oscuro */}
+                            <div className="bg-[#001e33]/40 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:bg-[#001e33]/60 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300 group">
                                 <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-wider group-hover:text-[#e6d769] transition-colors">Plan Mensual</h4>
                                 <p className="text-xs text-gray-300 text-center mb-6 font-light">Ideal para el respaldo jurídico continuo de tu empresa.</p>
                                 
@@ -229,8 +239,8 @@ const FormularioPlanes = () => {
                                 </ul>
                             </div>
 
-                            {/* Tarjeta Por Evento - Estilo Glassmorphism Oscuro */}
-                            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300 group">
+                            {/* Tarjeta Por Evento - Glassmorphism Oscuro */}
+                            <div className="bg-[#001e33]/40 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:bg-[#001e33]/60 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300 group">
                                 <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-wider group-hover:text-[#e6d769] transition-colors">Por Evento</h4>
                                 <p className="text-xs text-gray-300 text-center mb-6 font-light">Apoyo jurídico puntual para casos específicos sin ataduras.</p>
                                 
