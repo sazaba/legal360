@@ -5,91 +5,118 @@ import { HashLink as Link } from 'react-router-hash-link';
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 }
+        }
+    };
+
     return (
-        <footer className="relative w-full bg-[#030912] pt-10 pb-6 px-6 lg:px-20 overflow-hidden border-t border-white/10 font-roboto isolate">
+        <footer className="relative w-full bg-[#030912] py-8 px-6 lg:px-16 overflow-hidden border-t border-white/5 font-roboto">
             
-            {/* Sutil resplandor de fondo para profundidad premium */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
+            {/* Línea decorativa disruptiva superior */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent" />
+            <div className="absolute top-0 left-10 w-20 h-[2px] bg-[#d4af37] shadow-[0_0_15px_rgba(212,175,55,0.5)]" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* --- SECCIÓN PRINCIPAL: DISTRIBUCIÓN HORIZONTAL --- */}
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-4 mb-10">
+            <motion.div 
+                className="max-w-7xl mx-auto"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                {/* --- GRID PRINCIPAL SLIM --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start mb-8">
                     
-                    {/* Branding Compacto */}
-                    <div className="flex flex-col gap-2 max-w-xs">
-                        <motion.h2 
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f5e27a] font-montserrat tracking-tight"
-                        >
-                            Legal 360 <span className="text-[10px] font-light tracking-widest text-white/50 ml-1">S.A.S.</span>
-                        </motion.h2>
-                        <p className="text-[11px] text-gray-500 leading-relaxed font-light uppercase tracking-wider">
-                            NIT. 901.938.444-1 <br />
-                            <span className="text-white/40 italic">Soluciones jurídicas preventivas.</span>
-                        </p>
-                    </div>
-
-                    {/* Grid de Links Ultra-Compacto */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6 lg:gap-x-16">
-                        {/* Navegación */}
-                        <div className="flex flex-col gap-3">
-                            <h3 className="text-[9px] font-bold text-[#e6d769] uppercase tracking-[0.2em]">Navegación</h3>
-                            <nav className="flex flex-col gap-2 text-[12px] text-gray-400">
-                                <Link smooth to="/#top" className="hover:text-white transition-colors">Inicio</Link>
-                                <Link smooth to="/#servicios" className="hover:text-white transition-colors">Servicios</Link>
-                                <Link smooth to="/#por-que-nosotros" className="hover:text-white transition-colors">Nosotros</Link>
-                            </nav>
+                    {/* Branding - Col 1 & 2 */}
+                    <motion.div variants={fadeInUp} className="lg:col-span-2 flex flex-col gap-2">
+                        <h2 className="text-2xl font-black text-[#d4af37] font-montserrat tracking-tighter leading-none">
+                            Legal 360 S.A.S.
+                        </h2>
+                        <div className="space-y-1">
+                            <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase">NIT. 901.938.444-1</p>
+                            <p className="text-sm text-white/70 font-light italic leading-tight">
+                                Legal, claro y eficiente. <br />
+                                <span className="text-white/40 not-italic">Protege tu empresa con expertos legales.</span>
+                            </p>
                         </div>
+                    </motion.div>
 
-                        {/* Contacto */}
-                        <div className="flex flex-col gap-3">
-                            <h3 className="text-[9px] font-bold text-[#e6d769] uppercase tracking-[0.2em]">Contacto</h3>
-                            <div className="flex flex-col gap-2 text-[12px] text-gray-400">
-                                <a href="mailto:juridico@legal360.co" className="hover:text-white transition-colors">juridico@legal360.co</a>
-                                <span className="">+57 312 324 0463</span>
-                            </div>
+                    {/* Enlaces - Col 3 */}
+                    <motion.div variants={fadeInUp} className="flex flex-col gap-3">
+                        <h3 className="text-[10px] font-bold text-[#d4af37] uppercase tracking-[0.3em]">Enlaces</h3>
+                        <nav className="flex flex-col gap-1.5 text-xs text-gray-400">
+                            {['Inicio', 'Servicios', 'Nosotros', 'Contacto'].map((item) => (
+                                <Link 
+                                    key={item}
+                                    smooth to={`/#${item.toLowerCase()}`} 
+                                    className="hover:text-white hover:translate-x-1 transition-all duration-300 w-fit"
+                                >
+                                    {item}
+                                </Link>
+                            ))}
+                        </nav>
+                    </motion.div>
+
+                    {/* Contacto - Col 4 */}
+                    <motion.div variants={fadeInUp} className="flex flex-col gap-3">
+                        <h3 className="text-[10px] font-bold text-[#d4af37] uppercase tracking-[0.3em]">Contacto</h3>
+                        <div className="flex flex-col gap-1.5 text-xs text-gray-400">
+                            <a href="mailto:juridico@legal360.co" className="hover:text-white transition-colors">juridico@legal360.co</a>
+                            <p>+57 312 324 0463</p>
+                            <p>+57 322 767 1911</p>
+                            <p className="text-[11px] text-gray-500 italic">Cra. 23 # 79 - 09, Pereira</p>
                         </div>
+                    </motion.div>
 
-                        {/* Legal (Oculto en móvil muy pequeño o agrupado) */}
-                        <div className="flex flex-col gap-3">
-                            <h3 className="text-[9px] font-bold text-[#e6d769] uppercase tracking-[0.2em]">Legal</h3>
-                            <nav className="flex flex-col gap-2 text-[12px] text-gray-400">
-                                <Link to="/politica-datos" className="hover:text-white transition-colors">Privacidad</Link>
-                                <Link to="/terminos-condiciones" className="hover:text-white transition-colors">Términos</Link>
-                            </nav>
-                        </div>
-                    </div>
-
-                    {/* Social & Status */}
-                    <div className="flex flex-col items-start lg:items-end gap-4">
-                        <div className="flex gap-3">
+                    {/* Políticas y Redes - Col 5 */}
+                    <motion.div variants={fadeInUp} className="flex flex-col gap-3 lg:items-end">
+                        <h3 className="text-[10px] font-bold text-[#d4af37] uppercase tracking-[0.3em]">Síguenos</h3>
+                        <div className="flex gap-4 mb-2">
                             <a href="https://www.instagram.com/legal360abogados/" target="_blank" rel="noopener noreferrer" 
-                               className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm text-gray-400 hover:bg-[#d4af37] hover:text-[#030912] transition-all duration-300">
+                               className="text-lg text-gray-400 hover:text-[#d4af37] transition-all transform hover:scale-125">
                                 <FaInstagram />
                             </a>
                             <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" 
-                               className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm text-gray-400 hover:bg-[#d4af37] hover:text-[#030912] transition-all duration-300">
+                               className="text-lg text-gray-400 hover:text-[#d4af37] transition-all transform hover:scale-125">
                                 <FaWhatsapp />
                             </a>
                         </div>
-                        <div className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter">Atención Activa</span>
-                        </div>
-                    </div>
+                        <nav className="flex flex-col lg:items-end gap-1.5 text-[10px] text-gray-500 uppercase tracking-wider">
+                            <Link to="/politica-datos" className="hover:text-white transition-colors">Política de Datos</Link>
+                            <Link to="/terminos-condiciones" className="hover:text-white transition-colors">Términos y Condiciones</Link>
+                        </nav>
+                    </motion.div>
                 </div>
 
-                {/* --- FOOTER INFERIOR --- */}
-                <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-600 uppercase tracking-[0.15em]">
-                    <p>© {currentYear} LEGAL 360 S.A.S. — Pereira, Col</p>
-                    <div className="flex items-center gap-4">
-                        <p className="hover:text-gray-400 transition-colors cursor-default">Diseño de Vanguardia</p>
-                        <span className="w-1 h-1 rounded-full bg-white/10" />
-                        <p className="text-white/20">V.2.0</p>
+                {/* --- BARRA FINAL ULTRA SLIM --- */}
+                <motion.div 
+                    variants={fadeInUp}
+                    className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4"
+                >
+                    <p className="text-[9px] text-gray-600 uppercase tracking-[0.2em]">
+                        © {currentYear} Legal 360. Todos los derechos reservados.
+                    </p>
+                    
+                    {/* Elemento disruptivo: Firma de diseño */}
+                    <div className="flex items-center gap-3">
+                        <div className="h-[1px] w-8 bg-white/10" />
+                        <p className="text-[8px] text-white/20 uppercase tracking-[0.4em] font-light">
+                            High-End Legal Solutions
+                        </p>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
+
+            {/* Decoración de fondo minimalista */}
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#d4af37]/5 blur-[80px] rounded-full pointer-events-none" />
         </footer>
     );
 };
