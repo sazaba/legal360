@@ -123,7 +123,7 @@ export default function Navbar() {
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-auto">
                     <div className="flex justify-between items-center h-20">
                         
-                        {/* Logo totalmente limpio, sin transformaciones que mareen a Safari */}
+                        {/* Logo - Blindado contra el bug WebP de Safari */}
                         <div className="flex items-center space-x-4">
                             <div
                                 onClick={() => {
@@ -138,7 +138,15 @@ export default function Navbar() {
                                     src={logo}
                                     alt="Legal360"
                                     loading="eager"
-                                    className="w-16 sm:w-20 md:w-24 h-auto object-contain block bg-transparent"
+                                    decoding="sync"
+                                    className="w-16 sm:w-20 md:w-24 h-auto block"
+                                    style={{ 
+                                        color: 'transparent',
+                                        background: 'transparent',
+                                        WebkitTransform: 'translateZ(0)',
+                                        transform: 'translateZ(0)',
+                                        willChange: 'transform, opacity'
+                                    }}
                                 />
                             </div>
                         </div>
