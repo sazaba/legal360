@@ -11,9 +11,9 @@ import '../index.css';
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Activamos las animaciones de entrada un instante después de montar el componente
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
+    // Un pequeño delay para asegurar que el navegador esté listo antes de mostrar
+    const timer = setTimeout(() => setIsLoaded(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
@@ -25,10 +25,9 @@ const Hero = () => {
   };
 
   return (
-    // 1. Aislamiento gráfico (isolate) y altura estable (h-[100svh]) para matar bugs de Safari
     <section className="relative w-full h-[100svh] bg-[#0c111b] overflow-hidden isolate flex items-center justify-center">
       
-      {/* CAPA 1: FONDO E IMAGEN (Acelerada por Hardware) */}
+      {/* CAPA 1: FONDO E IMAGEN ESTABILIZADA */}
       <div className="absolute inset-0 z-[-1]">
         <picture className="block w-full h-full pointer-events-none">
           <source media="(min-width: 1025px)" srcSet={estatua} />
@@ -38,22 +37,21 @@ const Hero = () => {
             alt="Fondo Legal 360"
             loading="eager"
             fetchpriority="high"
-            className={`w-full h-full object-cover object-[70%_center] md:object-center transform-gpu transition-all duration-[1.5s] ease-out ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+            // FIX: Eliminamos la escala en la transición para evitar el "micro zoom".
+            // Se añade 'will-change-transform' para estabilidad en el scroll.
+            className={`w-full h-full object-cover object-[70%_center] md:object-center transform-gpu will-change-transform transition-opacity duration-[1.5s] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             style={{ WebkitTransform: 'translateZ(0)' }}
           />
         </picture>
 
-        {/* Overlays Premium para contraste y profundidad */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0c111b]/80 via-black/40 to-[#0c111b] mix-blend-multiply" />
         <div className="absolute inset-0 bg-[#001e33]/30" />
       </div>
 
-      {/* CAPA 2: CONTENIDO PRINCIPAL */}
+      {/* CAPA 2: CONTENIDO PRINCIPAL (Sin cambios en la lógica) */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-12 sm:gap-16 pt-16 sm:pt-0 translate-y-[-5%] sm:translate-y-0">
         
-        {/* Textos y Animaciones */}
         <div className="w-full md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left space-y-8">
-          
           <h1 className="flex flex-col gap-2">
             <span className={`text-white text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight drop-shadow-lg transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               Cumple con la Ley
@@ -66,7 +64,6 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Typewriter en píldora Glassmorphism Premium */}
           <div className={`transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <div className="inline-flex items-center justify-center bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl rounded-full px-6 sm:px-8 py-3 sm:py-4">
               <div className="font-bold text-base sm:text-lg md:text-xl text-[#f5e27a] tracking-wide">
@@ -85,7 +82,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Logo Flotante Desktop */}
         <div className={`hidden md:flex w-full md:w-2/5 justify-center transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
           <img 
             src={logo} 
@@ -96,8 +92,6 @@ const Hero = () => {
       </div>
 
       {/* CAPA 3: ELEMENTOS INFERIORES */}
-      
-      {/* Indicador animado de Scroll */}
       <button 
         onClick={handleScrollDown}
         className={`absolute bottom-16 sm:bottom-12 left-1/2 -translate-x-1/2 text-white/50 hover:text-[#e6d769] transition-colors duration-300 z-20 flex flex-col items-center gap-2 ${isLoaded ? 'animate-bounce' : 'opacity-0'}`}
@@ -106,14 +100,12 @@ const Hero = () => {
         <ArrowDownOutlined className="text-lg" />
       </button>
 
-      {/* Separador SVG super limpio */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 pointer-events-none translate-y-[2px]">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block">
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#0c111b]" />
         </svg>
       </div>
 
-      {/* Botón Flotante WhatsApp */}
       <a
         href="https://wa.link/twbzum"
         target="_blank"
