@@ -79,7 +79,7 @@ const Servicios = ({ id }) => {
       </div>
 
       {/* OVERLAYS AJUSTADOS: Más transparentes en el centro para dejar ver la imagen */}
-      <div className="absolute inset-0 bg-[#001e33]/30 z-[-1] pointer-events-none mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-[#001e33]/10 z-[-1] pointer-events-none mix-blend-multiply"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#001e33]/95 via-[#001e33]/40 to-[#001e33]/95 z-[-1] pointer-events-none"></div>
       
       {/* OLA SUPERIOR (Conecta con Quienes Somos) */}
