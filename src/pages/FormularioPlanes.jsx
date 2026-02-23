@@ -9,6 +9,11 @@ import {
     PhoneOutlined,
     CheckCircleOutlined,
     CalendarOutlined,
+    TeamOutlined,
+    AuditOutlined,
+    BellOutlined,
+    ThunderboltOutlined,
+    ClockCircleOutlined
 } from "@ant-design/icons";
 
 const FormularioPlanes = () => {
@@ -67,165 +72,153 @@ const FormularioPlanes = () => {
     };
 
     return (
-        // Fondo continuo #f8fafc que recibe la ola del componente anterior
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc] overflow-hidden">
             
             {/* ================= MITAD IZQUIERDA: FORMULARIO ================= */}
             <div className="w-full lg:w-[45%] xl:w-5/12 px-6 sm:px-12 lg:px-16 pt-20 lg:pt-28 pb-16 flex flex-col justify-center">
                 <div className="max-w-xl mx-auto w-full">
                     <div className="mb-8 text-center lg:text-left">
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
+                        <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
                             Agenda tu <br className="hidden lg:block"/>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#b8860b]">
-                                Diagnóstico
+                            <span className="text-[#001e33]">
+                                Diagnóstico Gratuito
                             </span>
                         </h2>
                         <p className="text-sm sm:text-base text-gray-500 font-roboto leading-relaxed">
-                            Conoce tu estado jurídico en materia laboral y comercial. Déjanos tus datos y un experto se comunicará contigo.
+                            Si usted es una persona jurídica o natural y requiere conocer cuál es su estado jurídico en materia derecho laboral y comercial, diligencie la siguiente información.
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5 text-[#001e33] text-sm font-roboto">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                             <input id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Nombre*" 
-                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                             <input id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required placeholder="Apellido*" 
-                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                         </div>
 
                         <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="Correo electrónico*" 
-                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
 
                         <div className="flex gap-4">
                             <select id="pais" name="pais" value={formData.pais} onChange={handleChange} required 
-                                className="w-1/3 bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
+                                className="w-1/3 bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
                                 <option value="Col">Col (+57)</option>
                             </select>
-                            <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="Número de teléfono*" 
-                                className="w-2/3 bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 placeholder-gray-400" />
+                            <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="+57" 
+                                className="w-2/3 bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                            <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required 
-                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
-                                <option value="">Cargo*</option>
-                                <option value="Gerente">Gerente / Socio</option>
-                                <option value="Administrador">Administrador</option>
-                                <option value="RRHH">Recursos Humanos</option>
-                                <option value="Otro">Otro</option>
-                            </select>
+                        <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required 
+                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
+                            <option value="">Cargo*</option>
+                            <option value="Gerente">Gerente / Socio</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="RRHH">Recursos Humanos</option>
+                            <option value="Otro">Otro</option>
+                        </select>
 
-                            <select id="tamano_empresa" name="tamano_empresa" value={formData.tamano_empresa} onChange={handleChange} required 
-                                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 cursor-pointer text-gray-600">
-                                <option value="">Tamaño de empresa*</option>
-                                <option value="1 a 10">1 a 10 empleados</option>
-                                <option value="11 a 100">11 a 100 empleados</option>
-                                <option value="101 en adelante">Más de 100</option>
-                            </select>
-                        </div>
+                        <select id="tamano_empresa" name="tamano_empresa" value={formData.tamano_empresa} onChange={handleChange} required 
+                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
+                            <option value="">Tamaño de empresa*</option>
+                            <option value="1 a 10">1 a 10 empleados</option>
+                            <option value="11 a 100">11 a 100 empleados</option>
+                            <option value="101 en adelante">Más de 100</option>
+                        </select>
 
-                        <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" required placeholder="Cuéntanos brevemente tu caso o consulta*" 
-                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 resize-none placeholder-gray-400" />
+                        <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" placeholder="Mensaje o consulta" 
+                            className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] resize-none placeholder-gray-400" />
 
-                        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm mt-1">
-                            <p className="text-xs text-gray-500 text-justify leading-relaxed">
-                                Autorizo a LEGAL 360 S.A.S. para el tratamiento de mis datos personales, envío de respuestas, publicidad, invitaciones a eventos y encuestas a través de este medio.
+                        <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm">
+                            <p className="text-[11px] text-gray-500 text-justify leading-relaxed">
+                                En virtud de lo anterior, autorizo o no autorizo a LEGAL 360 S.A.S., para que realice tratamiento de mis datos personales y emita respuesta a inquietudes, envíe publicidad, comunicaciones, promociones, invitaciones a eventos, noticias, encuestas y cualquier información comercial a través de este medio.
                             </p>
                             
-                            <div className="flex flex-wrap items-center gap-6 font-medium text-[#001e33]">
-                                <label className="flex items-center gap-2 cursor-pointer group">
+                            <div className="flex items-center gap-6 font-medium text-[#001e33] text-xs">
+                                <label className="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="autorizacion" value="si" checked={formData.autorizacion === 'si'} onChange={handleChange} required 
-                                        className="w-4 h-4 text-[#d4af37] bg-gray-100 border-gray-300 focus:ring-[#d4af37] cursor-pointer" />
-                                    <span className="group-hover:text-[#d4af37] transition-colors">Sí, autorizo</span>
+                                        className="w-4 h-4 text-[#d4af37] focus:ring-[#d4af37] cursor-pointer" />
+                                    <span>Autorizo</span>
                                 </label>
-                                <label className="flex items-center gap-2 cursor-pointer group">
+                                <label className="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="autorizacion" value="no" checked={formData.autorizacion === 'no'} onChange={handleChange} required 
-                                        className="w-4 h-4 text-[#d4af37] bg-gray-100 border-gray-300 focus:ring-[#d4af37] cursor-pointer" />
-                                    <span className="group-hover:text-red-500 transition-colors">No autorizo</span>
+                                        className="w-4 h-4 text-[#d4af37] focus:ring-[#d4af37] cursor-pointer" />
+                                    <span>No autorizo</span>
                                 </label>
                             </div>
-
-                            {formData.autorizacion === 'no' && (
-                                <p className="text-red-500 text-xs font-semibold animate-pulse">
-                                    * La autorización es obligatoria para enviar el formulario.
-                                </p>
-                            )}
                         </div>
 
                         <button 
                             type="submit" 
-                            disabled={isLoading || formData.autorizacion === 'no'} 
+                            disabled={isLoading} 
                             className={`w-full mt-3 font-montserrat font-bold py-4 rounded-xl text-sm tracking-widest shadow-lg transform active:scale-95 transition-all duration-300 uppercase
-                                ${(isLoading || formData.autorizacion === 'no') 
-                                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' 
-                                    : 'bg-[#001e33] hover:bg-[#062c54] text-[#e6d769] hover:shadow-[0_10px_20px_rgba(0,30,51,0.3)] hover:-translate-y-1'
+                                ${isLoading 
+                                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                                    : 'bg-[#001e33] hover:bg-[#062c54] text-white'
                                 }`}
                         >
-                            {isLoading ? 'Procesando...' : 'Solicitar Diagnóstico'}
+                            {isLoading ? 'Enviando...' : 'Enviar'}
                         </button>
                     </form>
                 </div>
             </div>
 
-            {/* ================= MITAD DERECHA: TARJETA DE PLANES (Corregido Responsive) ================= */}
-            {/* p-0 en móvil elimina los bordes blancos laterales */}
-            <div className="w-full lg:w-[55%] xl:w-7/12 p-0 lg:p-4 sm:lg:p-6 lg:p-8 flex">
-                
-                {/* rounded-none en móvil para que la imagen cubra todo el ancho */}
-                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden shadow-none lg:shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-center items-center px-6 sm:px-12 py-20 lg:py-16 isolate">
+            {/* ================= MITAD DERECHA: TARJETA DE PLANES ================= */}
+            <div className="w-full lg:w-[55%] xl:w-7/12 p-0 lg:p-4 flex">
+                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 sm:px-12 py-20 lg:py-16 isolate">
                     
                     {/* Fondo de Imagen */}
                     <div className="absolute inset-0 z-[-2]">
                         <img 
                             src={bustos} 
-                            alt="Abogados Legal 360" 
-                            loading="lazy"
-                            className="w-full h-full object-cover transform-gpu will-change-transform"
+                            alt="Fondo Legal" 
+                            className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-[#001e33]/85 mix-blend-multiply"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0c111b] via-[#001e33]/40 to-[#001e33]/80"></div>
+                        <div className="absolute inset-0 bg-[#001e33]/90 mix-blend-multiply"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#001e33] via-transparent to-[#001e33]/50"></div>
                     </div>
 
                     <div className="relative z-10 w-full max-w-2xl">
-                        <h3 className="text-3xl sm:text-4xl font-bold mb-10 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-4 drop-shadow-lg">
-                            <SolutionOutlined className="text-4xl" />
-                            Nuestros Planes
+                        <h3 className="text-3xl sm:text-4xl font-bold mb-12 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-4">
+                            <SolutionOutlined className="text-[#fcd34d]" />
+                            Planes de Asesoría Legal
                         </h3>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-                            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300">
-                                <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-widest text-[#e6d769]">Plan Mensual</h4>
-                                <p className="text-xs text-gray-300 text-center mb-6 font-light">Ideal para el respaldo jurídico continuo de tu empresa.</p>
-                                <ul className="space-y-3 text-sm text-gray-200 font-roboto">
-                                    <li className="flex items-start gap-3"><CheckCircleOutlined className="mt-0.5 text-[#e6d769]" />Acompañamiento en laboral, comercial y SST.</li>
-                                    <li className="flex items-start gap-3"><PhoneOutlined className="mt-0.5 text-[#e6d769]" />Consultas ilimitadas multicanal.</li>
-                                    <li className="flex items-start gap-3"><FileTextOutlined className="mt-0.5 text-[#e6d769]" />Revisión y elaboración documental.</li>
-                                    <li className="flex items-start gap-3"><CheckCircleOutlined className="mt-0.5 text-[#e6d769]" />Gestión de riesgos y alertas legales.</li>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+                            {/* Plan Mensual */}
+                            <div className="bg-white p-7 sm:p-8 rounded-[2rem] shadow-2xl flex flex-col h-full">
+                                <h4 className="text-xl font-bold mb-2 text-[#001e33] text-center font-montserrat">Plan Mensual</h4>
+                                <p className="text-[13px] text-gray-600 text-center mb-6 leading-tight">Ideal para empresas que requieren un respaldo jurídico preventivo.</p>
+                                <ul className="space-y-4 text-[13px] text-[#001e33] font-roboto flex-grow">
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Acompañamiento legal continuo en derecho laboral, comercial y Seguridad y Salud en el Trabajo.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><PhoneOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Consultas jurídicas ilimitadas por correo electrónico, teléfono, videollamada o Whatsapp.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><FileTextOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Revisión y elaboración de documentos legales.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><BellOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Alerta de vencimientos legales y gestión de riesgos jurídicos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><TeamOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Capacitaciones jurídicas a tu equipo.</li>
                                 </ul>
                             </div>
 
-                            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300">
-                                <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-widest text-[#e6d769]">Por Evento</h4>
-                                <p className="text-xs text-gray-300 text-center mb-6 font-light">Apoyo jurídico puntual para casos específicos sin ataduras.</p>
-                                <ul className="space-y-3 text-sm text-gray-200 font-roboto">
-                                    <li className="flex items-start gap-3"><CheckCircleOutlined className="mt-0.5 text-[#e6d769]" />Asesoría especializada para tu caso.</li>
-                                    <li className="flex items-start gap-3"><SolutionOutlined className="mt-0.5 text-[#e6d769]" />Estrategias de resultados inmediatos.</li>
-                                    <li className="flex items-start gap-3"><FileTextOutlined className="mt-0.5 text-[#e6d769]" />Trámites, reclamaciones y auditorías.</li>
-                                    <li className="flex items-start gap-3"><CalendarOutlined className="mt-0.5 text-[#e6d769]" />Sin compromisos mensuales, respuesta rápida.</li>
+                            {/* Servicios por Evento */}
+                            <div className="bg-white p-7 sm:p-8 rounded-[2rem] shadow-2xl flex flex-col h-full">
+                                <h4 className="text-xl font-bold mb-2 text-[#001e33] text-center font-montserrat">Servicios por Evento</h4>
+                                <p className="text-[13px] text-gray-600 text-center mb-6 leading-tight">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
+                                <ul className="space-y-4 text-[13px] text-[#001e33] font-roboto flex-grow">
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Asesoría especializada para un caso o situación puntual.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><ThunderboltOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Estrategias jurídicas enfocadas en resultados inmediatos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><AuditOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Gestión en trámites, reclamaciones, auditorías o requerimientos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> No requiere compromiso mensual.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><ClockCircleOutlined className="mt-1 text-[#001e33] flex-shrink-0" /> Tiempo de respuesta prioritario según disponibilidad.</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div className="mt-12 flex justify-center">
-                            <a
-                                href="https://wa.link/twbzum"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] font-bold font-montserrat py-3 px-8 rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all duration-300"
+                        <div className="mt-14 flex justify-center">
+                            <button
+                                className="inline-flex items-center gap-3 bg-[#e6ce5a] text-[#001e33] font-bold font-montserrat py-4 px-10 rounded-xl shadow-xl hover:scale-105 transition-all duration-300 text-sm tracking-tighter"
                             >
                                 <CalendarOutlined className="text-xl" />
-                                <span className="tracking-wider">AGENDA TU CITA</span>
-                            </a>
+                                <span>AGENDA TU PRIMERA CONSULTA</span>
+                            </button>
                         </div>
                     </div>
                 </div>
