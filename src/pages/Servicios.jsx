@@ -63,7 +63,7 @@ const Servicios = ({ id }) => {
   return (
     <section
       id={id || "servicios"}
-      className="relative pt-24 text-white min-h-screen pb-32 overflow-hidden isolate"
+      className="relative pt-24 text-white min-h-screen pb-32 overflow-hidden isolate bg-[#001e33]"
     >
       {/* FONDO OPTIMIZADO: CSS puro sin JS para evitar lag en Safari */}
       <div className="absolute inset-0 z-[-2]">
@@ -78,8 +78,9 @@ const Servicios = ({ id }) => {
         </picture>
       </div>
 
-      <div className="absolute inset-0 bg-[#001e33]/40 z-[-1] pointer-events-none mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-[#001e33]/80 to-[#001e33] opacity-90 z-[-1] pointer-events-none"></div>
+      {/* OVERLAYS AJUSTADOS: Más transparentes en el centro para dejar ver la imagen */}
+      <div className="absolute inset-0 bg-[#001e33]/30 z-[-1] pointer-events-none mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33]/95 via-[#001e33]/40 to-[#001e33]/95 z-[-1] pointer-events-none"></div>
       
       {/* OLA SUPERIOR (Conecta con Quienes Somos) */}
       <div className="absolute top-0 left-0 w-full overflow-hidden z-20 -translate-y-[1px]">
@@ -93,7 +94,7 @@ const Servicios = ({ id }) => {
           Asesoría y Consultoría Empresarial
         </h2>
 
-        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-14 font-roboto font-light tracking-wide max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-14 font-roboto font-light tracking-wide max-w-2xl mx-auto drop-shadow-md">
           Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
@@ -116,7 +117,7 @@ const Servicios = ({ id }) => {
                     <div className="mb-5 transform group-hover:scale-110 transition-transform duration-500 ease-out">
                       {servicio.icono}
                     </div>
-                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed">
+                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed drop-shadow-md">
                       {servicio.titulo}
                     </h3>
                     <div>
@@ -134,7 +135,7 @@ const Servicios = ({ id }) => {
 
                   {/* BACK CARD */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] border border-[#e6d769]/40 glass-panel-dark flex flex-col justify-center items-center text-center">
-                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3">
+                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3 drop-shadow-md">
                       {servicio.titulo}
                     </h3>
                     <p className="text-gray-200 text-xs sm:text-sm mb-5 leading-relaxed font-light">
