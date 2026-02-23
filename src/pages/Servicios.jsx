@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   UserSwitchOutlined,
   FileProtectOutlined,
@@ -12,14 +12,7 @@ import serviciosmobile from '../assets/images/serviciosmobile.webp';
 
 const Servicios = ({ id }) => {
   const [activeId, setActiveId] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const animationDelays = ['0s', '0.15s', '0.3s', '0.45s', '0.6s'];
 
@@ -67,40 +60,35 @@ const Servicios = ({ id }) => {
     }
   ];
 
-  const getBackgroundStyle = () => {
-    if (windowWidth <= 1240) {
-      return {
-        backgroundColor: '#001e33',
-        backgroundImage: `url(${serviciosmobile})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      };
-    } else {
-      return {
-        backgroundImage: `url(${Teamlegal})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 20%',
-        backgroundAttachment: 'fixed'
-      };
-    }
-  };
-
   return (
     <section
       id={id || "servicios"}
-      className="relative pt-24 text-white min-h-screen pb-16 overflow-hidden"
-      style={getBackgroundStyle()}
+      className="relative pt-24 text-white min-h-screen pb-32 overflow-hidden isolate"
     >
-      <div className="absolute inset-0 bg-[#001e33]/40 z-10 pointer-events-none mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-transparent to-[#001e33] opacity-80 z-10 pointer-events-none"></div>
+      {/* FONDO OPTIMIZADO: CSS puro sin JS para evitar lag en Safari */}
+      <div className="absolute inset-0 z-[-2]">
+        <picture className="w-full h-full block">
+          <source media="(min-width: 1024px)" srcSet={Teamlegal} />
+          <img 
+            src={serviciosmobile} 
+            alt="Servicios Legal 360" 
+            loading="lazy"
+            className="w-full h-full object-cover object-[center_20%] transform-gpu will-change-transform"
+          />
+        </picture>
+      </div>
+
+      <div className="absolute inset-0 bg-[#001e33]/40 z-[-1] pointer-events-none mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-[#001e33]/80 to-[#001e33] opacity-90 z-[-1] pointer-events-none"></div>
       
-      <div className="w-full overflow-hidden absolute top-0 left-0 z-20">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] rotate-180 drop-shadow-md">
-          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
+      {/* OLA SUPERIOR (Conecta con Quienes Somos) */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden z-20 -translate-y-[1px]">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block rotate-180 drop-shadow-md">
+          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#0c111b]" />
         </svg>
       </div>
 
-      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center">
+      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center mt-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-[#e6d769] to-[#f1e28c] drop-shadow-lg">
           Asesoría y Consultoría Empresarial
         </h2>
@@ -115,8 +103,8 @@ const Servicios = ({ id }) => {
             return (
               <div
                 key={servicio.id}
-                className={`relative w-full max-w-[280px] aspect-[3/4] perspective ${windowWidth < 768 ? 'mobile-fade-in' : ''}`}
-                style={windowWidth < 768 ? { '--delay': animationDelays[index % animationDelays.length] } : {}}
+                className="relative w-full max-w-[280px] aspect-[3/4] perspective mobile-fade-in"
+                style={{ '--delay': animationDelays[index % animationDelays.length] }}
               >
                 <div className={`relative w-full h-full card-transition transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
                   
@@ -175,14 +163,26 @@ const Servicios = ({ id }) => {
         </div>
       </div>
 
+      {/* OLA INFERIOR (Transición suave hacia FormularioPlanes) */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 translate-y-[2px] pointer-events-none">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[50px] sm:h-[80px] block">
+          {/* El color #f8fafc coincide exactamente con el fondo del Formulario */}
+          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#f8fafc]" />
+        </svg>
+      </div>
+
       <style jsx>{`
-        @keyframes fadeInMobile {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .mobile-fade-in {
-          opacity: 0;
-          animation: fadeInMobile 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards var(--delay, 0s);
+        /* Animación optimizada por CSS Media Queries (Cero JS) */
+        .mobile-fade-in { opacity: 1; }
+        @media (max-width: 767px) {
+          @keyframes fadeInMobile {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .mobile-fade-in {
+            opacity: 0;
+            animation: fadeInMobile 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards var(--delay, 0s);
+          }
         }
         
         .glass-panel {
@@ -195,7 +195,6 @@ const Servicios = ({ id }) => {
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
         }
-
         .perspective {
           perspective: 2000px;
           -webkit-perspective: 2000px;
