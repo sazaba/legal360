@@ -26,9 +26,10 @@ export default function BlogPublicList() {
         fetchBlogs();
     }, []);
 
+    // 1. Estado de Carga (Skeleton Premium)
     if (loading) {
         return (
-            <div className="w-full min-h-[50vh] bg-[#0c111b] flex flex-col items-center justify-center">
+            <div className="w-full min-h-[30vh] bg-[#0c111b] flex flex-col items-center justify-center">
                 <LoadingOutlined className="text-5xl text-[#e6d769] animate-spin mb-4" />
                 <p className="text-[#e6d769] font-montserrat tracking-widest uppercase text-sm animate-pulse">
                     Cargando artículos...
@@ -37,15 +38,20 @@ export default function BlogPublicList() {
         );
     }
 
+    // 2. Lógica para Ocultar Componente: Si no hay blogs, no renderizamos nada (retorna null)
+    if (!blogs || blogs.length === 0) {
+        return null;
+    }
+
+    // 3. Renderizado Principal (Solo si hay blogs)
     return (
-        // Fondo principal oscuro (#0c111b) - Isolate para renderizado GPU en Safari
         <section className="relative w-full min-h-[100svh] bg-[#0c111b] py-24 sm:py-32 isolate overflow-hidden">
             
             {/* ================= OLA DE TRANSICIÓN PREMIUM ================= */}
             {/* Esta ola es del color #f8fafc (el mismo de FormularioPlanes) para conectar ambos mundos */}
             <div className="absolute top-0 left-0 w-full overflow-hidden z-10 pointer-events-none -translate-y-[1px]">
-                <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block">
-                    <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" className="fill-[#f8fafc]" />
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block rotate-180">
+                    <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#f8fafc]" />
                 </svg>
             </div>
 
