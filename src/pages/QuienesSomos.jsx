@@ -6,16 +6,15 @@ const QuienesSomos = () => {
     <section className="relative w-full min-h-[100svh] flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:px-24 py-32 overflow-hidden bg-[#0c111b] isolate" id="por-que-nosotros">
       
       {/* ================= TRANSICIÓN PREMIUM SEAMLESS FADE ================= */}
-      {/* Se fusiona con el fondo #0c111b del Hero anterior */}
       <div className="absolute top-0 left-0 w-full h-32 sm:h-48 bg-gradient-to-b from-[#0c111b] via-[#0c111b]/80 to-transparent z-30 pointer-events-none -translate-y-[1px]"></div>
 
-      {/* 1. FONDO OPTIMIZADO Y ESTABILIZADO */}
-      <div className="absolute -top-[5%] -left-[5%] w-[110%] h-[110%] z-[-2] pointer-events-none">
+      {/* 1. FONDO OPTIMIZADO (Zoom reducido) */}
+      <div className="absolute inset-0 z-[-2] pointer-events-none">
         <img
           src={Mari}
           alt="Equipo Legal 360"
           loading="lazy"
-          className="w-full h-full object-cover object-[70%_center] lg:object-[85%_center] transform-gpu will-change-transform"
+          className="w-full h-full object-cover object-center lg:object-[right_center] transform-gpu"
         />
       </div>
 
@@ -23,7 +22,6 @@ const QuienesSomos = () => {
       <div className="absolute inset-0 z-[-1] bg-gradient-to-t from-[#0c111b]/95 via-[#0c111b]/80 to-[#0c111b]/40 lg:bg-gradient-to-r lg:from-[#0c111b]/95 lg:via-[#0c111b]/80 lg:to-transparent mix-blend-multiply pointer-events-none" />
       <div className="absolute inset-0 z-[-1] bg-[#001e33]/30 pointer-events-none" />
       
-      {/* Aseguramos que la base del componente termine en color sólido para la siguiente transición */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0c111b] to-transparent z-[-1] pointer-events-none translate-y-[1px]"></div>
 
       {/* 3. CONTENIDO PRINCIPAL (Glassmorphism Card) */}
