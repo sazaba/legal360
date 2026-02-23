@@ -21,13 +21,13 @@ const ContactoAccesos = () => {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.2 }
+            transition: { staggerChildren: 0.15 }
         }
     };
 
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
-        visible: { y: 0, opacity: 1 }
+        visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
     };
 
     const contactItems = [
@@ -55,23 +55,23 @@ const ContactoAccesos = () => {
     ];
 
     return (
-        <section className="relative w-full bg-[#030912] py-16 px-6 lg:px-20 overflow-hidden isolate">
+        <section className="relative w-full bg-[#030912] py-16 px-5 lg:px-20 overflow-hidden isolate">
             
-            {/* Elementos decorativos de fondo (Luces sutiles) */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#d4af37]/5 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#001e33]/40 blur-[120px] rounded-full pointer-events-none" />
+            {/* Luces de fondo optimizadas (Gradientes simples > Filtros complejos para Safari) */}
+            <div className="absolute top-0 left-1/4 w-80 h-80 bg-[#d4af37]/5 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#001e33]/30 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative z-10">
                 
-                <div className="flex flex-col items-center mb-12">
+                <div className="flex flex-col items-center mb-10">
                     <motion.span 
-                        initial={{ opacity: 0, tracking: "0.1em" }}
-                        whileInView={{ opacity: 1, tracking: "0.3em" }}
-                        className="text-[#e6d769] text-xs font-bold uppercase mb-3 font-montserrat"
+                        initial={{ opacity: 0, letterSpacing: "0.1em" }}
+                        whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+                        className="text-[#e6d769] text-[10px] sm:text-xs font-bold uppercase mb-3 font-montserrat"
                     >
                         Canales Directos
                     </motion.span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white font-montserrat text-center tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white font-montserrat text-center tracking-tight px-4">
                         ¿Cómo prefieres <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f5e27a]">contactarnos?</span>
                     </h2>
                 </div>
@@ -80,55 +80,57 @@ const ContactoAccesos = () => {
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
                 >
                     {contactItems.map((item) => (
                         <motion.div
                             key={item.id}
                             variants={itemVariants}
-                            whileHover={{ y: -8 }}
+                            whileTap={{ scale: 0.97 }}
                             onClick={item.action}
                             className="group relative cursor-pointer"
+                            style={{ WebkitTapHighlightColor: 'transparent' }}
                         >
-                            {/* Borde con Gradiente Animado */}
-                            <div className="absolute -inset-[1px] bg-gradient-to-r from-[#d4af37]/20 via-[#f5e27a]/40 to-[#d4af37]/20 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+                            {/* Borde Neón */}
+                            <div className="absolute -inset-[1px] bg-gradient-to-r from-[#d4af37]/10 via-[#f5e27a]/30 to-[#d4af37]/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[2px]" />
                             
-                            {/* Cuerpo de la tarjeta */}
-                            <div className="relative bg-[#0a1524]/80 backdrop-blur-xl border border-white/5 p-6 rounded-2xl flex items-center gap-5 transition-all duration-300 group-hover:border-[#e6d769]/30 group-hover:bg-[#0c1c30]">
+                            {/* Cuerpo de la tarjeta - Glassmorphism optimizado para iOS */}
+                            <div className="relative bg-[#0a1524]/60 backdrop-blur-xl border border-white/5 p-5 sm:p-6 rounded-2xl flex items-center gap-4 transition-all duration-300 group-hover:bg-[#0c1c30]/80"
+                                 style={{ WebkitBackdropFilter: 'blur(20px)' }}>
                                 
-                                {/* Icono Circular con Pulso */}
-                                <div className="relative flex-shrink-0 w-14 h-14 bg-gradient-to-br from-[#030912] to-[#0a1524] rounded-full flex items-center justify-center border border-white/10 text-[#e6d769] text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:border-[#e6d769]/50 shadow-lg">
+                                {/* Icono */}
+                                <div className="relative flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#030912] to-[#0a1524] rounded-full flex items-center justify-center border border-white/10 text-[#e6d769] text-xl sm:text-2xl transition-transform duration-500 group-hover:scale-110 shadow-lg transform-gpu">
                                     {item.icon}
-                                    {/* Anillo de pulso */}
-                                    <div className="absolute inset-0 rounded-full border border-[#e6d769]/30 animate-ping opacity-0 group-hover:opacity-100" />
+                                    {/* Pulso animado solo en dispositivos con hover (PC) */}
+                                    <div className="absolute inset-0 rounded-full border border-[#e6d769]/30 animate-ping opacity-0 group-hover:opacity-100 hidden md:block" />
                                 </div>
 
-                                <div className="flex flex-col overflow-hidden">
-                                    <span className="text-[#e6d769] text-[10px] font-bold uppercase tracking-widest font-montserrat mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-[#e6d769] text-[9px] font-bold uppercase tracking-widest font-montserrat mb-0.5 opacity-70 group-hover:opacity-100">
                                         {item.name}
                                     </span>
-                                    <span className="text-white text-sm sm:text-base font-semibold font-roboto truncate tracking-tight">
+                                    <span className="text-white text-xs sm:text-sm md:text-base font-semibold font-roboto truncate tracking-tight pr-2">
                                         {item.info}
                                     </span>
                                 </div>
 
-                                {/* Flecha indicadora que aparece al final */}
-                                <div className="ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#e6d769]">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                {/* Flecha */}
+                                <div className="ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#e6d769] flex-shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </motion.div>
 
-                {/* Footer de sección sutil */}
+                {/* Footer sutil */}
                 <motion.p 
                     initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 0.4 }}
-                    className="text-center text-white text-[10px] uppercase tracking-[0.4em] font-montserrat mt-12"
+                    whileInView={{ opacity: 0.3 }}
+                    className="text-center text-white text-[9px] uppercase tracking-[0.3em] font-montserrat mt-10 px-6"
                 >
-                    Atención inmediata de Lunes a Viernes
+                    Respuesta inmediata de Lunes a Viernes
                 </motion.p>
             </div>
         </section>
