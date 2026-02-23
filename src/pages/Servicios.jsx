@@ -63,9 +63,13 @@ const Servicios = ({ id }) => {
   return (
     <section
       id={id || "servicios"}
-      className="relative pt-24 text-white min-h-screen pb-32 overflow-hidden isolate"
+      className="relative pt-28 text-white min-h-screen pb-32 overflow-hidden isolate bg-[#001e33]"
     >
-      {/* FONDO OPTIMIZADO: CSS puro sin JS para evitar lag en Safari */}
+      {/* ================= TRANSICIÓN PREMIUM ================= */}
+      {/* Se fusiona con el fondo #0c111b de QuienesSomos */}
+      <div className="absolute top-0 left-0 w-full h-40 sm:h-56 bg-gradient-to-b from-[#0c111b] via-[#0c111b]/80 to-transparent z-30 pointer-events-none -translate-y-[1px]"></div>
+
+      {/* FONDO OPTIMIZADO */}
       <div className="absolute inset-0 z-[-2]">
         <picture className="w-full h-full block">
           <source media="(min-width: 1024px)" srcSet={Teamlegal} />
@@ -78,22 +82,19 @@ const Servicios = ({ id }) => {
         </picture>
       </div>
 
-      <div className="absolute inset-0 bg-[#001e33]/40 z-[-1] pointer-events-none mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#001e33] via-[#001e33]/80 to-[#001e33] opacity-90 z-[-1] pointer-events-none"></div>
-      
-      {/* OLA SUPERIOR (Conecta con Quienes Somos) */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden z-20 -translate-y-[1px]">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block rotate-180 drop-shadow-md">
-          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#0c111b]" />
-        </svg>
-      </div>
+      {/* OVERLAYS REDUCIDOS (Más transparencia para que se vea la foto) */}
+      <div className="absolute inset-0 bg-[#001e33]/20 z-[-1] pointer-events-none mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-[#001e33]/40 z-[-1] pointer-events-none"></div> 
+
+      {/* Degradado inferior FUERTE para conectar limpiamente con FormularioPlanes */}
+      <div className="absolute bottom-0 left-0 w-full h-48 sm:h-64 bg-gradient-to-t from-[#001e33] via-[#001e33]/90 to-transparent z-[-1] pointer-events-none translate-y-[1px]"></div>
 
       <div className="relative z-20 max-w-5xl mx-auto px-4 text-center mt-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-[#e6d769] to-[#f1e28c] drop-shadow-lg">
           Asesoría y Consultoría Empresarial
         </h2>
 
-        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-14 font-roboto font-light tracking-wide max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-14 font-roboto font-light tracking-wide max-w-2xl mx-auto drop-shadow-md">
           Asesoría legal, clara y eficiente para proteger a tu empresa.
         </p>
 
@@ -116,7 +117,7 @@ const Servicios = ({ id }) => {
                     <div className="mb-5 transform group-hover:scale-110 transition-transform duration-500 ease-out">
                       {servicio.icono}
                     </div>
-                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed">
+                    <h3 className="text-sm font-semibold text-[#e6d769] uppercase tracking-wider mb-6 leading-relaxed drop-shadow-md">
                       {servicio.titulo}
                     </h3>
                     <div>
@@ -134,7 +135,7 @@ const Servicios = ({ id }) => {
 
                   {/* BACK CARD */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] border border-[#e6d769]/40 glass-panel-dark flex flex-col justify-center items-center text-center">
-                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3">
+                    <h3 className="text-base sm:text-lg font-bold text-[#e6d769] mb-3 drop-shadow-md">
                       {servicio.titulo}
                     </h3>
                     <p className="text-gray-200 text-xs sm:text-sm mb-5 leading-relaxed font-light">
@@ -163,16 +164,7 @@ const Servicios = ({ id }) => {
         </div>
       </div>
 
-      {/* OLA INFERIOR (Transición suave hacia FormularioPlanes) */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 translate-y-[2px] pointer-events-none">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[50px] sm:h-[80px] block">
-          {/* El color #f8fafc coincide exactamente con el fondo del Formulario */}
-          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#f8fafc]" />
-        </svg>
-      </div>
-
       <style jsx>{`
-        /* Animación optimizada por CSS Media Queries (Cero JS) */
         .mobile-fade-in { opacity: 1; }
         @media (max-width: 767px) {
           @keyframes fadeInMobile {

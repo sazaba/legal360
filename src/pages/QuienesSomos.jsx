@@ -5,31 +5,28 @@ const QuienesSomos = () => {
   return (
     <section className="relative w-full min-h-[100svh] flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:px-24 py-32 overflow-hidden bg-[#0c111b] isolate" id="por-que-nosotros">
       
-      {/* 1. FONDO OPTIMIZADO Y ESTABILIZADO PARA SCROLL MÓVIL */}
-      {/* Usamos un contenedor ligeramente más grande que la pantalla (oversize) para evitar
-          que el cambio de tamaño de la barra del navegador en móviles cause "brincos" */}
+      {/* ================= TRANSICIÓN PREMIUM SEAMLESS FADE ================= */}
+      {/* Se fusiona con el fondo #0c111b del Hero anterior */}
+      <div className="absolute top-0 left-0 w-full h-32 sm:h-48 bg-gradient-to-b from-[#0c111b] via-[#0c111b]/80 to-transparent z-30 pointer-events-none -translate-y-[1px]"></div>
+
+      {/* 1. FONDO OPTIMIZADO Y ESTABILIZADO */}
       <div className="absolute -top-[5%] -left-[5%] w-[110%] h-[110%] z-[-2] pointer-events-none">
         <img
           src={Mari}
           alt="Equipo Legal 360"
           loading="lazy"
-          // Añadimos will-change-transform para que el navegador la trate como una capa estática
           className="w-full h-full object-cover object-[70%_center] lg:object-[85%_center] transform-gpu will-change-transform"
         />
       </div>
 
-      {/* 2. OVERLAYS (Sin cambios) */}
+      {/* 2. OVERLAYS */}
       <div className="absolute inset-0 z-[-1] bg-gradient-to-t from-[#0c111b]/95 via-[#0c111b]/80 to-[#0c111b]/40 lg:bg-gradient-to-r lg:from-[#0c111b]/95 lg:via-[#0c111b]/80 lg:to-transparent mix-blend-multiply pointer-events-none" />
       <div className="absolute inset-0 z-[-1] bg-[#001e33]/30 pointer-events-none" />
+      
+      {/* Aseguramos que la base del componente termine en color sólido para la siguiente transición */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0c111b] to-transparent z-[-1] pointer-events-none translate-y-[1px]"></div>
 
-      {/* 3. SEPARADOR SUPERIOR */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden z-10 -translate-y-[1px] pointer-events-none">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block rotate-180">
-          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#0c111b]" />
-        </svg>
-      </div>
-
-      {/* 4. CONTENIDO PRINCIPAL (Sin cambios en la lógica) */}
+      {/* 3. CONTENIDO PRINCIPAL (Glassmorphism Card) */}
       <div className="relative z-20 w-full max-w-2xl mt-8 lg:mt-0">
         
         <div className="bg-[#001e33]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-colors duration-500 hover:border-white/20 hover:bg-[#001e33]/50">
@@ -92,14 +89,6 @@ const QuienesSomos = () => {
           </div>
         </div>
       </div>
-
-      {/* 5. SEPARADOR INFERIOR */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-10 translate-y-[2px] pointer-events-none">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block">
-          <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#001e33]" />
-        </svg>
-      </div>
-      
     </section>
   );
 };
