@@ -23,7 +23,7 @@ const ContactoAccesos = () => {
                     />
                 </div>
 
-                {/* Columna de Botones (Oscuros con dorado para contrastar el blanco) */}
+                {/* Columna de Botones (CORREGIDO: Botones oscuros para contraste sobre blanco) */}
                 <div className="w-full lg:w-auto flex flex-wrap justify-center lg:justify-end gap-4 sm:gap-5">
                     
                     {/* Botón Llámanos */}
