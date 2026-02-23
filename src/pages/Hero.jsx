@@ -69,25 +69,33 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 leading-none translate-y-[1px]">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[30px] sm:h-[40px] drop-shadow-md">
+     {/* Separador SVG Inferior - Optimizado anti-glitch Safari */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden z-20 pointer-events-none translate-y-[2px]">
+        <svg 
+          viewBox="0 0 500 150" 
+          preserveAspectRatio="none" 
+          /* Eliminamos drop-shadow-md y forzamos block */
+          className="w-full h-[30px] sm:h-[40px] block"
+        >
           <path
             d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-            className="fill-[#001e33]"
+            className="fill-[#0c111b]" /* Asegúrate de que este color coincida con el fondo de "Quienes Somos" */
           />
         </svg>
       </div>
 
+      {/* Botón WhatsApp */}
       <a
         href="https://wa.link/twbzum"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 hover:shadow-2xl animate-bounce z-50 bg-gradient-to-br from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33]"
+        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 animate-bounce z-50 bg-gradient-to-br from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] pointer-events-auto"
       >
         <FaWhatsapp className="text-3xl" />
       </a>
     </section>
   );
 };
+
 
 export default Hero;
