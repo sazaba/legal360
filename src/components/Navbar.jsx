@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
-import { DownOutlined, LogoutOutlined, DashboardOutlined, MenuOutlined, CloseOutlined, CalendarOutlined } from '@ant-design/icons';
+import { 
+    DownOutlined, 
+    LogoutOutlined, 
+    DashboardOutlined, 
+    MenuOutlined, 
+    CloseOutlined, 
+    CalendarOutlined 
+} from '@ant-design/icons';
 import logo from "../assets/images/logolegal.webp";
 import Relevo from "../assets/images/relevo.webp";
 
@@ -18,7 +25,7 @@ export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // 1. Lógica de Scroll Premium
+    // 1. Lógica de Scroll Premium (Auto-hide y Transparencia)
     useEffect(() => {
         const handleScroll = () => {
             const currentY = window.scrollY;
@@ -36,7 +43,7 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY, menuAbierto, userDropdown]);
 
-    // 2. Cerrar dropdowns
+    // 2. Cerrar dropdown de usuario al hacer click fuera
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -47,7 +54,7 @@ export default function Navbar() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // 3. Navegación Inteligente
+    // 3. Navegación Inteligente (Scroll suave o redirección)
     const handleSmartScroll = (id) => {
         setMenuAbierto(false);
         setUserDropdown(false);
@@ -85,23 +92,22 @@ export default function Navbar() {
         }
     };
 
-    const isDarkBgRoute = location.pathname === "/politica-datos" || location.pathname === "/terminos-condiciones";
-    const isFloating = scrolled || isDarkBgRoute;
+    const isFloating = scrolled || location.pathname !== "/";
 
     return (
         <>
-            {/* WRAPPER PRINCIPAL */}
+            {/* WRAPPER PRINCIPAL - Cápsula flotante */}
             <header 
                 className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-                    ${showNavbar ? "top-4 sm:top-6" : "-top-32"}
-                    ${isFloating ? "w-[95%] lg:w-[90%] max-w-7xl" : "w-full sm:w-[96%] max-w-7xl"}
+                    ${showNavbar ? "top-3 sm:top-6" : "-top-32"}
+                    ${isFloating ? "w-[94%] lg:w-[88%] max-w-7xl" : "w-full sm:w-[96%] max-w-7xl"}
                 `}
             >
                 {/* CUERPO DEL NAVBAR */}
                 <div 
                     className={`relative w-full flex items-center justify-between transition-all duration-700 px-4 sm:px-10 h-16 sm:h-20
                         ${isFloating 
-                            ? "bg-[#001e33]/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)]" 
+                            ? "bg-[#001e33]/80 backdrop-blur-xl border border-white/10 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl" 
                             : "bg-transparent border border-transparent rounded-none"}
                     `}
                     style={isFloating ? { WebkitBackdropFilter: 'blur(20px)' } : {}}
@@ -115,131 +121,127 @@ export default function Navbar() {
                         <img
                             src={logo}
                             alt="Legal360"
-                            className="h-10 sm:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                            className="h-8 sm:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                         />
                     </div>
 
                     {/* MENÚ DESKTOP */}
                     <nav className="hidden md:flex items-center space-x-1 lg:space-x-4 h-full">
-                        {['top', 'por-que-nosotros', 'servicios'].map((item, index) => {
-                            const labels = ['Inicio', 'Nosotros', 'Servicios'];
-                            return (
-                                <button 
-                                    key={item}
-                                    onClick={() => handleSmartScroll(item)} 
-                                    className="relative text-gray-200 hover:text-[#e6d769] text-sm lg:text-base font-montserrat font-semibold transition-all duration-300 px-3 py-2 group overflow-hidden"
-                                >
-                                    <span className="relative z-10">{labels[index]}</span>
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-[#e6d769] transition-all duration-500 group-hover:w-full rounded-full shadow-[0_0_10px_#e6d769]"></span>
-                                </button>
-                            );
-                        })}
+                        {['top', 'por-que-nosotros', 'servicios'].map((item, index) => (
+                            <button 
+                                key={item}
+                                onClick={() => handleSmartScroll(item)} 
+                                className="relative text-gray-200 hover:text-[#e6d769] text-sm lg:text-base font-montserrat font-semibold transition-all duration-300 px-3 py-2 group"
+                            >
+                                <span className="relative z-10">{['Inicio', 'Nosotros', 'Servicios'][index]}</span>
+                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-[#e6d769] transition-all duration-500 group-hover:w-full rounded-full shadow-[0_0_10px_#e6d769]"></span>
+                            </button>
+                        ))}
 
-                        {/* BOTÓN AGENDA DIAGNÓSTICO (Desktop) */}
+                        {/* BOTÓN CTA DESKTOP */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
-                            className="relative ml-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] px-5 py-2.5 rounded-full text-xs lg:text-sm font-montserrat font-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] active:scale-95 flex items-center gap-2 group overflow-hidden"
+                            className="ml-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] px-6 py-2.5 rounded-full text-xs lg:text-sm font-montserrat font-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] active:scale-95 flex items-center gap-2 group"
                         >
-                            <CalendarOutlined className="text-base animate-bounce" />
-                            <span className="relative z-10 uppercase tracking-tighter">Agenda tu diagnóstico</span>
+                            <CalendarOutlined className="text-base" />
+                            <span className="uppercase tracking-tighter">Agenda tu diagnóstico</span>
                         </button>
 
-                        {/* Dropdown Usuario / Login */}
-                        {usuario && usuario.nombre ? (
+                        {/* USUARIO / LOGIN */}
+                        {usuario ? (
                             <div className="relative ml-2" ref={dropdownRef}>
                                 <button 
                                     onClick={() => setUserDropdown(!userDropdown)}
-                                    className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2.5 rounded-full hover:bg-[#e6d769] hover:text-[#001e33] transition-all duration-500 group"
+                                    className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-all"
                                 >
-                                    <div className="bg-[#001e33] text-[#e6d769] rounded-full w-7 h-7 flex items-center justify-center font-black text-xs shadow-md border border-[#e6d769]/30">
-                                        {usuario.nombre.charAt(0).toUpperCase()}
+                                    <div className="bg-[#e6d769] text-[#001e33] rounded-full w-7 h-7 flex items-center justify-center font-black text-xs uppercase">
+                                        {usuario.nombre?.charAt(0)}
                                     </div>
-                                    <DownOutlined className={`text-xs transition-transform duration-500 ${userDropdown ? 'rotate-180' : ''}`} />
+                                    <DownOutlined className={`text-[10px] text-gray-400 transition-transform ${userDropdown ? 'rotate-180' : ''}`} />
                                 </button>
-
-                                <div className={`absolute right-0 mt-4 w-60 rounded-3xl overflow-hidden shadow-2xl bg-[#001e33]/95 backdrop-blur-2xl border border-white/10 transition-all duration-500 origin-top-right ${userDropdown ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
-                                    <div className="p-2 flex flex-col gap-1">
-                                        <button onClick={() => { setUserDropdown(false); navigate('/admin'); }} className="flex items-center gap-3 w-full text-left px-5 py-4 text-sm text-gray-200 hover:text-[#001e33] hover:bg-[#e6d769] rounded-2xl transition-all">
-                                            <DashboardOutlined className="text-lg" /> <span>Panel Administrativo</span>
-                                        </button>
-                                        <div className="h-[1px] bg-white/5 mx-4 my-1"></div>
-                                        <button onClick={handleLogout} className="flex items-center gap-3 w-full text-left px-5 py-4 text-sm text-red-400 hover:text-white hover:bg-red-500 rounded-2xl transition-all">
-                                            <LogoutOutlined className="text-lg" /> <span>Cerrar Sesión</span>
-                                        </button>
-                                    </div>
+                                <div className={`absolute right-0 mt-4 w-56 bg-[#001e33] border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 ${userDropdown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
+                                    <button onClick={() => { setUserDropdown(false); navigate('/admin'); }} className="w-full flex items-center gap-3 px-5 py-4 text-sm text-gray-300 hover:bg-[#e6d769] hover:text-[#001e33] rounded-t-2xl transition-all">
+                                        <DashboardOutlined /> Panel Admin
+                                    </button>
+                                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-5 py-4 text-sm text-red-400 hover:bg-red-500 hover:text-white rounded-b-2xl transition-all">
+                                        <LogoutOutlined /> Cerrar Sesión
+                                    </button>
                                 </div>
                             </div>
                         ) : (
-                            <button onClick={() => navigate('/login')} className="ml-2 bg-white/5 text-white border border-white/20 hover:border-[#e6d769] hover:text-[#e6d769] px-6 py-2.5 rounded-full text-xs font-montserrat font-bold transition-all duration-500">
+                            <button onClick={() => navigate('/login')} className="ml-2 text-white/70 hover:text-[#e6d769] text-sm font-bold transition-colors px-4">
                                 LOGIN
                             </button>
                         )}
-
-                        <a href="https://www.cancilleria.gov.co/centro-relevo" target="_blank" rel="noopener noreferrer" className="ml-2 hover:scale-110 transition-transform duration-500 hidden lg:block">
-                            <img src={Relevo} alt="Centro de Relevo" className="w-8 object-contain brightness-110" />
-                        </a>
                     </nav>
 
-                    {/* BOTÓN HAMBURGUESA MÓVIL */}
-                    <button 
-                        onClick={() => setMenuAbierto(true)} 
-                        className="md:hidden flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 text-[#e6d769] active:scale-90 transition-all"
-                    >
-                        <MenuOutlined className="text-xl" />
-                    </button>
+                    {/* ACCIONES MÓVIL (Rediseñadas para que no sea "un asco") */}
+                    <div className="flex md:hidden items-center gap-3">
+                        {/* Botón CTA Compacto Móvil */}
+                        <button 
+                            onClick={() => handleSmartScroll('planes')}
+                            className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] h-10 px-4 rounded-xl flex items-center gap-2 shadow-lg active:scale-90 transition-all"
+                        >
+                            <CalendarOutlined className="text-lg" />
+                            <span className="text-[10px] font-black font-montserrat uppercase hidden xs:block">Agenda</span>
+                        </button>
+
+                        <button 
+                            onClick={() => setMenuAbierto(true)} 
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#e6d769] active:bg-[#e6d769] active:text-[#001e33] transition-all"
+                        >
+                            <MenuOutlined className="text-xl" />
+                        </button>
+                    </div>
                 </div>
             </header>
 
-            {/* MENÚ MÓVIL */}
-            <div className={`fixed inset-0 z-[200] md:hidden transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${menuAbierto ? "opacity-100 visible" : "opacity-0 invisible"}`}>
-                <div className="absolute inset-0 bg-[#001e33]/90 backdrop-blur-2xl" onClick={() => setMenuAbierto(false)}></div>
+            {/* MENÚ MÓVIL FULL SCREEN */}
+            <div className={`fixed inset-0 z-[200] md:hidden transition-all duration-500 ${menuAbierto ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+                <div className="absolute inset-0 bg-[#001e33]/95 backdrop-blur-xl" onClick={() => setMenuAbierto(false)}></div>
                 
-                <div className={`absolute top-0 right-0 w-[85%] sm:w-[400px] h-full bg-[#031525] border-l border-white/10 shadow-2xl flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${menuAbierto ? "translate-x-0" : "translate-x-full"}`}>
+                <div className={`absolute top-0 right-0 w-[85%] h-full bg-[#031525] border-l border-white/10 flex flex-col transition-transform duration-500 ${menuAbierto ? "translate-x-0" : "translate-x-full"}`}>
                     
-                    <div className="flex justify-between items-center p-8 border-b border-white/5">
-                        <img src={logo} alt="Legal360" className="h-10 w-auto object-contain" />
-                        <button onClick={() => setMenuAbierto(false)} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 text-gray-300 hover:text-white transition-all">
-                            <CloseOutlined className="text-xl" />
+                    <div className="flex justify-between items-center p-6 border-b border-white/5">
+                        <img src={logo} alt="Legal360" className="h-8 w-auto" />
+                        <button onClick={() => setMenuAbierto(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-gray-400">
+                            <CloseOutlined />
                         </button>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto px-8 py-10 flex flex-col gap-6">
-                        {/* BOTÓN AGENDA (Móvil prioritario) */}
+                    <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+                        {/* CTA en el menú lateral más balanceado */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
-                            className="w-full py-5 bg-gradient-to-r from-[#d4af37] to-[#f5e27a] text-[#001e33] rounded-2xl font-black font-montserrat text-lg shadow-[0_15px_30px_rgba(212,175,55,0.3)] active:scale-95 transition-all flex items-center justify-center gap-3"
+                            className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#f5e27a] text-[#001e33] rounded-2xl font-black font-montserrat text-base shadow-xl flex items-center justify-center gap-3"
                         >
-                            <CalendarOutlined /> AGENDA TU DIAGNÓSTICO
+                            <CalendarOutlined className="text-xl" /> AGENDA TU DIAGNÓSTICO
                         </button>
 
-                        <div className="h-[1px] bg-white/5 w-full my-2"></div>
-
-                        <div className="flex flex-col gap-2">
-                            {['top', 'por-que-nosotros', 'servicios'].map((item, index) => {
-                                const labels = ['Inicio', 'Nosotros', 'Servicios'];
-                                return (
-                                    <button key={item} onClick={() => handleSmartScroll(item)} className="text-left w-full py-4 text-2xl font-montserrat font-black text-gray-400 hover:text-[#e6d769] transition-all border-b border-white/5 uppercase tracking-tighter">
-                                        {labels[index]}
-                                    </button>
-                                );
-                            })}
-                            <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="text-left w-full py-4 text-2xl font-montserrat font-black text-gray-400 hover:text-[#e6d769] transition-all border-b border-white/5 uppercase tracking-tighter">
+                        <div className="space-y-2">
+                            {['top', 'por-que-nosotros', 'servicios'].map((item, index) => (
+                                <button 
+                                    key={item} 
+                                    onClick={() => handleSmartScroll(item)} 
+                                    className="w-full text-left py-4 text-2xl font-montserrat font-black text-gray-400 hover:text-[#e6d769] border-b border-white/5 uppercase"
+                                >
+                                    {['Inicio', 'Nosotros', 'Servicios'][index]}
+                                </button>
+                            ))}
+                            <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="block w-full text-left py-4 text-2xl font-montserrat font-black text-gray-400 border-b border-white/5 uppercase">
                                 Contacto
                             </a>
                         </div>
 
                         {!usuario && (
-                            <button onClick={() => { setMenuAbierto(false); navigate('/login'); }} className="mt-4 w-full py-4 border border-white/10 text-white rounded-2xl font-bold text-sm">
-                                INICIAR SESIÓN
+                            <button onClick={() => { setMenuAbierto(false); navigate('/login'); }} className="mt-4 w-full py-4 border border-[#e6d769] text-[#e6d769] rounded-2xl font-bold uppercase tracking-widest">
+                                Iniciar Sesión
                             </button>
                         )}
                     </div>
 
-                    {/* Footer Menú Móvil */}
-                    <div className="p-10 border-t border-white/5 flex flex-col items-center justify-center bg-black/20">
-                        <a href="https://www.centroderelevo.gov.co/632/w3-channel.html" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-500">
-                            <img src={Relevo} alt="Centro de Relevo" className="w-16 opacity-80" />
-                        </a>
+                    <div className="p-8 border-t border-white/5 flex justify-center bg-black/20">
+                        <img src={Relevo} alt="Centro de Relevo" className="w-16 opacity-50" />
                     </div>
                 </div>
             </div>
