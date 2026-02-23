@@ -54,7 +54,7 @@ export default function Navbar() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // 3. Navegación Inteligente (Scroll suave o redirección)
+    // 3. Navegación Inteligente
     const handleSmartScroll = (id) => {
         setMenuAbierto(false);
         setUserDropdown(false);
@@ -96,7 +96,6 @@ export default function Navbar() {
 
     return (
         <>
-            {/* WRAPPER PRINCIPAL - Cápsula flotante */}
             <header 
                 className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
                     ${showNavbar ? "top-3 sm:top-6" : "-top-32"}
@@ -143,7 +142,7 @@ export default function Navbar() {
                             onClick={() => handleSmartScroll('planes')}
                             className="ml-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] px-6 py-2.5 rounded-full text-xs lg:text-sm font-montserrat font-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] active:scale-95 flex items-center gap-2 group"
                         >
-                            <CalendarOutlined className="text-base" />
+                            <CalendarOutlined style={{ color: '#001e33' }} className="text-base flex-shrink-0" />
                             <span className="uppercase tracking-tighter">Agenda tu diagnóstico</span>
                         </button>
 
@@ -175,14 +174,14 @@ export default function Navbar() {
                         )}
                     </nav>
 
-                    {/* ACCIONES MÓVIL (Rediseñadas para que no sea "un asco") */}
-                    <div className="flex md:hidden items-center gap-3">
-                        {/* Botón CTA Compacto Móvil */}
+                    {/* ACCIONES MÓVIL (Compactas para evitar "el asco") */}
+                    <div className="flex md:hidden items-center gap-2 sm:gap-3">
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] h-10 px-4 rounded-xl flex items-center gap-2 shadow-lg active:scale-90 transition-all"
                         >
-                            <CalendarOutlined className="text-lg" />
+                            {/* Forzamos color para Safari */}
+                            <CalendarOutlined style={{ color: '#001e33' }} className="text-lg flex-shrink-0" />
                             <span className="text-[10px] font-black font-montserrat uppercase hidden xs:block">Agenda</span>
                         </button>
 
@@ -210,12 +209,12 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
-                        {/* CTA en el menú lateral más balanceado */}
+                        {/* Botón en el menú lateral con color de icono forzado */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#f5e27a] text-[#001e33] rounded-2xl font-black font-montserrat text-base shadow-xl flex items-center justify-center gap-3"
                         >
-                            <CalendarOutlined className="text-xl" /> AGENDA TU DIAGNÓSTICO
+                            <CalendarOutlined style={{ color: '#001e33' }} className="text-xl flex-shrink-0" /> AGENDA TU DIAGNÓSTICO
                         </button>
 
                         <div className="space-y-2">
@@ -232,12 +231,6 @@ export default function Navbar() {
                                 Contacto
                             </a>
                         </div>
-
-                        {!usuario && (
-                            <button onClick={() => { setMenuAbierto(false); navigate('/login'); }} className="mt-4 w-full py-4 border border-[#e6d769] text-[#e6d769] rounded-2xl font-bold uppercase tracking-widest">
-                                Iniciar Sesión
-                            </button>
-                        )}
                     </div>
 
                     <div className="p-8 border-t border-white/5 flex justify-center bg-black/20">
