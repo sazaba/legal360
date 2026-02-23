@@ -6,7 +6,7 @@ import SSTLegal360 from './pages/SSTLegal360';
 import DerechoLaboral from './pages/DerechoLaboral';
 import DerechoComercial from './pages/DerechoComercial';
 import CapacitacionesJuridicas from './pages/CapacitacionesJuridicas';
-import CicloCapacitaciones from './pages/CicloCapacitaciones'; // <-- Nueva importación
+import CicloCapacitaciones from './pages/CicloCapacitaciones';
 import PoliticaDatos from './pages/PoliticaDatos';
 import Footer from './pages/Footer';
 import TerminosWeb from './pages/TerminosWeb';
@@ -19,14 +19,18 @@ import AdminLayout from './components/AdminLayout';
 import BlogCRUD from './pages/BlogCRUD';
 import BlogView from './pages/BlogView';
 
+// 1. Importamos el nuevo componente del botón flotante
+import WhatsAppButton from './components/WhatsAppButton';
+
 function App() {
   const location = useLocation();
 
-  // Oculta el navbar si estamos en /admin o alguna de sus subrutas
+  // Oculta elementos públicos si estamos en /admin o alguna de sus subrutas
   const hideNavbar = location.pathname.startsWith('/admin');
 
   return (
     <>
+      {/* Navbar visible solo en rutas públicas */}
       {!hideNavbar && <Navbar />}
 
       <Routes>
@@ -35,14 +39,13 @@ function App() {
         <Route path="/derecho-laboral" element={<DerechoLaboral />} />
         <Route path="/comercial" element={<DerechoComercial />} />
         <Route path="/capacitaciones" element={<CapacitacionesJuridicas />} />
-        {/* 👇 Nueva ruta agregada */}
         <Route path="/ciclo-capacitaciones" element={<CicloCapacitaciones />} /> 
         <Route path="/politica-datos" element={<PoliticaDatos />} />
         <Route path="/terminos-condiciones" element={<TerminosWeb />} />
         <Route path="/login" element={<Login />} />
         <Route path="/blog/:slug" element={<BlogView />} />
 
-        {/* Rutas protegidas con layout */}
+        {/* Rutas protegidas con layout administrativo */}
         <Route
           path="/admin"
           element={
@@ -51,7 +54,7 @@ function App() {
             </RutaPrivada>
           }
         >
-          <Route index element={<UserCrudForm />} /> {/* 👈 Página por defecto */}
+          <Route index element={<UserCrudForm />} />
           <Route path="usuarios" element={<UserCrudForm />} />
           <Route path="diagnosticos" element={<DiagnosticoCrud />} />
           <Route path="pqsfr" element={<PQRSFManagement />} />
@@ -59,7 +62,11 @@ function App() {
         </Route>
       </Routes>
 
+      {/* Footer visible solo en rutas públicas */}
       {!hideNavbar && <Footer />}
+
+      {/* 2. Integramos el botón de WhatsApp globalmente (fuera de las rutas de admin) */}
+      {!hideNavbar && <WhatsAppButton />}
     </>
   );
 }

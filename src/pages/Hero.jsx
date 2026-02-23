@@ -105,15 +105,6 @@ const Hero = () => {
           <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" className="fill-[#0c111b]" />
         </svg>
       </div>
-
-      <a
-        href="https://wa.link/twbzum"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 p-4 rounded-full shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all duration-300 hover:scale-110 active:scale-95 z-100 bg-gradient-to-br from-[#d4af37] via-[#f5e27a] to-[#b8860b] text-[#001e33]"
-      >
-        <FaWhatsapp className="text-3xl" />
-      </a>
       
     </section>
   );
