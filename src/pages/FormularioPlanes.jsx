@@ -92,19 +92,14 @@ const FormularioPlanes = () => {
     };
 
     return (
-        // Estructura 100% Ancho (Split Screen)
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc]">
             
-            {/* OLA DE TRANSICIÓN SUPERIOR: Conecta Servicios (#001e33) con este componente */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden z-30 pointer-events-none -translate-y-[1px]">
-                <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block">
-                    {/* Ola invertida apuntando hacia abajo */}
-                    <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" className="fill-[#001e33]" />
-                </svg>
-            </div>
+            {/* ================= TRANSICIÓN PREMIUM SEAMLESS FADE ================= */}
+            {/* Elimina el corte duro y fusiona el #001e33 del componente Servicios con esta vista */}
+            <div className="absolute top-0 left-0 w-full h-32 sm:h-48 bg-gradient-to-b from-[#001e33] via-[#001e33]/70 to-transparent z-30 pointer-events-none -translate-y-[1px]"></div>
 
-            {/* ================= MITAD IZQUIERDA: FORMULARIO (Clean & Premium) ================= */}
-            <div className="w-full lg:w-[45%] xl:w-5/12 bg-[#f8fafc] px-6 sm:px-12 lg:px-16 pt-28 pb-16 flex flex-col justify-center">
+            {/* ================= MITAD IZQUIERDA: FORMULARIO ================= */}
+            <div className="w-full lg:w-[45%] xl:w-5/12 bg-[#f8fafc] px-6 sm:px-12 lg:px-16 pt-32 pb-16 flex flex-col justify-center relative z-20">
                 <div className="max-w-xl mx-auto w-full">
                     <div className="mb-8 text-center lg:text-left">
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
@@ -161,7 +156,7 @@ const FormularioPlanes = () => {
                         <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} rows="3" required placeholder="Cuéntanos brevemente tu caso o consulta*" 
                             className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent transition-all duration-300 resize-none placeholder-gray-400" />
 
-                        {/* Caja de Autorización Premium */}
+                        {/* Caja de Autorización */}
                         <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm mt-2">
                             <p className="text-xs text-gray-500 text-justify leading-relaxed">
                                 Autorizo a LEGAL 360 S.A.S. para el tratamiento de mis datos personales, envío de respuestas, publicidad, invitaciones a eventos y encuestas a través de este medio.
@@ -203,7 +198,7 @@ const FormularioPlanes = () => {
             </div>
 
             {/* ================= MITAD DERECHA: IMAGEN & PLANES ================= */}
-            <div className="w-full lg:w-[55%] xl:w-7/12 relative flex flex-col justify-center items-center px-6 sm:px-12 lg:px-20 pt-16 pb-24 lg:py-24 overflow-hidden isolate shadow-[-20px_0_50px_rgba(0,0,0,0.3)]">
+            <div className="w-full lg:w-[55%] xl:w-7/12 relative flex flex-col justify-center items-center px-6 sm:px-12 lg:px-20 pt-16 pb-24 lg:py-24 overflow-hidden isolate shadow-[-20px_0_50px_rgba(0,0,0,0.3)] z-10">
                 
                 {/* Fondo de Imagen Acelerado por GPU */}
                 <div className="absolute inset-0 z-[-2]">
@@ -218,7 +213,7 @@ const FormularioPlanes = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c111b] via-[#001e33]/60 to-transparent"></div>
                 </div>
 
-                <div className="relative z-10 w-full max-w-2xl">
+                <div className="relative z-10 w-full max-w-2xl mt-12 lg:mt-0">
                     <h3 className="text-3xl sm:text-4xl font-bold mb-10 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-4 drop-shadow-lg">
                         <SolutionOutlined className="text-4xl" />
                         Nuestros Planes
@@ -226,7 +221,6 @@ const FormularioPlanes = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                         
-                        {/* Tarjeta Plan Mensual */}
                         <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300">
                             <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-widest text-[#e6d769]">Plan Mensual</h4>
                             <p className="text-xs text-gray-300 text-center mb-6 font-light">Ideal para el respaldo jurídico continuo de tu empresa.</p>
@@ -239,7 +233,6 @@ const FormularioPlanes = () => {
                             </ul>
                         </div>
 
-                        {/* Tarjeta Por Evento */}
                         <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-white/15 hover:border-[#e6d769]/50 hover:-translate-y-1 transition-all duration-300">
                             <h4 className="text-xl font-bold mb-3 text-white text-center font-montserrat uppercase tracking-widest text-[#e6d769]">Por Evento</h4>
                             <p className="text-xs text-gray-300 text-center mb-6 font-light">Apoyo jurídico puntual para casos específicos sin ataduras.</p>
