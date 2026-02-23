@@ -4,50 +4,49 @@ import logowhitebg from '../assets/images/logowhitebg.webp';
 
 const ContactoAccesos = () => {
     return (
-        // Fondo muy oscuro que sirve de puente hacia el Footer
-        <section className="w-full bg-[#070d14] py-8 px-4 sm:px-6 lg:px-12 font-roboto border-t border-white/5">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+        // FONDO UNIFICADO: Usa exactamente el mismo #030912 que el Footer para una fusión invisible
+        <section className="relative w-full bg-[#030912] pt-24 pb-8 px-4 sm:px-6 lg:px-12 font-roboto isolate">
+            
+            {/* Opcional: Un pequeño brillo detrás de la tarjeta para destacarla */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#001e33]/40 via-transparent to-transparent z-[-1]"></div>
 
-                {/* LOGO */}
-                <div className="flex justify-center md:justify-start w-full md:w-auto">
+            {/* LA TARJETA BLANCA FLOTANTE */}
+            <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col lg:flex-row items-center justify-between gap-10 border border-gray-100 transform-gpu hover:shadow-[0_20px_60px_rgba(212,175,55,0.15)] transition-all duration-500 relative z-10">
+                
+                {/* Columna del Logo (Ahora resalta perfectamente sobre blanco) */}
+                <div className="flex justify-center lg:justify-start w-full lg:w-auto">
                     <img
                         src={logowhitebg}
                         alt="Legal 360 Logo"
                         loading="lazy"
-                        className="w-[140px] sm:w-[160px] object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-105 transition-transform duration-300"
+                        className="w-[180px] sm:w-[220px] object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500"
                     />
                 </div>
 
-                {/* BOTONES DE CONTACTO MODERNOS */}
-                <div className="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-3 sm:gap-5">
+                {/* Columna de Botones (Oscuros con dorado para contrastar el blanco) */}
+                <div className="w-full lg:w-auto flex flex-wrap justify-center lg:justify-end gap-4 sm:gap-5">
                     
                     {/* Botón Llámanos */}
-                    <a href="tel:+573123240463" className="group flex items-center gap-3 bg-white/5 border border-white/10 hover:border-[#e6d769]/50 hover:bg-white/10 px-5 sm:px-6 py-3 rounded-full transition-all duration-300">
-                        <div className="bg-[#001e33] p-2 rounded-full group-hover:scale-110 transition-transform">
-                            <BsFillTelephoneFill className="text-[#e6d769] text-lg sm:text-xl" />
-                        </div>
-                        <span className="text-gray-300 group-hover:text-white font-montserrat font-semibold text-xs sm:text-sm tracking-wider">
-                            LLÁMANOS
+                    <a href="tel:+573123240463" className="group flex items-center gap-4 bg-[#001e33] hover:bg-[#062c4f] px-6 py-4 rounded-full shadow-lg hover:shadow-[0_10px_20px_rgba(0,30,51,0.3)] transition-all duration-300 hover:-translate-y-1">
+                        <BsFillTelephoneFill className="text-[#e6d769] text-xl" />
+                        <span className="text-white font-montserrat font-bold text-xs sm:text-sm tracking-widest uppercase">
+                            Llámanos
                         </span>
                     </a>
 
                     {/* Botón Chatea */}
-                    <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 bg-white/5 border border-white/10 hover:border-[#e6d769]/50 hover:bg-white/10 px-5 sm:px-6 py-3 rounded-full transition-all duration-300">
-                        <div className="bg-[#001e33] p-2 rounded-full group-hover:scale-110 transition-transform">
-                            <AiOutlineMessage className="text-[#e6d769] text-lg sm:text-xl" />
-                        </div>
-                        <span className="text-gray-300 group-hover:text-white font-montserrat font-semibold text-xs sm:text-sm tracking-wider">
-                            CHATEA
+                    <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 bg-[#001e33] hover:bg-[#062c4f] px-6 py-4 rounded-full shadow-lg hover:shadow-[0_10px_20px_rgba(0,30,51,0.3)] transition-all duration-300 hover:-translate-y-1">
+                        <AiOutlineMessage className="text-[#e6d769] text-2xl" />
+                        <span className="text-white font-montserrat font-bold text-xs sm:text-sm tracking-widest uppercase">
+                            Chatea
                         </span>
                     </a>
 
                     {/* Botón Email */}
-                    <a href="mailto:servicioalcliente@legal360.co" className="group flex items-center gap-3 bg-white/5 border border-white/10 hover:border-[#e6d769]/50 hover:bg-white/10 px-5 sm:px-6 py-3 rounded-full transition-all duration-300">
-                        <div className="bg-[#001e33] p-2 rounded-full group-hover:scale-110 transition-transform">
-                            <AiOutlineMail className="text-[#e6d769] text-lg sm:text-xl" />
-                        </div>
-                        <span className="text-gray-300 group-hover:text-white font-montserrat font-semibold text-xs sm:text-sm tracking-wider">
-                            EMAIL
+                    <a href="mailto:servicioalcliente@legal360.co" className="group flex items-center gap-4 bg-[#001e33] hover:bg-[#062c4f] px-6 py-4 rounded-full shadow-lg hover:shadow-[0_10px_20px_rgba(0,30,51,0.3)] transition-all duration-300 hover:-translate-y-1">
+                        <AiOutlineMail className="text-[#e6d769] text-2xl" />
+                        <span className="text-white font-montserrat font-bold text-xs sm:text-sm tracking-widest uppercase">
+                            Email
                         </span>
                     </a>
 
