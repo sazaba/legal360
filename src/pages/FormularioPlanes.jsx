@@ -305,8 +305,8 @@ const FormularioPlanes = () => {
     return (
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc] overflow-hidden">
             
-            {/* ================= 60% IZQUIERDA: FORMULARIO ================= */}
-            <div className="w-full lg:w-[60%] px-6 sm:px-12 lg:px-16 pt-12 lg:pt-16 pb-8 flex flex-col justify-center">
+            {/* ================= 55% IZQUIERDA: FORMULARIO ================= */}
+            <div className="w-full lg:w-[55%] px-6 sm:px-12 lg:px-16 pt-12 lg:pt-16 pb-8 flex flex-col justify-center">
                 <div className="max-w-2xl mx-auto w-full">
                     <div className="mb-4 text-center lg:text-left">
                         <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-[#001e33] font-montserrat mb-2 tracking-tight">
@@ -339,7 +339,6 @@ const FormularioPlanes = () => {
                             </div>
                         </div>
 
-                        {/* Agrupados para ahorrar espacio vertical */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
@@ -396,8 +395,8 @@ const FormularioPlanes = () => {
                 </div>
             </div>
 
-            {/* ================= 40% DERECHA: TARJETA DE PLANES ================= */}
-            <div className="w-full lg:w-[40%] p-0 lg:p-4 flex">
+            {/* ================= 45% DERECHA: TARJETA DE PLANES ================= */}
+            <div className="w-full lg:w-[45%] p-0 lg:p-4 flex">
                 <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 py-12 isolate">
                     
                     {/* Fondo de Imagen */}
