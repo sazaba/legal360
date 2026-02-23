@@ -262,14 +262,7 @@ const FormularioPlanes = () => {
         e.preventDefault();
         
         if (formData.autorizacion !== 'si') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Autorización requerida',
-                text: 'Debes autorizar el tratamiento de datos para poder enviar tus datos.',
-                confirmButtonColor: '#001e33',
-                customClass: { popup: 'rounded-2xl shadow-2xl font-roboto' }
-            });
-            return;
+            return; // Bloqueado por seguridad adicional
         }
 
         setIsLoading(true);
@@ -302,11 +295,14 @@ const FormularioPlanes = () => {
         }
     };
 
+    // Determinar si el botón debe estar deshabilitado
+    const isSubmitDisabled = isLoading || formData.autorizacion !== 'si';
+
     return (
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc] overflow-hidden">
             
             {/* ================= 45% IZQUIERDA: FORMULARIO ================= */}
-            <div className="w-full lg:w-[45%] px-6 sm:px-10 lg:px-12 pt-10 lg:pt-12 pb-8 flex flex-col justify-center">
+            <div className="w-full lg:w-[45%] px-6 sm:px-10 lg:px-12 pt-8 lg:pt-10 pb-6 flex flex-col justify-center">
                 <div className="max-w-xl mx-auto w-full">
                     <div className="mb-4 text-center lg:text-left">
                         <h2 className="text-3xl lg:text-4xl font-extrabold text-[#001e33] font-montserrat mb-2 tracking-tight">
@@ -375,13 +371,24 @@ const FormularioPlanes = () => {
                                     <span>No autorizo</span>
                                 </label>
                             </div>
+
+                            {/* Letrero de Advertencia cuando no autoriza */}
+                            {formData.autorizacion === 'no' && (
+                                <div className="mt-2 p-2 bg-orange-50 border border-orange-200 rounded-lg">
+                                    <p className="text-[10px] text-orange-700 font-bold flex items-center gap-2">
+                                        ⚠️ El formulario no puede ser enviado sin la autorización del tratamiento de datos.
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
                         <button 
                             type="submit" 
-                            disabled={isLoading} 
+                            disabled={isSubmitDisabled} 
                             className={`w-full mt-1 font-montserrat font-bold py-3.5 rounded-xl text-sm tracking-widest shadow-lg transform active:scale-95 transition-all duration-300 uppercase
-                                ${isLoading ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-[#001e33] hover:bg-[#062c54] text-white'}`}
+                                ${isSubmitDisabled 
+                                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed grayscale' 
+                                    : 'bg-[#001e33] hover:bg-[#062c54] text-white'}`}
                         >
                             {isLoading ? 'Enviando...' : 'Enviar'}
                         </button>
@@ -391,7 +398,7 @@ const FormularioPlanes = () => {
 
             {/* ================= 55% DERECHA: TARJETA DE PLANES ================= */}
             <div className="w-full lg:w-[55%] p-0 lg:p-4 flex">
-                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 sm:px-10 py-12 isolate">
+                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 sm:px-10 py-10 isolate">
                     
                     {/* Fondo de Imagen */}
                     <div className="absolute inset-0 z-[-2]">
@@ -400,42 +407,42 @@ const FormularioPlanes = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-[#001e33] via-transparent to-[#001e33]/50"></div>
                     </div>
 
-                    <div className="relative z-10 w-full max-w-4xl">
-                        <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-3">
+                    <div className="relative z-10 w-full max-w-5xl">
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-3">
                             <SolutionOutlined className="text-[#fcd34d]" />
                             Planes de Asesoría Legal
                         </h3>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full items-stretch">
                             {/* Plan Mensual */}
-                            <div className="bg-white p-6 rounded-[1.5rem] shadow-2xl flex flex-col h-full">
-                                <h4 className="text-lg font-bold mb-1 text-[#001e33] font-montserrat">Plan Mensual</h4>
-                                <p className="text-[11px] text-gray-600 mb-4 leading-tight">Ideal para empresas que requieren un respaldo jurídico preventivo.</p>
-                                <ul className="space-y-2.5 text-[11px] text-[#001e33] font-roboto flex-grow">
-                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> Acompañamiento legal continuo en derecho laboral, comercial y Seguridad y Salud en el Trabajo.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><PhoneOutlined className="mt-0.5 flex-shrink-0" /> Consultas jurídicas ilimitadas por correo electrónico, teléfono, videollamada o Whatsapp.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><FileTextOutlined className="mt-0.5 flex-shrink-0" /> Revisión y elaboración de documentos legales.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><BellOutlined className="mt-0.5 flex-shrink-0" /> Alerta de vencimientos legales y gestión de riesgos jurídicos.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><TeamOutlined className="mt-0.5 flex-shrink-0" /> Capacitaciones jurídicas a tu equipo.</li>
+                            <div className="bg-white p-8 rounded-[2rem] shadow-2xl flex flex-col min-h-[420px]">
+                                <h4 className="text-xl font-bold mb-1 text-[#001e33] font-montserrat">Plan Mensual</h4>
+                                <p className="text-[13px] text-gray-600 mb-6 leading-tight">Ideal para empresas que requieren un respaldo jurídico preventivo.</p>
+                                <ul className="space-y-4 text-[13px] text-[#001e33] font-roboto flex-grow">
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Acompañamiento legal continuo en derecho laboral, comercial y Seguridad y Salud en el Trabajo.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><PhoneOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Consultas jurídicas ilimitadas por correo electrónico, teléfono, videollamada o Whatsapp.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><FileTextOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Revisión y elaboración de documentos legales.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><BellOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Alerta de vencimientos legales y gestión de riesgos jurídicos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><TeamOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Capacitaciones jurídicas a tu equipo.</li>
                                 </ul>
                             </div>
 
                             {/* Servicios por Evento */}
-                            <div className="bg-white p-6 rounded-[1.5rem] shadow-2xl flex flex-col h-full">
-                                <h4 className="text-lg font-bold mb-1 text-[#001e33] font-montserrat">Servicios por Evento</h4>
-                                <p className="text-[11px] text-gray-600 mb-4 leading-tight">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
-                                <ul className="space-y-2.5 text-[11px] text-[#001e33] font-roboto flex-grow">
-                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> Asesoría especializada para un caso o situación puntual.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><ThunderboltOutlined className="mt-0.5 flex-shrink-0" /> Estrategias jurídicas enfocadas en resultados inmediatos.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><AuditOutlined className="mt-0.5 flex-shrink-0" /> Gestión en trámites, reclamaciones, auditorías o requerimientos.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> No requiere compromiso mensual.</li>
-                                    <li className="flex items-start gap-2 leading-tight"><ClockCircleOutlined className="mt-0.5 flex-shrink-0" /> Tiempo de respuesta prioritario según disponibilidad.</li>
+                            <div className="bg-white p-8 rounded-[2rem] shadow-2xl flex flex-col min-h-[420px]">
+                                <h4 className="text-xl font-bold mb-1 text-[#001e33] font-montserrat">Servicios por Evento</h4>
+                                <p className="text-[13px] text-gray-600 mb-6 leading-tight">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
+                                <ul className="space-y-4 text-[13px] text-[#001e33] font-roboto flex-grow">
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Asesoría especializada para un caso o situación puntual.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><ThunderboltOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Estrategias jurídicas enfocadas en resultados inmediatos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><AuditOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Gestión en trámites, reclamaciones, auditorías o requerimientos.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><CheckCircleOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> No requiere compromiso mensual.</li>
+                                    <li className="flex items-start gap-3 leading-snug"><ClockCircleOutlined className="mt-1 flex-shrink-0 text-[#001e33]" /> Tiempo de respuesta prioritario según disponibilidad.</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div className="mt-10 flex justify-center">
-                            <button className="inline-flex items-center gap-3 bg-[#e6ce5a] text-[#001e33] font-bold font-montserrat py-4 px-10 rounded-xl shadow-xl hover:scale-105 transition-all text-xs tracking-tighter">
+                            <button className="inline-flex items-center gap-3 bg-[#e6ce5a] text-[#001e33] font-bold font-montserrat py-4 px-10 rounded-xl shadow-xl hover:scale-105 transition-all text-sm tracking-tighter">
                                 <CalendarOutlined className="text-lg" />
                                 <span>AGENDA TU PRIMERA CONSULTA</span>
                             </button>
