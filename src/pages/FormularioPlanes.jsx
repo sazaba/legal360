@@ -306,10 +306,10 @@ const FormularioPlanes = () => {
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc] overflow-hidden">
             
             {/* ================= 60% IZQUIERDA: FORMULARIO ================= */}
-            <div className="w-full lg:w-[60%] px-6 sm:px-12 lg:px-20 pt-16 lg:pt-24 pb-12 flex flex-col justify-center">
+            <div className="w-full lg:w-[60%] px-6 sm:px-12 lg:px-16 pt-12 lg:pt-16 pb-8 flex flex-col justify-center">
                 <div className="max-w-2xl mx-auto w-full">
-                    <div className="mb-6 text-center lg:text-left">
-                        <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-[#001e33] font-montserrat mb-3 tracking-tight">
+                    <div className="mb-4 text-center lg:text-left">
+                        <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-[#001e33] font-montserrat mb-2 tracking-tight">
                             Agenda tu <span className="text-[#001e33]">Diagnóstico Gratuito</span>
                         </h2>
                         <p className="text-sm sm:text-base text-gray-500 font-roboto leading-relaxed">
@@ -317,28 +317,30 @@ const FormularioPlanes = () => {
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4 text-[#001e33] text-sm font-roboto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 text-[#001e33] text-sm font-roboto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <input id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Nombre*" 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                             <input id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required placeholder="Apellido*" 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                             <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="Correo electrónico*" 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
+                            
                             <div className="flex gap-2">
                                 <select id="pais" name="pais" value={formData.pais} onChange={handleChange} required 
-                                    className="w-1/3 bg-white border border-gray-200 shadow-sm rounded-xl px-2 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600 text-xs">
+                                    className="w-1/3 bg-white border border-gray-200 shadow-sm rounded-xl px-3 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
                                     <option value="Col">Col (+57)</option>
                                 </select>
-                                <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="Teléfono*" 
+                                <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="+57" 
                                     className="w-2/3 bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] transition-all placeholder-gray-400" />
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Agrupados para ahorrar espacio vertical */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <select id="cargo" name="cargo" value={formData.cargo} onChange={handleChange} required 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
                                 <option value="">Cargo*</option>
@@ -347,6 +349,7 @@ const FormularioPlanes = () => {
                                 <option value="RRHH">Recursos Humanos</option>
                                 <option value="Otro">Otro</option>
                             </select>
+
                             <select id="tamano_empresa" name="tamano_empresa" value={formData.tamano_empresa} onChange={handleChange} required 
                                 className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] cursor-pointer text-gray-600">
                                 <option value="">Tamaño de empresa*</option>
@@ -360,8 +363,8 @@ const FormularioPlanes = () => {
                             className="w-full bg-white border border-gray-200 shadow-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#d4af37] resize-none placeholder-gray-400" />
 
                         <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3 shadow-sm">
-                            <p className="text-[10px] text-gray-500 text-justify leading-tight">
-                                Autorizo a LEGAL 360 S.A.S. para realizar el tratamiento de mis datos personales con el fin de emitir respuesta a mis inquietudes y enviar información comercial relevante.
+                            <p className="text-[10px] sm:text-[11px] text-gray-500 text-justify leading-snug">
+                                En virtud de lo anterior, autorizo o no autorizo a LEGAL 360 S.A.S., para que realice tratamiento de mis datos personales y emita respuesta a inquietudes, envíe publicidad, comunicaciones, promociones, invitaciones a eventos, noticias, encuestas y cualquier información comercial a través de este medio.
                             </p>
                             
                             <div className="flex items-center gap-6 font-medium text-[#001e33] text-xs">
@@ -381,7 +384,7 @@ const FormularioPlanes = () => {
                         <button 
                             type="submit" 
                             disabled={isLoading} 
-                            className={`w-full mt-2 font-montserrat font-bold py-3.5 rounded-xl text-sm tracking-widest shadow-lg transform active:scale-95 transition-all duration-300 uppercase
+                            className={`w-full mt-1 font-montserrat font-bold py-3.5 rounded-xl text-sm tracking-widest shadow-lg transform active:scale-95 transition-all duration-300 uppercase
                                 ${isLoading 
                                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
                                     : 'bg-[#001e33] hover:bg-[#062c54] text-white'
@@ -395,7 +398,7 @@ const FormularioPlanes = () => {
 
             {/* ================= 40% DERECHA: TARJETA DE PLANES ================= */}
             <div className="w-full lg:w-[40%] p-0 lg:p-4 flex">
-                <div className="relative w-full h-full min-h-[500px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 py-12 lg:py-10 isolate">
+                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center px-6 py-12 isolate">
                     
                     {/* Fondo de Imagen */}
                     <div className="absolute inset-0 z-[-2]">
@@ -409,39 +412,43 @@ const FormularioPlanes = () => {
                     </div>
 
                     <div className="relative z-10 w-full max-w-md">
-                        <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-3">
-                            <SolutionOutlined />
-                            Planes Legales
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-[#fcd34d] text-center font-montserrat flex items-center justify-center gap-3">
+                            <SolutionOutlined className="text-[#fcd34d]" />
+                            Planes de Asesoría Legal
                         </h3>
 
-                        <div className="flex flex-col gap-6 w-full">
+                        <div className="flex flex-col gap-4 w-full">
                             {/* Plan Mensual */}
-                            <div className="bg-white p-6 rounded-[1.5rem] shadow-2xl">
+                            <div className="bg-white p-5 rounded-[1.5rem] shadow-2xl">
                                 <h4 className="text-lg font-bold mb-1 text-[#001e33] font-montserrat">Plan Mensual</h4>
-                                <p className="text-[12px] text-gray-500 mb-4 leading-tight">Respaldo jurídico preventivo continuo.</p>
-                                <ul className="space-y-3 text-[12px] text-[#001e33] font-roboto">
-                                    <li className="flex items-start gap-2 leading-snug"><CheckCircleOutlined className="mt-0.5 text-[#d4af37]" /> Acompañamiento en derecho laboral y comercial.</li>
-                                    <li className="flex items-start gap-2 leading-snug"><PhoneOutlined className="mt-0.5 text-[#d4af37]" /> Consultas ilimitadas por todo medio.</li>
-                                    <li className="flex items-start gap-2 leading-snug"><FileTextOutlined className="mt-0.5 text-[#d4af37]" /> Revisión y elaboración de documentos.</li>
+                                <p className="text-[11px] text-gray-600 mb-3 leading-tight">Ideal para empresas que requieren un respaldo jurídico preventivo.</p>
+                                <ul className="space-y-2 text-[11px] text-[#001e33] font-roboto">
+                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> Acompañamiento legal continuo en derecho laboral, comercial y Seguridad y Salud en el Trabajo.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><PhoneOutlined className="mt-0.5 flex-shrink-0" /> Consultas jurídicas ilimitadas por correo electrónico, teléfono, videollamada o Whatsapp.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><FileTextOutlined className="mt-0.5 flex-shrink-0" /> Revisión y elaboración de documentos legales.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><BellOutlined className="mt-0.5 flex-shrink-0" /> Alerta de vencimientos legales y gestión de riesgos jurídicos.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><TeamOutlined className="mt-0.5 flex-shrink-0" /> Capacitaciones jurídicas a tu equipo.</li>
                                 </ul>
                             </div>
 
                             {/* Servicios por Evento */}
-                            <div className="bg-white p-6 rounded-[1.5rem] shadow-2xl">
-                                <h4 className="text-lg font-bold mb-1 text-[#001e33] font-montserrat">Por Evento</h4>
-                                <p className="text-[12px] text-gray-500 mb-4 leading-tight">Apoyo puntual en casos específicos.</p>
-                                <ul className="space-y-3 text-[12px] text-[#001e33] font-roboto">
-                                    <li className="flex items-start gap-2 leading-snug"><ThunderboltOutlined className="mt-0.5 text-[#d4af37]" /> Estrategias enfocadas en resultados inmediatos.</li>
-                                    <li className="flex items-start gap-2 leading-snug"><AuditOutlined className="mt-0.5 text-[#d4af37]" /> Gestión en trámites y auditorías.</li>
-                                    <li className="flex items-start gap-2 leading-snug"><ClockCircleOutlined className="mt-0.5 text-[#d4af37]" /> Sin compromisos mensuales.</li>
+                            <div className="bg-white p-5 rounded-[1.5rem] shadow-2xl">
+                                <h4 className="text-lg font-bold mb-1 text-[#001e33] font-montserrat">Servicios por Evento</h4>
+                                <p className="text-[11px] text-gray-600 mb-3 leading-tight">Para empresas que requieren apoyo jurídico puntual en casos específicos.</p>
+                                <ul className="space-y-2 text-[11px] text-[#001e33] font-roboto">
+                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> Asesoría especializada para un caso o situación puntual.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><ThunderboltOutlined className="mt-0.5 flex-shrink-0" /> Estrategias jurídicas enfocadas en resultados inmediatos.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><AuditOutlined className="mt-0.5 flex-shrink-0" /> Gestión en trámites, reclamaciones, auditorías o requerimientos.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><CheckCircleOutlined className="mt-0.5 flex-shrink-0" /> No requiere compromiso mensual.</li>
+                                    <li className="flex items-start gap-2 leading-tight"><ClockCircleOutlined className="mt-0.5 flex-shrink-0" /> Tiempo de respuesta prioritario según disponibilidad.</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div className="mt-10 flex justify-center">
-                            <button className="inline-flex items-center gap-2 bg-[#e6ce5a] text-[#001e33] font-bold font-montserrat py-3.5 px-8 rounded-xl shadow-xl hover:scale-105 transition-all text-xs tracking-tight">
+                        <div className="mt-8 flex justify-center">
+                            <button className="inline-flex items-center gap-3 bg-[#e6ce5a] text-[#001e33] font-bold font-montserrat py-3.5 px-8 rounded-xl shadow-xl hover:scale-105 transition-all text-xs tracking-tighter">
                                 <CalendarOutlined className="text-lg" />
-                                <span>AGENDAR CONSULTA</span>
+                                <span>AGENDA TU PRIMERA CONSULTA</span>
                             </button>
                         </div>
                     </div>
