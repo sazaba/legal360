@@ -17,10 +17,10 @@
         @apply bg-gradient-to-b from-[#0c111b] to-[#1a1d29] min-h-screen text-white;
     }
 
-    /* CORRECCIÓN: Sin el !important para que los botones de Tailwind funcionen */
+    /* 1. Regla general para todos los enlaces (limpia) */
     a {
-       color: inherit; 
-       text-decoration: none;
+       color: inherit !important; 
+       text-decoration: none !important;
        transition: color 0.3s ease;
     }
 
@@ -29,10 +29,10 @@
     footer a, 
     .navbar a, 
     .footer a {
-        color: white;
+        color: white !important;
     }
 
-    /* 3. Hover (Este sí puede llevar !important por seguridad) */
+    /* 3. Hover */
     nav a:hover, 
     footer a:hover {
         color: #e6d769 !important;
