@@ -48,9 +48,9 @@ const ContactoAccesos = () => {
         {
             id: 3,
             name: "Email",
-            info: "servicioalcliente@legal360.co",
+            info: "juridico@legal360.co",
             icon: <AiOutlineMail />,
-            action: () => handleNavigation('mail', 'servicioalcliente@legal360.co')
+            action: () => handleNavigation('mail', 'juridico@legal360.co')
         }
     ];
 

@@ -67,11 +67,17 @@ const FormularioPlanes = () => {
     };
 
     return (
-        // Fondo continuo #f8fafc que nace desde la ola del componente anterior
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc] overflow-hidden">
             
+            {/* OLA DE TRANSICIÓN SUPERIOR */}
+            <div className="absolute top-0 left-0 w-full overflow-hidden z-30 pointer-events-none -translate-y-[1px]">
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[60px] block">
+                    <path d="M0.00,49.98 C150.00,150.00 349.19,-50.00 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" className="fill-[#001e33]" />
+                </svg>
+            </div>
+
             {/* ================= MITAD IZQUIERDA: FORMULARIO ================= */}
-            <div className="w-full lg:w-[45%] xl:w-5/12 px-6 sm:px-12 lg:px-16 pt-20 lg:pt-28 pb-16 flex flex-col justify-center">
+            <div className="w-full lg:w-[45%] xl:w-5/12 px-6 sm:px-12 lg:px-16 pt-28 pb-16 flex flex-col justify-center">
                 <div className="max-w-xl mx-auto w-full">
                     <div className="mb-8 text-center lg:text-left">
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
@@ -168,11 +174,12 @@ const FormularioPlanes = () => {
                 </div>
             </div>
 
-            {/* ================= MITAD DERECHA: TARJETA FLOTANTE (Ultra Premium) ================= */}
-            {/* El secreto: padding alrededor (p-4 lg:p-8) y bordes ultra redondeados (rounded-[2.5rem]) */}
-            <div className="w-full lg:w-[55%] xl:w-7/12 p-4 sm:p-6 lg:p-8 flex">
+            {/* ================= MITAD DERECHA: NUESTROS PLANES (100% Ancho en Responsive) ================= */}
+            {/* Cambios: p-0 en móvil para cubrir el ancho total, p-8 en desktop para el efecto tarjeta */}
+            <div className="w-full lg:w-[55%] xl:w-7/12 p-0 lg:p-8 flex">
                 
-                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-center items-center px-6 sm:px-12 py-16 isolate">
+                {/* Cambios: rounded-none en móvil para cubrir bordes, rounded-[2.5rem] en desktop */}
+                <div className="relative w-full h-full min-h-[600px] lg:min-h-full rounded-none lg:rounded-[2.5rem] overflow-hidden shadow-none lg:shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-center items-center px-6 sm:px-12 py-20 lg:py-16 isolate">
                     
                     {/* Fondo de Imagen Acelerado */}
                     <div className="absolute inset-0 z-[-2]">
