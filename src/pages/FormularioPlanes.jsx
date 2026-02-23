@@ -92,14 +92,11 @@ const FormularioPlanes = () => {
     };
 
     return (
+        // Estructura 100% Ancho (Split Screen) SIN separadores superiores
         <section className="relative w-full min-h-[100svh] flex flex-col lg:flex-row bg-[#f8fafc]">
             
-            {/* ================= TRANSICIÓN PREMIUM SEAMLESS FADE ================= */}
-            {/* Elimina el corte duro y fusiona el #001e33 del componente Servicios con esta vista */}
-            <div className="absolute top-0 left-0 w-full h-32 sm:h-48 bg-gradient-to-b from-[#001e33] via-[#001e33]/70 to-transparent z-30 pointer-events-none -translate-y-[1px]"></div>
-
             {/* ================= MITAD IZQUIERDA: FORMULARIO ================= */}
-            <div className="w-full lg:w-[45%] xl:w-5/12 bg-[#f8fafc] px-6 sm:px-12 lg:px-16 pt-32 pb-16 flex flex-col justify-center relative z-20">
+            <div className="w-full lg:w-[45%] xl:w-5/12 bg-[#f8fafc] px-6 sm:px-12 lg:px-16 pt-28 pb-16 flex flex-col justify-center relative z-20">
                 <div className="max-w-xl mx-auto w-full">
                     <div className="mb-8 text-center lg:text-left">
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#001e33] font-montserrat mb-4 tracking-tight">
