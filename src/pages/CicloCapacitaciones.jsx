@@ -18,31 +18,33 @@ const CicloCapacitaciones = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
+  const goldColor = '#e6d769';
+
   const modulos = [
     {
       titulo: 'Actualización normativa y legal',
       descripcion: 'Cumplimiento de requisitos y manejo adecuado de la normatividad vigente.',
-      icono: <CheckCircleOutlined className="text-5xl text-[#e6d769]" />
+      icono: <CheckCircleOutlined style={{ color: goldColor }} className="text-5xl" />
     },
     {
       titulo: 'Desarrollo de habilidades blandas',
       descripcion: 'Liderazgo, comunicación asertiva, resolución de conflictos y trabajo en equipo.',
-      icono: <TeamOutlined className="text-5xl text-[#e6d769]" />
+      icono: <TeamOutlined style={{ color: goldColor }} className="text-5xl" />
     },
     {
       titulo: 'Gestión organizacional',
       descripcion: 'Optimización de procesos, productividad y cultura de la mejora continua.',
-      icono: <LineChartOutlined className="text-5xl text-[#e6d769]" />
+      icono: <LineChartOutlined style={{ color: goldColor }} className="text-5xl" />
     },
     {
       titulo: 'Salud y bienestar laboral',
       descripcion: 'Estrategias de prevención, autocuidado y promoción de entornos saludables.',
-      icono: <SafetyCertificateOutlined className="text-5xl text-[#e6d769]" />
+      icono: <SafetyCertificateOutlined style={{ color: goldColor }} className="text-5xl" />
     },
     {
       titulo: 'Gestión comercial',
       descripcion: 'Prospección y fidelización de clientes, gestión de cartera y seguimiento de clientes, capacitación en servicio al cliente.',
-      icono: <BulbOutlined className="text-5xl text-[#e6d769]" />
+      icono: <BulbOutlined style={{ color: goldColor }} className="text-5xl" />
     }
   ];
 
@@ -74,25 +76,27 @@ const CicloCapacitaciones = () => {
           </p>
         </div>
 
-        {/* GRID DE MÓDULOS (DISEÑO IDENTICO) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center items-stretch max-w-7xl mx-auto">
+        {/* CONTENEDOR FLEX PARA CENTRAR TARJETAS SOBRANTES */}
+        <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
           {modulos.map((modulo, index) => (
             <div
               key={index}
-              className="bg-white/10 rounded-2xl shadow-md p-6 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full"
+              className="bg-white/10 rounded-2xl shadow-md p-8 text-center backdrop-blur-md hover:scale-105 transition-transform duration-300 w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] max-w-md"
             >
-              <div className="flex justify-center mb-4">{modulo.icono}</div>
+              <div className="flex justify-center mb-4">
+                {modulo.icono}
+              </div>
               <h2 className="text-lg font-semibold text-[#e6d769] mb-2">
                 {modulo.titulo}
               </h2>
-              <p className="text-sm text-gray-200">
+              <p className="text-sm text-gray-200 leading-relaxed">
                 {modulo.descripcion}
               </p>
             </div>
           ))}
         </div>
 
-        {/* BOTONES DE VOLVER */}
+        {/* BOTONES VOLVER */}
         <div className="mt-20 text-center">
           <Link
             to="/#servicios"
@@ -102,7 +106,7 @@ const CicloCapacitaciones = () => {
             <span>Volver</span>
           </Link>
 
-          <div className="block sm:hidden mt-20 text-center z-20">
+          <div className="block sm:hidden mt-10 text-center z-20">
             <Link
               to="/#servicios"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#95642a] text-[#001e33] font-semibold py-2 px-5 rounded-full text-sm shadow-md hover:scale-105 transition-all duration-300"
