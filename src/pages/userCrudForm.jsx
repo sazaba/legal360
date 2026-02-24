@@ -24,7 +24,6 @@ import {
     DeleteOutlined,
     UserOutlined,
     MailOutlined,
-    ShieldOutlined,
     CheckCircleOutlined,
     StopOutlined
 } from '@ant-design/icons';
@@ -190,28 +189,28 @@ export default function UserCrudForm() {
                     },
                 }}
             >
-                <div className="min-h-full pb-20 animate-in fade-in duration-700">
+                <div className="min-h-full pb-20">
                     
-                    {/* ENCABEZADO PREMIUM */}
+                    {/* ENCABEZADO */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
                                 Gestión de <span className="text-[#e6d769]">Usuarios</span>
                             </h2>
-                            <p className="text-gray-400 mt-1">Administra los accesos y roles de la plataforma.</p>
+                            <p className="text-gray-400 mt-1">Administración de accesos del sistema.</p>
                         </div>
                         <Button 
                             type="primary" 
                             size="large"
                             icon={<PlusOutlined />} 
                             onClick={openNewDrawer}
-                            className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold border-none shadow-lg shadow-gold/20"
+                            className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold border-none"
                         >
                             Nuevo Usuario
                         </Button>
                     </div>
 
-                    {/* VISTA DE ESCRITORIO (TABLA) */}
+                    {/* VISTA DESKTOP */}
                     <div className="hidden lg:block bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden">
                         <Table
                             columns={columns}
@@ -223,25 +222,25 @@ export default function UserCrudForm() {
                         />
                     </div>
 
-                    {/* VISTA MÓVIL (CARDS) */}
+                    {/* VISTA MOBILE CARDS */}
                     <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-4">
                         {usuarios.map((user) => (
                             <div key={user.id} className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl">
                                 <div className="flex justify-between items-start mb-4">
                                     <Space>
-                                        <Avatar style={{ backgroundColor: goldColor }} icon={<UserOutlined />} />
+                                        <Avatar style={{ backgroundColor: goldColor, color: darkBlue }} icon={<UserOutlined />} />
                                         <div>
                                             <h4 className="text-white font-bold m-0">{user.nombre_usuario}</h4>
-                                            <Tag color={user.rol === 'admin' ? goldColor : '#3b82f6'} className="m-0 text-[10px]">{user.rol}</Tag>
+                                            <Tag color={user.rol === 'admin' ? goldColor : '#3b82f6'} className="m-0 text-[10px] uppercase font-bold text-black">{user.rol}</Tag>
                                         </div>
                                     </Space>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-1">
                                         <Button size="small" type="text" icon={<EditOutlined style={{ color: goldColor }} />} onClick={() => handleEdit(user)} />
                                         <Button size="small" type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(user)} />
                                     </div>
                                 </div>
                                 <div className="space-y-2 text-sm">
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between border-b border-white/5 pb-1">
                                         <span className="text-gray-400">Correo:</span>
                                         <span className="text-gray-200">{user.correo}</span>
                                     </div>
@@ -254,15 +253,14 @@ export default function UserCrudForm() {
                         ))}
                     </div>
 
-                    {/* DRAWER DE FORMULARIO */}
+                    {/* DRAWER */}
                     <Drawer
-                        title={<span className="text-[#e6d769]">{editId ? 'Editar Perfil' : 'Crear Nuevo Usuario'}</span>}
+                        title={<span className="text-[#e6d769]">{editId ? 'Editar Perfil' : 'Nuevo Usuario'}</span>}
                         open={formVisible}
                         onClose={() => setFormVisible(false)}
                         width={window.innerWidth < 768 ? '100%' : 450}
                         bodyStyle={{ background: '#001e33', paddingTop: '20px' }}
                         headerStyle={{ background: '#001e33', borderBottom: '1px solid rgba(255,255,255,0.1)' }}
-                        className="premium-drawer"
                     >
                         <Form
                             form={form}
@@ -273,25 +271,25 @@ export default function UserCrudForm() {
                         >
                             <Form.Item
                                 name="nombre_usuario"
-                                label={<span className="text-gray-300">Nombre de Usuario</span>}
-                                rules={[{ required: true, message: 'Ingresa un nombre' }]}
+                                label={<span className="text-gray-300">Usuario</span>}
+                                rules={[{ required: true, message: 'Campo obligatorio' }]}
                             >
-                                <Input prefix={<UserOutlined />} className="premium-input" placeholder="p. ej. juan_perez" />
+                                <Input prefix={<UserOutlined />} className="premium-input" />
                             </Form.Item>
 
                             <Form.Item
                                 name="correo"
-                                label={<span className="text-gray-300">Correo Electrónico</span>}
-                                rules={[{ required: true, type: 'email', message: 'Ingresa un correo válido' }]}
+                                label={<span className="text-gray-300">Correo</span>}
+                                rules={[{ required: true, type: 'email', message: 'Correo inválido' }]}
                             >
-                                <Input prefix={<MailOutlined />} className="premium-input" placeholder="correo@ejemplo.com" />
+                                <Input prefix={<MailOutlined />} className="premium-input" />
                             </Form.Item>
 
                             <Form.Item
                                 name="contrasena"
                                 label={<span className="text-gray-300">Contraseña</span>}
                                 rules={!editId ? [{ required: true, message: 'La contraseña es obligatoria' }] : []}
-                                help={editId ? "Dejar en blanco para mantener la actual" : ""}
+                                help={editId ? "Dejar vacío para no cambiar" : ""}
                             >
                                 <Input.Password className="premium-input" />
                             </Form.Item>
@@ -300,8 +298,8 @@ export default function UserCrudForm() {
                                 <Col span={12}>
                                     <Form.Item name="rol" label={<span className="text-gray-300">Rol</span>}>
                                         <Select className="premium-select">
-                                            <Select.Option value="admin text-white">Administrador</Select.Option>
-                                            <Select.Option value="usuario">Usuario Estándar</Select.Option>
+                                            <Select.Option value="admin">admin</Select.Option>
+                                            <Select.Option value="usuario">usuario</Select.Option>
                                         </Select>
                                     </Form.Item>
                                 </Col>
@@ -316,14 +314,8 @@ export default function UserCrudForm() {
                             </Row>
 
                             <div className="mt-10">
-                                <Button 
-                                    type="primary" 
-                                    htmlType="submit" 
-                                    block 
-                                    size="large"
-                                    className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold border-none"
-                                >
-                                    {editId ? 'Guardar Cambios' : 'Registrar Usuario'}
+                                <Button type="primary" htmlType="submit" block size="large" className="bg-[#e6d769] hover:bg-[#f1e28c] text-[#001e33] font-bold border-none">
+                                    {editId ? 'Actualizar' : 'Crear'}
                                 </Button>
                             </div>
                         </Form>
@@ -348,6 +340,7 @@ export default function UserCrudForm() {
                     }
                     
                     .ant-drawer-content { background: #001e33 !important; }
+                    .ant-select-dropdown { background-color: #001e33 !important; border: 1px solid rgba(255,255,255,0.1); }
                 `}} />
             </ConfigProvider>
         </AntApp>
