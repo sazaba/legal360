@@ -10,7 +10,8 @@ import {
     AppstoreOutlined,
     HomeOutlined,
     EditOutlined,
-    LogoutOutlined
+    LogoutOutlined,
+    CloseOutlined // <--- IMPORTACIÓN CORREGIDA
 } from '@ant-design/icons';
 
 export default function NavbarUsuarioAutenticado() {
@@ -35,13 +36,12 @@ export default function NavbarUsuarioAutenticado() {
             className={({ isActive }) => `
                 relative flex items-center group px-4 py-3 rounded-xl transition-all duration-300 mb-2
                 ${isActive 
-                    ? 'bg-gradient-to-r from-[#e6d769]/20 to-transparent text-[#e6d769] shadow-inner' 
+                    ? 'bg-gradient-to-r from-[#e6d769]/20 to-transparent text-[#e6d769]' 
                     : 'text-gray-400 hover:bg-white/5 hover:text-white'}
             `}
         >
             {({ isActive }) => (
                 <>
-                    {/* Indicador Activo Lateral */}
                     {isActive && (
                         <div className="absolute left-0 w-1 h-6 bg-[#e6d769] rounded-r-full shadow-[0_0_10px_#e6d769]" />
                     )}
@@ -51,7 +51,7 @@ export default function NavbarUsuarioAutenticado() {
                     </span>
                     
                     {!isCollapsed && (
-                        <span className="ml-4 font-medium tracking-wide text-sm whitespace-nowrap overflow-hidden">
+                        <span className="ml-4 font-medium tracking-wide text-sm whitespace-nowrap">
                             {item.label}
                         </span>
                     )}
@@ -66,16 +66,15 @@ export default function NavbarUsuarioAutenticado() {
                 token: { colorPrimary: goldColor, borderRadius: 12 },
             }}
         >
-            {/* Contenedor Principal con altura dinámica para Safari (dvh) */}
-            <div className="flex h-screen h-[100dvh] bg-[#000b14] text-white overflow-hidden font-sans">
+            {/* Contenedor Principal con dvh para Safari */}
+            <div className="flex h-screen min-h-[100dvh] bg-[#000b14] text-white overflow-hidden font-sans">
                 
-                {/* --- SIDEBAR DESKTOP (Glassmorphism) --- */}
+                {/* --- SIDEBAR DESKTOP --- */}
                 <aside
                     className={`hidden md:flex flex-col relative z-30 transition-all duration-500 ease-in-out border-r border-white/10
                         ${collapsed ? 'w-20' : 'w-72'} 
                         bg-[#001e33]/40 backdrop-blur-xl`}
                 >
-                    {/* Header Sidebar */}
                     <div className="flex items-center justify-between p-6 mb-4">
                         {!collapsed && (
                             <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent uppercase tracking-tighter">
@@ -90,14 +89,12 @@ export default function NavbarUsuarioAutenticado() {
                         </button>
                     </div>
 
-                    {/* Links */}
                     <nav className="flex-1 px-4 overflow-y-auto custom-scrollbar">
                         {items.map((item) => (
                             <MenuLink key={item.to} item={item} isCollapsed={collapsed} />
                         ))}
                     </nav>
 
-                    {/* Footer Sidebar */}
                     <div className="p-4 border-t border-white/10">
                         <button className="flex items-center w-full px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-xl transition-all group">
                             <LogoutOutlined className="text-xl group-hover:rotate-12 transition-transform" />
@@ -106,9 +103,8 @@ export default function NavbarUsuarioAutenticado() {
                     </div>
                 </aside>
 
-                {/* --- CONTENIDO PRINCIPAL --- */}
-                <main className="relative flex-1 flex flex-col min-w-0 bg-[#001e33]/10">
-                    {/* Decoración de fondo premium */}
+                {/* --- CONTENIDO --- */}
+                <main className="relative flex-1 flex flex-col min-w-0 overflow-hidden bg-[#001e33]/10">
                     <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#e6d769]/5 blur-[120px] rounded-full pointer-events-none" />
                     
                     <div className="flex-1 overflow-auto p-4 md:p-8 relative z-10 custom-scrollbar">
@@ -116,15 +112,15 @@ export default function NavbarUsuarioAutenticado() {
                     </div>
                 </main>
 
-                {/* --- NAVEGACIÓN MOBILE (Safari Optimized) --- */}
+                {/* --- NAVEGACIÓN MOBILE --- */}
                 <div className="md:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none">
-                    <div className="pointer-events-auto flex items-center bg-[#001e33]/80 backdrop-blur-2xl border border-white/20 px-6 py-3 rounded-full shadow-2xl">
+                    <div className="pointer-events-auto flex items-center bg-[#001e33]/90 backdrop-blur-2xl border border-white/20 px-6 py-3 rounded-full shadow-2xl">
                         <Tooltip title="Menú">
                             <Button
                                 type="text"
                                 icon={<AppstoreOutlined style={{ fontSize: '24px', color: goldColor }} />}
                                 onClick={() => setDrawerVisible(true)}
-                                className="flex items-center justify-center hover:scale-110 transition-transform"
+                                className="flex items-center justify-center border-none shadow-none"
                             />
                         </Tooltip>
                         <div className="w-[1px] h-6 bg-white/20 mx-4" />
@@ -134,18 +130,16 @@ export default function NavbarUsuarioAutenticado() {
                     </div>
                 </div>
 
-                {/* Mobile Drawer Estilizado */}
                 <Drawer
                     placement="bottom"
                     closable={true}
-                    closeIcon={<CloseOutlined className="text-white" />}
+                    closeIcon={<CloseOutlined style={{ color: 'white' }} />}
                     onClose={() => setDrawerVisible(false)}
                     open={drawerVisible}
                     height="auto"
                     contentWrapperStyle={{ borderRadius: '24px 24px 0 0', overflow: 'hidden' }}
-                    bodyStyle={{
-                        backgroundColor: '#001e33',
-                        padding: '24px 16px 40px 16px',
+                    styles={{
+                        body: { backgroundColor: '#001e33', padding: '24px 16px 40px 16px' }
                     }}
                 >
                     <div className="mb-6 text-center">
@@ -165,22 +159,13 @@ export default function NavbarUsuarioAutenticado() {
                 </Drawer>
             </div>
 
-            {/* Estilos CSS adicionales para el scrollbar premium */}
-            <style jsx>{`
-                .custom-scrollbar::-webkit-scrollbar {
-                    width: 4px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: rgba(230, 215, 105, 0.1);
-                    border-radius: 10px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                    background: rgba(230, 215, 105, 0.3);
-                }
-            `}</style>
+            {/* Inyectamos estilos directamente */}
+            <style dangerouslySetInnerHTML={{ __html: `
+                .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(230, 215, 105, 0.1); border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(230, 215, 105, 0.3); }
+            `}} />
         </ConfigProvider>
     );
 }
