@@ -10,8 +10,8 @@ import {
 } from '@ant-design/icons';
 import { FaWhatsapp } from 'react-icons/fa';
 
-// ESPACIO PARA IMPORTAR TU VIDEO
-// import v1 from '../assets/videos/tu_video.mp4'; 
+
+import v1 from '../assets/videos/teammeeting.mp4'; 
 
 const CicloCapacitaciones = () => {
   useEffect(() => {
@@ -58,7 +58,7 @@ const CicloCapacitaciones = () => {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
-        {/* <source src={v1} type="video/mp4" /> */}
+        <source src={v1} type="video/mp4" />
         Tu navegador no soporta el video.
       </video>
 
