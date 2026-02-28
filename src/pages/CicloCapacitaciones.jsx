@@ -49,7 +49,7 @@ const CicloCapacitaciones = () => {
   ];
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden pt-6">
+    <section className="relative w-full min-h-screen overflow-hidden pt-20 md:pt-32 lg:pt-36">
       {/* VIDEO DE FONDO */}
       <video
         autoPlay
