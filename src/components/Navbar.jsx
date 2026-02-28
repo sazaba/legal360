@@ -250,4 +250,4 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
             </div>
         </>
     );
-}
+}   

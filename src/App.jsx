@@ -18,27 +18,21 @@ import PQRSFManagement from './pages/PQRSFManagement';
 import AdminLayout from './components/AdminLayout';
 import BlogCRUD from './pages/BlogCRUD';
 import BlogView from './pages/BlogView';
+
+// Importamos el componente del botón flotante
 import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   const location = useLocation();
+  // NUEVO: Estado global para el menú móvil controlado desde App.js
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Oculta elementos públicos si estamos en /admin
+  // Oculta elementos públicos si estamos en /admin o alguna de sus subrutas
   const hideNavbar = location.pathname.startsWith('/admin');
-
-  // NUEVO: Lista de rutas donde NO queremos que estorbe WhatsApp
-  const rutasServicios = [
-    '/sst', 
-    '/derecho-laboral', 
-    '/comercial', 
-    '/capacitaciones', 
-    '/ciclo-capacitaciones'
-  ];
-  const hideWhatsAppEnServicios = rutasServicios.includes(location.pathname);
 
   return (
     <>
+      {/* Pasamos el estado al Navbar para que lo controle */}
       {!hideNavbar && <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
 
       <Routes>
@@ -70,12 +64,11 @@ function App() {
         </Route>
       </Routes>
 
+      {/* Footer visible solo en rutas públicas */}
       {!hideNavbar && <Footer />}
 
-      {/* Condición final para WhatsApp: 
-          No mostrar en Admin, No mostrar si el menú responsive está abierto, 
-          y NO mostrar si estamos dentro de la vista de un servicio específico. */}
-      {!hideNavbar && !isMenuOpen && !hideWhatsAppEnServicios && <WhatsAppButton />}
+      {/* NUEVO: Ocultamos el botón si estamos en admin O si el menú móvil está abierto */}
+      {!hideNavbar && !isMenuOpen && <WhatsAppButton />}
     </>
   );
 }
