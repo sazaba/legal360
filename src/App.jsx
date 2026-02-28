@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -19,19 +19,21 @@ import AdminLayout from './components/AdminLayout';
 import BlogCRUD from './pages/BlogCRUD';
 import BlogView from './pages/BlogView';
 
-// 1. Importamos el nuevo componente del botón flotante
+// Importamos el componente del botón flotante
 import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   const location = useLocation();
+  // NUEVO: Estado global para el menú móvil controlado desde App.js
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Oculta elementos públicos si estamos en /admin o alguna de sus subrutas
   const hideNavbar = location.pathname.startsWith('/admin');
 
   return (
     <>
-      {/* Navbar visible solo en rutas públicas */}
-      {!hideNavbar && <Navbar />}
+      {/* Pasamos el estado al Navbar para que lo controle */}
+      {!hideNavbar && <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -65,8 +67,8 @@ function App() {
       {/* Footer visible solo en rutas públicas */}
       {!hideNavbar && <Footer />}
 
-      {/* 2. Integramos el botón de WhatsApp globalmente (fuera de las rutas de admin) */}
-      {!hideNavbar && <WhatsAppButton />}
+      {/* NUEVO: Ocultamos el botón si estamos en admin O si el menú móvil está abierto */}
+      {!hideNavbar && !isMenuOpen && <WhatsAppButton />}
     </>
   );
 }

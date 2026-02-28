@@ -12,10 +12,9 @@ import {
     UserOutlined
 } from '@ant-design/icons';
 import logo from "../assets/images/logolegal.webp";
-// Se eliminaron imports no usados para limpiar
 
-export default function Navbar() {
-    const [menuAbierto, setMenuAbierto] = useState(false);
+// NUEVO: Recibimos isMenuOpen y setIsMenuOpen como props desde App.js
+export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
     const [scrolled, setScrolled] = useState(false);
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -26,12 +25,11 @@ export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // --- (Lógica de Scroll y Auth se mantiene idéntica) ---
     useEffect(() => {
         const handleScroll = () => {
             const currentY = window.scrollY;
             setScrolled(currentY > 20);
-            if (currentY > lastScrollY && currentY > 100 && !menuAbierto && !userDropdown) {
+            if (currentY > lastScrollY && currentY > 100 && !isMenuOpen && !userDropdown) {
                 setShowNavbar(false);
             } else {
                 setShowNavbar(true);
@@ -40,7 +38,7 @@ export default function Navbar() {
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY, menuAbierto, userDropdown]);
+    }, [lastScrollY, isMenuOpen, userDropdown]);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -53,7 +51,7 @@ export default function Navbar() {
     }, []);
 
     const handleSmartScroll = (id) => {
-        setMenuAbierto(false);
+        setIsMenuOpen(false); // Cierra usando la prop
         setUserDropdown(false);
         if (location.pathname === "/") {
             const el = document.getElementById(id);
@@ -69,7 +67,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         setUserDropdown(false);
-        setMenuAbierto(false);
+        setIsMenuOpen(false); // Cierra usando la prop
         await Swal.fire({
             title: '<span class="font-montserrat font-black">¿Cerrar Sesión?</span>',
             html: '<span class="font-montserrat font-medium text-sm">Tu sesión actual será finalizada.</span>',
@@ -98,7 +96,6 @@ export default function Navbar() {
                     ${isFloating ? "w-[94%] lg:w-[88%] max-w-7xl" : "w-full sm:w-[96%] max-w-7xl"}
                 `}
             >
-                {/* CUERPO DEL NAVBAR (DESKTOP) */}
                 <div 
                     className={`relative w-full flex items-center justify-between transition-all duration-700 px-4 sm:px-10 h-16 sm:h-20
                         ${isFloating 
@@ -108,12 +105,10 @@ export default function Navbar() {
                     style={isFloating ? { WebkitBackdropFilter: 'blur(20px)' } : {}}
                 >
                     
-                    {/* LOGO */}
                     <div onClick={() => handleSmartScroll("top")} className="flex items-center cursor-pointer select-none group h-full">
                         <img src={logo} alt="Legal360" className="h-8 sm:h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
                     </div>
 
-                    {/* MENÚ DESKTOP */}
                     <nav className="hidden md:flex items-center space-x-1 lg:space-x-4 h-full font-montserrat">
                         {['top', 'por-que-nosotros', 'servicios'].map((item, index) => (
                             <button 
@@ -126,7 +121,6 @@ export default function Navbar() {
                             </button>
                         ))}
 
-                        {/* BOTÓN CTA DESKTOP */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="ml-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] px-5 py-2.5 rounded-full text-xs lg:text-sm font-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] active:scale-95 flex items-center gap-2 group uppercase tracking-tight"
@@ -135,7 +129,6 @@ export default function Navbar() {
                             <span>Agenda tu diagnóstico</span>
                         </button>
 
-                        {/* USUARIO / LOGIN DESKTOP */}
                         {usuario ? (
                             <div className="relative ml-2" ref={dropdownRef}>
                                 <button 
@@ -147,7 +140,6 @@ export default function Navbar() {
                                     </div>
                                     <DownOutlined className={`text-[10px] text-gray-400 transition-transform ${userDropdown ? 'rotate-180' : ''}`} />
                                 </button>
-                                {/* Dropdown Desktop Compacto */}
                                 <div className={`absolute right-0 mt-3 w-48 bg-[#001e33] border border-white/10 rounded-xl shadow-2xl transition-all duration-300 ${userDropdown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
                                     <button onClick={() => { setUserDropdown(false); navigate('/admin'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-300 hover:bg-[#e6d769] hover:text-[#001e33] rounded-t-xl transition-all">
                                         <DashboardOutlined /> Panel Admin
@@ -164,7 +156,6 @@ export default function Navbar() {
                         )}
                     </nav>
 
-                    {/* ACCIONES MÓVIL (Header contraído - Compacto) */}
                     <div className="flex md:hidden items-center gap-2 font-montserrat">
                         <button 
                             onClick={() => handleSmartScroll('planes')}
@@ -175,7 +166,7 @@ export default function Navbar() {
                         </button>
 
                         <button 
-                            onClick={() => setMenuAbierto(true)} 
+                            onClick={() => setIsMenuOpen(true)} // Abre usando la prop
                             className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#e6d769] active:bg-[#e6d769] active:text-[#001e33] transition-all"
                         >
                             <MenuOutlined className="text-lg" />
@@ -184,27 +175,21 @@ export default function Navbar() {
                 </div>
             </header>
 
-            {/* =====================================================================================
-                MENÚ MÓVIL REDISEÑADO (Versión Compacta y Premium)
-               ===================================================================================== */}
-            <div className={`fixed inset-0 z-[200] md:hidden transition-all duration-500 font-montserrat ${menuAbierto ? "opacity-100 visible" : "opacity-0 invisible"}`}>
-                <div className="absolute inset-0 bg-[#000c14]/80 backdrop-blur-sm" onClick={() => setMenuAbierto(false)}></div>
+            {/* MENÚ MÓVIL */}
+            <div className={`fixed inset-0 z-[200] md:hidden transition-all duration-500 font-montserrat ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+                <div className="absolute inset-0 bg-[#000c14]/80 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>
                 
-                {/* Panel Lateral más angosto (max-w-sm) */}
-                <div className={`absolute top-0 right-0 w-full max-w-xs h-full bg-[#001524] border-l border-[#d4af37]/10 flex flex-col transition-transform duration-500 shadow-2xl ${menuAbierto ? "translate-x-0" : "translate-x-full"}`}>
+                <div className={`absolute top-0 right-0 w-full max-w-xs h-full bg-[#001524] border-l border-[#d4af37]/10 flex flex-col transition-transform duration-500 shadow-2xl ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
                     
-                    {/* 1. CABECERA COMPACTA */}
                     <div className="flex justify-between items-center p-4 border-b border-white/5">
                         <img src={logo} alt="Legal360" className="h-8 w-auto" />
-                        <button onClick={() => setMenuAbierto(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:text-white transition-all">
+                        <button onClick={() => setIsMenuOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:text-white transition-all">
                             <CloseOutlined className="text-base"/>
                         </button>
                     </div>
 
-                    {/* 2. CUERPO PRINCIPAL */}
                     <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-6">
                         
-                        {/* BOTÓN AGENDA PREMIUM (Compacto) */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="w-full py-3 px-4 bg-gradient-to-r from-[#d4af37] to-[#f5e27a] rounded-xl shadow-lg flex items-center justify-center gap-3 group active:scale-95 transition-all"
@@ -213,37 +198,34 @@ export default function Navbar() {
                             <span className="text-[#001e33] font-black text-sm uppercase tracking-tight">Agenda tu diagnóstico</span>
                         </button>
 
-                        {/* ENLACES DE NAVEGACIÓN (Tamaño sensato: text-xl font-extrabold) */}
-                        <div className="flex flex-col gap-1 mt-2">
+                        {/* NUEVO DISEÑO DE ENLACES MÓVILES (Estilo Hero) */}
+                        <div className="flex flex-col mt-4 gap-2">
                             {['top', 'por-que-nosotros', 'servicios'].map((item, index) => (
                                 <button 
                                     key={item} 
                                     onClick={() => handleSmartScroll(item)} 
-                                    className="text-left py-3 px-2 text-xl font-extrabold text-gray-300 hover:text-[#e6d769] uppercase tracking-tight transition-colors border-b border-white/5 last:border-0"
+                                    className="text-left py-4 px-2 text-[1.15rem] font-bold text-gray-200 hover:text-[#e6d769] uppercase tracking-[0.15em] transition-colors border-b border-white/5 last:border-0"
                                 >
                                     {['Inicio', 'Nosotros', 'Servicios'][index]}
                                 </button>
                             ))}
-                            <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="text-left py-3 px-2 text-xl font-extrabold text-gray-300 hover:text-[#e6d769] uppercase tracking-tight transition-colors">
+                            <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="text-left py-4 px-2 text-[1.15rem] font-bold text-gray-200 hover:text-[#e6d769] uppercase tracking-[0.15em] transition-colors">
                                 Contacto
                             </a>
                         </div>
                     </div>
 
-                    {/* 3. PIE DE MENÚ (Auth Compacto) */}
                     <div className="p-4 bg-[#000f1a] border-t border-white/5 mt-auto">
                         {usuario ? (
                             <div className="flex flex-col gap-3">
-                                {/* Saludo compacto */}
                                 <div className="flex items-center gap-3 px-2 mb-1">
                                     <div className="bg-[#e6d769] text-[#001e33] rounded-full w-8 h-8 flex items-center justify-center font-black text-sm uppercase">
                                         {usuario.nombre?.charAt(0)}
                                     </div>
                                     <p className="text-white text-sm font-bold uppercase truncate">Hola, {usuario.nombre}</p>
                                 </div>
-                                {/* Botones de acción estándar */}
                                 <button 
-                                    onClick={() => { setMenuAbierto(false); navigate('/admin'); }} 
+                                    onClick={() => { setIsMenuOpen(false); navigate('/admin'); }} 
                                     className="w-full py-3 bg-white/5 border border-white/10 hover:border-[#e6d769] text-gray-200 hover:text-[#e6d769] rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
                                 >
                                     <DashboardOutlined /> Panel Admin
@@ -256,9 +238,8 @@ export default function Navbar() {
                                 </button>
                             </div>
                         ) : (
-                            /* Botón Login elegante */
                             <button 
-                                onClick={() => { setMenuAbierto(false); navigate('/login'); }} 
+                                onClick={() => { setIsMenuOpen(false); navigate('/login'); }} 
                                 className="w-full py-3 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#001e33] rounded-xl font-black text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 transition-all"
                             >
                                 <UserOutlined /> LOGIN
