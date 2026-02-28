@@ -8,7 +8,8 @@ import {
     DashboardOutlined, 
     MenuOutlined, 
     CloseOutlined, 
-    CalendarOutlined 
+    CrownOutlined, // <-- Nuevo icono premium
+    UserOutlined
 } from '@ant-design/icons';
 import logo from "../assets/images/logolegal.webp";
 import Relevo from "../assets/images/relevo.webp";
@@ -72,6 +73,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         setUserDropdown(false);
+        setMenuAbierto(false); // Aseguramos que el menú móvil también se cierre
         const result = await Swal.fire({
             title: '¿Deseas cerrar sesión?',
             text: 'Tu sesión actual será finalizada.',
@@ -142,7 +144,7 @@ export default function Navbar() {
                             onClick={() => handleSmartScroll('planes')}
                             className="ml-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] px-6 py-2.5 rounded-full text-xs lg:text-sm font-montserrat font-black transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] active:scale-95 flex items-center gap-2 group"
                         >
-                            <CalendarOutlined style={{ color: '#001e33' }} className="text-base flex-shrink-0" />
+                            <CrownOutlined style={{ color: '#001e33' }} className="text-base flex-shrink-0" />
                             <span className="uppercase tracking-tighter">Agenda tu diagnóstico</span>
                         </button>
 
@@ -174,14 +176,13 @@ export default function Navbar() {
                         )}
                     </nav>
 
-                    {/* ACCIONES MÓVIL (Compactas para evitar "el asco") */}
+                    {/* ACCIONES MÓVIL (Compactas) */}
                     <div className="flex md:hidden items-center gap-2 sm:gap-3">
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] text-[#001e33] h-10 px-4 rounded-xl flex items-center gap-2 shadow-lg active:scale-90 transition-all"
                         >
-                            {/* Forzamos color para Safari */}
-                            <CalendarOutlined style={{ color: '#001e33' }} className="text-lg flex-shrink-0" />
+                            <CrownOutlined style={{ color: '#001e33' }} className="text-lg flex-shrink-0" />
                             <span className="text-[10px] font-black font-montserrat uppercase hidden xs:block">Agenda</span>
                         </button>
 
@@ -209,12 +210,11 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
-                        {/* Botón en el menú lateral con color de icono forzado */}
                         <button 
                             onClick={() => handleSmartScroll('planes')}
                             className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#f5e27a] text-[#001e33] rounded-2xl font-black font-montserrat text-base shadow-xl flex items-center justify-center gap-3"
                         >
-                            <CalendarOutlined style={{ color: '#001e33' }} className="text-xl flex-shrink-0" /> AGENDA TU DIAGNÓSTICO
+                            <CrownOutlined style={{ color: '#001e33' }} className="text-xl flex-shrink-0" /> AGENDA TU DIAGNÓSTICO
                         </button>
 
                         <div className="space-y-2">
@@ -230,6 +230,31 @@ export default function Navbar() {
                             <a href="https://wa.link/twbzum" target="_blank" rel="noopener noreferrer" className="block w-full text-left py-4 text-2xl font-montserrat font-black text-gray-400 border-b border-white/5 uppercase">
                                 Contacto
                             </a>
+
+                            {/* --- SECCIÓN ADMINISTRATIVA / LOGIN MÓVIL --- */}
+                            {usuario ? (
+                                <>
+                                    <button 
+                                        onClick={() => { setMenuAbierto(false); navigate('/admin'); }} 
+                                        className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-[#e6d769] border-b border-white/5 uppercase"
+                                    >
+                                        <DashboardOutlined /> Panel Admin
+                                    </button>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="w-full flex items-center gap-3 text-left py-4 text-xl font-montserrat font-bold text-red-400 border-b border-white/5 uppercase"
+                                    >
+                                        <LogoutOutlined /> Cerrar Sesión
+                                    </button>
+                                </>
+                            ) : (
+                                <button 
+                                    onClick={() => { setMenuAbierto(false); navigate('/login'); }} 
+                                    className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-white/70 hover:text-[#e6d769] border-b border-white/5 uppercase"
+                                >
+                                    <UserOutlined /> Login
+                                </button>
+                            )}
                         </div>
                     </div>
 
