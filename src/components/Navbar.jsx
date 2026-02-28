@@ -8,7 +8,7 @@ import {
     DashboardOutlined, 
     MenuOutlined, 
     CloseOutlined, 
-    CrownOutlined, // <-- Nuevo icono premium
+    CrownOutlined,
     UserOutlined
 } from '@ant-design/icons';
 import logo from "../assets/images/logolegal.webp";
@@ -73,7 +73,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         setUserDropdown(false);
-        setMenuAbierto(false); // Aseguramos que el menú móvil también se cierre
+        setMenuAbierto(false);
         const result = await Swal.fire({
             title: '¿Deseas cerrar sesión?',
             text: 'Tu sesión actual será finalizada.',
@@ -85,7 +85,7 @@ export default function Navbar() {
             cancelButtonColor: '#3b82f6',
             confirmButtonText: 'Sí, cerrar sesión',
             cancelButtonText: 'Cancelar',
-            customClass: { popup: 'rounded-3xl border border-gray-700' }
+            customClass: { popup: 'rounded-3xl border border-gray-700 font-montserrat' }
         });
 
         if (result.isConfirmed) {
@@ -148,12 +148,12 @@ export default function Navbar() {
                             <span className="uppercase tracking-tighter">Agenda tu diagnóstico</span>
                         </button>
 
-                        {/* USUARIO / LOGIN */}
+                        {/* USUARIO / LOGIN DESKTOP */}
                         {usuario ? (
                             <div className="relative ml-2" ref={dropdownRef}>
                                 <button 
                                     onClick={() => setUserDropdown(!userDropdown)}
-                                    className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-all"
+                                    className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-all font-montserrat"
                                 >
                                     <div className="bg-[#e6d769] text-[#001e33] rounded-full w-7 h-7 flex items-center justify-center font-black text-xs uppercase">
                                         {usuario.nombre?.charAt(0)}
@@ -161,22 +161,22 @@ export default function Navbar() {
                                     <DownOutlined className={`text-[10px] text-gray-400 transition-transform ${userDropdown ? 'rotate-180' : ''}`} />
                                 </button>
                                 <div className={`absolute right-0 mt-4 w-56 bg-[#001e33] border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 ${userDropdown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
-                                    <button onClick={() => { setUserDropdown(false); navigate('/admin'); }} className="w-full flex items-center gap-3 px-5 py-4 text-sm text-gray-300 hover:bg-[#e6d769] hover:text-[#001e33] rounded-t-2xl transition-all">
+                                    <button onClick={() => { setUserDropdown(false); navigate('/admin'); }} className="w-full flex items-center gap-3 px-5 py-4 text-sm font-montserrat font-semibold text-gray-300 hover:bg-[#e6d769] hover:text-[#001e33] rounded-t-2xl transition-all">
                                         <DashboardOutlined /> Panel Admin
                                     </button>
-                                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-5 py-4 text-sm text-red-400 hover:bg-red-500 hover:text-white rounded-b-2xl transition-all">
+                                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-5 py-4 text-sm font-montserrat font-semibold text-red-400 hover:bg-red-500 hover:text-white rounded-b-2xl transition-all">
                                         <LogoutOutlined /> Cerrar Sesión
                                     </button>
                                 </div>
                             </div>
                         ) : (
-                            <button onClick={() => navigate('/login')} className="ml-2 text-white/70 hover:text-[#e6d769] text-sm font-bold transition-colors px-4">
+                            <button onClick={() => navigate('/login')} className="ml-2 text-white/70 hover:text-[#e6d769] text-sm font-montserrat font-semibold uppercase tracking-wide transition-colors px-4">
                                 LOGIN
                             </button>
                         )}
                     </nav>
 
-                    {/* ACCIONES MÓVIL (Compactas) */}
+                    {/* ACCIONES MÓVIL */}
                     <div className="flex md:hidden items-center gap-2 sm:gap-3">
                         <button 
                             onClick={() => handleSmartScroll('planes')}
@@ -236,13 +236,13 @@ export default function Navbar() {
                                 <>
                                     <button 
                                         onClick={() => { setMenuAbierto(false); navigate('/admin'); }} 
-                                        className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-[#e6d769] border-b border-white/5 uppercase"
+                                        className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-[#e6d769] border-b border-white/5 uppercase transition-colors"
                                     >
                                         <DashboardOutlined /> Panel Admin
                                     </button>
                                     <button 
                                         onClick={handleLogout} 
-                                        className="w-full flex items-center gap-3 text-left py-4 text-xl font-montserrat font-bold text-red-400 border-b border-white/5 uppercase"
+                                        className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-red-400 border-b border-white/5 uppercase transition-colors"
                                     >
                                         <LogoutOutlined /> Cerrar Sesión
                                     </button>
@@ -250,7 +250,7 @@ export default function Navbar() {
                             ) : (
                                 <button 
                                     onClick={() => { setMenuAbierto(false); navigate('/login'); }} 
-                                    className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-white/70 hover:text-[#e6d769] border-b border-white/5 uppercase"
+                                    className="w-full flex items-center gap-3 text-left py-4 text-2xl font-montserrat font-black text-white/70 hover:text-[#e6d769] border-b border-white/5 uppercase transition-colors"
                                 >
                                     <UserOutlined /> Login
                                 </button>
