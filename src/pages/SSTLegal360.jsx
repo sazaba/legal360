@@ -8,7 +8,7 @@ import {
     CheckCircleOutlined
 } from '@ant-design/icons';
 import v1 from '../assets/videos/v5.mp4';
-import { FaWhatsapp } from 'react-icons/fa';
+// import { FaWhatsapp } from 'react-icons/fa'; // No se usa aquí
 
 const services = [
     {
@@ -49,7 +49,6 @@ const SSTLegal360 = () => {
     }, []);
 
     return (
-        // Padding ajustado: pt-10 (móvil), md:pt-32, lg:pt-36 (desktop)
         <section className="relative w-full min-h-screen overflow-hidden pt-10 md:pt-32 lg:pt-36 font-montserrat">
             <video
                 autoPlay
@@ -103,16 +102,19 @@ const SSTLegal360 = () => {
                 </div>
 
                 <div className="mt-16 sm:mt-24 text-center relative z-20">
-                    {/* BOTÓN DE VOLVER RESTAURADO: Transparente, borde dorado, efecto glass */}
+                    {/* CORRECCIÓN AQUÍ: 
+                        - Se eliminó `border-[#d4af37]` 
+                        - Se agregó `border-white/20` para un borde de cristal sutil.
+                    */}
                     <Link
                         to="/#servicios"
-                        className="gap-2 bg-white/10 border border-[#d4af37] hover:bg-[#d4af37] hover:text-[#001e33] backdrop-blur-md text-[#e6d769] font-black py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 fixed sm:top-32 sm:left-8 hidden sm:inline-flex items-center uppercase text-sm tracking-wider"
+                        className="gap-2 bg-white/10 border border-white/20 hover:bg-[#d4af37] hover:text-[#001e33] backdrop-blur-md text-[#e6d769] font-black py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 fixed sm:top-32 sm:left-8 hidden sm:inline-flex items-center uppercase text-sm tracking-wider"
                     >
                         <ArrowLeftOutlined className="text-lg" />
                         <span>Volver</span>
                     </Link>
 
-                    {/* Botón responsive (abajo) */}
+                    {/* Botón responsive (abajo) - Este sigue igual de sólido */}
                     <div className="block sm:hidden text-center z-20 w-full flex justify-center">
                         <Link
                             to="/#servicios"
