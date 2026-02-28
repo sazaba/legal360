@@ -49,7 +49,7 @@ const SSTLegal360 = () => {
     }, []);
 
     return (
-        // Restauramos pt-10 para móvil, y aplicamos el padding grande (pt-32/pt-36) solo en desktop
+        // Padding ajustado: pt-10 (móvil), md:pt-32, lg:pt-36 (desktop)
         <section className="relative w-full min-h-screen overflow-hidden pt-10 md:pt-32 lg:pt-36 font-montserrat">
             <video
                 autoPlay
@@ -103,14 +103,16 @@ const SSTLegal360 = () => {
                 </div>
 
                 <div className="mt-16 sm:mt-24 text-center relative z-20">
+                    {/* BOTÓN DE VOLVER RESTAURADO: Transparente, borde dorado, efecto glass */}
                     <Link
                         to="/#servicios"
-                        className="gap-2 bg-gradient-to-r from-[#d4af37] via-[#f5e27a] to-[#d4af37] hover:shadow-[0_0_20px_rgba(230,215,105,0.4)] text-[#001e33] font-black py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 fixed sm:top-32 sm:left-8 hidden sm:inline-flex items-center uppercase text-sm tracking-wider"
+                        className="gap-2 bg-white/10 border border-[#d4af37] hover:bg-[#d4af37] hover:text-[#001e33] backdrop-blur-md text-[#e6d769] font-black py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 fixed sm:top-32 sm:left-8 hidden sm:inline-flex items-center uppercase text-sm tracking-wider"
                     >
                         <ArrowLeftOutlined className="text-lg" />
                         <span>Volver</span>
                     </Link>
 
+                    {/* Botón responsive (abajo) */}
                     <div className="block sm:hidden text-center z-20 w-full flex justify-center">
                         <Link
                             to="/#servicios"
