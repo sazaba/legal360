@@ -16,7 +16,8 @@ import {
     ConfigProvider,
     theme,
     Tag,
-    Avatar
+    Avatar,
+    Spin
 } from 'antd';
 import {
     PlusOutlined,
@@ -25,7 +26,8 @@ import {
     UserOutlined,
     MailOutlined,
     CheckCircleOutlined,
-    StopOutlined
+    StopOutlined,
+    LoadingOutlined
 } from '@ant-design/icons';
 
 export default function UserCrudForm() {
@@ -37,12 +39,13 @@ export default function UserCrudForm() {
 
     // Paleta Premium
     const goldColor = '#e6d769';
-    const darkBlue = '#001e33';
-    const darkBg = '#05111a'; // Un fondo ligeramente más profundo para contraste
+    // const darkBg = '#05111a'; // ELIMINADO: Ya no usamos fondo fijo
 
     const fetchUsuarios = async () => {
         setLoading(true);
         try {
+            // Simulo un pequeño delay para que se aprecie la animación de carga
+            // await new Promise(resolve => setTimeout(resolve, 800)); 
             const res = await axios.get('/api/usuarios');
             setUsuarios(res.data);
         } catch (error) {
@@ -112,6 +115,9 @@ export default function UserCrudForm() {
         }
     };
 
+    // Icono de carga personalizado
+    const antIcon = <LoadingOutlined style={{ fontSize: 24, color: goldColor }} spin />;
+
     const columns = [
         {
             title: 'Usuario',
@@ -161,7 +167,7 @@ export default function UserCrudForm() {
             ),
         },
         {
-            title: '', // Dejamos el título vacío para un look más limpio
+            title: '',
             key: 'acciones',
             fixed: 'right',
             align: 'right',
@@ -192,13 +198,15 @@ export default function UserCrudForm() {
                     algorithm: theme.darkAlgorithm,
                     token: {
                         colorPrimary: goldColor,
-                        colorBgContainer: 'rgba(5, 17, 26, 0.6)',
+                        // Hacemos el fondo del contenedor un poco más transparente para que se mezcle con el fondo global
+                        colorBgContainer: 'rgba(5, 17, 26, 0.4)',
                         borderRadius: 12,
-                        fontFamily: "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+                        fontFamily: "'Montserrat', sans-serif",
                     },
                 }}
             >
-                <div className="min-h-full pb-20 premium-font" style={{ backgroundColor: darkBg }}>
+                {/* Eliminado style={{ backgroundColor: darkBg }} para usar el fondo global */}
+                <div className="min-h-full pb-20 premium-font">
                     
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
                         {/* ENCABEZADO */}
@@ -220,13 +228,14 @@ export default function UserCrudForm() {
                             </Button>
                         </div>
 
-                        {/* VISTA DESKTOP */}
-                        <div className="hidden lg:block glass-panel rounded-2xl overflow-hidden shadow-2xl">
+                        {/* VISTA DESKTOP CON ANIMACIÓN */}
+                        {/* Agregamos la clase 'animate-fade-in-up' al contenedor de la tabla */}
+                        <div className="hidden lg:block glass-panel rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up">
                             <Table
                                 columns={columns}
                                 dataSource={usuarios}
                                 rowKey="id"
-                                loading={loading}
+                                loading={{ indicator: antIcon, spinning: loading }}
                                 pagination={{ 
                                     pageSize: 8,
                                     position: ['bottomCenter'],
@@ -236,46 +245,54 @@ export default function UserCrudForm() {
                             />
                         </div>
 
-                        {/* VISTA MOBILE CARDS */}
-                        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-5">
-                            {usuarios.map((user) => (
-                                <div key={user.id} className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                                    {/* Decoración sutil de fondo */}
-                                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#e6d769] opacity-[0.03] rounded-bl-full pointer-events-none"></div>
-                                    
-                                    <div className="flex justify-between items-start mb-5 relative z-10">
-                                        <Space size="middle">
-                                            <Avatar size="large" style={{ backgroundColor: 'rgba(230, 215, 105, 0.1)', color: goldColor, border: `1px solid rgba(230, 215, 105, 0.3)` }} icon={<UserOutlined />} />
-                                            <div>
-                                                <h4 className="text-gray-100 font-semibold text-lg m-0">{user.nombre_usuario}</h4>
-                                                <span className="text-[10px] text-gray-500 uppercase tracking-widest">{user.rol}</span>
-                                            </div>
-                                        </Space>
-                                        <div className="flex gap-1 bg-black/20 rounded-lg p-1">
-                                            <Button size="small" type="text" icon={<EditOutlined className="text-[#e6d769]" />} onClick={() => handleEdit(user)} />
-                                            <Button size="small" type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(user)} />
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="space-y-3 text-sm relative z-10">
-                                        <div className="flex justify-between items-center bg-white/[0.02] p-3 rounded-lg border border-white/[0.02]">
-                                            <span className="text-gray-500 font-light"><MailOutlined className="mr-2"/>Correo</span>
-                                            <span className="text-gray-300 font-medium truncate ml-2">{user.correo}</span>
-                                        </div>
-                                        <div className="flex justify-between items-center bg-white/[0.02] p-3 rounded-lg border border-white/[0.02]">
-                                            <span className="text-gray-500 font-light">Estado</span>
-                                            {user.activo ? 
-                                                <span className="text-green-400 flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500"></span>Activo</span> : 
-                                                <span className="text-red-400 flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500"></span>Inactivo</span>
-                                            }
-                                        </div>
-                                    </div>
+                        {/* VISTA MOBILE CARDS CON ANIMACIÓN Y LOADING */}
+                        <div className="lg:hidden">
+                            {loading ? (
+                                <div className="flex justify-center items-center h-64">
+                                     <Spin indicator={antIcon} />
                                 </div>
-                            ))}
+                            ) : (
+                                // Agregamos 'animate-fade-in-up' al grid de tarjetas
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fade-in-up">
+                                    {usuarios.map((user) => (
+                                        <div key={user.id} className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-[#e6d769] opacity-[0.03] rounded-bl-full pointer-events-none"></div>
+                                            
+                                            <div className="flex justify-between items-start mb-5 relative z-10">
+                                                <Space size="middle">
+                                                    <Avatar size="large" style={{ backgroundColor: 'rgba(230, 215, 105, 0.1)', color: goldColor, border: `1px solid rgba(230, 215, 105, 0.3)` }} icon={<UserOutlined />} />
+                                                    <div>
+                                                        <h4 className="text-gray-100 font-semibold text-lg m-0">{user.nombre_usuario}</h4>
+                                                        <span className="text-[10px] text-gray-500 uppercase tracking-widest">{user.rol}</span>
+                                                    </div>
+                                                </Space>
+                                                <div className="flex gap-1 bg-black/20 rounded-lg p-1">
+                                                    <Button size="small" type="text" icon={<EditOutlined className="text-[#e6d769]" />} onClick={() => handleEdit(user)} />
+                                                    <Button size="small" type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(user)} />
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="space-y-3 text-sm relative z-10">
+                                                <div className="flex justify-between items-center bg-white/[0.02] p-3 rounded-lg border border-white/[0.02]">
+                                                    <span className="text-gray-500 font-light"><MailOutlined className="mr-2"/>Correo</span>
+                                                    <span className="text-gray-300 font-medium truncate ml-2">{user.correo}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center bg-white/[0.02] p-3 rounded-lg border border-white/[0.02]">
+                                                    <span className="text-gray-500 font-light">Estado</span>
+                                                    {user.activo ? 
+                                                        <span className="text-green-400 flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500"></span>Activo</span> : 
+                                                        <span className="text-red-400 flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500"></span>Inactivo</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    {/* DRAWER */}
+                    {/* DRAWER (Mantenemos el fondo oscuro aquí para contraste) */}
                     <Drawer
                         title={<span className="text-lg font-semibold tracking-wide" style={{ color: goldColor }}>{editId ? 'Editar Perfil' : 'Nuevo Usuario'}</span>}
                         open={formVisible}
@@ -293,6 +310,7 @@ export default function UserCrudForm() {
                             requiredMark={false}
                             className="premium-form"
                         >
+                             {/* ... (Campos del formulario iguales al anterior) ... */}
                             <Form.Item
                                 name="nombre_usuario"
                                 label={<span className="text-gray-400 text-xs uppercase tracking-wider font-semibold">Usuario</span>}
@@ -353,6 +371,24 @@ export default function UserCrudForm() {
                         font-family: 'Montserrat', sans-serif;
                     }
 
+                    /* --- ANIMACIONES CSS PURAS --- */
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(30px); /* Empieza un poco más abajo */
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .animate-fade-in-up {
+                        /* La animación dura 0.6s y tiene una curva de velocidad suave */
+                        animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                    }
+                    /* ----------------------------- */
+
                     /* Efecto Glassmorphism compatible con Safari */
                     .glass-panel {
                         background: rgba(255, 255, 255, 0.02);
@@ -375,6 +411,9 @@ export default function UserCrudForm() {
                         box-shadow: 0 6px 20px rgba(230, 215, 105, 0.3) !important;
                         filter: brightness(1.1);
                     }
+                    .premium-btn-gold:active {
+                        transform: translateY(0px);
+                    }
 
                     /* Tabla Premium */
                     .premium-table .ant-table { 
@@ -391,7 +430,7 @@ export default function UserCrudForm() {
                         border-bottom: 1px solid rgba(255,255,255,0.05) !important;
                     }
                     .premium-table .ant-table-thead > tr > th::before {
-                        display: none !important; /* Quita los divisores de columnas de antd */
+                        display: none !important;
                     }
                     .premium-table .ant-table-tbody > tr > td { 
                         border-bottom: 1px solid rgba(255,255,255,0.03) !important; 
@@ -399,6 +438,9 @@ export default function UserCrudForm() {
                     }
                     .premium-table .ant-table-tbody > tr:hover > td { 
                         background: rgba(230, 215, 105, 0.03) !important; 
+                    }
+                    .premium-table .ant-spin-nested-loading {
+                        min-height: 200px; /* Altura mínima mientras carga */
                     }
 
                     /* Paginación */
@@ -438,6 +480,7 @@ export default function UserCrudForm() {
                         border: 1px solid rgba(255,255,255,0.05) !important;
                         border-radius: 16px !important;
                         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+                        font-family: 'Montserrat', sans-serif;
                     }
                 `}} />
             </ConfigProvider>
