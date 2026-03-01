@@ -14,15 +14,17 @@ import {
     Link as LinkIcon,
     Edit3,
     XCircle,
-    FileTextOutlined
+    ChevronLeft,
+    ChevronRight,
+    PlusCircle
 } from 'lucide-react';
 
 const AVAILABLE_TAGS = [
-    "Psicología", "Psicoterapia", "Ansiedad", "Depresión", "Estrés",
-    "Estres laboral", "Trauma", "SST", "Riesgo psicosocial en el trabajo", "Manizales"
+    "Derecho Laboral", "Derecho Comercial", "Seguridad Social", "Pensiones", "SST",
+    "Riesgos Laborales", "Contratos", "Creación de Sociedades", "Asesoría Empresarial",
+    "Gestión del Talento", "Liquidaciones", "Prevención Legal", "Actualidad Jurídica", "Pereira"
 ];
 
-// Paleta Premium global
 const goldColor = '#e6d769';
 
 export default function BlogCRUD() {
@@ -32,23 +34,21 @@ export default function BlogCRUD() {
     const [editMode, setEditMode] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     
+    // --- LÓGICA DE PAGINACIÓN ---
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5; 
+    
     const [formData, setFormData] = useState({
-        id: null,
-        title: "",
-        slug: "",
-        excerpt: "",
-        content: "",
-        author: "",
-        status: "draft",
-        tags: [],
-        readTime: "",
-        image: null, 
-        isFeatured: false
+        id: null, title: "", slug: "", excerpt: "", content: "",
+        author: "", status: "draft", tags: [], readTime: "",
+        image: null, isFeatured: false
     });
     
     const [previewImage, setPreviewImage] = useState(null);
     const fileInputRef = useRef();
+    const formRef = useRef(null); // Ref para el scroll automático al formulario
 
+    // --- CONFIGURACIÓN DE QUILL (INTACTA) ---
     const modules = useMemo(() => ({
         toolbar: [
             [{ 'header': [2, 3, false] }],
@@ -83,17 +83,35 @@ export default function BlogCRUD() {
         fetchBlogs();
     }, []);
 
+    // Volver a la página 1 si se realiza una búsqueda
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm]);
+
     const fetchBlogs = async () => {
         setLoadingList(true);
         try {
             const res = await axios.get('/api/blog/list');
             setBlogs(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
-            Swal.fire({ title: 'Error', text: 'No se pudieron cargar los blogs', icon: 'error', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
+            Swal.fire({ title: 'Error', text: 'No se pudieron cargar los blogs', icon: 'error', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor });
         } finally {
             setLoadingList(false);
         }
     };
+
+    // --- FILTRADO Y CÁLCULO DE PAGINACIÓN ---
+    const filteredBlogs = blogs.filter(blog =>
+        blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.author?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredBlogs.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -107,11 +125,9 @@ export default function BlogCRUD() {
     const toggleTag = (tag) => {
         setFormData((prev) => {
             const currentTags = prev.tags;
-            if (currentTags.includes(tag)) {
-                return { ...prev, tags: currentTags.filter((t) => t !== tag) };
-            } else {
-                return { ...prev, tags: [...currentTags, tag] };
-            }
+            return currentTags.includes(tag) 
+                ? { ...prev, tags: currentTags.filter((t) => t !== tag) }
+                : { ...prev, tags: [...currentTags, tag] };
         });
     };
 
@@ -139,46 +155,30 @@ export default function BlogCRUD() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const generateSlug = (text) => text.toLowerCase().trim().replace(/[^ña-z0-9\s-]/g, '').replace(/\s+/g, '-');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.content || formData.content === "<p><br></p>") {
-            Swal.fire({ icon: 'warning', title: 'Falta contenido', text: 'El contenido no puede estar vacío.', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
+            Swal.fire({ icon: 'warning', title: 'Falta contenido', text: 'El contenido no puede estar vacío.', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor });
             return;
         }
 
         setLoadingSubmit(true);
         const data = new FormData();
-        const slug = formData.slug.trim() || generateSlug(formData.title);
-        
-        data.append('title', formData.title);
-        data.append('slug', slug);
-        data.append('excerpt', formData.excerpt);
-        data.append('content', formData.content);
-        data.append('author', formData.author);
-        data.append('status', formData.status);
-        data.append('readTime', formData.readTime);
-        data.append('isFeatured', formData.isFeatured);
-        data.append('tags', JSON.stringify(formData.tags));
-
-        if (formData.image instanceof File) {
-            data.append('image', formData.image);
-        }
+        Object.keys(formData).forEach(key => {
+            if (key === 'tags') data.append(key, JSON.stringify(formData[key]));
+            else if (key === 'image') { if(formData[key] instanceof File) data.append(key, formData[key]); }
+            else data.append(key, formData[key]);
+        });
 
         try {
-            if (editMode) {
-                await axios.put(`/api/blog/update/${formData.id}`, data);
-                Swal.fire({ title: '¡Actualizado!', text: 'El artículo se guardó correctamente.', icon: 'success', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
-            } else {
-                await axios.post('/api/blog/create', data);
-                Swal.fire({ title: '¡Publicado!', text: 'El artículo fue creado correctamente.', icon: 'success', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
-            }
+            if (editMode) await axios.put(`/api/blog/update/${formData.id}`, data);
+            else await axios.post('/api/blog/create', data);
+            
+            Swal.fire({ title: 'Éxito', text: 'Operación completada', icon: 'success', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor });
             cancelEdit();
             fetchBlogs();
         } catch (err) {
-            const errorMsg = err?.response?.data?.message || 'Hubo un problema al guardar el blog';
-            Swal.fire({ title: 'Error', text: errorMsg, icon: 'error', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
+            Swal.fire({ title: 'Error', text: 'Hubo un problema al guardar', icon: 'error', background: '#0a1929', color: '#ffffff' });
         } finally {
             setLoadingSubmit(false);
         }
@@ -188,71 +188,50 @@ export default function BlogCRUD() {
         let parsedTags = [];
         try {
             parsedTags = typeof blog.tags === 'string' ? JSON.parse(blog.tags) : (Array.isArray(blog.tags) ? blog.tags : []);
-        } catch (e) {
-            parsedTags = [];
-        }
+        } catch (e) { parsedTags = []; }
 
-        setFormData({
-            id: blog.id,
-            title: blog.title || '',
-            slug: blog.slug || '',
-            excerpt: blog.excerpt || '',
-            content: blog.content || '',
-            author: blog.author || '',
-            status: blog.status || 'draft',
-            tags: parsedTags,
-            readTime: blog.readTime || '',
-            image: null,
-            isFeatured: blog.isFeatured || false
-        });
+        setFormData({ ...blog, tags: parsedTags, image: null });
         setPreviewImage(blog.image_url || blog.image || null);
         setEditMode(true);
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        // Scroll suave al formulario
+        formRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     const handleDelete = async (id) => {
-        const result = await Swal.fire({
-            title: '¿Eliminar artículo?',
-            text: "Esta acción no se puede deshacer.",
-            icon: 'warning',
-            background: '#0a1929',
-            color: '#ffffff',
-            showCancelButton: true,
-            confirmButtonColor: '#e11d48',
-            cancelButtonColor: 'rgba(255,255,255,0.1)',
-            confirmButtonText: '<span style="color:#ffffff; font-weight:600;">Sí, eliminar</span>',
-            cancelButtonText: 'Cancelar',
-            customClass: { popup: 'premium-swal-popup' }
-        });
-
+        const result = await Swal.fire({ title: '¿Eliminar artículo?', text: "No podrás revertir esto.", icon: 'warning', showCancelButton: true, background: '#0a1929', color: '#ffffff', confirmButtonColor: '#e11d48' });
         if (result.isConfirmed) {
             try {
                 await axios.delete(`/api/blog/delete/${id}`);
-                setBlogs(blogs.filter((b) => b.id !== id));
-                Swal.fire({ title: 'Eliminado', text: 'El artículo ha sido eliminado.', icon: 'success', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
+                fetchBlogs();
+                Swal.fire({ title: 'Eliminado', icon: 'success', background: '#0a1929', color: '#ffffff' });
             } catch (err) {
-                Swal.fire({ title: 'Error', text: 'No se pudo eliminar el artículo.', icon: 'error', background: '#0a1929', color: '#ffffff', confirmButtonColor: goldColor, customClass: { popup: 'premium-swal-popup' } });
+                Swal.fire({ title: 'Error', text: 'No se pudo eliminar', icon: 'error' });
             }
         }
     };
-
-    const filteredBlogs = blogs.filter(blog =>
-        blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        blog.author?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-20 premium-font text-gray-200">
             
             {/* ENCABEZADO */}
-            <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight m-0">
-                    Administrador de <span style={{ color: goldColor }}>Blog</span>
-                </h2>
-                <p className="text-gray-400 mt-2 font-light text-sm">Gestiona tus publicaciones, artículos y recursos.</p>
+            <div className="flex justify-between items-end mb-12">
+                <div>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight m-0">
+                        Administrador de <span style={{ color: goldColor }}>Blog</span>
+                    </h2>
+                    <p className="text-gray-400 mt-2 font-light text-sm">Gestiona tus publicaciones, artículos y recursos.</p>
+                </div>
+                {!editMode && (
+                    <button 
+                        onClick={() => formRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        className="hidden md:flex items-center gap-2 text-xs font-bold text-[#e6d769] hover:text-white transition-colors"
+                    >
+                        <PlusCircle size={18} /> NUEVO ARTÍCULO
+                    </button>
+                )}
             </div>
 
-            {/* SECCIÓN 1: LISTA DE BLOGS */}
+            {/* SECCIÓN 1: LISTA DE BLOGS CON PAGINACIÓN */}
             <div className="mb-16">
                 <div className="glass-panel p-6 rounded-2xl animate-fade-in-up">
                     <input 
@@ -268,41 +247,82 @@ export default function BlogCRUD() {
                     ) : filteredBlogs.length === 0 ? (
                         <p className="text-gray-500 text-center py-8 font-light">No hay publicaciones existentes.</p>
                     ) : (
-                        <ul className="space-y-4">
-                            {filteredBlogs.map(blog => (
-                                <li key={blog.id} className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-white/[0.04] transition-all group">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <h4 className="text-lg font-semibold text-gray-100 m-0">{blog.title}</h4>
-                                            {blog.isFeatured && <Star size={14} className="text-[#e6d769]" fill="currentColor" />}
+                        <>
+                            <ul className="space-y-4">
+                                {currentItems.map(blog => (
+                                    <li key={blog.id} className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-white/[0.04] transition-all group">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <h4 className="text-lg font-semibold text-gray-100 m-0">{blog.title}</h4>
+                                                {blog.isFeatured && <Star size={14} className="text-[#e6d769]" fill="currentColor" />}
+                                            </div>
+                                            <p className="text-xs font-light text-gray-400 m-0 mt-1">
+                                                <span className="text-gray-300 font-medium">{blog.author || 'Anónimo'}</span> • Estado: <span className="uppercase tracking-widest text-[#e6d769]">{blog.status}</span>
+                                            </p>
                                         </div>
-                                        <p className="text-xs font-light text-gray-400 m-0 mt-1">
-                                            <span className="text-gray-300 font-medium">{blog.author || 'Anónimo'}</span> • Estado: <span className="uppercase tracking-widest text-[#e6d769]">{blog.status}</span>
-                                        </p>
+                                        <div className="flex gap-2 w-full md:w-auto mt-3 md:mt-0">
+                                            <button onClick={() => handleEdit(blog)} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-black/20 border border-white/10 hover:border-[#e6d769]/50 text-gray-300 hover:text-[#e6d769] px-4 py-2 rounded-lg transition-all text-sm">
+                                                <Edit3 size={16} /> Editar
+                                            </button>
+                                            <button onClick={() => handleDelete(blog.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-lg transition-all text-sm">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* CONTROLES DE PAGINACIÓN */}
+                            {totalPages > 1 && (
+                                <div className="flex justify-center items-center gap-4 mt-8 pt-6 border-t border-white/5">
+                                    <button 
+                                        disabled={currentPage === 1}
+                                        onClick={() => paginate(currentPage - 1)}
+                                        className="p-2 rounded-lg hover:bg-white/5 disabled:opacity-20 transition-all text-gray-400"
+                                    >
+                                        <ChevronLeft size={20} />
+                                    </button>
+                                    
+                                    <div className="flex gap-2">
+                                        {[...Array(totalPages)].map((_, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => paginate(i + 1)}
+                                                className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${currentPage === i + 1 ? 'bg-[#e6d769] text-[#001e33]' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+                                            >
+                                                {i + 1}
+                                            </button>
+                                        ))}
                                     </div>
-                                    <div className="flex gap-2 w-full md:w-auto mt-3 md:mt-0">
-                                        <button onClick={() => handleEdit(blog)} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-black/20 border border-white/10 hover:border-[#e6d769]/50 text-gray-300 hover:text-[#e6d769] px-4 py-2 rounded-lg transition-all text-sm">
-                                            <Edit3 size={16} /> Editar
-                                        </button>
-                                        <button onClick={() => handleDelete(blog.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-lg transition-all text-sm">
-                                            <Trash2 size={16} />
-                                        </button>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+
+                                    <button 
+                                        disabled={currentPage === totalPages}
+                                        onClick={() => paginate(currentPage + 1)}
+                                        className="p-2 rounded-lg hover:bg-white/5 disabled:opacity-20 transition-all text-gray-400"
+                                    >
+                                        <ChevronRight size={20} />
+                                    </button>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
             </div>
 
-            {/* SECCIÓN 2: FORMULARIO */}
-            <div className="mb-8 border-t border-white/10 pt-10">
-                <h2 className="text-2xl font-semibold text-white tracking-tight mb-8">
-                    {editMode ? 'Editar Artículo' : 'Crear Nuevo Artículo'}
-                </h2>
+            {/* SECCIÓN 2: FORMULARIO (Scroll destino) */}
+            <div ref={formRef} className="mb-8 border-t border-white/10 pt-10">
+                <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-2xl font-semibold text-white tracking-tight">
+                        {editMode ? 'Editar Artículo' : 'Crear Nuevo Artículo'}
+                    </h2>
+                    {editMode && (
+                         <button onClick={cancelEdit} className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 font-bold">
+                            <XCircle size={14} /> CANCELAR EDICIÓN
+                         </button>
+                    )}
+                </div>
                 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
                     {/* COLUMNA IZQUIERDA */}
                     <div className="lg:col-span-2 space-y-6">
                         <div className="glass-panel p-6 rounded-2xl">
@@ -327,11 +347,10 @@ export default function BlogCRUD() {
                                 type="text"
                                 name="slug"
                                 placeholder="ej: como-superar-la-ansiedad"
-                                className="w-full text-sm text-[#e6d769] bg-black/20 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-[#e6d769] transition-colors placeholder:text-gray-600"
+                                className="w-full text-sm text-[#e6d769] bg-black/20 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-[#e6d769] transition-colors"
                                 value={formData.slug}
                                 onChange={handleChange}
                             />
-                            <p className="text-[10px] text-gray-500 mt-2 m-0">Usa minúsculas y guiones. Déjalo en blanco para generarlo automáticamente.</p>
                         </div>
 
                         <div className="glass-panel p-6 rounded-2xl">
@@ -339,8 +358,8 @@ export default function BlogCRUD() {
                             <textarea
                                 name="excerpt"
                                 rows={3}
-                                placeholder="Un breve resumen que aparecerá en las tarjetas..."
-                                className="w-full text-gray-300 bg-black/20 border border-white/10 rounded-lg px-4 py-3 resize-none outline-none focus:border-[#e6d769] transition-colors placeholder:text-gray-600"
+                                placeholder="Un breve resumen..."
+                                className="w-full text-gray-300 bg-black/20 border border-white/10 rounded-lg px-4 py-3 resize-none outline-none focus:border-[#e6d769]"
                                 value={formData.excerpt}
                                 onChange={handleChange}
                                 required
@@ -363,209 +382,81 @@ export default function BlogCRUD() {
 
                     {/* COLUMNA DERECHA */}
                     <div className="space-y-6">
-                        
-                        {/* Botón Destacado */}
                         <div 
                             onClick={() => setFormData(prev => ({ ...prev, isFeatured: !prev.isFeatured }))}
                             className={`p-5 rounded-2xl cursor-pointer transition-all flex items-center justify-between group border ${
                             formData.isFeatured ? "bg-[#e6d769]/10 border-[#e6d769]/30" : "bg-white/[0.02] border-white/10 hover:border-white/20"
                         }`}>
                             <div className="flex items-center gap-3">
-                                <div className={`p-2 rounded-full ${formData.isFeatured ? "bg-[#e6d769]/20 text-[#e6d769]" : "bg-white/5 text-gray-500"}`}>
-                                    <Star size={18} fill={formData.isFeatured ? "currentColor" : "none"} />
-                                </div>
+                                <Star size={18} fill={formData.isFeatured ? "currentColor" : "none"} className={formData.isFeatured ? "text-[#e6d769]" : "text-gray-500"} />
                                 <div>
                                     <p className={`text-sm font-semibold m-0 ${formData.isFeatured ? "text-[#e6d769]" : "text-gray-300"}`}>Destacar Artículo</p>
-                                    <p className="text-[10px] text-gray-500 m-0 mt-0.5">Aparecerá primero en el inicio</p>
                                 </div>
                             </div>
                             <div className={`w-10 h-5 rounded-full relative transition-colors ${formData.isFeatured ? "bg-[#e6d769]" : "bg-white/10"}`}>
-                                <div className={`absolute top-1 w-3 h-3 rounded-full shadow-sm transition-all duration-300 ${formData.isFeatured ? "left-6 bg-[#001e33]" : "left-1 bg-gray-400"}`} />
+                                <div className={`absolute top-1 w-3 h-3 rounded-full transition-all duration-300 ${formData.isFeatured ? "left-6 bg-[#001e33]" : "left-1 bg-gray-400"}`} />
                             </div>
                         </div>
 
-                        {/* Etiquetas y Metadatos */}
                         <div className="glass-panel p-6 rounded-2xl space-y-5">
-                            <div>
-                                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Etiquetas ({formData.tags.length})</label>
-                                <div className="flex flex-wrap gap-2">
-                                    {AVAILABLE_TAGS.map((tag) => {
-                                        const isSelected = formData.tags.includes(tag);
-                                        return (
-                                            <button key={tag} type="button" onClick={() => toggleTag(tag)} className={`text-xs px-3 py-1.5 rounded-full border transition-all flex items-center gap-1.5 font-medium ${isSelected ? "bg-[#e6d769]/20 text-[#e6d769] border-[#e6d769]/50" : "bg-transparent text-gray-400 border-white/10 hover:border-white/30"}`}>
-                                                {isSelected && <Check size={12} />} {tag}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
+                            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider">Etiquetas</label>
+                            <div className="flex flex-wrap gap-2">
+                                {AVAILABLE_TAGS.map((tag) => (
+                                    <button key={tag} type="button" onClick={() => toggleTag(tag)} className={`text-[10px] px-2 py-1 rounded-full border transition-all ${formData.tags.includes(tag) ? "bg-[#e6d769]/20 text-[#e6d769] border-[#e6d769]/50" : "bg-transparent text-gray-500 border-white/10"}`}>
+                                        {tag}
+                                    </button>
+                                ))}
                             </div>
-                            <div>
-                                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Tiempo de Lectura</label>
-                                <input type="text" placeholder="Ej: 5 min" name="readTime" className="w-full premium-input px-4 py-2" value={formData.readTime} onChange={handleChange} required />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Autor</label>
-                                    <input type="text" name="author" placeholder="Nombre" className="w-full premium-input px-4 py-2" value={formData.author} onChange={handleChange} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Estado</label>
-                                    <select name="status" value={formData.status} onChange={handleChange} className="w-full premium-input px-4 py-2">
-                                        <option value="draft" className="bg-[#0a1929]">Borrador</option>
-                                        <option value="published" className="bg-[#0a1929]">Publicado</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <input type="text" placeholder="Tiempo de lectura" name="readTime" className="w-full premium-input px-4 py-2" value={formData.readTime} onChange={handleChange} required />
+                            <input type="text" placeholder="Autor" name="author" className="w-full premium-input px-4 py-2" value={formData.author} onChange={handleChange} />
+                            <select name="status" value={formData.status} onChange={handleChange} className="w-full premium-input px-4 py-2">
+                                <option value="draft" className="bg-[#0a1929]">Borrador</option>
+                                <option value="published" className="bg-[#0a1929]">Publicado</option>
+                            </select>
                         </div>
 
-                        {/* Subida de Imagen */}
                         <div className="glass-panel p-6 rounded-2xl">
-                            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Imagen Destacada</label>
-                            <div className="relative w-full aspect-video bg-black/20 rounded-xl overflow-hidden border border-white/10 border-dashed flex flex-col items-center justify-center group transition-colors hover:bg-black/40">
+                             <div className="relative w-full aspect-video bg-black/20 rounded-xl overflow-hidden border border-white/10 border-dashed flex flex-col items-center justify-center group transition-colors hover:bg-black/40">
                                 {previewImage ? (
                                     <>
                                         <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
-                                        <button type="button" onClick={clearImage} className="absolute top-2 right-2 bg-black/50 backdrop-blur-md p-2 rounded-full text-red-400 hover:text-red-300 hover:bg-black/70 transition-all border border-white/10">
+                                        <button type="button" onClick={clearImage} className="absolute top-2 right-2 bg-black/50 p-2 rounded-full text-red-400 hover:text-red-300">
                                             <X size={16} />
                                         </button>
                                     </>
                                 ) : (
                                     <>
-                                        <UploadCloud className="text-gray-500 mb-2 group-hover:text-[#e6d769] transition-colors" size={32} />
-                                        <span className="text-xs text-gray-400 group-hover:text-gray-300 font-medium">Clic para subir imagen</span>
+                                        <UploadCloud className="text-gray-500 mb-2 group-hover:text-[#e6d769]" size={32} />
+                                        <span className="text-[10px] text-gray-400">Subir imagen</span>
                                         <input type="file" name="image" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="absolute inset-0 opacity-0 cursor-pointer" />
                                     </>
                                 )}
                             </div>
                         </div>
 
-                        {/* Botones de Acción */}
-                        <div className="space-y-3 pt-4">
-                            <button type="submit" disabled={loadingSubmit} className="w-full premium-btn-gold py-4 rounded-xl flex items-center justify-center gap-2 text-lg disabled:opacity-50">
-                                {loadingSubmit ? <Loader2 className="animate-spin" /> : <Save size={20} />}
-                                {editMode ? 'Guardar Cambios' : 'Publicar Artículo'}
-                            </button>
-                            
-                            {editMode && (
-                                <button type="button" onClick={cancelEdit} disabled={loadingSubmit} className="w-full bg-white/5 border border-white/10 text-gray-300 hover:bg-white/10 hover:text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50">
-                                    <XCircle size={18} /> Cancelar Edición
-                                </button>
-                            )}
-                        </div>
+                        <button type="submit" disabled={loadingSubmit} className="w-full premium-btn-gold py-4 rounded-xl flex items-center justify-center gap-2 text-lg disabled:opacity-50">
+                            {loadingSubmit ? <Loader2 className="animate-spin" /> : <Save size={20} />}
+                            {editMode ? 'Guardar Cambios' : 'Publicar Artículo'}
+                        </button>
                     </div>
                 </form>
             </div>
 
             <style dangerouslySetInnerHTML={{__html: `
                 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
                 .premium-font { font-family: 'Montserrat', sans-serif; }
-
-                /* Animación Fade In */
-                @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-                .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
-
-                /* Glassmorphism */
-                .glass-panel {
-                    background: rgba(255, 255, 255, 0.02);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                }
-
-                /* Inputs */
-                .premium-input {
-                    background: rgba(0, 0, 0, 0.2) !important;
-                    border: 1px solid rgba(255,255,255,0.08) !important;
-                    color: white !important;
-                    border-radius: 8px !important;
-                    transition: all 0.3s ease !important;
-                    outline: none;
-                }
-                .premium-input:focus, .premium-input:hover {
-                    border-color: #e6d769 !important;
-                    background: rgba(0, 0, 0, 0.4) !important;
-                    box-shadow: 0 0 0 2px rgba(230, 215, 105, 0.1) !important;
-                }
-
-                /* Botón Dorado */
-                .premium-btn-gold {
-                    background: linear-gradient(135deg, #e6d769 0%, #d4af37 100%) !important;
-                    color: #001e33 !important;
-                    font-weight: 600 !important;
-                    border: none !important;
-                    box-shadow: 0 4px 15px rgba(230, 215, 105, 0.2) !important;
-                    transition: all 0.3s ease !important;
-                }
-                .premium-btn-gold:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 20px rgba(230, 215, 105, 0.3) !important;
-                    filter: brightness(1.1);
-                }
-
-                /* SweetAlert2 Premium */
-                .premium-swal-popup {
-                    border: 1px solid rgba(255,255,255,0.05) !important;
-                    border-radius: 16px !important;
-                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-                    font-family: 'Montserrat', sans-serif;
-                }
-
-                /* --- CUSTOMIZACIÓN REACT QUILL PARA MODO OSCURO --- */
-                .premium-quill-container .ql-toolbar { 
-                    background: rgba(255, 255, 255, 0.03) !important; 
-                    border-color: rgba(255, 255, 255, 0.1) !important; 
-                    border-top-left-radius: 12px; 
-                    border-top-right-radius: 12px; 
-                    padding: 12px;
-                }
-                .premium-quill-container .ql-container { 
-                    border-color: rgba(255, 255, 255, 0.1) !important; 
-                    border-bottom-left-radius: 12px; 
-                    border-bottom-right-radius: 12px; 
-                    font-family: 'Montserrat', sans-serif; 
-                    font-size: 1rem;
-                    background: rgba(0, 0, 0, 0.2);
-                }
-                .premium-quill-container .ql-editor { 
-                    color: #e5e7eb; /* Texto claro */
-                    min-height: 300px;
-                }
-                .premium-quill-container .ql-editor::before {
-                    color: rgba(255, 255, 255, 0.3) !important; /* Placeholder oscuro */
-                }
-                
-                /* Colores de los iconos del editor */
+                .glass-panel { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+                .premium-input { background: rgba(0, 0, 0, 0.2) !important; border: 1px solid rgba(255,255,255,0.08) !important; color: white !important; border-radius: 8px !important; outline: none; transition: all 0.3s ease; }
+                .premium-input:focus { border-color: #e6d769 !important; box-shadow: 0 0 0 2px rgba(230, 215, 105, 0.1) !important; }
+                .premium-btn-gold { background: linear-gradient(135deg, #e6d769 0%, #d4af37 100%) !important; color: #001e33 !important; font-weight: 600 !important; border: none !important; box-shadow: 0 4px 15px rgba(230, 215, 105, 0.2) !important; transition: all 0.3s ease; }
+                .premium-btn-gold:hover { transform: translateY(-2px); filter: brightness(1.1); }
+                .premium-quill-container .ql-toolbar { background: rgba(255, 255, 255, 0.03) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+                .premium-quill-container .ql-container { border: 1px solid rgba(255, 255, 255, 0.1) !important; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; font-family: 'Montserrat', sans-serif; background: rgba(0, 0, 0, 0.2); }
+                .premium-quill-container .ql-editor { color: #e5e7eb; min-height: 300px; }
                 .premium-quill-container .ql-snow .ql-stroke { stroke: #9ca3af; }
-                .premium-quill-container .ql-snow .ql-fill, 
-                .premium-quill-container .ql-snow .ql-stroke.ql-fill { fill: #9ca3af; }
-                
-                /* Hover en los iconos del editor (Dorado) */
-                .premium-quill-container .ql-snow.ql-toolbar button:hover .ql-stroke, 
-                .premium-quill-container .ql-snow .ql-toolbar button:hover .ql-stroke,
-                .premium-quill-container .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #e6d769; }
-                
-                .premium-quill-container .ql-snow.ql-toolbar button:hover .ql-fill, 
-                .premium-quill-container .ql-snow .ql-toolbar button:hover .ql-fill,
-                .premium-quill-container .ql-snow.ql-toolbar button.ql-active .ql-fill { fill: #e6d769; }
-
-                /* Dropdowns del editor (Encabezados) */
-                .premium-quill-container .ql-snow .ql-picker { color: #9ca3af; }
-                .premium-quill-container .ql-snow .ql-picker-options { 
-                    background-color: #0a1929; 
-                    border: 1px solid rgba(255,255,255,0.1); 
-                    border-radius: 8px;
-                    padding: 8px;
-                }
-                .premium-quill-container .ql-snow .ql-picker-item { color: #e5e7eb; }
-                .premium-quill-container .ql-snow .ql-picker-item:hover { color: #e6d769; }
-                
-                /* Justificado de texto Quill */
-                .ql-editor .ql-align-justify { text-align: justify; text-justify: inter-word; }
-                .ql-editor li.ql-align-justify { text-align: justify; }
-                .ql-editor .ql-indent-1 { padding-left: 3em; }
-                .ql-editor .ql-indent-2 { padding-left: 6em; }
-                .ql-editor .ql-indent-3 { padding-left: 9em; }
+                .premium-quill-container .ql-snow.ql-toolbar button:hover .ql-stroke, .premium-quill-container .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #e6d769; }
+                .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+                @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
             `}} />
         </div>
     );
