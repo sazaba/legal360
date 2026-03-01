@@ -28,7 +28,7 @@ export default function Home() {
             </section>
             
             <section id="blog"> {/* Cambié el ID repetido de 'planes' a 'blog' */}
-                <BlogPublicList />
+                {/* <BlogPublicList /> */}
             </section>
             
             <ContactoAccesos />
